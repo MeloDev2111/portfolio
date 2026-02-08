@@ -1,8 +1,8 @@
 ---
 import { getRelativeLocaleUrl } from "../i18n/utils";
 
-// Redirect to default locale
-const target = getRelativeLocaleUrl("en", "");
+const enUrl = getRelativeLocaleUrl("en", "");
+const esUrl = getRelativeLocaleUrl("es", "");
 ---
 
 <!doctype html>
@@ -10,14 +10,30 @@ const target = getRelativeLocaleUrl("en", "");
     <head>
         <meta charset="UTF-8" />
         <title>Redirecting...</title>
-        <meta http-equiv="refresh" content={`0;url=${target}`} />
-        <script define:vars={{ target }}>
-            window.location.href = target;
+        <!-- Default fallback for no-JS -->
+        <meta http-equiv="refresh" content={`0;url=${enUrl}`} />
+        <script define:vars={{ enUrl, esUrl }}>
+            try {
+                // Check browser language
+                const lang = navigator.language || navigator.userLanguage;
+                if (lang && lang.startsWith("es")) {
+                    window.location.replace(esUrl);
+                } else {
+                    window.location.replace(enUrl);
+                }
+            } catch (e) {
+                // Fallback
+                window.location.replace(enUrl);
+            }
         </script>
     </head>
     <body
         class="bg-gunmetal text-white flex items-center justify-center h-screen"
     >
-        <p>Redirecting to <a href={target}>{target}</a>...</p>
+        <noscript>
+            <p>
+                Redirecting to <a href={enUrl}>{enUrl}</a>...
+            </p>
+        </noscript>
     </body>
 </html>
