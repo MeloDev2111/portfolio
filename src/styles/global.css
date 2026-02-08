@@ -13,7 +13,7 @@
 
     body {
         @apply bg-gunmetal text-light;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         scroll-behavior: smooth;
     }
 }

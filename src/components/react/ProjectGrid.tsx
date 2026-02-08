@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { ProjectCard } from './ProjectCard';
+import React, { useState, useMemo } from "react";
+import { ProjectCard } from "./ProjectCard";
 
 interface Project {
     slug: string;
@@ -10,7 +10,7 @@ interface Project {
         link?: string;
         image?: string | { src: string; width: number; height: number };
         featured?: boolean;
-    }
+    };
 }
 
 interface ProjectGridProps {
@@ -21,12 +21,15 @@ interface ProjectGridProps {
     };
 }
 
-export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) => {
+export const ProjectGrid: React.FC<ProjectGridProps> = ({
+    projects,
+    labels,
+}) => {
     const [activeTag, setActiveTag] = useState<string | null>(null);
 
     // Helper to normalize tags (handle if Astro passes Set, Array or String)
     const getSafeTags = (tags: any): string[] => {
-        if (typeof tags === 'string') return tags.split(',');
+        if (typeof tags === "string") return tags.split(",");
         if (Array.isArray(tags)) return tags;
         if (tags instanceof Set) return Array.from(tags);
         return [];
@@ -36,9 +39,9 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
     const allTags = useMemo(() => {
         const tags = new Set<string>();
         if (projects && Array.isArray(projects)) {
-            projects.forEach(p => {
+            projects.forEach((p) => {
                 const pTags = getSafeTags(p.data.tags);
-                pTags.forEach(t => tags.add(t));
+                pTags.forEach((t) => tags.add(t));
             });
         }
         return Array.from(tags).sort();
@@ -47,7 +50,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
     // Filter projects
     const filteredProjects = useMemo(() => {
         if (!activeTag) return projects;
-        return projects.filter(p => {
+        return projects.filter((p) => {
             const pTags = getSafeTags(p.data.tags);
             return pTags.includes(activeTag);
         });
@@ -59,21 +62,23 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
             <div className="flex flex-wrap gap-3 justify-center">
                 <button
                     onClick={() => setActiveTag(null)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTag === null
-                        ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
-                        : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
-                        }`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                        activeTag === null
+                            ? "bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]"
+                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30"
+                    }`}
                 >
                     {labels.all}
                 </button>
-                {allTags.map(tag => (
+                {allTags.map((tag) => (
                     <button
                         key={tag}
                         onClick={() => setActiveTag(tag)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTag === tag
-                            ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
-                            : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
-                            }`}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                            activeTag === tag
+                                ? "bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]"
+                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30"
+                        }`}
                     >
                         {tag}
                     </button>

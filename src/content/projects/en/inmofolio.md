@@ -14,13 +14,13 @@ InmoFolio is a full-featured real estate management platform designed to streaml
 
 ## Key Features
 
--   **User Authentication**: Secure login and role-based access control (RBAC).
--   **Property Listings**: Advanced search filters and map integration.
--   **Dashboard**: Analytics for agents and admins.
+- **User Authentication**: Secure login and role-based access control (RBAC).
+- **Property Listings**: Advanced search filters and map integration.
+- **Dashboard**: Analytics for agents and admins.
 
 ## Tech Stack
 
--   **Backend**: Java 21, Spring Boot 3.2
--   **Frontend**: React 19, Tailwind CSS
--   **Database**: PostgreSQL
--   **Deployment**: AWS EC2, Docker
+- **Backend**: Java 21, Spring Boot 3.2
+- **Frontend**: React 19, Tailwind CSS
+- **Database**: PostgreSQL
+- **Deployment**: AWS EC2, Docker

@@ -1,62 +1,62 @@
 name: Master CI/CD
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+    contents: write
+    pages: write
+    id-token: write
 
 jobs:
-  release-and-deploy:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
-    concurrency:
-      group: "production"
-      cancel-in-progress: true
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+    release-and-deploy:
+        runs-on: ubuntu-latest
+        if: "!contains(github.event.head_commit.message, 'skip ci')"
+        concurrency:
+            group: "production"
+            cancel-in-progress: true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
 
-      - name: Configure Git User
-        run: |
-          git config --global user.name "MeloDev [Bot]"
-          git config --global user.email "melodiaz2111@gmail.com"
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Validate Code
-        run: |
-          npm run lint
-          npm run test
+            - name: Configure Git User
+              run: |
+                  git config --global user.name "MeloDev [Bot]"
+                  git config --global user.email "melodiaz2111@gmail.com"
 
-      - name: Automated Version Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
-        run: |
-          npm run release -- --ci --no-git.requireCleanWorkingDir --git.commitMessage="chore: release v\${version} [skip ci]"
+            - name: Validate Code
+              run: |
+                  npm run lint
+                  npm run test
 
-      - name: Build Project
-        run: npm run build
+            - name: Automated Version Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+              run: |
+                  npm run release -- --ci --no-git.requireCleanWorkingDir --git.commitMessage="chore: release v\${version} [skip ci]"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
+            - name: Build Project
+              run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: ./dist
+
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v4

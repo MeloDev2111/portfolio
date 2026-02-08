@@ -5,13 +5,13 @@ import TechStack from "../../components/astro/TechStack.astro";
 import { ProjectGrid } from "../../components/react/ProjectGrid";
 import { getCollection, type CollectionEntry } from "astro:content";
 import {
-	getLangFromUrl,
-	useTranslations,
-	getRelativeLocaleUrl,
+    getLangFromUrl,
+    useTranslations,
+    getRelativeLocaleUrl,
 } from "../../i18n/utils";
 
 export function getStaticPaths() {
-	return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+    return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
 }
 
 const { lang } = Astro.params;
@@ -26,22 +26,22 @@ type CertEntry = CollectionEntry<"certifications">;
 // Projects
 const allProjects = await getCollection("projects");
 const projects = allProjects
-	.filter((project: ProjectEntry) => project.slug.startsWith(`${lang}/`))
-	.sort(
-		(a: ProjectEntry, b: ProjectEntry) =>
-			b.data.date.valueOf() - a.data.date.valueOf(),
-	);
+    .filter((project: ProjectEntry) => project.slug.startsWith(`${lang}/`))
+    .sort(
+        (a: ProjectEntry, b: ProjectEntry) =>
+            b.data.date.valueOf() - a.data.date.valueOf(),
+    );
 
 const projectProps = projects.map((p: ProjectEntry) => ({
-	slug: p.slug,
-	data: {
-		title: p.data.title,
-		description: p.data.description,
-		tags: p.data.tags,
-		link: p.data.link,
-		image: p.data.image,
-		featured: p.data.featured,
-	},
+    slug: p.slug,
+    data: {
+        title: p.data.title,
+        description: p.data.description,
+        tags: p.data.tags,
+        link: p.data.link,
+        image: p.data.image,
+        featured: p.data.featured,
+    },
 }));
 
 // Sanitize props to remove any potential non-POJO artifacts
@@ -54,173 +54,173 @@ const certifications = await getCollection("certifications");
 ---
 
 <Layout title="MeloDev Portfolio" lang={lang}>
-	<Hero />
+    <Hero />
 
-	<!-- About Section -->
-	<section id="about" class="py-20 bg-gunmetal">
-		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2
-				class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
-			>
-				<span
-					class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-				>
-					{t("nav.about")}
-				</span>
-				<div class="h-px bg-white/10 flex-grow ml-6"></div>
-			</h2>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gunmetal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+            >
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+                >
+                    {t("nav.about")}
+                </span>
+                <div class="h-px bg-white/10 flex-grow ml-6"></div>
+            </h2>
 
-			<!-- Bio -->
-			<div class="prose prose-invert prose-lg text-gray-400 mb-16">
-				<p>
-					{
-						lang === "en"
-							? "I am a 24-year-old Systems Engineer passionate about building robust, scalable architectures. My expertise lies in Backend Development with Java/Spring, Cloud Solutions with AWS, and exploring the frontiers of Data Science."
-							: "Soy un Ingeniero de Sistemas de 24 años apasionado por construir arquitecturas robustas y escalables. Mi experiencia se centra en el Desarrollo Backend con Java/Spring, Soluciones Cloud con AWS y la exploración de la Ciencia de Datos."
-					}
-				</p>
-				<p>
-					{
-						lang === "en"
-							? "I bridge the gap between complex engineering problems and elegant, user-centric solutions. With a focus on performance and reliability, I aim to create digital ecosystems that stand the test of time."
-							: "Conecto problemas de ingeniería complejos con soluciones elegantes centradas en el usuario. Con un enfoque en el rendimiento y la fiabilidad, aspiro a crear ecosistemas digitales que perduren en el tiempo."
-					}
-				</p>
-			</div>
-		</div>
-	</section>
+            <!-- Bio -->
+            <div class="prose prose-invert prose-lg text-gray-400 mb-16">
+                <p>
+                    {
+                        lang === "en"
+                            ? "I am a 24-year-old Systems Engineer passionate about building robust, scalable architectures. My expertise lies in Backend Development with Java/Spring, Cloud Solutions with AWS, and exploring the frontiers of Data Science."
+                            : "Soy un Ingeniero de Sistemas de 24 años apasionado por construir arquitecturas robustas y escalables. Mi experiencia se centra en el Desarrollo Backend con Java/Spring, Soluciones Cloud con AWS y la exploración de la Ciencia de Datos."
+                    }
+                </p>
+                <p>
+                    {
+                        lang === "en"
+                            ? "I bridge the gap between complex engineering problems and elegant, user-centric solutions. With a focus on performance and reliability, I aim to create digital ecosystems that stand the test of time."
+                            : "Conecto problemas de ingeniería complejos con soluciones elegantes centradas en el usuario. Con un enfoque en el rendimiento y la fiabilidad, aspiro a crear ecosistemas digitales que perduren en el tiempo."
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
 
-	<!-- Certifications Section -->
-	<section id="certifications" class="py-20 bg-charcoal">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2
-				class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
-			>
-				<span
-					class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-				>
-					{t("nav.certifications")}
-				</span>
-				<div class="h-px bg-white/10 flex-grow ml-6"></div>
-			</h2>
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-charcoal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+            >
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+                >
+                    {t("nav.certifications")}
+                </span>
+                <div class="h-px bg-white/10 flex-grow ml-6"></div>
+            </h2>
 
-			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-				{
-					certifications
-						.filter((c) => c.data.starred)
-						.sort(
-							(a, b) =>
-								new Date(b.data.date).valueOf() -
-								new Date(a.data.date).valueOf(),
-						)
-						.slice(0, 4)
-						.map((cert: CertEntry) => (
-							<a
-								href={cert.data.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="block p-6 rounded-xl bg-gunmetal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group relative"
-							>
-								<div class="flex items-start gap-4">
-									{cert.data.badge && (
-										<img
-											src={
-												cert.data.badge.startsWith(
-													"http",
-												)
-													? cert.data.badge
-													: import.meta.env.BASE_URL.replace(
-															/\/$/,
-															"",
-														) + cert.data.badge
-											}
-											alt={cert.data.name}
-											class="w-16 h-16 object-contain"
-										/>
-									)}
-									<div>
-										<h3 class="text-lg font-bold text-light group-hover:text-gold transition-colors">
-											{cert.data.name}
-										</h3>
-										<p class="text-sm text-gray-400">
-											{cert.data.issuer}
-										</p>
-										<p class="text-xs text-gray-500 mt-2">
-											{cert.data.date}
-										</p>
-									</div>
-								</div>
-							</a>
-						))
-				}
-			</div>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {
+                    certifications
+                        .filter((c) => c.data.starred)
+                        .sort(
+                            (a, b) =>
+                                new Date(b.data.date).valueOf() -
+                                new Date(a.data.date).valueOf(),
+                        )
+                        .slice(0, 4)
+                        .map((cert: CertEntry) => (
+                            <a
+                                href={cert.data.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block p-6 rounded-xl bg-gunmetal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group relative"
+                            >
+                                <div class="flex items-start gap-4">
+                                    {cert.data.badge && (
+                                        <img
+                                            src={
+                                                cert.data.badge.startsWith(
+                                                    "http",
+                                                )
+                                                    ? cert.data.badge
+                                                    : import.meta.env.BASE_URL.replace(
+                                                          /\/$/,
+                                                          "",
+                                                      ) + cert.data.badge
+                                            }
+                                            alt={cert.data.name}
+                                            class="w-16 h-16 object-contain"
+                                        />
+                                    )}
+                                    <div>
+                                        <h3 class="text-lg font-bold text-light group-hover:text-gold transition-colors">
+                                            {cert.data.name}
+                                        </h3>
+                                        <p class="text-sm text-gray-400">
+                                            {cert.data.issuer}
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-2">
+                                            {cert.data.date}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        ))
+                }
+            </div>
 
-			<div class="mt-10 text-center">
-				<a
-					href={getRelativeLocaleUrl(lang, "certifications")}
-					class="text-gold hover:text-white underline underline-offset-4 transition-colors"
-				>
-					{
-						lang === "en"
-							? "View all certifications ->"
-							: "Ver todas las certificaciones ->"
-					}
-				</a>
-			</div>
-		</div>
-	</section>
+            <div class="mt-10 text-center">
+                <a
+                    href={getRelativeLocaleUrl(lang, "certifications")}
+                    class="text-gold hover:text-white underline underline-offset-4 transition-colors"
+                >
+                    {
+                        lang === "en"
+                            ? "View all certifications ->"
+                            : "Ver todas las certificaciones ->"
+                    }
+                </a>
+            </div>
+        </div>
+    </section>
 
-	<!-- Projects Section -->
-	<section id="projects" class="py-20 bg-charcoal/30">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2
-				class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
-			>
-				<span
-					class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-				>
-					{t("nav.projects")}
-				</span>
-				<div class="h-px bg-white/10 flex-grow ml-6"></div>
-			</h2>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-charcoal/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+            >
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+                >
+                    {t("nav.projects")}
+                </span>
+                <div class="h-px bg-white/10 flex-grow ml-6"></div>
+            </h2>
 
-			<ProjectGrid
-				client:only="react"
-				projects={cleanProjectProps}
-				labels={{
-					all: lang === "en" ? "All" : "Todos",
-					filter: lang === "en" ? "Filter by" : "Filtrar por",
-				}}
-			/>
-			<div class="mt-10 text-center">
-				<a
-					href={getRelativeLocaleUrl(lang, "projects")}
-					class="text-gold hover:text-white underline underline-offset-4 transition-colors"
-				>
-					{
-						lang === "en"
-							? "View all projects archive ->"
-							: "Ver archivo de proyectos ->"
-					}
-				</a>
-			</div>
-		</div>
-	</section>
+            <ProjectGrid
+                client:only="react"
+                projects={cleanProjectProps}
+                labels={{
+                    all: lang === "en" ? "All" : "Todos",
+                    filter: lang === "en" ? "Filter by" : "Filtrar por",
+                }}
+            />
+            <div class="mt-10 text-center">
+                <a
+                    href={getRelativeLocaleUrl(lang, "projects")}
+                    class="text-gold hover:text-white underline underline-offset-4 transition-colors"
+                >
+                    {
+                        lang === "en"
+                            ? "View all projects archive ->"
+                            : "Ver archivo de proyectos ->"
+                    }
+                </a>
+            </div>
+        </div>
+    </section>
 
-	<!-- Tech Stack Section -->
-	<section id="tech-stack" class="py-20 bg-gunmetal">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h2
-				class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
-			>
-				<span
-					class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-				>
-					{t("nav.tech")}
-				</span>
-				<div class="h-px bg-white/10 flex-grow ml-6"></div>
-			</h2>
-			<TechStack />
-		</div>
-	</section>
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="py-20 bg-gunmetal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+                class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+            >
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+                >
+                    {t("nav.tech")}
+                </span>
+                <div class="h-px bg-white/10 flex-grow ml-6"></div>
+            </h2>
+            <TechStack />
+        </div>
+    </section>
 </Layout>

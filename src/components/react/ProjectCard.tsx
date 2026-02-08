@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ProjectCardProps {
     title: string;
@@ -9,19 +9,26 @@ interface ProjectCardProps {
     featured?: boolean;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, tags, link, image, featured }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({
+    title,
+    description,
+    tags,
+    link,
+    image,
+    featured,
+}) => {
     return (
         <a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group relative overflow-hidden rounded-xl bg-charcoal border border-white/5 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 flex flex-col h-full ${featured ? 'md:col-span-2' : ''}`}
+            className={`group relative overflow-hidden rounded-xl bg-charcoal border border-white/5 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:shadow-gold/5 flex flex-col h-full ${featured ? "md:col-span-2" : ""}`}
         >
             {/* Image / Gradient Placeholder */}
             <div className="h-48 overflow-hidden bg-gunmetal relative">
                 {image ? (
                     <img
-                        src={typeof image === 'string' ? image : image.src}
+                        src={typeof image === "string" ? image : image.src}
                         alt={title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
@@ -55,8 +62,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, ta
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-auto">
-                    {tags.map(tag => (
-                        <span key={tag} className="px-2 py-1 rounded bg-white/5 text-xs text-gray-300 border border-white/5">
+                    {tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="px-2 py-1 rounded bg-white/5 text-xs text-gray-300 border border-white/5"
+                        >
                             {tag}
                         </span>
                     ))}

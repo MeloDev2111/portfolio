@@ -1,20 +1,21 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const projectsCollection = defineCollection({
-    type: 'content', // v2.5.0+ ; 'content' for markdown/mdx
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string(),
-        tags: z.array(z.string()),
-        image: image().optional(),
-        link: z.string().url().optional(),
-        date: z.date(),
-        featured: z.boolean().default(false),
-    }),
+    type: "content", // v2.5.0+ ; 'content' for markdown/mdx
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            tags: z.array(z.string()),
+            image: image().optional(),
+            link: z.string().url().optional(),
+            date: z.date(),
+            featured: z.boolean().default(false),
+        }),
 });
 
 const certificationsCollection = defineCollection({
-    type: 'data', // JSON/YAML
+    type: "data", // JSON/YAML
     schema: z.object({
         name: z.string(),
         issuer: z.string(),
@@ -22,7 +23,7 @@ const certificationsCollection = defineCollection({
         badge: z.string().optional(),
         url: z.string().url().optional(),
         starred: z.boolean().default(false).optional(),
-    })
+    }),
 });
 
 export const collections = {
