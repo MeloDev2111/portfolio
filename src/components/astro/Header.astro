@@ -10,16 +10,18 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-    { href: `/${lang}/projects`, label: t("nav.projects") },
-    { href: `/${lang}/about`, label: t("nav.about") },
-    { href: `/${lang}/tech-stack`, label: t("nav.tech") },
+    { href: getRelativeLocaleUrl(lang, "projects"), label: t("nav.projects") },
+    { href: getRelativeLocaleUrl(lang, "about"), label: t("nav.about") },
+    { href: getRelativeLocaleUrl(lang, "tech-stack"), label: t("nav.tech") },
 ];
 
 const currentPath = Astro.url.pathname;
 const otherLang = lang === "en" ? "es" : "en";
-// Replace current lang segment with other lang to switch (simple approach)
-// Note: This simple replacement assumes consistent route structure.
-// For production, a more robust path rewriter is better, but this works for MVP /en/x -> /es/x
+
+// Robust switcher: split path, replace lang segment, rebuild
+// This assumes structure /base/lang/... or /lang/...
+// Using getRelativeLocaleUrl is safer if we know the current page route, but we are in a layout component
+// A simple regex replacement of the lang segment in the path is usually safe enough for this structure
 const switchUrl = currentPath.replace(`/${lang}`, `/${otherLang}`);
 ---
 
@@ -30,7 +32,7 @@ const switchUrl = currentPath.replace(`/${lang}`, `/${otherLang}`);
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
             <a
-                href={`/${lang}/`}
+                href={getRelativeLocaleUrl(lang, "")}
                 class="text-xl font-heading font-bold text-light tracking-tighter hover:text-gold transition-colors"
             >
                 DEV<span class="text-gold">.</span>

@@ -8,7 +8,7 @@ interface Project {
         description: string;
         tags: string[];
         link?: string;
-        image?: string;
+        image?: string | { src: string; width: number; height: number };
         featured?: boolean;
         date: Date; // Keep as Date object, purely for sorting if needed, though we strictly use props for display
     }
@@ -45,8 +45,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
                 <button
                     onClick={() => setActiveTag(null)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTag === null
-                            ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
-                            : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
+                        ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
+                        : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
                         }`}
                 >
                     {labels.all}
@@ -56,8 +56,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
                         key={tag}
                         onClick={() => setActiveTag(tag)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTag === tag
-                                ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
-                                : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
+                            ? 'bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]'
+                            : 'bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30'
                             }`}
                     >
                         {tag}

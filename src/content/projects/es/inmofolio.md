@@ -5,7 +5,7 @@ tags: ["Java", "Spring Boot", "React", "AWS"]
 date: 2026-01-15
 featured: true
 link: "https://github.com/username/inmofolio"
-image: "/images/projects/inmofolio.webp"
+image: "../../../assets/projects/placeholder.svg"
 ---
 
 ## Visión General

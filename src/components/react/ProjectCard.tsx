@@ -5,7 +5,7 @@ interface ProjectCardProps {
     description: string;
     tags: string[];
     link?: string;
-    image?: string;
+    image?: string | { src: string; width: number; height: number };
     featured?: boolean;
 }
 
@@ -21,7 +21,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, ta
             <div className="h-48 overflow-hidden bg-gunmetal relative">
                 {image ? (
                     <img
-                        src={image}
+                        src={typeof image === 'string' ? image : image.src}
                         alt={title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"

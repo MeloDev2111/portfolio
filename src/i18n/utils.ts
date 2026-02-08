@@ -13,7 +13,9 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function getRelativeLocaleUrl(lang: string, path: string) {
-    // Basic implementation, can be replaced with Astro's native Helper if preferred
+    const base = import.meta.env.BASE_URL.endsWith('/')
+        ? import.meta.env.BASE_URL.slice(0, -1)
+        : import.meta.env.BASE_URL;
     const p = path.startsWith('/') ? path : `/${path}`;
-    return `/${lang}${p}`;
+    return `${base}/${lang}${p}`;
 }
