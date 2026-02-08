@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "release": "release-it",
-    "changelog": "auto-changelog -p"
+    "changelog": "auto-changelog -p",
+    "lint": "echo 'No linting configured'",
+    "test": "echo 'No tests configured'"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

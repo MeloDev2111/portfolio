@@ -39,6 +39,11 @@ jobs:
           git config --global user.name "MeloDev [Bot]"
           git config --global user.email "melodiaz2111@gmail.com"
 
+      - name: Validate Code
+        run: |
+          npm run lint
+          npm run test
+
       - name: Automated Version Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
