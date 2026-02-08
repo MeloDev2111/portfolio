@@ -8,16 +8,10 @@
     "github": {
         "release": false
     },
+    "hooks": {
+        "after:bump": "npm run changelog"
+    },
     "npm": {
         "publish": false
-    },
-    "plugins": {
-        "@release-it/conventional-changelog": {
-            "preset": "angular",
-            "infile": "CHANGELOG.md"
-        }
-    },
-    "hooks": {
-        "after:bump": "echo 'Version bumped to ${version}'"
     }
 }
