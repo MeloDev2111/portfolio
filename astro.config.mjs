@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://melodev2111.github.io',
+  base: '/portfolio',
   integrations: [react()],
 
   // Internationalization strategy
