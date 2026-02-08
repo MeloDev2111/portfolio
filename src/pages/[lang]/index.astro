@@ -34,8 +34,18 @@ const projects = allProjects
 
 const projectProps = projects.map((p: ProjectEntry) => ({
 	slug: p.slug,
-	data: { ...p.data },
+	data: {
+		title: p.data.title,
+		description: p.data.description,
+		tags: p.data.tags,
+		link: p.data.link,
+		image: p.data.image,
+		featured: p.data.featured,
+	},
 }));
+
+// Sanitize props to remove any potential non-POJO artifacts
+const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
 
 // Certifications
 const certifications = await getCollection("certifications");
@@ -133,8 +143,8 @@ const certifications = await getCollection("certifications");
 			</h2>
 
 			<ProjectGrid
-				client:visible
-				projects={projectProps}
+				client:only="react"
+				projects={cleanProjectProps}
 				labels={{
 					all: lang === "en" ? "All" : "Todos",
 					filter: lang === "en" ? "Filter by" : "Filtrar por",

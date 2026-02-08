@@ -21,10 +21,17 @@ const projects = allProjects
 const projectProps = projects.map((p) => ({
     slug: p.slug,
     data: {
-        ...p.data,
-        // Ensure date is a Date object (it already is from Schema, but React serializes it)
+        title: p.data.title,
+        description: p.data.description,
+        tags: p.data.tags,
+        link: p.data.link,
+        image: p.data.image,
+        featured: p.data.featured,
     },
 }));
+
+// Sanitize props to remove any potential non-POJO artifacts for hydration safety
+const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
 ---
 
 <Layout title={`Portfolio | ${t("nav.projects")}`} lang={lang}>
@@ -46,8 +53,8 @@ const projectProps = projects.map((p) => ({
         </p>
 
         <ProjectGrid
-            client:load
-            projects={projectProps}
+            client:only="react"
+            projects={cleanProjectProps}
             labels={{
                 all: lang === "en" ? "All" : "Todos",
                 filter: lang === "en" ? "Filter by" : "Filtrar por",
