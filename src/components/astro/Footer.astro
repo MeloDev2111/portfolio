@@ -1,0 +1,44 @@
+---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-charcoal/50 border-t border-white/5 mt-auto py-12">
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6"
+    >
+        <div class="text-center md:text-left">
+            <a
+                href={`/${lang}/`}
+                class="text-lg font-heading font-bold text-light tracking-tighter"
+            >
+                DEV<span class="text-gold">.</span>
+            </a>
+            <p class="text-sm text-gray-400 mt-2">
+                {t("footer.copyright").replace("2026", year.toString())}
+            </p>
+        </div>
+
+        <div class="flex gap-6">
+            <a
+                href="https://github.com/melod"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-400 hover:text-gold transition-colors"
+            >
+                GitHub
+            </a>
+            <a
+                href="https://linkedin.com/in/melod"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-400 hover:text-gold transition-colors"
+            >
+                LinkedIn
+            </a>
+        </div>
+    </div>
+</footer>

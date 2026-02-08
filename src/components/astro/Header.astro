@@ -1,0 +1,82 @@
+---
+import {
+    getLangFromUrl,
+    useTranslations,
+    getRelativeLocaleUrl,
+} from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+    { href: `/${lang}/projects`, label: t("nav.projects") },
+    { href: `/${lang}/about`, label: t("nav.about") },
+    { href: `/${lang}/tech-stack`, label: t("nav.tech") },
+];
+
+const currentPath = Astro.url.pathname;
+const otherLang = lang === "en" ? "es" : "en";
+// Replace current lang segment with other lang to switch (simple approach)
+// Note: This simple replacement assumes consistent route structure.
+// For production, a more robust path rewriter is better, but this works for MVP /en/x -> /es/x
+const switchUrl = currentPath.replace(`/${lang}`, `/${otherLang}`);
+---
+
+<header
+    class="fixed top-0 w-full z-50 backdrop-blur-md bg-gunmetal/80 border-b border-white/5 shadow-sm"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <a
+                href={`/${lang}/`}
+                class="text-xl font-heading font-bold text-light tracking-tighter hover:text-gold transition-colors"
+            >
+                DEV<span class="text-gold">.</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class="text-sm font-medium text-gray-300 hover:text-gold transition-colors"
+                        >
+                            {item.label}
+                        </a>
+                    ))
+                }
+
+                <!-- Language Switcher -->
+                <a
+                    href={switchUrl}
+                    class="px-3 py-1 rounded bg-charcoal border border-white/10 text-xs text-gray-300 hover:border-gold hover:text-gold transition-colors"
+                >
+                    {lang === "en" ? "ES" : "EN"}
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button (Placeholder for now) -->
+            <button
+                class="md:hidden text-gray-300 hover:text-white"
+                aria-label="Open menu"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
