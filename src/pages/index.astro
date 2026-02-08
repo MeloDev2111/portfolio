@@ -1,5 +1,23 @@
 ---
-// This file is required by Astro i18n to handle the root URL redirection
-// when prefixDefaultLocale is true.
-return Astro.redirect("/en/");
+import { getRelativeLocaleUrl } from "../i18n/utils";
+
+// Redirect to default locale
+const target = getRelativeLocaleUrl("en", "");
 ---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Redirecting...</title>
+        <meta http-equiv="refresh" content={`0;url=${target}`} />
+        <script define:vars={{ target }}>
+            window.location.href = target;
+        </script>
+    </head>
+    <body
+        class="bg-gunmetal text-white flex items-center justify-center h-screen"
+    >
+        <p>Redirecting to <a href={target}>{target}</a>...</p>
+    </body>
+</html>
