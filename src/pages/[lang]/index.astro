@@ -87,43 +87,85 @@ const certifications = await getCollection("certifications");
 					}
 				</p>
 			</div>
+		</div>
+	</section>
 
-			<!-- Certifications -->
-			<h3 class="text-2xl font-heading font-bold text-light mb-8">
-				Certifications
-			</h3>
-			<div class="grid gap-6 md:grid-cols-2">
+	<!-- Certifications Section -->
+	<section id="certifications" class="py-20 bg-charcoal">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<h2
+				class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+			>
+				<span
+					class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+				>
+					{t("nav.certifications")}
+				</span>
+				<div class="h-px bg-white/10 flex-grow ml-6"></div>
+			</h2>
+
+			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 				{
-					certifications.map((cert: CertEntry) => (
-						<a
-							href={cert.data.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="block p-6 rounded-xl bg-charcoal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group"
-						>
-							<div class="flex items-start gap-4">
-								{cert.data.badge && (
-									<img
-										src={cert.data.badge}
-										alt={cert.data.name}
-										class="w-16 h-16 object-contain"
-									/>
-								)}
-								<div>
-									<h3 class="text-lg font-bold text-light group-hover:text-gold transition-colors">
-										{cert.data.name}
-									</h3>
-									<p class="text-sm text-gray-400">
-										{cert.data.issuer}
-									</p>
-									<p class="text-xs text-gray-500 mt-2">
-										{cert.data.date}
-									</p>
+					certifications
+						.filter((c) => c.data.starred)
+						.sort(
+							(a, b) =>
+								new Date(b.data.date).valueOf() -
+								new Date(a.data.date).valueOf(),
+						)
+						.slice(0, 4)
+						.map((cert: CertEntry) => (
+							<a
+								href={cert.data.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="block p-6 rounded-xl bg-gunmetal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group relative"
+							>
+								<div class="flex items-start gap-4">
+									{cert.data.badge && (
+										<img
+											src={
+												cert.data.badge.startsWith(
+													"http",
+												)
+													? cert.data.badge
+													: import.meta.env.BASE_URL.replace(
+															/\/$/,
+															"",
+														) + cert.data.badge
+											}
+											alt={cert.data.name}
+											class="w-16 h-16 object-contain"
+										/>
+									)}
+									<div>
+										<h3 class="text-lg font-bold text-light group-hover:text-gold transition-colors">
+											{cert.data.name}
+										</h3>
+										<p class="text-sm text-gray-400">
+											{cert.data.issuer}
+										</p>
+										<p class="text-xs text-gray-500 mt-2">
+											{cert.data.date}
+										</p>
+									</div>
 								</div>
-							</div>
-						</a>
-					))
+							</a>
+						))
 				}
+			</div>
+
+			<div class="mt-10 text-center">
+				<a
+					href={getRelativeLocaleUrl(lang, "certifications")}
+					class="text-gold hover:text-white underline underline-offset-4 transition-colors"
+				>
+					{
+						lang === "en"
+							? "View all certifications ->"
+							: "Ver todas las certificaciones ->"
+					}
+				</a>
 			</div>
 		</div>
 	</section>

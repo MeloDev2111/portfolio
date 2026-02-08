@@ -21,6 +21,7 @@ const certificationsCollection = defineCollection({
         date: z.string(), // or date object
         badge: z.string().optional(),
         url: z.string().url().optional(),
+        starred: z.boolean().default(false).optional(),
     })
 });
 
