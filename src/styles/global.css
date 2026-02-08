@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+
+@theme {
+    /* We can extend here too if we want, but we used the config file */
+}
+
+/* Base styles */
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-gunmetal text-light font-sans antialiased;
+    }
+}

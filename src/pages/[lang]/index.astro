@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+	return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+---
+
+<Layout title="Portfolio Initialized" lang={lang}>
+	<main
+		class="flex min-h-screen flex-col items-center justify-center text-center p-8"
+	>
+		<div class="space-y-6 max-w-2xl">
+			<h1
+				class="text-5xl font-heading font-bold text-gold tracking-tight"
+			>
+				System Ready
+			</h1>
+			<p class="text-xl text-gray-300">
+				Astro + React + Tailwind configured successfully.
+			</p>
+			<div class="flex gap-4 justify-center mt-8">
+				<div
+					class="px-4 py-2 bg-charcoal rounded border border-gray-700 text-sm font-mono"
+				>
+					Current Theme: Dark Industrial Gold
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
