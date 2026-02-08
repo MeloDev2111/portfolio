@@ -12,7 +12,7 @@ export const ui = {
         'nav.tech': 'Tech Stack',
         'nav.contact': 'Contact',
         'hero.cta': 'Download CV',
-        'footer.copyright': '© 2026 Portfolio. All rights reserved.',
+        'footer.copyright': '© 2026 MeloDev. All rights reserved.',
     },
     es: {
         'nav.projects': 'Proyectos',
@@ -20,6 +20,6 @@ export const ui = {
         'nav.tech': 'Tecnologías',
         'nav.contact': 'Contacto',
         'hero.cta': 'Descargar CV',
-        'footer.copyright': '© 2026 Portafolio. Todos los derechos reservados.',
+        'footer.copyright': '© 2026 MeloDev. Todos los derechos reservados.',
     },
 } as const;

@@ -1,5 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import {
+    getLangFromUrl,
+    useTranslations,
+    getRelativeLocaleUrl,
+} from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,10 +16,10 @@ const year = new Date().getFullYear();
     >
         <div class="text-center md:text-left">
             <a
-                href={`/${lang}/`}
+                href={getRelativeLocaleUrl(lang, "")}
                 class="text-lg font-heading font-bold text-light tracking-tighter"
             >
-                DEV<span class="text-gold">.</span>
+                MeloDev<span class="text-gold">.</span>
             </a>
             <p class="text-sm text-gray-400 mt-2">
                 {t("footer.copyright").replace("2026", year.toString())}

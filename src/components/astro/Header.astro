@@ -4,7 +4,6 @@ import {
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
-import { languages } from "../../i18n/ui";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -44,7 +43,7 @@ const switchUrl = `${base}${newPathNoBase}`;
                 href={getRelativeLocaleUrl(lang, "")}
                 class="text-xl font-heading font-bold text-light tracking-tighter hover:text-gold transition-colors"
             >
-                DEV<span class="text-gold">.</span>
+                MeloDev<span class="text-gold">.</span>
             </a>
 
             <!-- Desktop Nav -->
