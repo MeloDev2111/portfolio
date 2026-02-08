@@ -9,9 +9,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-    { href: getRelativeLocaleUrl(lang, "projects"), label: t("nav.projects") },
-    { href: getRelativeLocaleUrl(lang, "about"), label: t("nav.about") },
-    { href: getRelativeLocaleUrl(lang, "tech-stack"), label: t("nav.tech") },
+    { href: getRelativeLocaleUrl(lang, "/#about"), label: t("nav.about") },
+    {
+        href: getRelativeLocaleUrl(lang, "/#projects"),
+        label: t("nav.projects"),
+    },
+    { href: getRelativeLocaleUrl(lang, "/#tech-stack"), label: t("nav.tech") },
 ];
 
 const currentPath = Astro.url.pathname;
