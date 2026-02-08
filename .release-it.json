@@ -1,9 +1,9 @@
 {
     "git": {
-        "commitMessage": "chore: release v${version} [skip ci]",
         "tagName": "v${version}",
         "push": true,
-        "requireCleanWorkingDir": false
+        "requireCleanWorkingDir": false,
+        "requireBranch": "master"
     },
     "github": {
         "release": false
