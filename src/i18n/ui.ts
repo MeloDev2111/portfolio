@@ -10,6 +10,7 @@ export const ui = {
         'nav.projects': 'Projects',
         'nav.about': 'About',
         'nav.tech': 'Tech Stack',
+        'nav.certifications': 'Certifications',
         'nav.contact': 'Contact',
         'hero.cta': 'Download CV',
         'footer.copyright': '© 2026 MeloDev. All rights reserved.',
