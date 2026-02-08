@@ -6,11 +6,10 @@ interface Project {
     data: {
         title: string;
         description: string;
-        tags: string[];
+        tags: string | string[]; // Allow string input
         link?: string;
         image?: string | { src: string; width: number; height: number };
         featured?: boolean;
-        date: Date; // Keep as Date object, purely for sorting if needed, though we strictly use props for display
     }
 }
 
@@ -25,17 +24,33 @@ interface ProjectGridProps {
 export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) => {
     const [activeTag, setActiveTag] = useState<string | null>(null);
 
+    // Helper to normalize tags (handle if Astro passes Set, Array or String)
+    const getSafeTags = (tags: any): string[] => {
+        if (typeof tags === 'string') return tags.split(',');
+        if (Array.isArray(tags)) return tags;
+        if (tags instanceof Set) return Array.from(tags);
+        return [];
+    };
+
     // Extract unique tags
     const allTags = useMemo(() => {
         const tags = new Set<string>();
-        projects.forEach(p => p.data.tags.forEach(t => tags.add(t)));
+        if (projects && Array.isArray(projects)) {
+            projects.forEach(p => {
+                const pTags = getSafeTags(p.data.tags);
+                pTags.forEach(t => tags.add(t));
+            });
+        }
         return Array.from(tags).sort();
     }, [projects]);
 
     // Filter projects
     const filteredProjects = useMemo(() => {
         if (!activeTag) return projects;
-        return projects.filter(p => p.data.tags.includes(activeTag));
+        return projects.filter(p => {
+            const pTags = getSafeTags(p.data.tags);
+            return pTags.includes(activeTag);
+        });
     }, [projects, activeTag]);
 
     return (
@@ -72,7 +87,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, labels }) =>
                         key={project.slug}
                         title={project.data.title}
                         description={project.data.description}
-                        tags={project.data.tags}
+                        tags={getSafeTags(project.data.tags)}
                         link={project.data.link}
                         image={project.data.image}
                         featured={project.data.featured}

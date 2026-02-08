@@ -1,5 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import {
+    getLangFromUrl,
+    useTranslations,
+    getRelativeLocaleUrl,
+} from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,7 +22,7 @@ const t = useTranslations(lang);
         <span
             class="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-sm text-gold mb-6 font-medium"
         >
-            System Engineer & Data Enthusiast
+            Software Engineer & Data Enthusiast
         </span>
 
         <h1
@@ -53,7 +57,7 @@ const t = useTranslations(lang);
                 {t("hero.cta")}
             </a>
             <a
-                href={`/${lang}/projects`}
+                href={getRelativeLocaleUrl(lang, "/#projects")}
                 class="px-8 py-3 rounded-lg border border-white/20 text-light font-medium hover:bg-white/5 transition-colors"
             >
                 {lang === "en" ? "View Projects" : "Ver Proyectos"}

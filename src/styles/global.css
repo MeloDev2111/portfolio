@@ -12,6 +12,8 @@
     }
 
     body {
-        @apply bg-gunmetal text-light font-sans antialiased;
+        @apply bg-gunmetal text-light;
+        font-family: 'Inter', sans-serif;
+        scroll-behavior: smooth;
     }
 }
