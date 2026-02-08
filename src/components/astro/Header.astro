@@ -18,11 +18,20 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 const otherLang = lang === "en" ? "es" : "en";
 
-// Robust switcher: split path, replace lang segment, rebuild
-// This assumes structure /base/lang/... or /lang/...
-// Using getRelativeLocaleUrl is safer if we know the current page route, but we are in a layout component
-// A simple regex replacement of the lang segment in the path is usually safe enough for this structure
-const switchUrl = currentPath.replace(`/${lang}`, `/${otherLang}`);
+// Robust switcher:
+// 1. Remove base path
+// 2. Replace lang part
+// 3. Re-add base path
+// This avoids issues where replace() might target the wrong part of the string
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL.slice(0, -1)
+    : import.meta.env.BASE_URL;
+// Path without base (e.g. /en/projects)
+const pathNoBase = currentPath.replace(base, "");
+// Replace /en/ with /es/ or vice versa in the relative path
+const newPathNoBase = pathNoBase.replace(`/${lang}`, `/${otherLang}`);
+// Reconstruct full URL
+const switchUrl = `${base}${newPathNoBase}`;
 ---
 
 <header
