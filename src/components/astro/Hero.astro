@@ -43,7 +43,11 @@ const t = useTranslations(lang);
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-                href="#"
+                href={import.meta.env.BASE_URL.replace(/\/$/, "") +
+                    `/cv/cv-${lang}.pdf`}
+                download={`Cv_Melio_Diaz_${lang.toLowerCase()}.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
                 class="px-8 py-3 rounded-lg bg-gold text-gunmetal font-bold hover:bg-yellow-400 transition-colors shadow-[0_0_20px_rgba(244,208,63,0.3)]"
             >
                 {t("hero.cta")}
