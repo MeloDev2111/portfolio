@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ProjectGrid } from "../../components/react/ProjectGrid";
+import { getCollection } from "astro:content";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+// Fetch projects and filter by current language (folder based)
+const allProjects = await getCollection("projects");
+const projects = allProjects
+    .filter((project) => project.slug.startsWith(`${lang}/`))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Map Astro content to React props
+const projectProps = projects.map((p) => ({
+    slug: p.slug,
+    data: {
+        ...p.data,
+        // Ensure date is a Date object (it already is from Schema, but React serializes it)
+    },
+}));
+---
+
+<Layout title={`Portfolio | ${t("nav.projects")}`} lang={lang}>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-light mb-8">
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+            >
+                {t("nav.projects")}
+            </span>
+        </h1>
+
+        <p class="text-xl text-gray-400 max-w-2xl mb-12">
+            {
+                lang === "en"
+                    ? "A showcase of my technical projects, featuring scalable backend architectures and full-stack applications."
+                    : "Una muestra de mis proyectos técnicos, destacando arquitecturas backend escalables y aplicaciones full-stack."
+            }
+        </p>
+
+        <ProjectGrid
+            client:load
+            projects={projectProps}
+            labels={{
+                all: lang === "en" ? "All" : "Todos",
+                filter: lang === "en" ? "Filter by" : "Filtrar por",
+            }}
+        />
+    </div>
+</Layout>

@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TechStack from "../../components/astro/TechStack.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<Layout title={`Portfolio | ${t("nav.tech")}`} lang={lang}>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <h1
+            class="text-4xl md:text-5xl font-heading font-bold text-light mb-12"
+        >
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
+            >
+                {t("nav.tech")}
+            </span>
+        </h1>
+
+        <TechStack />
+    </div>
+</Layout>

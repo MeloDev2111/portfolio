@@ -1,0 +1,55 @@
+---
+const technologies = [
+    { name: "Java", icon: "☕", category: "Backend" },
+    { name: "Spring Boot", icon: "🍃", category: "Backend" },
+    { name: "AWS", icon: "☁️", category: "Cloud" },
+    { name: "Docker", icon: "whale", category: "DevOps" }, // Using emoji for simplicity, typically SVG
+    { name: "PostgreSQL", icon: "🐘", category: "Database" },
+    { name: "React", icon: "⚛️", category: "Frontend" },
+    { name: "Astro", icon: "🚀", category: "Frontend" },
+    { name: "Tailwind", icon: "🎨", category: "Frontend" },
+    { name: "Python", icon: "🐍", category: "Data Science" },
+    { name: "TensorFlow", icon: "🧠", category: "Data Science" },
+];
+
+// Group by category
+const categories = [
+    "Backend",
+    "Frontend",
+    "Cloud",
+    "Data Science",
+    "DevOps",
+    "Database",
+];
+---
+
+<div class="grid gap-8">
+    {
+        categories.map((category) => {
+            const techByCategory = technologies.filter(
+                (t) => t.category === category,
+            );
+            if (techByCategory.length === 0) return null;
+
+            return (
+                <div class="space-y-4">
+                    <h3 class="text-xl font-heading font-bold text-gray-300 border-b border-white/5 pb-2">
+                        {category}
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {techByCategory.map((tech) => (
+                            <div class="flex items-center gap-3 p-4 rounded-lg bg-charcoal border border-white/5 hover:border-gold/30 hover:shadow-[0_0_15px_rgba(244,208,63,0.1)] transition-all group">
+                                <span class="text-2xl grayscale group-hover:grayscale-0 transition-all filter">
+                                    {tech.icon === "whale" ? "🐳" : tech.icon}
+                                </span>
+                                <span class="font-medium text-gray-300 group-hover:text-light transition-colors">
+                                    {tech.name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        })
+    }
+</div>
