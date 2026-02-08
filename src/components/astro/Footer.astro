@@ -4,6 +4,7 @@ import {
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
+import { siteConfig } from "../../site.config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
                 href={getRelativeLocaleUrl(lang, "")}
                 class="text-lg font-heading font-bold text-light tracking-tighter"
             >
-                MeloDev<span class="text-gold">.</span>
+                {siteConfig.alias}<span class="text-gold">.</span>
             </a>
             <p class="text-sm text-gray-400 mt-2">
                 {t("footer.copyright").replace("2026", year.toString())}
@@ -28,7 +29,7 @@ const year = new Date().getFullYear();
 
         <div class="flex gap-6">
             <a
-                href="https://github.com/MeloDev2111"
+                href={siteConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-gray-400 hover:text-gold transition-colors"
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
                 GitHub
             </a>
             <a
-                href="https://www.linkedin.com/in/melio-diaz-diaz/"
+                href={siteConfig.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-gray-400 hover:text-gold transition-colors"

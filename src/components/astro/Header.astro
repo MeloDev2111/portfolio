@@ -4,6 +4,7 @@ import {
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
+import { siteConfig } from "../../site.config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -41,7 +42,7 @@ const switchUrl = `${base}${newPathNoBase}`;
 ---
 
 <header
-    class="fixed top-0 w-full z-50 backdrop-blur-md bg-gunmetal/80 border-b border-white/5 shadow-sm"
+    class="fixed top-0 w-full z-50 backdrop-blur-md bg-gunmetal/70 border-b border-white/5 shadow-sm"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
@@ -50,7 +51,7 @@ const switchUrl = `${base}${newPathNoBase}`;
                 href={getRelativeLocaleUrl(lang, "")}
                 class="text-xl font-heading font-bold text-light tracking-tighter hover:text-gold transition-colors"
             >
-                MeloDev<span class="text-gold">.</span>
+                {siteConfig.alias}<span class="text-gold">.</span>
             </a>
 
             <!-- Desktop Nav -->
