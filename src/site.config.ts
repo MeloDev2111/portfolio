@@ -8,7 +8,6 @@ export const siteConfig = {
     social: {
         github: "https://github.com/MeloDev2111",
         linkedin: "https://www.linkedin.com/in/melio-diaz-diaz/",
-        email: "contact@meloz.dev", // Using a placeholder for now, user can update
     },
     // "Deep Gunmetal & Copper" Theme
     theme: {
