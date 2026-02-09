@@ -215,7 +215,9 @@ const techLogos = getBentoSkills().map((skill) => ({
                     >
                         Verified
                     </p>
-                    <div class="flex flex-wrap justify-center gap-2">
+                    <div
+                        class="flex flex-wrap justify-center content-center gap-3 w-full px-2"
+                    >
                         {
                             getSecondarySocials().map((profile) => (
                                 <a
@@ -223,10 +225,10 @@ const techLogos = getBentoSkills().map((skill) => ({
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     title={profile.name}
-                                    class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-[#c08b5a]/50 hover:bg-[#c08b5a]/10 hover:scale-110 transition-all text-white p-2 cursor-pointer group/icon shadow-inner"
+                                    class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-[#c08b5a]/50 hover:bg-[#c08b5a]/10 hover:scale-110 transition-all text-white p-2 cursor-pointer group/icon shadow-inner shrink-0"
                                 >
                                     <span
-                                        class="w-full h-full group-hover/icon:scale-110 transition-transform block"
+                                        class="w-full h-full group-hover/icon:scale-110 transition-transform flex items-center justify-center"
                                         set:html={profile.icon}
                                     />
                                 </a>
