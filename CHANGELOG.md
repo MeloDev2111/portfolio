@@ -2,16 +2,14 @@
 
 # [0.2.0](https://github.com/MeloDev2111/portfolio/compare/v0.1.3...v0.2.0) (2026-02-09)
 
-
 ### Bug Fixes
 
-* lint corrections ([6deb0f6](https://github.com/MeloDev2111/portfolio/commit/6deb0f6f85a9d537667a6cb62eff28cf46a7ab08))
-
+- lint corrections ([6deb0f6](https://github.com/MeloDev2111/portfolio/commit/6deb0f6f85a9d537667a6cb62eff28cf46a7ab08))
 
 ### Features
 
-* centralize config, refine aesthetics, and add cv fallback logic ([5733adc](https://github.com/MeloDev2111/portfolio/commit/5733adc14aa14c313aed57a0148e76f11c445fb0))
-* premium bento hero redesign with live clock and devicon logos ([f601d84](https://github.com/MeloDev2111/portfolio/commit/f601d849ab2398a97d86ab9c787d4fa19774290e))
+- centralize config, refine aesthetics, and add cv fallback logic ([5733adc](https://github.com/MeloDev2111/portfolio/commit/5733adc14aa14c313aed57a0148e76f11c445fb0))
+- premium bento hero redesign with live clock and devicon logos ([f601d84](https://github.com/MeloDev2111/portfolio/commit/f601d849ab2398a97d86ab9c787d4fa19774290e))
 
 ##
 

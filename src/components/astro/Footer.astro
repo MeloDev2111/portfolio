@@ -11,6 +11,7 @@ import Logo from "./Logo.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
+import { getAllActiveSocials } from "../../utils/social";
 ---
 
 <footer class="bg-gunmetal border-t border-light/5 mt-auto py-12">
@@ -35,23 +36,22 @@ const year = new Date().getFullYear();
             </p>
         </div>
 
-        <div class="flex gap-6">
-            <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-400 hover:text-gold transition-colors"
-            >
-                GitHub
-            </a>
-            <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-400 hover:text-gold transition-colors"
-            >
-                LinkedIn
-            </a>
+        <div
+            class="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-end"
+        >
+            {
+                getAllActiveSocials().map((link) => (
+                    <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`flex items-center gap-2 text-gray-400 ${link.colorClass || "hover:text-gold"} transition-colors text-sm font-medium`}
+                    >
+                        <span>{link.icon}</span>
+                        <span>{link.name}</span>
+                    </a>
+                ))
+            }
         </div>
     </div>
 </footer>

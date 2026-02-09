@@ -5,10 +5,6 @@ export const siteConfig = {
     title: "Software Engineer & Data Enthusiast",
     description:
         "Personal portfolio of Melio Diaz (MeloDev), a Systems Engineer specializing in Backend (Java/Spring), Cloud (AWS), and Data Science.",
-    social: {
-        github: "https://github.com/MeloDev2111",
-        linkedin: "https://www.linkedin.com/in/melio-diaz-diaz/",
-    },
     // "Deep Gunmetal & Copper" Theme
     theme: {
         colors: {
