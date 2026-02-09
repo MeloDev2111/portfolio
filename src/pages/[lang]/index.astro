@@ -58,41 +58,175 @@ const certifications = await getCollection("certifications");
     <Hero />
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gunmetal">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-                class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
-            >
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-                >
-                    {t("nav.about")}
-                </span>
-                <div class="h-px bg-white/10 flex-grow ml-6"></div>
-            </h2>
+    <section
+        id="about"
+        class="py-16 md:py-24 min-h-[50vh] flex flex-col justify-center bg-gunmetal snap-start relative overflow-hidden"
+    >
+        <!-- Background Elements -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#c08b5a]/5 via-transparent to-transparent opacity-50"
+        >
+        </div>
 
-            <!-- Bio -->
-            <div class="prose prose-invert prose-lg text-gray-400 mb-16">
-                <p>
-                    {
-                        lang === "en"
-                            ? "I am a 24-year-old Systems Engineer passionate about building robust, scalable architectures. My expertise lies in Backend Development with Java/Spring, Cloud Solutions with AWS, and exploring the frontiers of Data Science."
-                            : "Soy un Ingeniero de Sistemas de 24 años apasionado por construir arquitecturas robustas y escalables. Mi experiencia se centra en el Desarrollo Backend con Java/Spring, Soluciones Cloud con AWS y la exploración de la Ciencia de Datos."
-                    }
-                </p>
-                <p>
-                    {
-                        lang === "en"
-                            ? "I bridge the gap between complex engineering problems and elegant, user-centric solutions. With a focus on performance and reliability, I aim to create digital ecosystems that stand the test of time."
-                            : "Conecto problemas de ingeniería complejos con soluciones elegantes centradas en el usuario. Con un enfoque en el rendimiento y la fiabilidad, aspiro a crear ecosistemas digitales que perduren en el tiempo."
-                    }
-                </p>
+        <div
+            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full"
+        >
+            <div
+                class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden"
+            >
+                <!-- Noise Texture -->
+                <div
+                    class="absolute inset-0 bento-noise opacity-10 pointer-events-none"
+                >
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12 relative z-10">
+                    <!-- Column 1: Header & Bio (Span 2) -->
+                    <div class="md:col-span-2 flex flex-col gap-6">
+                        <div class="flex items-center gap-4 mb-2">
+                            <h2
+                                class="text-3xl md:text-4xl font-heading font-bold text-white tracking-tight"
+                            >
+                                {t("nav.about")}
+                                <span class="text-[#c08b5a]">.</span>
+                            </h2>
+                            <div
+                                class="h-px bg-white/10 flex-grow rounded-full"
+                            >
+                            </div>
+                        </div>
+
+                        <div
+                            class="prose prose-invert prose-lg text-[#94a3b8] leading-relaxed"
+                        >
+                            <p
+                                set:html={lang === "en"
+                                    ? "I am a 24-year-old <span class='text-[#e1e1e0] font-semibold'>Systems Engineer</span> passionate about building robust, scalable architectures. My expertise lies in <span class='text-[#c08b5a]'>Backend Development</span> with Java/Spring, <span class='text-[#c08b5a]'>Cloud Solutions</span> with AWS, and exploring the frontiers of Data Science."
+                                    : "Soy un <span class='text-[#e1e1e0] font-semibold'>Ingeniero de Sistemas</span> de 24 años apasionado por construir arquitecturas robustas y escalables. Mi experiencia se centra en el <span class='text-[#c08b5a]'>Desarrollo Backend</span> con Java/Spring, <span class='text-[#c08b5a]'>Soluciones Cloud</span> con AWS y la exploración de la Ciencia de Datos."}
+                            />
+                            <p
+                                set:html={lang === "en"
+                                    ? "I bridge the gap between complex engineering problems and elegant, user-centric solutions. With a focus on <span class='text-[#e1e1e0] font-semibold'>performance</span> and <span class='text-[#e1e1e0] font-semibold'>reliability</span>, I aim to create digital ecosystems that stand the test of time."
+                                    : "Conecto problemas de ingeniería complejos con soluciones elegantes centradas en el usuario. Con un enfoque en el <span class='text-[#e1e1e0] font-semibold'>rendimiento</span> y la <span class='text-[#e1e1e0] font-semibold'>fiabilidad</span>, aspiro a crear ecosistemas digitales que perduren en el tiempo."}
+                            />
+                        </div>
+
+                        <!-- Signature / decorative element -->
+                        <div
+                            class="mt-4 opacity-50 font-mono text-xs tracking-widest text-[#c08b5a]"
+                        >
+                            // ARCHITECTING_THE_FUTURE
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Tech DNA / Visual Sidebar -->
+                    <div
+                        class="md:col-span-1 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 flex flex-col justify-center"
+                    >
+                        <h3
+                            class="text-sm font-bold text-[#818d90] uppercase tracking-widest mb-6 flex items-center gap-2"
+                        >
+                            <span class="w-2 h-2 rounded-full bg-[#c08b5a]"
+                            ></span>
+                            Focus Areas
+                        </h3>
+
+                        <div class="flex flex-col gap-4">
+                            <!-- Item 1 -->
+                            <div
+                                class="group p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#c08b5a]/30 transition-all hover:-translate-x-1"
+                            >
+                                <div class="flex items-center gap-3 mb-1">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-[#c08b5a]"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 01-2 2v4a2 2 0 012 2h14a2 2 0 012-2v-4a2 2 0 01-2-2m-2-4h.01M17 16h.01"
+                                        ></path>
+                                    </svg>
+                                    <span class="font-bold text-gray-200"
+                                        >Backend Systems</span
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-500 pl-8">
+                                    Microservices & APIs
+                                </p>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div
+                                class="group p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#c08b5a]/30 transition-all hover:-translate-x-1"
+                            >
+                                <div class="flex items-center gap-3 mb-1">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-[#c08b5a]"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                        ></path>
+                                    </svg>
+                                    <span class="font-bold text-gray-200"
+                                        >Cloud Infra</span
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-500 pl-8">
+                                    AWS & Scalability
+                                </p>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div
+                                class="group p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#c08b5a]/30 transition-all hover:-translate-x-1"
+                            >
+                                <div class="flex items-center gap-3 mb-1">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-[#c08b5a]"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                        ></path>
+                                    </svg>
+                                    <span class="font-bold text-gray-200"
+                                        >Data Science</span
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-500 pl-8">
+                                    Analysis & Insights
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-20 bg-charcoal">
+    <section
+        id="certifications"
+        class="py-16 md:py-24 min-h-[60vh] flex flex-col justify-center bg-charcoal snap-start"
+    >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
                 class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
@@ -175,7 +309,10 @@ const certifications = await getCollection("certifications");
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-charcoal/30">
+    <section
+        id="projects"
+        class="py-16 md:py-24 min-h-[60vh] flex flex-col justify-center bg-charcoal/30 snap-start"
+    >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
                 class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
@@ -212,7 +349,10 @@ const certifications = await getCollection("certifications");
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-20 bg-gunmetal">
+    <section
+        id="tech-stack"
+        class="py-16 md:py-24 min-h-[40vh] flex flex-col justify-center bg-gunmetal snap-start"
+    >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
                 class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
