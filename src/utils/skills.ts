@@ -1,6 +1,13 @@
 export interface Skill {
     name: string;
-    category: "Backend" | "Frontend" | "Cloud" | "DevOps" | "Database" | "Data Science" | "Other";
+    category:
+        | "Backend"
+        | "Frontend"
+        | "Cloud"
+        | "DevOps"
+        | "Database"
+        | "Data Science"
+        | "Other";
     icon: string; // Devicon URL (SVG)
     emoji: string;
     // Optional configuration for the Hero Bento "Core Stats" or other featured sections
@@ -11,7 +18,8 @@ export interface Skill {
     };
 }
 
-const DEVICON_BASE = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+const DEVICON_BASE =
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
 export const SKILLS: Skill[] = [
     // Backend
@@ -23,8 +31,8 @@ export const SKILLS: Skill[] = [
         featured: {
             inBento: true,
             colorClass: "group-hover:bg-[#f89820]/20",
-            borderClass: "group-hover:border-[#f89820]/40"
-        }
+            borderClass: "group-hover:border-[#f89820]/40",
+        },
     },
     {
         name: "Spring",
@@ -34,14 +42,14 @@ export const SKILLS: Skill[] = [
         featured: {
             inBento: true,
             colorClass: "group-hover:bg-[#6db33f]/20",
-            borderClass: "group-hover:border-[#6db33f]/40"
-        }
+            borderClass: "group-hover:border-[#6db33f]/40",
+        },
     },
     {
         name: "Node.js",
         category: "Backend",
         icon: `${DEVICON_BASE}/nodejs/nodejs-original.svg`,
-        emoji: "🟢"
+        emoji: "🟢",
     },
 
     // Cloud
@@ -53,8 +61,8 @@ export const SKILLS: Skill[] = [
         featured: {
             inBento: true,
             colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40"
-        }
+            borderClass: "group-hover:border-[#FF9900]/40",
+        },
     },
     {
         name: "GCP",
@@ -64,8 +72,8 @@ export const SKILLS: Skill[] = [
         featured: {
             inBento: true,
             colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40"
-        }
+            borderClass: "group-hover:border-[#FF9900]/40",
+        },
     },
 
     // Frontend
@@ -73,19 +81,19 @@ export const SKILLS: Skill[] = [
         name: "React",
         category: "Frontend",
         icon: `${DEVICON_BASE}/react/react-original.svg`,
-        emoji: "⚛️"
+        emoji: "⚛️",
     },
     {
         name: "Astro",
         category: "Frontend",
         icon: `${DEVICON_BASE}/astro/astro-original.svg`,
-        emoji: "🚀"
+        emoji: "🚀",
     },
     {
         name: "Tailwind",
         category: "Frontend",
         icon: `${DEVICON_BASE}/tailwindcss/tailwindcss-original.svg`,
-        emoji: "🎨"
+        emoji: "🎨",
     },
 
     // Data Science
@@ -97,20 +105,20 @@ export const SKILLS: Skill[] = [
         featured: {
             inBento: true,
             colorClass: "group-hover:bg-[#3776AB]/20",
-            borderClass: "group-hover:border-[#3776AB]/40"
-        }
+            borderClass: "group-hover:border-[#3776AB]/40",
+        },
     },
     {
         name: "Pandas",
         category: "Data Science",
         icon: `${DEVICON_BASE}/pandas/pandas-original.svg`,
-        emoji: "🐼"
+        emoji: "🐼",
     },
     {
         name: "TensorFlow",
         category: "Data Science",
         icon: `${DEVICON_BASE}/tensorflow/tensorflow-original.svg`,
-        emoji: "🧠"
+        emoji: "🧠",
     },
 
     // DevOps
@@ -118,13 +126,13 @@ export const SKILLS: Skill[] = [
         name: "Docker",
         category: "DevOps",
         icon: `${DEVICON_BASE}/docker/docker-original.svg`,
-        emoji: "🐳"
+        emoji: "🐳",
     },
     {
         name: "Kubernetes",
         category: "DevOps",
         icon: `${DEVICON_BASE}/kubernetes/kubernetes-original.svg`,
-        emoji: "☸️"
+        emoji: "☸️",
     },
 
     // Database
@@ -132,7 +140,7 @@ export const SKILLS: Skill[] = [
         name: "PostgreSQL",
         category: "Database",
         icon: `${DEVICON_BASE}/postgresql/postgresql-original.svg`,
-        emoji: "🐘"
+        emoji: "🐘",
     },
     {
         name: "SQL",
@@ -144,11 +152,13 @@ export const SKILLS: Skill[] = [
         // I will use a generic database SVG from a reliable source or just map it to something common.
         // Let's assume standard SQL via a generic icon or a placeholder.
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
-        emoji: "🗃️"
-    }
+        emoji: "🗃️",
+    },
 ];
 
 // Helpers
-export const getBentoSkills = () => SKILLS.filter(s => s.featured?.inBento);
-export const getSkillsByCategory = (category: string) => SKILLS.filter(s => s.category === category);
-export const getAllCategories = () => Array.from(new Set(SKILLS.map(s => s.category)));
+export const getBentoSkills = () => SKILLS.filter((s) => s.featured?.inBento);
+export const getSkillsByCategory = (category: string) =>
+    SKILLS.filter((s) => s.category === category);
+export const getAllCategories = () =>
+    Array.from(new Set(SKILLS.map((s) => s.category)));
