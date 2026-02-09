@@ -30,4 +30,30 @@
         opacity: 0.4;
         mix-blend-mode: overlay;
     }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-[#0c111c];
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-[#818d90]/20 rounded-full border-[2px] border-[#0c111c];
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-[#c08b5a]/60;
+    }
+
+    /* Custom Selection */
+    ::selection {
+        @apply bg-[#c08b5a]/30 text-white;
+    }
+
+    /* Focus Outline to match theme */
+    :focus-visible {
+        @apply outline-none ring-2 ring-[#c08b5a] ring-offset-2 ring-offset-[#0c111c];
+    }
 }

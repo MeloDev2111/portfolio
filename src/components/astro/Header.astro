@@ -43,7 +43,9 @@ const newPathNoBase = pathNoBase.replace(`/${lang}`, `/${otherLang}`);
 const switchUrl = `${base}${newPathNoBase}`;
 ---
 
-<header class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50">
+<header
+    class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 transition-all duration-300 ease-in-out"
+>
     <div class="flex justify-between items-center h-14 px-2">
         <!-- P1: Brand (Left) -->
         <a
@@ -119,17 +121,29 @@ const switchUrl = `${base}${newPathNoBase}`;
     </div>
 
     <!-- Mobile Menu (Floating & Detached) -->
-    <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 p-2">
+    <div
+        id="mobile-menu-backdrop"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0"
+        aria-hidden="true"
+    >
+    </div>
+    <div
+        id="mobile-menu"
+        class="hidden fixed top-20 left-4 right-4 z-50 transform transition-all duration-300 origin-top scale-95 opacity-0"
+    >
         <nav
-            class="bg-[#0c111c]/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1"
+            class="bg-[#0c111c]/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1 ring-1 ring-white/5"
         >
             {
                 navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                        class="px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-between group"
                     >
                         {item.label}
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity text-gold">
+                            →
+                        </span>
                     </a>
                 ))
             }
@@ -137,20 +151,165 @@ const switchUrl = `${base}${newPathNoBase}`;
     </div>
 </header>
 
+<!-- Back to Top Button -->
+<button
+    id="back-to-top"
+    aria-label="Back to Top"
+    class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-gold/90 text-gunmetal shadow-lg shadow-gold/20 translate-y-24 opacity-0 transition-transform duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+    </svg>
+</button>
+
 <script>
-    const btn = document.getElementById("mobile-menu-btn");
-    const menu = document.getElementById("mobile-menu");
+    const header = document.querySelector("header");
+    const backToTopBtn = document.getElementById("back-to-top");
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
+    const navLinks = document.querySelectorAll("nav a"); // Desktop nav links
 
-    if (btn && menu) {
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
+    let lastScrollY = window.scrollY;
 
-        // Close menu when clicking a link
-        menu.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                menu.classList.add("hidden");
+    // Thresholds
+    const SHOW_BACK_TO_TOP_OFFSET = 600;
+
+    function handleScroll() {
+        const currentScrollY = window.scrollY;
+
+        // 1. Smart Navbar Logic
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            header?.classList.add("-translate-y-[150%]", "opacity-0");
+            closeMobileMenu(); // Ensure menu closes on scroll down
+        } else {
+            header?.classList.remove("-translate-y-[150%]", "opacity-0");
+        }
+
+        // 2. Back to Top Button Logic
+        if (currentScrollY > SHOW_BACK_TO_TOP_OFFSET) {
+            backToTopBtn?.classList.remove("translate-y-24", "opacity-0");
+        } else {
+            backToTopBtn?.classList.add("translate-y-24", "opacity-0");
+        }
+
+        lastScrollY = currentScrollY;
+    }
+
+    // Scroll Spy Logic
+    function initScrollSpy() {
+        const sections = document.querySelectorAll("section");
+        const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -60% 0px", // Trigger when section is near top/middle
+            threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    if (id) {
+                        highlightNavLink(id);
+                    }
+                }
             });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+    }
+
+    function highlightNavLink(id: string) {
+        navLinks.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href && href.includes(`#${id}`)) {
+                // Active Styling
+                link.classList.add("bg-white/10", "text-white", "shadow-sm");
+                link.classList.remove(
+                    "text-gray-400",
+                    "hover:text-white",
+                    "hover:bg-white/5",
+                );
+            } else {
+                // Inactive Styling
+                link.classList.remove("bg-white/10", "text-white", "shadow-sm");
+                link.classList.add(
+                    "text-gray-400",
+                    "hover:text-white",
+                    "hover:bg-white/5",
+                );
+            }
         });
     }
+
+    // Mobile Menu Functions
+    function openMobileMenu() {
+        mobileMenu?.classList.remove("hidden");
+        mobileMenuBackdrop?.classList.remove("hidden");
+
+        // Small delay to allow display:block to apply before transition
+        setTimeout(() => {
+            mobileMenu?.classList.remove("scale-95", "opacity-0");
+            mobileMenuBackdrop?.classList.remove("opacity-0");
+        }, 10);
+
+        document.body.style.overflow = "hidden"; // Lock scroll
+    }
+
+    function closeMobileMenu() {
+        mobileMenu?.classList.add("scale-95", "opacity-0");
+        mobileMenuBackdrop?.classList.add("opacity-0");
+
+        setTimeout(() => {
+            mobileMenu?.classList.add("hidden");
+            mobileMenuBackdrop?.classList.add("hidden");
+        }, 300); // Matches transition duration
+
+        document.body.style.overflow = ""; // Unlock scroll
+    }
+
+    // Event Listeners
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    backToTopBtn?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener("click", () => {
+            if (mobileMenu.classList.contains("hidden")) {
+                openMobileMenu();
+            } else {
+                closeMobileMenu();
+            }
+        });
+
+        mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
+
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+        });
+    }
+
+    // Initialize
+    initScrollSpy();
 </script>
