@@ -45,10 +45,12 @@ import { getAllActiveSocials } from "../../utils/social";
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class={`flex items-center gap-2 text-gray-400 ${link.colorClass || "hover:text-gold"} transition-colors text-sm font-medium`}
+                        class={`flex items-center gap-1 text-gray-400 ${link.colorClass || "hover:text-gold"} transition-colors text-sm font-medium group`}
                     >
-                        <span>{link.icon}</span>
-                        <span>{link.name}</span>
+                        <span class="w-5 h-5" set:html={link.icon} />
+                        <span class="group-hover:text-white transition-colors">
+                            {link.name}
+                        </span>
                     </a>
                 ))
             }

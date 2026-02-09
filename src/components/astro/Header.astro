@@ -43,51 +43,62 @@ const newPathNoBase = pathNoBase.replace(`/${lang}`, `/${otherLang}`);
 const switchUrl = `${base}${newPathNoBase}`;
 ---
 
-<header
-    class="fixed top-0 w-full z-50 backdrop-blur-md bg-gunmetal/80 border-b border-light/5 shadow-sm"
->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <a
-                href={getRelativeLocaleUrl(lang, "")}
-                class="group flex items-center gap-2 hover:opacity-80 transition-opacity"
-                aria-label={siteConfig.name}
+<header class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50">
+    <div class="flex justify-between items-center h-14 px-2">
+        <!-- P1: Brand (Left) -->
+        <a
+            href={getRelativeLocaleUrl(lang, "")}
+            class="pl-4 flex items-center gap-2 group"
+            aria-label={siteConfig.name}
+        >
+            <div
+                class="p-1.5 rounded-full bg-white/5 border border-white/5 group-hover:border-gold/30 transition-colors"
             >
-                <Logo width="40" height="40" variant="original" />
-                <span
-                    class="text-xl font-heading font-bold text-light tracking-tighter group-hover:text-gold transition-colors"
-                >
-                    {siteConfig.alias}<span class="text-gold">.</span>
-                </span>
+                <Logo width="24" height="24" variant="original" />
+            </div>
+            <span
+                class="text-lg font-bold text-light tracking-tight hidden sm:block"
+            >
+                {siteConfig.alias}<span class="text-gold">.</span>
+            </span>
+        </a>
+
+        <!-- P2: Nav Pills (Center) -->
+        <nav
+            class="hidden md:flex items-center gap-1 bg-white/10 backdrop-blur-sm p-1 rounded-full border border-white/10 shadow-inner"
+        >
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                            currentPath === item.href ||
+                            (item.href !== "/" &&
+                                currentPath.startsWith(item.href))
+                                ? "bg-white/10 text-white shadow-sm"
+                                : "text-gray-400 hover:text-white hover:bg-white/5"
+                        }`}
+                    >
+                        {item.label}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <!-- P3: Actions (Right) -->
+        <div class="flex items-center gap-2 pr-2">
+            <!-- Language -->
+            <a
+                href={switchUrl}
+                class="px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-xs text-gray-300 hover:text-white hover:border-white/20 transition-all font-medium"
+            >
+                {lang === "en" ? "ES" : "EN"}
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex space-x-8 items-center">
-                {
-                    navItems.map((item) => (
-                        <a
-                            href={item.href}
-                            class="text-sm font-medium text-gray-300 hover:text-gold transition-colors"
-                        >
-                            {item.label}
-                        </a>
-                    ))
-                }
-
-                <!-- Language Switcher -->
-                <a
-                    href={switchUrl}
-                    class="px-3 py-1 rounded bg-charcoal border border-white/10 text-xs text-gray-300 hover:border-gold hover:text-gold transition-colors"
-                >
-                    {lang === "en" ? "ES" : "EN"}
-                </a>
-            </nav>
-
-            <!-- Mobile Menu Button -->
+            <!-- Mobile Menu Toggle -->
             <button
                 id="mobile-menu-btn"
-                class="md:hidden text-gray-300 hover:text-white focus:outline-none"
+                class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none"
                 aria-label="Toggle menu"
             >
                 <svg
@@ -107,53 +118,21 @@ const switchUrl = `${base}${newPathNoBase}`;
         </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-gunmetal/95 backdrop-blur-md border-b border-white/5"
-    >
-        <nav class="px-4 py-6 space-y-4 flex flex-col">
+    <!-- Mobile Menu (Floating & Detached) -->
+    <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 p-2">
+        <nav
+            class="bg-[#0c111c]/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1"
+        >
             {
                 navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="text-base font-medium text-gray-300 hover:text-gold transition-colors block"
+                        class="px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
                     >
                         {item.label}
                     </a>
                 ))
             }
-            <div
-                class="pt-4 border-t border-white/10 flex items-center justify-between"
-            >
-                <span class="text-gray-400 text-sm">{t("nav.language")}</span>
-                <div
-                    class="flex bg-charcoal rounded-lg p-1 border border-white/10"
-                >
-                    <a
-                        href={lang === "en" ? "#" : switchUrl}
-                        class={`px-3 py-1.5 rounded-md text-sm transition-all ${
-                            lang === "en"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm cursor-default"
-                                : "text-gray-400 hover:text-white"
-                        }`}
-                        aria-current={lang === "en" ? "page" : undefined}
-                    >
-                        EN
-                    </a>
-                    <a
-                        href={lang === "es" ? "#" : switchUrl}
-                        class={`px-3 py-1.5 rounded-md text-sm transition-all ${
-                            lang === "es"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm cursor-default"
-                                : "text-gray-400 hover:text-white"
-                        }`}
-                        aria-current={lang === "es" ? "page" : undefined}
-                    >
-                        ES
-                    </a>
-                </div>
-            </div>
         </nav>
     </div>
 </header>

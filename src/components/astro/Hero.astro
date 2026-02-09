@@ -85,26 +85,25 @@ const techLogos = getBentoSkills().map((skill) => ({
                 >
                 </div>
 
-                <!-- Decorative Icon (Top Right) -->
+                <!-- Decorative Blob -->
                 <div
-                    class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                    class="absolute -top-20 -right-20 w-64 h-64 bg-[#c08b5a]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#c08b5a]/20 transition-all duration-700"
                 >
-                    <Logo width="80" height="80" variant="theme" />
                 </div>
 
                 <div class="relative z-10 pt-4">
                     <span
-                        class="text-[#c08b5a] font-mono text-sm mb-4 block tracking-widest font-bold"
+                        class="text-[#f59e0b] font-mono text-base mb-2 block tracking-widest font-bold"
                     >
-                        {t("hero.greeting") || "HELLO_WORLD"}
+                        {t("hero.greeting") || "Hi, I'm"}
                     </span>
                     <h1
-                        class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-[#818d90] mb-4"
+                        class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-tight"
                     >
                         {siteConfig.name}
                     </h1>
                     <p
-                        class="text-[#818d90] text-lg sm:text-xl max-w-md leading-relaxed"
+                        class="text-[#94a3b8] text-lg sm:text-xl max-w-lg leading-relaxed font-light"
                     >
                         {t("hero.description") || ui.en["hero.description"]}
                     </p>
@@ -116,21 +115,22 @@ const techLogos = getBentoSkills().map((skill) => ({
                         download={cvFilename}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#c08b5a] text-[#0c111c] font-bold hover:bg-[#e0aa75] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_15px_rgba(192,139,90,0.2)]"
+                        class="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#f59e0b] text-[#0f172a] font-bold hover:bg-[#eab308] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-orange-500/20"
                     >
                         <span>{t("hero.cta") || ui.en["hero.cta"]}</span>
                         <svg
-                            class="w-4 h-4"
+                            class="w-5 h-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            ><path
+                            stroke-width="2.5"
+                        >
+                            <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                            ></path></svg
-                        >
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                            ></path>
+                        </svg>
                     </a>
                     <a
                         target="_blank"
@@ -138,49 +138,65 @@ const techLogos = getBentoSkills().map((skill) => ({
                         href={getPrimarySocials().find(
                             (s) => s.name === "LinkedIn",
                         )?.url}
-                        class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#818d90]/30 text-[#e1e1e0] hover:bg-white/5 hover:border-[#818d90]/60 transition-all font-medium"
+                        class="flex items-center gap-2 px-8 py-3.5 rounded-xl border border-white/10 text-white hover:bg-white/5 hover:border-white/20 transition-all font-medium backdrop-blur-sm"
                     >
                         <span>{t("nav.contact")}</span>
                     </a>
                 </div>
             </div>
 
-            <!-- 2. Main Socials (GitHub & LinkedIn) -->
+            <!-- 2. Main Socials (Compact Stack) -->
             <div
-                class="md:col-span-1 md:row-span-1 rounded-2xl glass-card p-6 flex flex-col justify-center gap-4 hover:border-[#c08b5a]/30 transition-all group overflow-hidden"
+                class="md:col-span-1 md:row-span-1 rounded-2xl glass-card p-5 flex flex-col gap-3 justify-center hover:border-[#c08b5a]/30 transition-all group overflow-hidden"
             >
                 <div
                     class="absolute inset-0 bento-noise pointer-events-none opacity-20"
                 >
                 </div>
-
                 {
                     getPrimarySocials().map((social) => (
                         <a
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#c08b5a]/20 transition-all group/link"
+                            class="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#c08b5a]/20 transition-all group/link relative overflow-hidden"
                         >
-                            <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-black/20 text-xl group-hover/link:scale-110 transition-transform">
-                                {social.icon}
-                            </span>
+                            <span
+                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-[#0f172a] text-white p-1.5 group-hover/link:scale-110 transition-transform"
+                                set:html={social.icon}
+                            />
+
                             <div class="flex flex-col">
-                                <span class="text-sm font-bold text-[#e1e1e0] group-hover/link:text-[#c08b5a] transition-colors">
+                                <span class="text-xs font-bold text-white group-hover/link:text-[#f59e0b] transition-colors leading-tight">
                                     {social.name}
                                 </span>
-                                <span class="text-[10px] text-[#818d90]">
+                                <span class="text-[10px] text-[#818d90] font-medium leading-tight">
                                     {social.label}
                                 </span>
+                            </div>
+                            <div class="absolute right-2 text-[#818d90] opacity-0 group-hover/link:opacity-100 transition-opacity">
+                                <svg
+                                    class="w-3 h-3"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M7 17L17 7M17 7H7M17 7V17"
+                                    />
+                                </svg>
                             </div>
                         </a>
                     ))
                 }
             </div>
 
-            <!-- 3. Tech Profiles (Credly, etc) -->
+            <!-- 3. Tech Profiles (Vertical Stack) -->
             <div
-                class="md:col-span-1 md:row-span-1 rounded-2xl glass-card p-6 flex flex-col items-center justify-center relative overflow-hidden group hover:border-[#c08b5a]/30 transition-all"
+                class="md:col-span-1 md:row-span-1 rounded-2xl glass-card p-5 flex flex-col items-center justify-center relative overflow-hidden group hover:border-[#c08b5a]/30 transition-all"
             >
                 <div
                     class="absolute inset-0 bento-noise pointer-events-none opacity-20"
@@ -192,14 +208,14 @@ const techLogos = getBentoSkills().map((skill) => ({
                 </div>
 
                 <div
-                    class="relative z-10 w-full h-full flex flex-col justify-center"
+                    class="relative z-10 w-full h-full flex flex-col justify-center items-center"
                 >
                     <p
-                        class="text-[10px] text-[#818d90] font-mono mb-4 text-center uppercase tracking-widest font-medium"
+                        class="text-[10px] text-[#818d90] font-mono mb-3 text-center uppercase tracking-widest font-bold"
                     >
-                        Verified Skills
+                        Verified
                     </p>
-                    <div class="flex flex-wrap justify-center gap-3">
+                    <div class="flex flex-wrap justify-center gap-2">
                         {
                             getSecondarySocials().map((profile) => (
                                 <a
@@ -207,11 +223,12 @@ const techLogos = getBentoSkills().map((skill) => ({
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     title={profile.name}
-                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-[#c08b5a]/50 hover:bg-[#c08b5a]/10 hover:scale-110 transition-all text-lg cursor-pointer group/icon"
+                                    class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-[#c08b5a]/50 hover:bg-[#c08b5a]/10 hover:scale-110 transition-all text-white p-2 cursor-pointer group/icon shadow-inner"
                                 >
-                                    <span class="group-hover/icon:scale-110 transition-transform block">
-                                        {profile.icon}
-                                    </span>
+                                    <span
+                                        class="w-full h-full group-hover/icon:scale-110 transition-transform block"
+                                        set:html={profile.icon}
+                                    />
                                 </a>
                             ))
                         }
