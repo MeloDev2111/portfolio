@@ -9,13 +9,14 @@ export const siteConfig = {
         linkedin: "https://www.linkedin.com/in/melio-diaz-diaz/",
         email: "contact@meloz.dev", // Using a placeholder for now, user can update
     },
-    // Using the "Warm Minimalism" / "Dark Industrial Gold" theme described in context.md
+    // "Deep Gunmetal & Copper" Theme
     theme: {
         colors: {
-            primary: "#F4D03F", // Gold
-            background: "#111827", // Gunmetal
-            surface: "#1F2937", // Charcoal
-            text: "#F9FAFB", // Light
+            primary: "#c08b5a", // Antique Copper
+            secondary: "#5a5866", // Slate
+            background: "#0c111c", // Deep Gunmetal
+            surface: "#1F2937", // Charcoal (unchanged for now, used in other places?)
+            text: "#e1e1e0", // Platinum
         },
     },
 };

@@ -4,10 +4,12 @@ export default {
     theme: {
         extend: {
             colors: {
-                gunmetal: "#111827",
-                charcoal: "#1F2937",
-                gold: "#F4D03F",
-                light: "#F9FAFB",
+                gunmetal: "#0c111c", // Deep Gunmetal
+                charcoal: "#1F2937", // Keep as secondary surface
+                gold: "#c08b5a", // Antique Copper (aliased as 'gold' to maintain compatibility)
+                light: "#e1e1e0", // Platinum
+                copper: "#c08b5a", // Explicit alias
+                slate: "#5a5866", // Secondary accent
             },
             fontFamily: {
                 sans: ["Inter", "sans-serif"],

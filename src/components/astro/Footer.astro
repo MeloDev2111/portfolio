@@ -6,21 +6,29 @@ import {
 } from "../../i18n/utils";
 import { siteConfig } from "../../site.config";
 
+import Logo from "./Logo.astro";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-charcoal/50 border-t border-white/5 mt-auto py-12">
+<footer class="bg-gunmetal border-t border-light/5 mt-auto py-12">
     <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6"
     >
-        <div class="text-center md:text-left">
+        <div class="flex flex-col items-center md:items-start gap-2">
             <a
                 href={getRelativeLocaleUrl(lang, "")}
-                class="text-lg font-heading font-bold text-light tracking-tighter"
+                class="group flex items-center gap-2 hover:opacity-80 transition-opacity"
+                aria-label={siteConfig.name}
             >
-                {siteConfig.alias}<span class="text-gold">.</span>
+                <Logo width="32" height="32" variant="original" />
+                <span
+                    class="text-lg font-heading font-bold text-light tracking-tighter group-hover:text-gold transition-colors"
+                >
+                    {siteConfig.alias}<span class="text-gold">.</span>
+                </span>
             </a>
             <p class="text-sm text-gray-400 mt-2">
                 {t("footer.copyright").replace("2026", year.toString())}

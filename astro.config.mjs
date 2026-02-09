@@ -19,8 +19,18 @@ export default defineConfig({
         },
     },
 
-    // Image optimization (default in Astro 5, explicitly stated for clarity)
+    // Image optimization
     image: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "images.credly.com",
+            },
+            {
+                protocol: "https",
+                hostname: "cdn.jsdelivr.net",
+            },
+        ],
         service: {
             entrypoint: "astro/assets/services/sharp",
         },

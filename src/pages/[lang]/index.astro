@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/astro/Hero.astro";
 import TechStack from "../../components/astro/TechStack.astro";
@@ -123,7 +124,7 @@ const certifications = await getCollection("certifications");
                             >
                                 <div class="flex items-start gap-4">
                                     {cert.data.badge && (
-                                        <img
+                                        <Image
                                             src={
                                                 cert.data.badge.startsWith(
                                                     "http",
@@ -135,6 +136,9 @@ const certifications = await getCollection("certifications");
                                                       ) + cert.data.badge
                                             }
                                             alt={cert.data.name}
+                                            width={64}
+                                            height={64}
+                                            loading="lazy"
                                             class="w-16 h-16 object-contain"
                                         />
                                     )}

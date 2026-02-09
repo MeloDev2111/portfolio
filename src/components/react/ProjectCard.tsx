@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group relative overflow-hidden rounded-xl bg-charcoal border border-white/5 hover:border-gold/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(244,208,63,0.1)] hover:-translate-y-1 flex flex-col h-full ${featured ? "md:col-span-2" : ""}`}
+            className={`group relative overflow-hidden rounded-xl bg-charcoal border border-white/5 hover:border-gold/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(192,139,90,0.2)] hover:-translate-y-1 flex flex-col h-full ${featured ? "md:col-span-2" : ""}`}
         >
             {/* Image / Gradient Placeholder */}
             <div className="h-48 overflow-hidden bg-gunmetal relative">
