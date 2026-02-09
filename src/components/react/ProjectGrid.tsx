@@ -64,8 +64,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     onClick={() => setActiveTag(null)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                         activeTag === null
-                            ? "bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]"
-                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30"
+                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
+                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
                     }`}
                 >
                     {labels.all}
@@ -76,8 +76,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         onClick={() => setActiveTag(tag)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                             activeTag === tag
-                                ? "bg-gold text-gunmetal shadow-[0_0_10px_rgba(244,208,63,0.3)]"
-                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-gold/30"
+                                ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
+                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
                         }`}
                     >
                         {tag}
