@@ -15,7 +15,8 @@ export const ui = {
         "nav.contact": "Contact",
         "hero.cta": "Download CV",
         "hero.greeting": "Hi, I'm",
-        "hero.description": "Specializing in scalable Backend architectures, Cloud solutions (AWS), and Data Science integrations.",
+        "hero.description":
+            "Specializing in scalable Backend architectures, Cloud solutions (AWS), and Data Science integrations.",
         "hero.viewProjects": "View Projects",
         "footer.copyright": "© 2026 MeloDev. All rights reserved.",
         "aria.page": "page",
@@ -29,7 +30,8 @@ export const ui = {
         "nav.contact": "Contacto",
         "hero.cta": "Descargar CV",
         "hero.greeting": "Hola, soy",
-        "hero.description": "Especializado en arquitecturas Backend escalables, soluciones Cloud (AWS) e integraciones de Ciencia de Datos.",
+        "hero.description":
+            "Especializado en arquitecturas Backend escalables, soluciones Cloud (AWS) e integraciones de Ciencia de Datos.",
         "hero.viewProjects": "Ver Proyectos",
         "footer.copyright": "© 2026 MeloDev. Todos los derechos reservados.",
         "aria.page": "página",
