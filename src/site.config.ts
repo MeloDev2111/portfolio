@@ -4,7 +4,7 @@ export const siteConfig = {
     role: "Software Engineer",
     title: "Software Engineer & Data Enthusiast",
     description:
-        "Personal portfolio of Melio Diaz (MeloDev), a Systems Engineer specializing in Backend (Java/Spring), Cloud (AWS), and Data Science.",
+        "Personal portfolio of Melio Diaz (MeloDev), a Systems Engineer specializing in High-Scalability Platforms, Cloud Computing, and Software Architecture.",
     // "Deep Gunmetal & Copper" Theme
     theme: {
         colors: {
