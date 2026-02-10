@@ -99,16 +99,8 @@ const certifications = await getCollection("certifications");
                         <div
                             class="prose prose-invert prose-lg text-[#94a3b8] leading-relaxed"
                         >
-                            <p
-                                set:html={lang === "en"
-                                    ? "Systems Engineer with experience in developing <span class='text-[#e1e1e0] font-semibold'>high-scalability platforms</span> and <span class='text-[#e1e1e0] font-semibold'>digital transformation</span> in the education sector. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-[#c08b5a]'>Java, Spring Boot, Python</span>, and <span class='text-[#c08b5a]'>Cloud Computing</span>."
-                                    : "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-[#e1e1e0] font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-[#e1e1e0] font-semibold'>transformación digital</span> en el sector educativo. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-[#c08b5a]'>Java, Spring Boot, Python</span> y <span class='text-[#c08b5a]'>Cloud Computing</span>."}
-                            />
-                            <p
-                                set:html={lang === "en"
-                                    ? "I have a strong interest in <span class='text-[#e1e1e0] font-semibold'>Software Architecture</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span>, and <span class='text-[#e1e1e0] font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments."
-                                    : "Gran interés en el diseño de <span class='text-[#e1e1e0] font-semibold'>Arquitecturas de Software</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span> y <span class='text-[#e1e1e0] font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos."}
-                            />
+                            <p set:html={t("about.p1")} />
+                            <p set:html={t("about.p2")} />
                         </div>
 
                         <!-- Signature / decorative element -->
@@ -311,11 +303,7 @@ const certifications = await getCollection("certifications");
                     href={getRelativeLocaleUrl(lang, "certifications")}
                     class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
                 >
-                    {
-                        lang === "en"
-                            ? "View all certifications ->"
-                            : "Ver todas las certificaciones ->"
-                    }
+                    {t("section.viewAllCerts")}
                 </a>
             </div>
         </div>
@@ -342,8 +330,8 @@ const certifications = await getCollection("certifications");
                 client:only="react"
                 projects={cleanProjectProps}
                 labels={{
-                    all: lang === "en" ? "All" : "Todos",
-                    filter: lang === "en" ? "Filter by" : "Filtrar por",
+                    all: t("ui.all"),
+                    filter: t("ui.filterBy"),
                 }}
             />
             <div class="mt-10 text-center">
@@ -351,11 +339,7 @@ const certifications = await getCollection("certifications");
                     href={getRelativeLocaleUrl(lang, "projects")}
                     class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
                 >
-                    {
-                        lang === "en"
-                            ? "View all projects archive ->"
-                            : "Ver archivo de proyectos ->"
-                    }
+                    {t("section.viewAllProjects")}
                 </a>
             </div>
         </div>
@@ -384,11 +368,7 @@ const certifications = await getCollection("certifications");
                     href={getRelativeLocaleUrl(lang, "tech-stack")}
                     class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
                 >
-                    {
-                        lang === "en"
-                            ? "View full tech stack ->"
-                            : "Ver todo el stack tecnológico ->"
-                    }
+                    {t("section.viewFullTech")}
                 </a>
             </div>
         </div>

@@ -4,7 +4,11 @@ import {
     ALL_CATEGORY_NAMES,
     HOME_CATEGORIES,
 } from "../../utils/skills";
-import { getLangFromUrl, getRelativeLocaleUrl } from "../../i18n/utils";
+import {
+    getLangFromUrl,
+    getRelativeLocaleUrl,
+    useTranslations,
+} from "../../i18n/utils";
 
 interface Props {
     compact?: boolean;
@@ -16,6 +20,7 @@ const { categories = compact ? HOME_CATEGORIES : ALL_CATEGORY_NAMES } =
     Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div class="grid gap-8">
@@ -115,7 +120,7 @@ const lang = getLangFromUrl(Astro.url);
                                     +{remainingCount}
                                 </span>
                                 <span class="text-xs text-gray-500 group-hover:text-gray-300">
-                                    More
+                                    {t("ui.more")}
                                 </span>
                             </a>
                         )}

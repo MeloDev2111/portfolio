@@ -45,20 +45,16 @@ const cleanCertProps = JSON.parse(JSON.stringify(certProps));
         </h1>
 
         <p class="text-xl text-gray-400 max-w-2xl mb-12">
-            {
-                lang === "en"
-                    ? "Professional certifications and achievements validating my technical expertise."
-                    : "Certificaciones profesionales y logros que validan mi experiencia técnica."
-            }
+            {t("page.certificationsDescription")}
         </p>
 
         <CertificationList
             client:only="react"
             certifications={cleanCertProps}
             labels={{
-                sortBy: lang === "en" ? "Sort by Date" : "Ordenar por Fecha",
-                sortDesc: lang === "en" ? "Newest" : "Más recientes",
-                sortAsc: lang === "en" ? "Oldest" : "Más antiguos",
+                sortBy: t("ui.sortBy"),
+                sortDesc: t("ui.sortDesc"),
+                sortAsc: t("ui.sortAsc"),
             }}
         />
     </div>

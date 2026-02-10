@@ -28,20 +28,8 @@ const certifications = await getCollection("certifications");
             </h1>
 
             <div class="prose prose-invert prose-lg text-gray-400">
-                <p>
-                    {
-                        lang === "en"
-                            ? "I am a 24-year-old Systems Engineer passionate about building robust, scalable architectures. My expertise lies in Backend Development with Java/Spring, Cloud Solutions with AWS, and exploring the frontiers of Data Science."
-                            : "Soy un Ingeniero de Sistemas de 24 años apasionado por construir arquitecturas robustas y escalables. Mi experiencia se centra en el Desarrollo Backend con Java/Spring, Soluciones Cloud con AWS y la exploración de la Ciencia de Datos."
-                    }
-                </p>
-                <p>
-                    {
-                        lang === "en"
-                            ? "I bridge the gap between complex engineering problems and elegant, user-centric solutions. With a focus on performance and reliability, I aim to create digital ecosystems that stand the test of time."
-                            : "Conecto problemas de ingeniería complejos con soluciones elegantes centradas en el usuario. Con un enfoque en el rendimiento y la fiabilidad, aspiro a crear ecosistemas digitales que perduren en el tiempo."
-                    }
-                </p>
+                <p set:html={t("about.p1")} />
+                <p set:html={t("about.p2")} />
             </div>
         </section>
 

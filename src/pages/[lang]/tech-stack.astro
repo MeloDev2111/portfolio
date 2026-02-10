@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import TechStack from "../../components/astro/TechStack.astro";
+import TechStackComponent from "../../components/astro/TechStack.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export async function getStaticPaths() {
@@ -26,25 +26,17 @@ const t = useTranslations(lang as any);
                 <h1
                     class="text-4xl md:text-5xl font-heading font-bold text-white mb-6"
                 >
-                    {
-                        lang === "en"
-                            ? "Full Technology Stack"
-                            : "Stack Tecnológico Completo"
-                    }
+                    {t("page.techStackTitle")}
                     <span class="text-[#c08b5a]">.</span>
                 </h1>
                 <p
                     class="text-xl text-[#94a3b8] max-w-2xl mx-auto leading-relaxed"
                 >
-                    {
-                        lang === "en"
-                            ? "A comprehensive overview of the tools, languages, and frameworks I use to build robust digital solutions."
-                            : "Una visión completa de las herramientas, lenguajes y frameworks que utilizo para construir soluciones digitales robustas."
-                    }
+                    {t("page.techStackDescription")}
                 </p>
             </div>
 
-            <TechStack />
+            <TechStackComponent />
         </div>
     </section>
 </Layout>
