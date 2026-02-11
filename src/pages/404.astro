@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ui, languages } from "../i18n/ui";
+import { getRelativeLocaleUrl } from "../i18n/utils";
+
+const t = ui.en;
+const supportedLangs = Object.keys(languages);
+const homeUrl = getRelativeLocaleUrl("en", "");
+---
+
+<Layout title="404 - Not Found" lang="en">
+    <div
+        class="min-h-[80vh] flex flex-col items-center justify-center text-center px-4"
+    >
+        <div class="relative mb-8">
+            <h1
+                class="text-9xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#c08b5a] to-[#c08b5a]/10 opacity-20 select-none"
+            >
+                404
+            </h1>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-4xl font-bold text-light">Page Not Found</span
+                >
+            </div>
+        </div>
+
+        <p
+            id="error-message"
+            class="text-xl text-gray-400 max-w-lg mb-8 leading-relaxed"
+        >
+            {t["404.description"]}
+        </p>
+
+        <a
+            href={homeUrl}
+            id="home-link"
+            class="px-8 py-3 rounded-full bg-[#c08b5a] text-gunmetal font-bold hover:bg-[#e6a66b] transition-all hover:scale-105 shadow-lg shadow-[#c08b5a]/20"
+        >
+            {t["404.button"]}
+        </a>
+    </div>
+</Layout>
+
+<script define:vars={{ supportedLangs }}>
+    // Robust logic to handle unsupported language redirects
+    const fullPath = window.location.pathname;
+
+    // We need to know if there is a base path (e.g. /portfolio) or if we are at root /
+    // A heuristic is to check if the path starts with a known base or if we assume specific deployment
+    // For local dev, path is usually /ru/, but for prod it might be /portfolio/ru/
+
+    // Let's split and clean segments
+    const segments = fullPath.split("/").filter(Boolean);
+
+    // If we are in a subdirectory deployment (like GitHub Pages project page),
+    // the first segment might be the project name.
+    // However, Astro's `import.meta.env.BASE_URL` is available at build time,
+    // but not easily injected here without `define:vars`.
+    // Instead, we can look for the language code pattern.
+
+    // Find the index of the segment that looks like a lang code
+    const langIndex = segments.findIndex((seg) => /^[a-z]{2}$/i.test(seg));
+
+    if (langIndex !== -1) {
+        const potentialLang = segments[langIndex];
+
+        // If it looks like a lang but is NOT supported
+        if (!supportedLangs.includes(potentialLang)) {
+            // Reconstruct path with 'en' instead of the unsupported lang
+            segments[langIndex] = "en";
+            const newPath = "/" + segments.join("/");
+
+            // Redirect immediately with a query param to trigger the toast
+            window.location.replace(
+                `${newPath}?lang_fallback=${potentialLang}`,
+            );
+        }
+    }
+</script>

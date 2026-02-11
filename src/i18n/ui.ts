@@ -39,6 +39,12 @@ export const ui = {
             "A showcase of my technical projects, featuring scalable backend architectures and full-stack applications.",
         "page.certificationsDescription":
             "Professional certifications and achievements validating my technical expertise.",
+        "404.title": "Page Not Found",
+        "404.description":
+            "The page you are looking for doesn't exist or has been moved.",
+        "404.button": "Back to Home",
+        "404.unsupportedLang":
+            "The requested language is not supported. Redirecting to English version...",
         "footer.copyright": "© 2026 MeloDev. All rights reserved.",
         "aria.page": "page",
     },
@@ -75,6 +81,11 @@ export const ui = {
             "Una muestra de mis proyectos técnicos, destacando arquitecturas backend escalables y aplicaciones full-stack.",
         "page.certificationsDescription":
             "Certificaciones profesionales y logros que validan mi experiencia técnica.",
+        "404.title": "Página no encontrada",
+        "404.description": "La página que buscas no existe o ha sido movida.",
+        "404.button": "Volver al Inicio",
+        "404.unsupportedLang":
+            "El idioma solicitado no está soportado. Redírigiendo a la versión en inglés...",
         "footer.copyright": "© 2026 MeloDev. Todos los derechos reservados.",
         "aria.page": "página",
     },
