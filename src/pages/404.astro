@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ui, languages } from "../i18n/ui";
+import { ui, languages, defaultLang } from "../i18n/ui";
 import { getRelativeLocaleUrl } from "../i18n/utils";
 
 const t = ui.en;
 const supportedLangs = Object.keys(languages);
 const homeUrl = getRelativeLocaleUrl("en", "");
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <Layout title="404 - Not Found" lang="en">
@@ -41,39 +42,52 @@ const homeUrl = getRelativeLocaleUrl("en", "");
     </div>
 </Layout>
 
-<script define:vars={{ supportedLangs }}>
-    // Robust logic to handle unsupported language redirects
-    const fullPath = window.location.pathname;
+<script define:vars={{ supportedLangs, ui, defaultLang, basePath }}>
+    // Getting variables from server-side build
+    const pathname = window.location.pathname;
 
-    // We need to know if there is a base path (e.g. /portfolio) or if we are at root /
-    // A heuristic is to check if the path starts with a known base or if we assume specific deployment
-    // For local dev, path is usually /ru/, but for prod it might be /portfolio/ru/
+    function getRelativePath(path, base) {
+        if (!base) return path;
+        return path.startsWith(base) ? path.slice(base.length) : path;
+    }
 
-    // Let's split and clean segments
-    const segments = fullPath.split("/").filter(Boolean);
+    const relativePath = getRelativePath(pathname, basePath);
+    const segments = relativePath.split("/").filter(Boolean);
+    const firstSegment = segments[0];
 
-    // If we are in a subdirectory deployment (like GitHub Pages project page),
-    // the first segment might be the project name.
-    // However, Astro's `import.meta.env.BASE_URL` is available at build time,
-    // but not easily injected here without `define:vars`.
-    // Instead, we can look for the language code pattern.
+    // Check if the first segment looks like a language code (2 letters)
+    const isLangCode = /^[a-z]{2}$/i.test(firstSegment);
 
-    // Find the index of the segment that looks like a lang code
-    const langIndex = segments.findIndex((seg) => /^[a-z]{2}$/i.test(seg));
+    if (isLangCode) {
+        if (supportedLangs.includes(firstSegment)) {
+            // Case 1: Language is supported (e.g. /es/not-found)
+            // Update the UI to match the language
+            const t = ui[firstSegment];
+            if (t) {
+                // Update text content
+                const titleSpan = document.querySelector(
+                    ".font-bold.text-light",
+                );
+                if (titleSpan) titleSpan.textContent = t["404.title"];
 
-    if (langIndex !== -1) {
-        const potentialLang = segments[langIndex];
+                const descP = document.getElementById("error-message");
+                if (descP) descP.textContent = t["404.description"];
 
-        // If it looks like a lang but is NOT supported
-        if (!supportedLangs.includes(potentialLang)) {
-            // Reconstruct path with 'en' instead of the unsupported lang
-            segments[langIndex] = "en";
-            const newPath = "/" + segments.join("/");
+                const homeBtn = document.getElementById("home-link");
+                if (homeBtn) {
+                    homeBtn.textContent = t["404.button"];
+                    // Update home link to point to that language's home
+                    homeBtn.href = `${basePath}/${firstSegment}/`;
+                }
+            }
+        } else {
+            // Case 2: Language is NOT supported (e.g. /fr/anything)
+            // Redirect to default language
+            segments[0] = defaultLang;
+            const newPath = `${basePath}/${segments.join("/")}`;
 
             // Redirect immediately with a query param to trigger the toast
-            window.location.replace(
-                `${newPath}?lang_fallback=${potentialLang}`,
-            );
+            window.location.replace(`${newPath}?lang_fallback=${firstSegment}`);
         }
     }
 </script>
