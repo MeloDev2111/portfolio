@@ -23,7 +23,7 @@ export const ui = {
         "about.p2":
             "I have a strong interest in <span class='text-[#e1e1e0] font-semibold'>Software Architecture</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span>, and <span class='text-[#e1e1e0] font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments.",
         "section.viewAllCerts": "View all certifications ->",
-        "section.viewAllProjects": "View all projects archive ->",
+        "section.viewAllProjects": "View all projects archive",
         "section.viewFullTech": "View full tech stack ->",
         "ui.all": "All",
         "ui.filterBy": "Filter by",
@@ -70,7 +70,7 @@ export const ui = {
         "about.p2":
             "Gran interés en el diseño de <span class='text-[#e1e1e0] font-semibold'>Arquitecturas de Software</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span> y <span class='text-[#e1e1e0] font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
         "section.viewAllCerts": "Ver todas las certificaciones ->",
-        "section.viewAllProjects": "Ver archivo de proyectos ->",
+        "section.viewAllProjects": "Ver archivo de proyectos",
         "section.viewFullTech": "Ver todo el stack tecnológico ->",
         "ui.all": "Todos",
         "ui.filterBy": "Filtrar por",
