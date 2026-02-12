@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface ProjectCardProps {
     title: string;
@@ -19,7 +19,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     featured,
     inProgress,
 }) => {
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [isTruncated, setIsTruncated] = useState(false);
+    const textRef = useRef<HTMLParagraphElement>(null);
     const Component = inProgress || !link ? "div" : "a";
+
+    useEffect(() => {
+        const checkTruncation = () => {
+            if (textRef.current) {
+                const { scrollHeight, clientHeight } = textRef.current;
+                setIsTruncated(scrollHeight > clientHeight);
+            }
+        };
+
+        checkTruncation();
+        window.addEventListener("resize", checkTruncation);
+        return () => window.removeEventListener("resize", checkTruncation);
+    }, [description]);
 
     return (
         <Component
@@ -50,7 +66,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         className={`w-full h-full object-cover transition-transform duration-700 ${
                             !inProgress ? "group-hover:scale-105" : ""
                         }`}
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
                     />
                 ) : (
@@ -75,7 +91,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
 
             {/* Content */}
-            <div className="p-6 flex flex-col flex-grow relative z-10">
+            <div className="p-6 flex flex-col flex-grow relative z-30">
                 <div className="flex justify-between items-start mb-4 gap-2">
                     <h3
                         className={`text-xl font-heading font-bold text-light transition-colors ${!inProgress && "group-hover:text-[#c08b5a]"}`}
@@ -91,9 +107,31 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     </div>
                 </div>
 
-                <p className="text-gray-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed">
-                    {description}
-                </p>
+                <div
+                    className="relative mb-6 flex-grow"
+                    onMouseEnter={() => isTruncated && setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                >
+                    <p
+                        ref={textRef}
+                        className="text-gray-400 text-sm line-clamp-3 leading-relaxed"
+                    >
+                        {description}
+                    </p>
+
+                    {/* Custom Tooltip */}
+                    <div
+                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-[#1a1f2e]/98 backdrop-blur-xl border border-white/10 rounded-xl text-sm text-gray-300 shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
+                            showTooltip && isTruncated
+                                ? "opacity-100 translate-y-0 scale-100 visible"
+                                : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
+                        }`}
+                    >
+                        {description}
+                        {/* Arrow */}
+                        <div className="absolute -bottom-1.5 left-6 w-3 h-3 bg-[#1a1f2e]/98 border-r border-b border-white/10 rotate-45 transform"></div>
+                    </div>
+                </div>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-auto">

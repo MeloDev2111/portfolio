@@ -313,6 +313,7 @@ const certifications = await getCollection("certifications");
                         .slice(0, 2)
                         .map((project) => (
                             <ProjectCard
+                                client:visible
                                 title={project.data.title}
                                 description={project.data.description}
                                 tags={project.data.tags ?? []}
