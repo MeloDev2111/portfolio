@@ -244,6 +244,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                                                 width={64}
                                                 height={64}
                                                 class="w-full h-full object-contain"
+                                                loading="eager"
                                             />
                                         </div>
                                     ) : (
@@ -415,12 +416,15 @@ const techLogos = getBentoSkills().map((skill) => ({
                                         <div
                                             class={`group/icon relative w-full aspect-square flex items-center justify-center p-2 rounded-lg border border-white/5 bg-white/5 ${tech.border} ${tech.color} hover:scale-105 transition-transform cursor-default`}
                                         >
-                                            {/* Direct Img for sharp SVG rendering */}
-                                            <img
+                                            {/* Direct Img for sharp SVG rendering - NOW OPTIMIZED via Astro Image 
+                                                Note: remotePatterns must be configured for cdn.jsdelivr.net in astro.config.mjs
+                                            */}
+                                            <Image
                                                 src={tech.src}
                                                 alt={tech.label}
+                                                width={64}
+                                                height={64}
                                                 class="w-full h-full object-contain filter brightness-100 contrast-100 group-hover/icon:brightness-110 transition-all"
-                                                loading="lazy"
                                             />
 
                                             {/* Dynamic Tooltip */}

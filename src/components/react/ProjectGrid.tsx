@@ -70,11 +70,10 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
             <div className="flex flex-wrap gap-3 justify-center">
                 <button
                     onClick={() => setActiveTags([])}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                        activeTags.length === 0
-                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
-                    }`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTags.length === 0
+                        ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
+                        : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
+                        }`}
                 >
                     {labels.all}
                 </button>
@@ -82,11 +81,10 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     <button
                         key={tag}
                         onClick={() => toggleTag(tag)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                            activeTags.includes(tag)
-                                ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
-                        }`}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeTags.includes(tag)
+                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
+                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
+                            }`}
                     >
                         {tag}
                     </button>
@@ -95,7 +93,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project) => (
+                {filteredProjects.map((project, index) => (
                     <ProjectCard
                         key={project.slug}
                         title={project.data.title}
@@ -105,6 +103,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         image={project.data.image}
                         featured={project.data.featured}
                         inProgress={project.data.inProgress}
+                        priority={index < 3}
                     />
                 ))}
             </div>
