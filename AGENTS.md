@@ -86,8 +86,16 @@
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.6.0 (Beta - Experience Section Complete).
+- **Status:** v0.7.0 (Beta - Experience Section Complete).
 - **Recent Focus:**
+    - **Final Polish & SEO:**
+        - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
+        - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
+        - Optimized image loading (eager vs lazy) for better LCP.
+    - **UX Enhancements:**
+        - Implemented `ScrollToTop` component with circular progress indicator.
+        - Fixed scroll snapping inconsistency in Experience section.
+        - Cleaned up Header visual artifacts on scroll.
     - **Experience Section:**
         - Implemented full timeline view at `/experience` with "Download CV" CTA.
         - Integrated "Experience" card into Hero Bento grid (showing top 2 roles) with perfect vertical alignment.
@@ -101,14 +109,11 @@
         - Refactored localization strategy: English files are the strict Single Source of Truth for configuration.
     - **Hero Section:** Dynamic "Latest Achievement" bento card.
     - **Certifications:** Added "Verified Credentials" banner with Credly integration.
-    - **Final Polish & SEO:**
-        - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
-        - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
-        - Optimized image loading (eager vs lazy) for better LCP.
 
 - **Immediate Next Steps:**
-    - **Release Preparation:**
-        - Prepare v0.7.0 release.
-        - Verify production build locally (`npm run preview`).
-    - **Future Enhancements:**
-        - Brainstorm additional elements to enrich the portfolio (e.g., Blog, Resources, Testimonials).
+    - **Content & Features Expansion:**
+        - **Technical Blog:** Design MDX architecture for sharing engineering insights.
+        - **Interactive API Showcase:** (New) Add a section to demo live backend endpoints or Swagger documentation.
+        - **Contact Integration:** Implement a functional contact form (e.g., Formspree) or 'Book a Meeting' Calendly embed widget.
+    - **Quality Assurance:**
+        - **E2E Testing:** Setup Playwright to automate critical path verification (Navigation, i18n, Forms).

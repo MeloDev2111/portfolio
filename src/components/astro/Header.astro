@@ -155,39 +155,14 @@ const switchUrl = `${base}${newPathNoBase}`;
     </div>
 </header>
 
-<!-- Back to Top Button -->
-<button
-    id="back-to-top"
-    aria-label="Back to Top"
-    class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-gold/90 text-gunmetal shadow-lg shadow-gold/20 translate-y-24 opacity-0 transition-transform duration-500 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold"
->
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-    >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
-    </svg>
-</button>
-
 <script>
     const header = document.querySelector("header");
-    const backToTopBtn = document.getElementById("back-to-top");
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
     const navLinks = document.querySelectorAll("nav a"); // Desktop nav links
 
     let lastScrollY = window.scrollY;
-
-    // Thresholds
-    const SHOW_BACK_TO_TOP_OFFSET = 600;
 
     function handleScroll() {
         const currentScrollY = window.scrollY;
@@ -198,13 +173,6 @@ const switchUrl = `${base}${newPathNoBase}`;
             closeMobileMenu(); // Ensure menu closes on scroll down
         } else {
             header?.classList.remove("-translate-y-[150%]", "opacity-0");
-        }
-
-        // 2. Back to Top Button Logic
-        if (currentScrollY > SHOW_BACK_TO_TOP_OFFSET) {
-            backToTopBtn?.classList.remove("translate-y-24", "opacity-0");
-        } else {
-            backToTopBtn?.classList.add("translate-y-24", "opacity-0");
         }
 
         lastScrollY = currentScrollY;
@@ -294,10 +262,6 @@ const switchUrl = `${base}${newPathNoBase}`;
         }
     });
 
-    backToTopBtn?.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener("click", () => {
             if (mobileMenu.classList.contains("hidden")) {
@@ -316,4 +280,17 @@ const switchUrl = `${base}${newPathNoBase}`;
 
     // Initialize
     initScrollSpy();
+</script>
+
+<script>
+    const header = document.querySelector("header");
+
+    // Scroll Handler
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+            header?.classList.add("bg-gunmetal/80", "backdrop-blur-md");
+        } else {
+            header?.classList.remove("bg-gunmetal/80", "backdrop-blur-md");
+        }
+    });
 </script>

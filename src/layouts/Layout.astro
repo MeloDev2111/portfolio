@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/astro/Header.astro";
 import Footer from "../components/astro/Footer.astro";
 import LanguageToast from "../components/astro/LanguageToast.astro";
+import ScrollToTop from "../components/astro/ScrollToTop.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import { siteConfig } from "../site.config";
 
@@ -36,8 +37,10 @@ const {
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
 
         <!-- Discord / Theme -->
         <meta name="theme-color" content={siteConfig.theme.colors.primary} />
@@ -75,5 +78,6 @@ const {
             <slot />
         </main>
         <Footer />
+        <ScrollToTop />
     </body>
 </html>
