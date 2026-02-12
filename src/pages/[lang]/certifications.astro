@@ -34,7 +34,11 @@ const certProps = allCertifications.map((c) => ({
 const cleanCertProps = JSON.parse(JSON.stringify(certProps));
 ---
 
-<Layout title={`Portfolio | ${t("nav.certifications")}`} lang={lang}>
+<Layout
+    title={`Portfolio | ${t("nav.certifications")}`}
+    lang={lang}
+    description={t("page.certificationsDescription")}
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h1 class="text-4xl md:text-5xl font-heading font-bold text-light mb-8">
             <span

@@ -11,7 +11,11 @@ const { lang } = Astro.params;
 const t = useTranslations(lang as any);
 ---
 
-<Layout title={`Portfolio | ${t("nav.tech")}`} lang={lang}>
+<Layout
+    title={`Portfolio | ${t("nav.tech")}`}
+    lang={lang}
+    description={t("page.techStackDescription")}
+>
     <section
         class="py-20 md:py-32 min-h-screen bg-gunmetal relative overflow-hidden"
     >

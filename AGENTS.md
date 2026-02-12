@@ -101,11 +101,14 @@
         - Refactored localization strategy: English files are the strict Single Source of Truth for configuration.
     - **Hero Section:** Dynamic "Latest Achievement" bento card.
     - **Certifications:** Added "Verified Credentials" banner with Credly integration.
-    - **TechStack:** Refined with "featured" glow effects.
+    - **Final Polish & SEO:**
+        - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
+        - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
+        - Optimized image loading (eager vs lazy) for better LCP.
 
 - **Immediate Next Steps:**
-    - **Final Polish:**
-        - Conduct SEO audit (meta tags, descriptions).
-        - Verify lighthouse scores after recent image optimizations.
+    - **Release Preparation:**
+        - Prepare v0.7.0 release.
+        - Verify production build locally (`npm run preview`).
     - **Future Enhancements:**
         - Brainstorm additional elements to enrich the portfolio (e.g., Blog, Resources, Testimonials).

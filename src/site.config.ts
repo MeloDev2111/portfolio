@@ -15,4 +15,6 @@ export const siteConfig = {
             text: "#e1e1e0", // Platinum
         },
     },
+    // Default OG Image (relative to public/)
+    ogImage: "/media/logo.svg",
 };
