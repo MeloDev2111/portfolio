@@ -44,10 +44,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             href={!inProgress ? link : undefined}
             target={!inProgress && link ? "_blank" : undefined}
             rel={!inProgress && link ? "noopener noreferrer" : undefined}
-            className={`group relative overflow-hidden rounded-2xl glass-card border border-white/5 transition-all duration-500 flex flex-col h-full ${!inProgress
-                ? "hover:border-[#c08b5a]/40 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 cursor-pointer"
-                : "opacity-80 cursor-default"
-                }`}
+            className={`group relative overflow-hidden rounded-2xl glass-card border border-white/5 transition-all duration-500 flex flex-col h-full ${
+                !inProgress
+                    ? "hover:border-[#c08b5a]/40 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 cursor-pointer"
+                    : "opacity-80 cursor-default"
+            }`}
         >
             {/* Noise Texture */}
             <div className="absolute inset-0 bento-noise opacity-10 pointer-events-none"></div>
@@ -64,8 +65,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         height={
                             typeof image !== "string" ? image.height : undefined
                         }
-                        className={`w-full h-full object-cover transition-transform duration-700 ${!inProgress ? "group-hover:scale-105" : ""
-                            }`}
+                        className={`w-full h-full object-cover transition-transform duration-700 ${
+                            !inProgress ? "group-hover:scale-105" : ""
+                        }`}
                         loading={priority ? "eager" : "lazy"}
                         decoding="async"
                     />
@@ -121,10 +123,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
                     {/* Custom Tooltip */}
                     <div
-                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-[#1a1f2e]/98 backdrop-blur-xl border border-white/10 rounded-xl text-sm text-gray-300 shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${showTooltip && isTruncated
-                            ? "opacity-100 translate-y-0 scale-100 visible"
-                            : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
-                            }`}
+                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-[#1a1f2e]/98 backdrop-blur-xl border border-white/10 rounded-xl text-sm text-gray-300 shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
+                            showTooltip && isTruncated
+                                ? "opacity-100 translate-y-0 scale-100 visible"
+                                : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
+                        }`}
                     >
                         {description}
                         {/* Arrow */}
