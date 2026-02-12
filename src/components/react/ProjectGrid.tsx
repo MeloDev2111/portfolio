@@ -26,7 +26,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     projects,
     labels,
 }) => {
-    const [activeTag, setActiveTag] = useState<string | null>(null);
+    const [activeTags, setActiveTags] = useState<string[]>([]);
 
     // Helper to normalize tags (handle if Astro passes Set, Array or String)
     const getSafeTags = (tags: any): string[] => {
@@ -48,23 +48,30 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
         return Array.from(tags).sort();
     }, [projects]);
 
-    // Filter projects
+    // Handle tag toggle
+    const toggleTag = (tag: string) => {
+        setActiveTags((prev) =>
+            prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+        );
+    };
+
+    // Filter projects (AND logic: project must contain all selected tags)
     const filteredProjects = useMemo(() => {
-        if (!activeTag) return projects;
+        if (activeTags.length === 0) return projects;
         return projects.filter((p) => {
             const pTags = getSafeTags(p.data.tags);
-            return pTags.includes(activeTag);
+            return activeTags.every((tag) => pTags.includes(tag));
         });
-    }, [projects, activeTag]);
+    }, [projects, activeTags]);
 
     return (
         <div className="space-y-8">
             {/* Filter Controls */}
             <div className="flex flex-wrap gap-3 justify-center">
                 <button
-                    onClick={() => setActiveTag(null)}
+                    onClick={() => setActiveTags([])}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                        activeTag === null
+                        activeTags.length === 0
                             ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
                             : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
                     }`}
@@ -74,9 +81,9 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                 {allTags.map((tag) => (
                     <button
                         key={tag}
-                        onClick={() => setActiveTag(tag)}
+                        onClick={() => toggleTag(tag)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                            activeTag === tag
+                            activeTags.includes(tag)
                                 ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
                                 : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
                         }`}
@@ -104,8 +111,14 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
             {/* Empty State */}
             {filteredProjects.length === 0 && (
-                <div className="text-center py-20 text-gray-500">
-                    No projects found for this filter.
+                <div className="text-center py-20 text-gray-500 flex flex-col items-center gap-4">
+                    <p>No projects match all selected filters.</p>
+                    <button
+                        onClick={() => setActiveTags([])}
+                        className="text-[#c08b5a] hover:underline"
+                    >
+                        Clear filters
+                    </button>
                 </div>
             )}
         </div>

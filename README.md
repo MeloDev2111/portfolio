@@ -52,6 +52,49 @@ A high-performance, accessible, and internationalized personal portfolio website
 └── tailwind.config.mjs  # Tailwind configuration
 ```
 
+## 📝 Content Management
+
+### Adding a New Project
+
+1.  **Add Master File (English):**
+    Create a `.md` file in `src/content/projects/en/my-project.md`:
+    ```markdown
+    ---
+    title: "Project Name"
+    description: "Brief description in English."
+    tags: ["React", "TypeScript"]
+    date: 2024-01-01
+    featured: true # Shows in Home & Top of Projects
+    inProgress: false # Adds 'In Construction' badge
+    link: "https://github.com/..."
+    image: "../../../assets/projects/my-image.png" # OR project-placeholder.svg
+    ---
+    ```
+2.  **Add Translation (Spanish - Optional):**
+    Create a file in `src/content/projects/es/my-project.md` with **ONLY** the fields to override:
+    ```markdown
+    ---
+    title: "Nombre del Proyecto"
+    description: "Descripción breve en Español."
+    ---
+    ```
+    _Note: Metadata like tags, date, and image are inherited from the English file._
+
+### Adding a Certification
+
+1.  Open `src/content/certifications/certs.json`.
+2.  Add a new entry to the array:
+    ```json
+    {
+        "name": "Certification Name",
+        "issuer": "Provider (e.g., AWS)",
+        "date": "2024-01-01",
+        "link": "https://credly.com/...",
+        "badge": "https://images.credly.com/...",
+        "starred": true // Highlights in Hero section
+    }
+    ```
+
 ## 🧞 Commands
 
 All commands are run from the root of the project:

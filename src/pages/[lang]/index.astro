@@ -310,7 +310,7 @@ const certifications = await getCollection("certifications");
                 {
                     projects
                         .filter((p) => p.data.featured)
-                        .slice(0, 3)
+                        .slice(0, 2)
                         .map((project) => (
                             <ProjectCard
                                 title={project.data.title}

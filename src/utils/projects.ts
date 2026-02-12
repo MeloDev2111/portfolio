@@ -63,5 +63,12 @@ export async function getLocalizedProjects(
     // 4. Global Filter (Drafts) & Sort
     return localizedProjects
         .filter((p) => !p.data.draft)
-        .sort((a, b) => b.data.date!.valueOf() - a.data.date!.valueOf());
+        .sort((a, b) => {
+            // 1. Featured first
+            if (a.data.featured && !b.data.featured) return -1;
+            if (!a.data.featured && b.data.featured) return 1;
+
+            // 2. Date descending
+            return b.data.date!.valueOf() - a.data.date!.valueOf();
+        });
 }

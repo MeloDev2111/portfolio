@@ -41,10 +41,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     <img
                         src={typeof image === "string" ? image : image.src}
                         alt={title}
+                        width={
+                            typeof image !== "string" ? image.width : undefined
+                        }
+                        height={
+                            typeof image !== "string" ? image.height : undefined
+                        }
                         className={`w-full h-full object-cover transition-transform duration-700 ${
                             !inProgress ? "group-hover:scale-105" : ""
                         }`}
                         loading="lazy"
+                        decoding="async"
                     />
                 ) : (
                     <div className="w-full h-full bg-gradient-to-br from-charcoal to-gunmetal flex items-center justify-center">
