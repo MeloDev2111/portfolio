@@ -5,6 +5,7 @@ import {
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
 import { EXPERIENCE } from "../../utils/experience";
+import { publicFileExists } from "../../utils/files";
 
 interface Props {
     count?: number;
@@ -16,19 +17,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 import { getCVDetails } from "../../utils/cv";
 const { url: cvUrl, filename: cvFilename } = getCVDetails(lang);
-
-import fs from "node:fs";
-import path from "node:path";
-
-const logoExists = (logoPath: string | undefined) => {
-    if (!logoPath) return false;
-    try {
-        const publicPath = path.join(process.cwd(), "public", logoPath);
-        return fs.existsSync(publicPath);
-    } catch (e) {
-        return false;
-    }
-};
 
 // Ordenar experiencia por fecha (más reciente primero)
 const allExperience = [...EXPERIENCE].sort((a, b) => {
@@ -125,7 +113,7 @@ const displayedExperience = count
                                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
                                     <div class="flex items-start gap-4">
                                         <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-[#c08b5a]">
-                                            {logoExists(job.logo) ? (
+                                            {publicFileExists(job.logo) ? (
                                                 <img
                                                     src={job.logo}
                                                     alt={job.company}

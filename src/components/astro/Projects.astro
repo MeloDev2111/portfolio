@@ -1,0 +1,93 @@
+---
+import { ProjectCard } from "../react/ProjectCard";
+import { getLocalizedProjects } from "../../utils/projects";
+import {
+    getLangFromUrl,
+    useTranslations,
+    getRelativeLocaleUrl,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const projects = await getLocalizedProjects(lang);
+---
+
+<section
+    id="projects"
+    class="py-16 md:py-24 min-h-[60vh] flex flex-col justify-center bg-charcoal/30 snap-start"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2
+            class="text-3xl md:text-4xl font-heading font-bold text-light mb-12 flex items-center"
+        >
+            <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-[#c08b5a] to-white"
+            >
+                {t("nav.projects")}
+            </span>
+            <div class="h-px bg-white/10 flex-grow ml-6"></div>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                projects
+                    .filter((p) => p.data.featured)
+                    .slice(0, 2)
+                    .map((project) => (
+                        <ProjectCard
+                            client:visible
+                            title={project.data.title}
+                            description={project.data.description}
+                            tags={project.data.tags ?? []}
+                            link={project.data.link}
+                            image={project.data.image}
+                            featured={project.data.featured}
+                            inProgress={project.data.inProgress}
+                        />
+                    ))
+            }
+
+            {/* View All Projects Card */}
+            <a
+                href={getRelativeLocaleUrl(lang, "projects")}
+                class="group relative overflow-hidden rounded-2xl glass-card border border-white/5 hover:border-[#c08b5a]/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 flex flex-col items-center justify-center p-8 min-h-[300px] cursor-pointer"
+            >
+                <div
+                    class="absolute inset-0 bento-noise opacity-10 pointer-events-none"
+                >
+                </div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-[#c08b5a]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                >
+                </div>
+
+                <div
+                    class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[#c08b5a]/20 group-hover:border-[#c08b5a]/30 transition-all duration-300"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-8 h-8 text-gray-400 group-hover:text-[#c08b5a] transition-colors"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </div>
+
+                <h3
+                    class="text-xl font-heading font-bold text-white group-hover:text-[#c08b5a] transition-colors"
+                >
+                    {t("section.viewAllProjects")}
+                </h3>
+                <p class="text-sm text-gray-500 mt-2 text-center max-w-xs">
+                    {t("page.projectsDescription")}
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
