@@ -10,6 +10,7 @@ interface Project {
         link?: string;
         image?: string | { src: string; width: number; height: number };
         featured?: boolean;
+        inProgress?: boolean;
     };
 }
 
@@ -96,6 +97,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         link={project.data.link}
                         image={project.data.image}
                         featured={project.data.featured}
+                        inProgress={project.data.inProgress}
                     />
                 ))}
             </div>

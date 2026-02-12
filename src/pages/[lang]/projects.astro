@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { ProjectGrid } from "../../components/react/ProjectGrid";
-import { getCollection } from "astro:content";
+import { getLocalizedProjects } from "../../utils/projects";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export async function getStaticPaths() {
@@ -11,11 +11,8 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const t = useTranslations(lang as any);
 
-// Fetch projects and filter by current language (folder based)
-const allProjects = await getCollection("projects");
-const projects = allProjects
-    .filter((project) => project.slug.startsWith(`${lang}/`))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Fetch projects using localized logic (with EN fallback)
+const projects = await getLocalizedProjects(lang);
 
 // Map Astro content to React props
 const projectProps = projects.map((p) => ({
@@ -27,6 +24,7 @@ const projectProps = projects.map((p) => ({
         link: p.data.link,
         image: p.data.image,
         featured: p.data.featured,
+        inProgress: p.data.inProgress,
     },
 }));
 

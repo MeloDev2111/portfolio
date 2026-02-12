@@ -3,13 +3,14 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/astro/Hero.astro";
 import TechStack from "../../components/astro/TechStack.astro";
-import { ProjectGrid } from "../../components/react/ProjectGrid";
+import { ProjectCard } from "../../components/react/ProjectCard";
 import { getCollection, type CollectionEntry } from "astro:content";
 import {
     getLangFromUrl,
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
+import { getLocalizedProjects } from "../../utils/projects";
 
 export function getStaticPaths() {
     return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
@@ -25,28 +26,7 @@ type ProjectEntry = CollectionEntry<"projects">;
 type CertEntry = CollectionEntry<"certifications">;
 
 // Projects
-const allProjects = await getCollection("projects");
-const projects = allProjects
-    .filter((project: ProjectEntry) => project.slug.startsWith(`${lang}/`))
-    .sort(
-        (a: ProjectEntry, b: ProjectEntry) =>
-            b.data.date.valueOf() - a.data.date.valueOf(),
-    );
-
-const projectProps = projects.map((p: ProjectEntry) => ({
-    slug: p.slug,
-    data: {
-        title: p.data.title,
-        description: p.data.description,
-        tags: p.data.tags,
-        link: p.data.link,
-        image: p.data.image,
-        featured: p.data.featured,
-    },
-}));
-
-// Sanitize props to remove any potential non-POJO artifacts
-const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
+const projects = await getLocalizedProjects(lang);
 
 // Certifications
 const certifications = await getCollection("certifications");
@@ -326,20 +306,64 @@ const certifications = await getCollection("certifications");
                 <div class="h-px bg-white/10 flex-grow ml-6"></div>
             </h2>
 
-            <ProjectGrid
-                client:only="react"
-                projects={cleanProjectProps}
-                labels={{
-                    all: t("ui.all"),
-                    filter: t("ui.filterBy"),
-                }}
-            />
-            <div class="mt-10 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {
+                    projects
+                        .filter((p) => p.data.featured)
+                        .slice(0, 3)
+                        .map((project) => (
+                            <ProjectCard
+                                title={project.data.title}
+                                description={project.data.description}
+                                tags={project.data.tags ?? []}
+                                link={project.data.link}
+                                image={project.data.image}
+                                featured={project.data.featured}
+                                inProgress={project.data.inProgress}
+                            />
+                        ))
+                }
+
+                {/* View All Projects Card */}
                 <a
                     href={getRelativeLocaleUrl(lang, "projects")}
-                    class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
+                    class="group relative overflow-hidden rounded-2xl glass-card border border-white/5 hover:border-[#c08b5a]/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 flex flex-col items-center justify-center p-8 min-h-[300px] cursor-pointer"
                 >
-                    {t("section.viewAllProjects")}
+                    <div
+                        class="absolute inset-0 bento-noise opacity-10 pointer-events-none"
+                    >
+                    </div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-[#c08b5a]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    >
+                    </div>
+
+                    <div
+                        class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[#c08b5a]/20 group-hover:border-[#c08b5a]/30 transition-all duration-300"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="w-8 h-8 text-gray-400 group-hover:text-[#c08b5a] transition-colors"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+
+                    <h3
+                        class="text-xl font-heading font-bold text-white group-hover:text-[#c08b5a] transition-colors"
+                    >
+                        {t("section.viewAllProjects")}
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-2 text-center max-w-xs">
+                        {t("page.projectsDescription")}
+                    </p>
                 </a>
             </div>
         </div>

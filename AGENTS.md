@@ -102,8 +102,8 @@
     - **Professional Experience:**
         - Extract experience from CV.
         - Evaluate implementation options:
-            - *Option A:* Summary view (Current Role + Bullets) -> Redirect to full timeline.
-            - *Option B:* Bento integration ("Currently at UTP") -> Redirect to full view.
+            - _Option A:_ Summary view (Current Role + Bullets) -> Redirect to full timeline.
+            - _Option B:_ Bento integration ("Currently at UTP") -> Redirect to full view.
     - **Core Stats (Hero):**
         - Evaluate the necessity of "Years Exp" and "Projects" stats.
         - Consider making them clickable (redirecting to Experience/Projects) or refining their presentation.
