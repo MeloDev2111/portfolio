@@ -47,6 +47,11 @@ export const ui = {
             "The requested language is not supported. Redirecting to English version...",
         "footer.copyright": "© 2026 MeloDev. All rights reserved.",
         "aria.page": "page",
+        "hero.latestAchievement": "Latest Achievement",
+        "credly.verified": "Verified Credentials",
+        "credly.description":
+            "Verify all my digital badges and certifications directly on Credly.",
+        "credly.viewProfile": "View Profile",
     },
     es: {
         "nav.projects": "Proyectos",
@@ -88,5 +93,10 @@ export const ui = {
             "El idioma solicitado no está soportado. Redírigiendo a la versión en inglés...",
         "footer.copyright": "© 2026 MeloDev. Todos los derechos reservados.",
         "aria.page": "página",
+        "hero.latestAchievement": "Último Logro",
+        "credly.verified": "Credenciales Verificadas",
+        "credly.description":
+            "Verifica todas mis insignias y certificados digitales directamente en Credly.",
+        "credly.viewProfile": "Ver Perfil",
     },
 } as const;

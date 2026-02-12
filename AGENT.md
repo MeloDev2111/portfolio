@@ -88,10 +88,24 @@
 
 - **Status:** v0.5.0 (Beta/Active Development).
 - **Recent Focus:**
-    - Completed `TechStack` component refinement with "featured" glow effects.
-    - Implemented `404.astro` page with proper localization handling.
-    - Configured automated release pipeline.
+    - **Hero Section:** Replaced secondary social links with dynamic "Latest Achievement" bento card (fetching starred certifications).
+    - **Certifications:** Added "Verified Credentials" banner with Credly integration on the certifications page.
+    - **i18n:** Implemented full localization for new dynamic components.
+    - **TechStack:** Refined with "featured" glow effects.
+    - **DevOps:** Configured automated release pipeline and `404.astro` logic.
 - **Immediate Next Steps:**
-    - Refine content for the "About Me" section (Senior CV alignment).
-    - Finalize mobile responsiveness for the "Services" or "Experience" section.
-    - Add more unit tests for utility functions.
+- **Immediate Next Steps:**
+    - **Projects Section:**
+        - Add the portfolio itself as a featured project.
+        - Configure a carousel/grid of 3-4 featured projects.
+        - Ensure the final card/indicator redirects to the full projects view.
+    - **Professional Experience:**
+        - Extract experience from CV.
+        - Evaluate implementation options:
+            - *Option A:* Summary view (Current Role + Bullets) -> Redirect to full timeline.
+            - *Option B:* Bento integration ("Currently at UTP") -> Redirect to full view.
+    - **Core Stats (Hero):**
+        - Evaluate the necessity of "Years Exp" and "Projects" stats.
+        - Consider making them clickable (redirecting to Experience/Projects) or refining their presentation.
+    - **Future Enhancements:**
+        - Brainstorm additional elements to enrich the portfolio (e.g., Blog, Resources, Testimonials).
