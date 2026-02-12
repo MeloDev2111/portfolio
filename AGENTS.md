@@ -86,8 +86,13 @@
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.5.0 (Beta/Active Development).
+- **Status:** v0.6.0 (Beta - Experience Section Complete).
 - **Recent Focus:**
+    - **Experience Section:**
+        - Implemented full timeline view at `/experience` with "Download CV" CTA.
+        - Integrated "Experience" card into Hero Bento grid (showing top 2 roles) with perfect vertical alignment.
+        - Unified logo logic: Server-side validation (`fs.existsSync`) + Premium CSS placeholder fallback for missing images.
+        - Standardized styling for buttons and layout consistency.
     - **Projects Section:** 
         - Implemented static featured grid (Top 2 + "View All") for optimal home layout.
         - Added `inProgress` and `draft` states with visual badges and disabling logic.
@@ -99,14 +104,6 @@
     - **TechStack:** Refined with "featured" glow effects.
 
 - **Immediate Next Steps:**
-    - **Professional Experience:**
-        - Extract experience from CV.
-        - Evaluate implementation options:
-            - _Option A:_ Summary view (Current Role + Bullets) -> Redirect to full timeline.
-            - _Option B:_ Bento integration ("Currently at UTP") -> Redirect to full view.
-    - **Core Stats (Hero):**
-        - Evaluate the necessity of "Years Exp" and "Projects" stats.
-        - Consider making them clickable (redirecting to Experience/Projects) or refining their presentation.
     - **Final Polish:**
         - Conduct SEO audit (meta tags, descriptions).
         - Verify lighthouse scores after recent image optimizations.

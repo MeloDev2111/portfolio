@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/astro/Hero.astro";
 import TechStack from "../../components/astro/TechStack.astro";
+import Experience from "../../components/astro/Experience.astro";
 import { ProjectCard } from "../../components/react/ProjectCard";
 import { getCollection, type CollectionEntry } from "astro:content";
 import {
@@ -193,6 +194,9 @@ const certifications = await getCollection("certifications");
             </div>
         </div>
     </section>
+
+    <!-- Experience Section -->
+    <Experience count={2} />
 
     <!-- Certifications Section -->
     <section

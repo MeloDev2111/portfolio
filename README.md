@@ -2,7 +2,7 @@
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/MeloDev2111/portfolio/master-pipeline.yml?label=Deploy&style=flat-square)
 ![License](https://img.shields.io/github/license/MeloDev2111/portfolio?style=flat-square)
-![Version](https://img.shields.io/badge/version-0.5.0-blue?style=flat-square)
+![Version](https://img.shields.io/github/package-json/v/MeloDev2111/portfolio?color=blue&style=flat-square)
 
 A high-performance, accessible, and internationalized personal portfolio website built for a Backend Developer & Data Science enthusiast. Designed with a "Dark Industrial Gold" aesthetic and focused on showcasing technical depth.
 
@@ -94,6 +94,30 @@ A high-performance, accessible, and internationalized personal portfolio website
         "starred": true // Highlights in Hero section
     }
     ```
+
+### Adding Work Experience
+
+1.  Open `src/utils/experience.ts`.
+2.  Add a new entry to the `EXPERIENCE` array:
+    ```typescript
+    {
+        company: "Company Name",
+        role: "Job Title",
+        startDate: "YYYY-MM",
+        endDate: "YYYY-MM", // or "Present",
+        description: {
+            en: "Description in English.",
+            es: "Descripción en Español."
+        },
+        technologies: ["React", "TypeScript", "Node.js"],
+        current: true, // or false
+        logo: "/logos/company.png" // Optional
+    }
+    ```
+    **Note regarding Logos:**
+    - The system automatically checks if the file exists in `public/logos/`.
+    - If the file exists, it will be displayed.
+    - If it's missing or undefined, a premium placeholder with the company's initial will be shown automatically.
 
 ## 🧞 Commands
 
