@@ -30,8 +30,8 @@ export const SKILLS: Skill[] = [
         emoji: "☕",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#f89820]/20",
-            borderClass: "group-hover:border-[#f89820]/40",
+            colorClass: "group-hover/icon:bg-[#E71D36]/20",
+            borderClass: "group-hover/icon:border-[#E71D36]/40",
         },
     },
     {
@@ -41,8 +41,8 @@ export const SKILLS: Skill[] = [
         emoji: "🍃",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#6db33f]/20",
-            borderClass: "group-hover:border-[#6db33f]/40",
+            colorClass: "group-hover/icon:bg-[#6db33f]/20",
+            borderClass: "group-hover/icon:border-[#6db33f]/40",
         },
     },
     {
@@ -52,8 +52,8 @@ export const SKILLS: Skill[] = [
         emoji: "🐍",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#3776AB]/20",
-            borderClass: "group-hover:border-[#3776AB]/40",
+            colorClass: "group-hover/icon:bg-[#3776AB]/20",
+            borderClass: "group-hover/icon:border-[#3776AB]/40",
         },
     },
     {
@@ -69,8 +69,8 @@ export const SKILLS: Skill[] = [
         emoji: "🟪",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#3776AB]/20",
-            borderClass: "group-hover:border-[#3776AB]/40",
+            colorClass: "group-hover/icon:bg-[#777BB4]/20",
+            borderClass: "group-hover/icon:border-[#777BB4]/40",
         },
     },
 
@@ -82,8 +82,8 @@ export const SKILLS: Skill[] = [
         emoji: "🌩️",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#f89820]/20",
+            borderClass: "group-hover/icon:border-[#f89820]/40",
         },
     },
     {
@@ -93,8 +93,8 @@ export const SKILLS: Skill[] = [
         emoji: "☁️",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#4285F4]/20",
+            borderClass: "group-hover/icon:border-[#4285F4]/40",
         },
     },
 
@@ -124,8 +124,8 @@ export const SKILLS: Skill[] = [
         emoji: "🔵",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#3178C6]/20",
+            borderClass: "group-hover/icon:border-[#3178C6]/40",
         },
     },
 
@@ -149,8 +149,8 @@ export const SKILLS: Skill[] = [
         emoji: "🌊",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#FF4B4B]/20",
+            borderClass: "group-hover/icon:border-[#FF4B4B]/40",
         },
     },
     {
@@ -160,8 +160,8 @@ export const SKILLS: Skill[] = [
         emoji: "📓",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#F37626]/20",
+            borderClass: "group-hover/icon:border-[#F37626]/40",
         },
     },
 
@@ -179,8 +179,8 @@ export const SKILLS: Skill[] = [
         emoji: "🔵",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#0078D7]/20",
+            borderClass: "group-hover/icon:border-[#0078D7]/40",
         },
     },
     {
@@ -196,8 +196,8 @@ export const SKILLS: Skill[] = [
         emoji: "🗄️",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#F05032]/20",
+            borderClass: "group-hover/icon:border-[#F05032]/40",
         },
     },
 
@@ -209,8 +209,8 @@ export const SKILLS: Skill[] = [
         emoji: "🐘",
         featured: {
             inBento: true,
-            colorClass: "group-hover:bg-[#FF9900]/20",
-            borderClass: "group-hover:border-[#FF9900]/40",
+            colorClass: "group-hover/icon:bg-[#336791]/20",
+            borderClass: "group-hover/icon:border-[#336791]/40",
         },
     },
     {

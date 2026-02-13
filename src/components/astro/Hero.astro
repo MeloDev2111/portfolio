@@ -290,10 +290,10 @@ const techLogos = getBentoSkills().map((skill) => ({
                     <div class="flex items-center gap-2">
                         <span class="relative flex h-2 w-2">
                             <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f59e0b] opacity-75"
                             ></span>
                             <span
-                                class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+                                class="relative inline-flex rounded-full h-2 w-2 bg-[#f59e0b]"
                             ></span>
                         </span>
                     </div>
@@ -407,7 +407,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                                                 alt={tech.label}
                                                 width={64}
                                                 height={64}
-                                                class="w-full h-full object-contain filter brightness-100 contrast-100 group-hover/icon:brightness-110 transition-all"
+                                                class="w-full h-full object-contain filter grayscale opacity-80 brightness-125 group-hover/icon:grayscale-0 group-hover/icon:opacity-100 group-hover/icon:brightness-100 transition-all duration-300"
                                             />
 
                                             {/* Dynamic Tooltip */}
@@ -422,11 +422,11 @@ const techLogos = getBentoSkills().map((skill) => ({
                                     <a
                                         href={getRelativeLocaleUrl(
                                             lang,
-                                            "/#tech-stack",
+                                            "/tech-stack",
                                         )}
-                                        class="group/more relative w-full aspect-square flex items-center justify-center rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 hover:border-[#c08b5a]/30 transition-all cursor-pointer"
+                                        class="group/more relative w-full aspect-square flex items-center justify-center rounded-lg border border-white/5 bg-white/5 group-hover:bg-white/10 group-hover:border-[#c08b5a]/30 hover:!bg-[#c08b5a]/20 hover:!border-[#c08b5a] transition-all cursor-pointer"
                                     >
-                                        <span class="text-xs font-bold text-gray-500 group-hover/more:text-[#c08b5a] transition-colors">
+                                        <span class="text-xs font-bold text-gray-500 group-hover:text-gray-300 group-hover/more:text-[#c08b5a] transition-colors">
                                             +{remaining}
                                         </span>
 
