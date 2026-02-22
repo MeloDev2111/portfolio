@@ -1,25 +1,25 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: melodev-portfolio
-  description: A high-performance, accessible, and internationalized personal portfolio website built with Astro 5 and React 19.
-  annotations:
-    github.com/project-slug: MeloDev2111/portfolio
-    backstage.io/techdocs-ref: dir:.
-    backstage.io/github-actions-id: master-pipeline.yml
-  labels:
-    language: typescript
-    framework: astro
-    aesthetic: dark-industrial-gold
-  links:
-    - url: https://melodev2111.github.io/portfolio/en
-      title: Live Portfolio
-      icon: dashboard
-    - url: https://github.com/MeloDev2111/portfolio
-      title: Source Code
-      icon: github
+    name: melodev-portfolio
+    description: A high-performance, accessible, and internationalized personal portfolio website built with Astro 5 and React 19.
+    annotations:
+        github.com/project-slug: MeloDev2111/portfolio
+        backstage.io/techdocs-ref: dir:.
+        backstage.io/github-actions-id: master-pipeline.yml
+    labels:
+        language: typescript
+        framework: astro
+        aesthetic: dark-industrial-gold
+    links:
+        - url: https://melodev2111.github.io/portfolio/en
+          title: Live Portfolio
+          icon: dashboard
+        - url: https://github.com/MeloDev2111/portfolio
+          title: Source Code
+          icon: github
 spec:
-  type: website
-  lifecycle: production
-  owner: user:melodev2111
-  system: portfolio-ecosystem
+    type: website
+    lifecycle: production
+    owner: user:melodev2111
+    system: portfolio-ecosystem
