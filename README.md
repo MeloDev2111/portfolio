@@ -12,13 +12,13 @@ A high-performance, accessible, and internationalized personal portfolio website
 - **UI Library:** [React 19](https://react.dev/) - For interactive components.
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework.
 - **Testing:** [Vitest](https://vitest.dev/) - Blazing fast unit testing.
-- **i18n:** Native Astro Internationalization (English & Spanish).
+- **i18n:** Native Astro Internationalization (English, Spanish & Japanese).
 - **Deployment:** GitHub Pages via GitHub Actions.
 
 ## ✨ Features
 
 - **⚡ Blazing Fast:** Statically generated for optimal performance (Lighthouse 95+).
-- **🌍 Internationalization (i18n):** Full support for English (`/en`) and Spanish (`/es`).
+- **🌍 Internationalization (i18n):** Full support for English (`/en`), Spanish (`/es`), and Japanese (`/ja`).
 - **🎨 Custom Design System:** "Dark Industrial Gold" theme with Bento Grid layouts.
 - **📱 Responsive:** Mobile-first design approach.
 - **🤖 Automated Releases:** Semantic versioning and changelog generation using `release-it`.
@@ -119,6 +119,17 @@ A high-performance, accessible, and internationalized personal portfolio website
     - If the file exists, it will be displayed.
     - If it's missing or undefined, a premium placeholder with the company's initial will be shown automatically.
 
+### Adding a New Language
+
+1.  **Configure Locale:** In `astro.config.mjs`, add the language code to `i18n.locales`.
+2.  **Add UI Labels:** In `src/i18n/ui.ts`:
+    - Add the code and display name to the `languages` object.
+    - Add a new dictionary entry in the `ui` object (be sure to include `nav.langName`).
+3.  **Localize Content:**
+    - Create localized project files in `src/content/projects/[lang]/`.
+    - Add localized descriptions in `src/utils/experience.ts`.
+4.  **Verify:** Run `npm run test` to verify routing logic.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project:
@@ -131,6 +142,7 @@ All commands are run from the root of the project:
 | `npm run preview` | Preview your build locally                  |
 | `npm run test`    | Run unit tests with Vitest                  |
 | `npm run lint`    | Check for linting errors                    |
+| `npm run format`  | Fix formatting issues with Prettier         |
 | `npm run release` | Create a new release (tag + changelog)      |
 
 ## 🤝 Contributing
@@ -142,8 +154,9 @@ This is a personal portfolio project, but suggestions are welcome!
 3.  Commit your changes (`git commit -m 'feat: add some amazing feature'`).
 4.  **Run Tests:** Ensure all tests pass (`npm run test`).
 5.  **Lint Check:** Verify code quality (`npm run lint`).
-6.  Push to the branch (`git push origin feature/amazing-feature`).
-7.  Open a Pull Request.
+6.  **Format Code:** Fix styling issues automatically (`npm run format`).
+7.  Push to the branch (`git push origin feature/amazing-feature`).
+8.  Open a Pull Request.
 
 ## 📄 License
 

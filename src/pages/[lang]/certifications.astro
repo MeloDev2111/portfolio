@@ -1,11 +1,12 @@
 ---
+import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import { CertificationList } from "../../components/react/CertificationList";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
-    return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+    return getI18nStaticPaths();
 }
 
 const { lang } = Astro.params;

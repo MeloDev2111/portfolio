@@ -1,10 +1,11 @@
 ---
+import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import TechStackComponent from "../../components/astro/TechStack.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 export async function getStaticPaths() {
-    return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+    return getI18nStaticPaths();
 }
 
 const { lang } = Astro.params;

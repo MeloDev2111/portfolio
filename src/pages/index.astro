@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from "../i18n/utils";
 
 const enUrl = getRelativeLocaleUrl("en", "");
 const esUrl = getRelativeLocaleUrl("es", "");
+const jaUrl = getRelativeLocaleUrl("ja", "");
 ---
 
 <!doctype html>
@@ -12,12 +13,14 @@ const esUrl = getRelativeLocaleUrl("es", "");
         <title>Redirecting...</title>
         <!-- Default fallback for no-JS -->
         <meta http-equiv="refresh" content={`0;url=${enUrl}`} />
-        <script define:vars={{ enUrl, esUrl }}>
+        <script define:vars={{ enUrl, esUrl, jaUrl }}>
             try {
                 // Check browser language
                 const lang = navigator.language || navigator.userLanguage;
                 if (lang && lang.startsWith("es")) {
                     window.location.replace(esUrl);
+                } else if (lang && lang.startsWith("ja")) {
+                    window.location.replace(jaUrl);
                 } else {
                     window.location.replace(enUrl);
                 }

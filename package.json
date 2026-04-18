@@ -11,6 +11,7 @@
         "release": "release-it",
         "changelog": "auto-changelog -p",
         "lint": "eslint . && prettier --check .",
+        "format": "prettier --write .",
         "test": "vitest run"
     },
     "dependencies": {

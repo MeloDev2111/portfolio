@@ -81,13 +81,25 @@
 4.  **Internationalization:**
     - All text must be abstractable or localized.
     - Content lives in `src/pages/[lang]/` or `src/content/`.
-    - Use helper functions/dictionaries for UI labels.
-5.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases.
+    - Use helper functions/dictionaries (`src/i18n/ui.ts`) for UI labels.
+    - **Adding a New Language:**
+        1.  Update `astro.config.mjs`: Add the locale code to `locales: ["en", "es", "ja", ...]`.
+        2.  Update `src/i18n/ui.ts`:
+            - Add the language code and its display name to the `languages` object.
+            - Add a new dictionary entry for the language in the `ui` object.
+            - Add `nav.langName` for the language selector.
+        3.  The `LanguagePicker` component will automatically detect and display the new language.
+5.  **Formatting & Quality:** Use `npm run format` to automatically fix styling issues across the project.
+6.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases.
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.7.0 (Beta - Experience Section Complete).
+- **Status:** v0.7.2 (Beta - Multi-Language Support Enhanced).
 - **Recent Focus:**
+    - **i18n & Multi-Language:**
+        - Upgraded language selector from binary toggle to a premium glassmorphism dropdown.
+        - Added support for Japanese (`ja`) and optimized the `getAllLanguageUrls` helper.
+        - Refactored `src/i18n/utils.ts` for automated unit testing (Vitest).
     - **Final Polish & SEO:**
         - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
         - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
