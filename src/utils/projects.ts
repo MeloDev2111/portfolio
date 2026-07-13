@@ -20,16 +20,16 @@ export async function getLocalizedProjects(
     const getProjectId = (slug: string) => slug.split("/").slice(1).join("/");
 
     // 1. Identify English projects (Source of Truth)
-    const enProjects = allProjects.filter((p) => p.slug.startsWith("en/"));
+    const enProjects = allProjects.filter((p) => p.id.startsWith("en/"));
 
-    // 2. Map all projects by slug for quick lookup
-    const projectsMap = new Map(allProjects.map((p) => [p.slug, p]));
+    // 2. Map all projects by id for quick lookup
+    const projectsMap = new Map(allProjects.map((p) => [p.id, p]));
 
     // 3. Build the localized list with Strict Config Separation
     const localizedProjects = enProjects.map((enProject) => {
-        const projectId = getProjectId(enProject.slug);
-        const localizedSlug = `${lang}/${projectId}`;
-        const localizedVersion = projectsMap.get(localizedSlug);
+        const projectId = getProjectId(enProject.id);
+        const localizedId = `${lang}/${projectId}`;
+        const localizedVersion = projectsMap.get(localizedId);
 
         // BASE DATA (Config) - Always from English Master
         // Use 'en' for date, tags, link, image, featured, inProgress, draft
@@ -48,9 +48,9 @@ export async function getLocalizedProjects(
 
         return {
             ...enProject, // Keep original ID/slug structure base? Or localized?
-            // Actually we want the localized slug for linking if needed, but the config from EN.
+            // Actually we want the localized id for linking if needed, but the config from EN.
             // Let's return a hybrid object.
-            slug: localizedVersion ? localizedVersion.slug : enProject.slug,
+            id: localizedVersion ? localizedVersion.id : enProject.id,
             body: localizedVersion ? localizedVersion.body : enProject.body,
             collection: enProject.collection,
             data: {

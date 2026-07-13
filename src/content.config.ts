@@ -1,7 +1,9 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
+import { glob } from "astro/loaders";
 
 const projectsCollection = defineCollection({
-    type: "content", // v2.5.0+ ; 'content' for markdown/mdx
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
     schema: ({ image }) =>
         z.object({
             title: z.string(),
@@ -17,7 +19,10 @@ const projectsCollection = defineCollection({
 });
 
 const certificationsCollection = defineCollection({
-    type: "data", // JSON/YAML
+    loader: glob({
+        pattern: "**/*.{json,yaml,yml}",
+        base: "./src/content/certifications",
+    }),
     schema: z.object({
         name: z.string(),
         issuer: z.string(),

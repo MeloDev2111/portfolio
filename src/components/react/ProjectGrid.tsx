@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { ProjectCard } from "./ProjectCard";
 
 interface Project {
-    slug: string;
+    id: string;
     data: {
         title: string;
         description: string;
@@ -97,7 +97,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProjects.map((project, index) => (
                     <ProjectCard
-                        key={project.slug}
+                        key={project.id}
                         title={project.data.title}
                         description={project.data.description}
                         tags={getSafeTags(project.data.tags)}

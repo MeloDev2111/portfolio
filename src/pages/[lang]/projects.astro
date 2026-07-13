@@ -17,7 +17,7 @@ const projects = await getLocalizedProjects(lang);
 
 // Map Astro content to React props
 const projectProps = projects.map((p) => ({
-    slug: p.slug,
+    id: p.id,
     data: {
         title: p.data.title,
         description: p.data.description,
