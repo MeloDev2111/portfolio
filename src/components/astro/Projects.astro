@@ -33,18 +33,25 @@ const projects = await getLocalizedProjects(lang);
                 projects
                     .filter((p) => p.data.featured)
                     .slice(0, 2)
-                    .map((project) => (
-                        <ProjectCard
-                            client:visible
-                            title={project.data.title}
-                            description={project.data.description}
-                            tags={project.data.tags ?? []}
-                            link={project.data.link}
-                            image={project.data.image}
-                            featured={project.data.featured}
-                            inProgress={project.data.inProgress}
-                        />
-                    ))
+                    .map((project) => {
+                        const cleanProps = JSON.parse(
+                            JSON.stringify({
+                                title: project.data.title,
+                                description: project.data.description,
+                                tags: project.data.tags ?? [],
+                                link: project.data.link,
+                                image: project.data.image,
+                                featured: project.data.featured,
+                                inProgress: project.data.inProgress,
+                            })
+                        );
+                        return (
+                            <ProjectCard
+                                client:visible
+                                {...cleanProps}
+                            />
+                        );
+                    })
             }
 
             {/* View All Projects Card */}
