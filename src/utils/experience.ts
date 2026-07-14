@@ -14,10 +14,29 @@ export interface ExperienceItem {
 
 export const EXPERIENCE: ExperienceItem[] = [
     {
+        company: "Globant",
+        role: "Java Developer Ssr Advanced",
+        startDate: "2026-03",
+        endDate: "Present",
+        description: {
+            en: "Working at Globant as a Java Developer Ssr Advanced, currently assigned to a Peruvian payment method client. Developing backend solutions using Java Spring Boot, Reactive Programming with Spring Webflux and Project Reactor, and Apache Kafka.",
+            es: "Trabajando en Globant como Java Developer Ssr Advanced, actualmente asignado a un cliente peruano del sector de medios de pago. Desarrollando soluciones backend usando Java Spring Boot, Programación Reactiva con Spring Webflux y Project Reactor, y Apache Kafka.",
+        },
+        technologies: [
+            "Java",
+            "Spring Boot",
+            "Spring Webflux",
+            "Project Reactor",
+            "Apache Kafka",
+        ],
+        current: true,
+        logo: "/logos/globant.png",
+    },
+    {
         company: "UTP",
         role: "Backend Developer", // Promoted from Trainee
         startDate: "2023-10",
-        endDate: "Present",
+        endDate: "2026-03",
         description: {
             en: "Led the backend development for the Postgraduate LMS (10k+ users). Optimized enrollment processing from hours to minutes, handling an increase from 20k to 1M requests. Integrated Active Directory for efficient candidate registration and mentored new team members in DevOps culture.",
             es: "Lideré el desarrollo backend del LMS de Postgrado (10k+ usuarios). Optimicé el procesamiento de matrículas de horas a minutos, gestionando un incremento de 20k a 1M de solicitudes. Integré Active Directory para agilizar el proceso de registro de postulantes y mentoreé a nuevos miembros en cultura DevOps.",
@@ -29,7 +48,7 @@ export const EXPERIENCE: ExperienceItem[] = [
             "Microservices",
             "Active Directory",
         ],
-        current: true,
+        current: false,
         logo: "/logos/utp.png",
     },
     {

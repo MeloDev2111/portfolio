@@ -73,6 +73,12 @@ export const SKILLS: Skill[] = [
             borderClass: "group-hover/icon:border-[#777BB4]/40",
         },
     },
+    {
+        name: "Apache Kafka",
+        category: "Backend",
+        icon: `${DEVICON_BASE}/apachekafka/apachekafka-original.svg`,
+        emoji: "📡",
+    },
 
     // Cloud
     {
@@ -224,6 +230,23 @@ export const SKILLS: Skill[] = [
         category: "Database",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
         emoji: "🗃️",
+    },
+    {
+        name: "Redis",
+        category: "Database",
+        icon: `${DEVICON_BASE}/redis/redis-original.svg`,
+        emoji: "⚡",
+    },
+    {
+        name: "MongoDB",
+        category: "Database",
+        icon: `${DEVICON_BASE}/mongodb/mongodb-original.svg`,
+        emoji: "🍃",
+        featured: {
+            inBento: true,
+            colorClass: "group-hover/icon:bg-[#47A248]/20",
+            borderClass: "group-hover/icon:border-[#47A248]/40",
+        },
     },
 ];
 
