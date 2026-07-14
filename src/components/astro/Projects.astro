@@ -43,14 +43,9 @@ const projects = await getLocalizedProjects(lang);
                                 image: project.data.image,
                                 featured: project.data.featured,
                                 inProgress: project.data.inProgress,
-                            })
+                            }),
                         );
-                        return (
-                            <ProjectCard
-                                client:visible
-                                {...cleanProps}
-                            />
-                        );
+                        return <ProjectCard client:visible {...cleanProps} />;
                     })
             }
 
