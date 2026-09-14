@@ -1,7 +1,7 @@
 {
     "name": "melodev-portfolio",
     "type": "module",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "packageManager": "pnpm@12.4.1",
     "license": "MIT",
     "scripts": {
