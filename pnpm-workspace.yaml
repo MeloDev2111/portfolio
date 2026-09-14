@@ -1,2 +1,5 @@
 allowBuilds:
     esbuild: true
+    sharp: true
+    "@img/sharp-libvips-linux-x64": true
+    "@img/sharp-libvips-win32-x64": true
