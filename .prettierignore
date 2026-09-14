@@ -1,4 +1,5 @@
 CHANGELOG.md
 AGENTS.MD
+pnpm-lock.yaml
 src/content/projects/en/*
 src/content/projects/es/*

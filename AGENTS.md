@@ -33,7 +33,7 @@
 
 - **Platform:** GitHub Pages.
 - **Workflow:** Automated deployment via GitHub Actions on push to `master`.
-- **Versioning:** Semantic Versioning (SemVer) enforced via `npm run release`.
+- **Versioning:** Semantic Versioning (SemVer) enforced via `pnpm release`.
 
 ## 3. 📂 Project Structure
 
@@ -53,6 +53,7 @@
 │   │   └── index.astro  # Root redirect to default locale
 │   └── utils/           # Helper functions (i18n, formatting)
 ├── astro.config.mjs     # Astro configuration (i18n, integrations)
+├── pnpm-workspace.yaml  # pnpm workspace configuration (allowBuilds)
 └── tailwind.config.mjs  # Tailwind configuration (theme extension)
 ```
 
@@ -89,13 +90,17 @@
             - Add a new dictionary entry for the language in the `ui` object.
             - Add `nav.langName` for the language selector.
         3.  The `LanguagePicker` component will automatically detect and display the new language.
-5.  **Formatting & Quality:** Use `npm run format` to automatically fix styling issues across the project.
+5.  **Formatting & Quality:** Use `pnpm format` to automatically fix styling issues across the project.
 6.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases.
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.7.2 (Beta - Multi-Language Support Enhanced).
+- **Status:** v0.9.0 (Multi-Language Support & Package Manager Optimization).
 - **Recent Focus:**
+    - **Package Manager & Security:**
+        - Standardized workspace setup on `pnpm` (v12+).
+        - Configured `pnpm-workspace.yaml` `allowBuilds` for `esbuild` build script permissions.
+        - Updated GitHub Actions workflow (`master-pipeline.yml`) to use `pnpm` v12.
     - **i18n & Multi-Language:**
         - Upgraded language selector from binary toggle to a premium glassmorphism dropdown.
         - Added support for Japanese (`ja`) and optimized the `getAllLanguageUrls` helper.

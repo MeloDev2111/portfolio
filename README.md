@@ -128,22 +128,24 @@ A high-performance, accessible, and internationalized personal portfolio website
 3.  **Localize Content:**
     - Create localized project files in `src/content/projects/[lang]/`.
     - Add localized descriptions in `src/utils/experience.ts`.
-4.  **Verify:** Run `npm run test` to verify routing logic.
+4.  **Verify:** Run `pnpm test` to verify routing logic.
 
 ## 🧞 Commands
 
 All commands are run from the root of the project:
 
-| Command           | Action                                      |
-| :---------------- | :------------------------------------------ |
-| `npm install`     | Installs dependencies                       |
-| `npm run dev`     | Starts local dev server at `localhost:4321` |
-| `npm run build`   | Build your production site to `./dist/`     |
-| `npm run preview` | Preview your build locally                  |
-| `npm run test`    | Run unit tests with Vitest                  |
-| `npm run lint`    | Check for linting errors                    |
-| `npm run format`  | Fix formatting issues with Prettier         |
-| `npm run release` | Create a new release (tag + changelog)      |
+> **Note:** This project uses `pnpm` (v12+) as its package manager. Native build script permissions (e.g. `esbuild`) are managed via `pnpm-workspace.yaml` (`allowBuilds`).
+
+| Command        | Action                                      |
+| :------------- | :------------------------------------------ |
+| `pnpm install` | Installs dependencies                       |
+| `pnpm dev`     | Starts local dev server at `localhost:4321` |
+| `pnpm build`   | Build your production site to `./dist/`     |
+| `pnpm preview` | Preview your build locally                  |
+| `pnpm test`    | Run unit tests with Vitest                  |
+| `pnpm lint`    | Check for linting errors                    |
+| `pnpm format`  | Fix formatting issues with Prettier         |
+| `pnpm release` | Create a new release (tag + changelog)      |
 
 ## 🤝 Contributing
 
@@ -152,9 +154,9 @@ This is a personal portfolio project, but suggestions are welcome!
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feature/amazing-feature`).
 3.  Commit your changes (`git commit -m 'feat: add some amazing feature'`).
-4.  **Run Tests:** Ensure all tests pass (`npm run test`).
-5.  **Lint Check:** Verify code quality (`npm run lint`).
-6.  **Format Code:** Fix styling issues automatically (`npm run format`).
+4.  **Run Tests:** Ensure all tests pass (`pnpm test`).
+5.  **Lint Check:** Verify code quality (`pnpm lint`).
+6.  **Format Code:** Fix styling issues automatically (`pnpm format`).
 7.  Push to the branch (`git push origin feature/amazing-feature`).
 8.  Open a Pull Request.
 

@@ -25,14 +25,19 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
               with:
-                  node-version: 20
-                  cache: "npm"
+                  version: 12
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v7
+              with:
+                  node-version: 24
+                  cache: "pnpm"
 
             - name: Install dependencies
-              run: npm ci
+              run: pnpm install --frozen-lockfile
 
             - name: Configure Git User
               run: |
@@ -41,22 +46,22 @@ jobs:
 
             - name: Validate Code
               run: |
-                  npm run lint
-                  npm run test
+                  pnpm lint
+                  pnpm test
 
             - name: Automated Version Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
               run: |
-                  npm run release -- --ci --no-git.requireCleanWorkingDir --git.commitMessage="chore: release v\${version} [skip ci]"
+                  pnpm release -- --ci --no-git.requireCleanWorkingDir --git.commitMessage="chore: release v\${version} [skip ci]"
 
             - name: Build Project
-              run: npm run build
+              run: pnpm build
 
             - name: Upload artifact
-              uses: actions/upload-pages-artifact@v3
+              uses: actions/upload-pages-artifact@v5
               with:
                   path: ./dist
 
             - name: Deploy to GitHub Pages
-              uses: actions/deploy-pages@v4
+              uses: actions/deploy-pages@v5
