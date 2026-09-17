@@ -4,13 +4,13 @@
 ![License](https://img.shields.io/github/license/MeloDev2111/portfolio?style=flat-square)
 ![Version](https://img.shields.io/github/package-json/v/MeloDev2111/portfolio?color=blue&style=flat-square)
 
-A high-performance, accessible, and internationalized personal portfolio website built for a Backend Developer & Data Science enthusiast. Designed with a "Dark Industrial Gold" aesthetic and focused on showcasing technical depth.
+A high-performance, accessible, and internationalized personal portfolio website built for a Backend Developer & Data Science enthusiast. Designed with a "Gunmetal & Copper" aesthetic and focused on showcasing technical depth.
 
 ## 🚀 Tech Stack
 
-- **Framework:** [Astro 5](https://astro.build/) - High-performance static site generation.
+- **Framework:** [Astro 7](https://astro.build/) - High-performance static site generation.
 - **UI Library:** [React 19](https://react.dev/) - For interactive components.
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework.
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - CSS-first design tokens, no JS config.
 - **Testing:** [Vitest](https://vitest.dev/) - Blazing fast unit testing.
 - **i18n:** Native Astro Internationalization (English, Spanish & Japanese).
 - **Deployment:** GitHub Pages via GitHub Actions.
@@ -19,37 +19,51 @@ A high-performance, accessible, and internationalized personal portfolio website
 
 - **⚡ Blazing Fast:** Statically generated for optimal performance (Lighthouse 95+).
 - **🌍 Internationalization (i18n):** Full support for English (`/en`), Spanish (`/es`), and Japanese (`/ja`).
-- **🎨 Custom Design System:** "Dark Industrial Gold" theme with Bento Grid layouts.
+- **🎨 Custom Design System:** "Gunmetal & Copper" theme with semantic tokens and Bento Grid layouts.
+- **🌗 Light & Dark Themes:** Persisted manual toggle that respects `prefers-color-scheme`, with no flash on load.
+- **♿ Accessible:** WCAG AA contrast enforced by unit tests, full keyboard support, respects reduced-motion.
 - **📱 Responsive:** Mobile-first design approach.
 - **🤖 Automated Releases:** Semantic versioning and changelog generation using `release-it`.
+
+## 📚 Documentation
+
+| Document                                       | What it covers                                                                                                                      |
+| :--------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) | **The visual source of truth** — tokens, theming, typography, primitives, accessibility contract. Read before touching any styling. |
+| [docs/ROADMAP.md](docs/ROADMAP.md)             | Planned features and the design requirements each one imposes.                                                                      |
+| [docs/REDESIGN_PLAN.md](docs/REDESIGN_PLAN.md) | Working plan for the redesign currently in progress (in Spanish; retired once it ships).                                            |
+| [AGENTS.md](AGENTS.md)                         | Architecture, conventions and constraints (for humans and AI agents alike).                                                         |
 
 ## 🛠️ Project Structure
 
 ```text
 /
 ├── .github/workflows/   # CI/CD pipelines
-├── public/              # Static assets (images, fonts, resume.pdf)
+├── docs/                # Design system, roadmap & redesign plan
+├── public/              # Static assets (logos, cv/, media/, certifications/)
 ├── src/
 │   ├── assets/          # Optimized assets (processed by Astro)
 │   ├── components/      # UI Components
 │   │   ├── astro/       # Static components (Hero, Header, Footer)
-│   │   └── react/       # Interactive components (ProjectGrid, Filters)
+│   │   ├── react/       # Interactive islands (ProjectGrid, CertificationList)
+│   │   └── ui/          # Design-system primitives (Section, Card, Button)
 │   ├── content/         # Content Collections (Data source)
 │   │   ├── certifications/ # JSON data for certifications
 │   │   └── projects/    # Markdown files for projects (en/es)
 │   ├── i18n/            # Internationalization logic
 │   │   ├── ui.ts        # UI labels and translations
 │   │   └── utils.ts     # Path and locale helpers
-│   ├── layouts/         # Page layouts (Layout.astro)
+│   ├── layouts/         # Layout.astro, ThemeScript.astro
 │   ├── pages/           # File-based routing
-│   │   ├── [lang]/      # Localized pages wrapper (en/es)
+│   │   ├── [lang]/      # Localized pages wrapper (en/es/ja)
 │   │   ├── 404.astro    # Custom 404 error page
 │   │   └── index.astro  # Root redirect
-│   ├── styles/          # Global styles (Tailwind imports)
+│   ├── styles/          # tokens.css (design tokens) + global.css
 │   ├── tests/           # Unit tests (Vitest)
-│   └── utils/           # Helper functions (cv, skills, social)
-├── astro.config.mjs     # Astro configuration
-└── tailwind.config.mjs  # Tailwind configuration
+│   ├── utils/           # Helper functions (cv, skills, social, theme)
+│   ├── content.config.ts # Collection schemas
+│   └── site.config.ts   # Site metadata, navigation, contact
+└── astro.config.mjs     # Astro configuration
 ```
 
 ## 📝 Content Management

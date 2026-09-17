@@ -1,136 +1,134 @@
 # 🤖 AGENT.md: Project Context & Guidelines
 
-> **Note to AI Agents:** This file serves as the primary source of truth for the project's architecture, philosophy, and development standards. Always consult this file before making major architectural decisions.
+> **Note to AI Agents:** This file is the source of truth for the project's architecture, philosophy and development standards. Consult it before making architectural decisions.
+>
+> **Visual decisions belong in [`docs/DESIGN_SYSTEM.md`](./docs/DESIGN_SYSTEM.md), not here.** Do not invent colors, spacing or component patterns — take them from that document. Future features and their design requirements are in [`docs/ROADMAP.md`](./docs/ROADMAP.md).
+>
+> A redesign is currently in progress. If you are implementing it, read [`docs/REDESIGN_PLAN.md`](./docs/REDESIGN_PLAN.md) — it carries the phase breakdown, the verified findings and the acceptance criteria. **Implement one phase at a time.**
 
 ## 1. 🎯 Project Philosophy & Goals
 
-- **Objective:** Create a high-performance personal portfolio to consolidate professional branding for a Systems Engineer specializing in Backend (Java/Spring), Cloud (AWS), and Data Science.
-- **Target Audience:** Technical recruiters (EdTech, Digital Transformation, Banking), HR managers, and academic institutions.
-- **Key Vibe:** "Warm Minimalism". Professional but approachable. "Dark Industrial Gold" aesthetic.
-- **Core Value:** Showcase technical depth through the portfolio itself (clean code, modern stack, perfect lighthouse scores).
+- **Objective:** A high-performance personal portfolio consolidating the professional brand of a Systems Engineer specializing in Backend (Java/Spring), Cloud (AWS/GCP) and Data Science.
+- **Target audience:** Technical recruiters (EdTech, digital transformation, banking), HR managers, and academic institutions.
+- **Key vibe:** "Warm minimalism" — professional but approachable. **"Gunmetal & Copper"** aesthetic.
+- **Core value:** The portfolio demonstrates technical depth *by being* the artifact: clean code, modern stack, excellent Lighthouse scores.
 
 ## 2. 🛠️ Tech Stack & Architecture
 
-### Core Frameworks
+### Core
 
-- **Framework:** Astro 5 (Latest) - Chosen for SSG capabilities, speed, and islands architecture.
-- **Authentication/Logic:** Minimal client-side JS, mostly static HTML.
-- **UI Library:** React 19 (for interactive islands like the Tech Stack grid).
-- **Styling:** Tailwind CSS v4 (using `@tailwindcss/vite` plugin).
-    - _Theme:_ Custom `industrial-gold` palette defined in CSS variables/Tailwind config.
-- **Bundler:** Vite 6 (via Astro).
+- **Framework:** Astro 7 — SSG, islands architecture.
+- **UI library:** React 19, for interactive islands only.
+- **Styling:** Tailwind CSS v4 via the `@tailwindcss/vite` plugin.
+  - Tokens are defined in **CSS** (`src/styles/tokens.css`), not in a JS config. See §4.
+- **Bundler:** Vite (via Astro).
+- **Package manager:** pnpm 12. Native build-script permissions (e.g. `esbuild`) are granted in `pnpm-workspace.yaml` via `allowBuilds`.
 
-### Key Libraries & Tools
+### Key libraries & tooling
 
-- **Internationalization (i18n):** Native Astro i18n features.
-    - Locales: `en` (default), `es`.
-    - Routing: `/[lang]/...` strategy with `prefixDefaultLocale: true`.
-- **Testing:** `vitest` for unit testing logic and components.
-- **Linting/Formatting:** ESLint 9 + Prettier (with Astro plugins).
-- **Release Automation:** `release-it` + `auto-changelog` for semantic versioning and CHANGELOG generation.
+- **i18n:** native Astro i18n. Locales `en` (default), `es`, `ja`, with `prefixDefaultLocale: true` — every route is `/[lang]/…`.
+- **Deployment base path:** the site builds under a `base` of `/portfolio` (overridable via `BASE_PATH`). **Always construct URLs with the i18n helpers or `import.meta.env.BASE_URL`; never hardcode an absolute path.**
+- **Testing:** Vitest with happy-dom.
+- **Linting/formatting:** ESLint 9 + Prettier, with Astro plugins.
+- **Releases:** `release-it` + `auto-changelog`, semantic versioning.
 
-### DevOps & CI/CD
+### DevOps
 
-- **Platform:** GitHub Pages.
-- **Workflow:** Automated deployment via GitHub Actions on push to `master`.
-- **Versioning:** Semantic Versioning (SemVer) enforced via `pnpm release`.
+- **Platform:** GitHub Pages, deployed by GitHub Actions on push to `master`.
+- **Versioning:** SemVer via `pnpm release`.
 
 ## 3. 📂 Project Structure
 
 ```text
 /
-├── .github/workflows/   # CI/CD pipelines
-├── public/              # Static assets (images, fonts, resume.pdf)
+├── .github/workflows/       # CI/CD pipelines
+├── docs/
+│   ├── DESIGN_SYSTEM.md     # Visual source of truth
+│   └── ROADMAP.md           # Future features + their design requirements
+├── public/                  # Static assets (logos, cv/, media/, certifications/)
 ├── src/
-│   ├── assets/          # Optimized assets (processed by Astro)
-│   ├── components/      # Reusable UI components (Astro & React)
-│   │   ├── common/      # Shared components (Header, Footer, Button)
-│   │   └── sections/    # Page sections (Hero, About, Projects)
-│   ├── layouts/         # Page layouts (Layout.astro)
-│   ├── pages/           # File-based routing
-│   │   ├── [lang]/      # Localized pages wrapper
-│   │   ├── 404.astro    # Custom 404 error page
-│   │   └── index.astro  # Root redirect to default locale
-│   └── utils/           # Helper functions (i18n, formatting)
-├── astro.config.mjs     # Astro configuration (i18n, integrations)
-├── pnpm-workspace.yaml  # pnpm workspace configuration (allowBuilds)
-└── tailwind.config.mjs  # Tailwind configuration (theme extension)
+│   ├── assets/              # Optimized assets (processed by Astro)
+│   ├── components/
+│   │   ├── astro/           # Static components (Hero, Header, Footer, …)
+│   │   ├── react/           # Interactive islands (ProjectGrid, CertificationList)
+│   │   └── ui/              # Design-system primitives (Section, Card, Button, …)
+│   ├── content/             # Content collections
+│   │   ├── certifications/  # One JSON file per certification
+│   │   └── projects/        # Markdown, split by locale: en/, es/
+│   ├── i18n/
+│   │   ├── ui.ts            # UI strings per locale
+│   │   └── utils.ts         # Locale + path helpers
+│   ├── layouts/             # Layout.astro, ThemeScript.astro
+│   ├── pages/
+│   │   ├── [lang]/          # Localized routes
+│   │   ├── 404.astro
+│   │   └── index.astro      # Root redirect (does NOT use Layout)
+│   ├── styles/
+│   │   ├── tokens.css       # Design tokens + themes + @utility effects
+│   │   └── global.css       # Tailwind import + base layer
+│   ├── tests/               # Vitest
+│   ├── utils/               # cv, experience, files, projects, skills, social, theme
+│   ├── content.config.ts    # Collection schemas
+│   └── site.config.ts       # Site metadata, nav, contact providers
+├── astro.config.mjs
+└── pnpm-workspace.yaml
 ```
 
-## 4. 🎨 Design System Guidelines ("Dark Industrial Gold")
+## 4. 🎨 Design System
 
-- **Visual Identity:** Sophisticated Dark Mode with "Moon/Wolf" iconography.
-- **Color Palette:**
-    - **Backgrounds:** Deep Gunmetal / Charcoal (`#111827`, `#0B0C10`).
-    - **Primary Accent:** Mustard/Golden Yellow (`#F4D03F`, `#FFC107`) for CTAs and highlights.
-    - **Text:** Crisp White/Light Grey (`#F9FAFB`) for readability.
-- **Typography:**
-    - **Headings:** Modern Sans-Serif ('Space Grotesk' or 'Outfit').
-    - **Body:** Readable Sans-Serif ('Inter' or 'Public Sans').
-- **UI Patterns:**
-    - **Bento Grid:** For displaying projects and skills.
-    - **Glassmorphism:** Subtle transparency on navigation.
-    - **Glow Effects:** Warm golden glows for "featured" elements.
+**The full specification is [`docs/DESIGN_SYSTEM.md`](./docs/DESIGN_SYSTEM.md).** The essentials an agent must not get wrong:
+
+- **Identity:** "Gunmetal & Copper" — deep gunmetal `#0c111c` backgrounds, antique copper `#c08b5a` brand accent, platinum `#e1e1e0` text. Light theme is warm paper `#faf7f2` with a darkened copper `#8a5c2e`. Iconography is moon/wolf.
+- **Two accents, with rules.** `copper` = identity (borders, glows, hover, accented words). `amber` = action and liveness (primary CTA, "current" indicator, "new" badge). They are not interchangeable.
+- **Typography:** Space Grotesk for headings (`font-heading`), Inter for body (`font-sans`), a monospace stack for metadata and code.
+- **Theming:** dark (default) + light, switched by **remapping CSS variables**, not by `dark:` variants. `dark:` is reserved for non-color differences (blur strength, glow presence, image filters).
+- **UI patterns:** bento grid in the hero, glassmorphism on cards and navigation, warm copper glows on featured elements — glows auto-neutralize in light theme via `--glow-strength`.
+
+### Non-negotiables
+
+1. **No raw hex values in `src/`** outside `styles/tokens.css` and the brand colors in `utils/skills.ts`. Use semantic utilities: `bg-surface`, `text-fg-muted`, `border-border-accent`.
+2. **No `dark:` variant for a color.** If a color must differ per theme, add or fix a token.
+3. **No new bespoke card or button markup.** Extend a primitive in `src/components/ui/`.
+4. **No gradient text**, no `min-h-[Nvh]` on sections, no `scroll-snap`.
+5. **Contrast ≥4.5:1 in both themes**, enforced by `src/tests/tokens.test.ts`. A new color pair must be added to that test.
 
 ## 5. ✅ Development Constraints & Rules
 
-1.  **Performance First:** Maintain Lighthouse scores of 95+ (Performance, Accessibility, Best Practices, SEO).
-2.  **Strict TypeScript:** No `any`. Define interfaces for all props and data models.
-3.  **Component Modularity:**
-    - Use `.astro` components for static content.
-    - Use `.tsx` (React) ONLY for interactive state management (e.g., filters, sliders).
-4.  **Internationalization:**
-    - All text must be abstractable or localized.
-    - Content lives in `src/pages/[lang]/` or `src/content/`.
-    - Use helper functions/dictionaries (`src/i18n/ui.ts`) for UI labels.
-    - **Adding a New Language:**
-        1.  Update `astro.config.mjs`: Add the locale code to `locales: ["en", "es", "ja", ...]`.
-        2.  Update `src/i18n/ui.ts`:
-            - Add the language code and its display name to the `languages` object.
-            - Add a new dictionary entry for the language in the `ui` object.
-            - Add `nav.langName` for the language selector.
-        3.  The `LanguagePicker` component will automatically detect and display the new language.
-5.  **Formatting & Quality:** Use `pnpm format` to automatically fix styling issues across the project.
-6.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases.
+1. **Performance first:** Lighthouse ≥95 across Performance, Accessibility, Best Practices and SEO.
+2. **Strict TypeScript:** no `any`. Interfaces for all props and data models.
+3. **Component modularity:**
+   - `.astro` for static content — this is the default.
+   - `.tsx` (React) **only** for interactive state (filters, sorting). An island that holds no state should be an `.astro` component.
+   - Prefer `client:visible` over `client:only` so islands render server-side and work without JS.
+4. **Accessibility is a contract, not a polish pass.** See §9 of the design system. Specifically: no hover-only information, ≥44×44 touch targets, focus visible in both themes, everything keyboard-operable, and all content readable with JS disabled.
+5. **Internationalization:**
+   - All user-facing text is localized. No hardcoded English in components.
+   - UI strings live in `src/i18n/ui.ts`; content lives in `src/content/`.
+   - English files are the **strict source of truth** for project configuration; localized files override only `title` and `description`, and inherit tags, date and image.
+   - **Adding a language:**
+     1. Add the code to `i18n.locales` in `astro.config.mjs`.
+     2. In `src/i18n/ui.ts`, add it to `languages` and add its dictionary (including `nav.langName`).
+     3. Add localized project files and experience descriptions.
+     4. Run `pnpm test` — `i18n.test.ts` reports missing keys.
 
-## 6. 📝 Current Status & Roadmap
+     `LanguagePicker` picks the new language up automatically.
+6. **Formatting:** `pnpm format` fixes styling across the project.
+7. **Clean commits:** Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) — automated releases depend on them.
 
-- **Status:** v0.9.0 (Multi-Language Support & Package Manager Optimization).
-- **Recent Focus:**
-    - **Package Manager & Security:**
-        - Standardized workspace setup on `pnpm` (v12+).
-        - Configured `pnpm-workspace.yaml` `allowBuilds` for `esbuild` build script permissions.
-        - Updated GitHub Actions workflow (`master-pipeline.yml`) to use `pnpm` v12.
-    - **i18n & Multi-Language:**
-        - Upgraded language selector from binary toggle to a premium glassmorphism dropdown.
-        - Added support for Japanese (`ja`) and optimized the `getAllLanguageUrls` helper.
-        - Refactored `src/i18n/utils.ts` for automated unit testing (Vitest).
-    - **Final Polish & SEO:**
-        - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
-        - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
-        - Optimized image loading (eager vs lazy) for better LCP.
-    - **UX Enhancements:**
-        - Implemented `ScrollToTop` component with circular progress indicator.
-        - Fixed scroll snapping inconsistency in Experience section.
-        - Cleaned up Header visual artifacts on scroll.
-    - **Experience Section:**
-        - Implemented full timeline view at `/experience` with "Download CV" CTA.
-        - Integrated "Experience" card into Hero Bento grid (showing top 2 roles) with perfect vertical alignment.
-        - Unified logo logic: Server-side validation (`fs.existsSync`) + Premium CSS placeholder fallback for missing images.
-        - Standardized styling for buttons and layout consistency.
-    - **Projects Section:** 
-        - Implemented static featured grid (Top 2 + "View All") for optimal home layout.
-        - Added `inProgress` and `draft` states with visual badges and disabling logic.
-        - Enhanced `ProjectGrid` with multi-tag filtering (AND logic) and smart sorting (Featured > Date).
-        - Integrated new case studies: IBM Data Engineering, Data Science, and API Colores.
-        - Refactored localization strategy: English files are the strict Single Source of Truth for configuration.
-    - **Hero Section:** Dynamic "Latest Achievement" bento card.
-    - **Certifications:** Added "Verified Credentials" banner with Credly integration.
+## 6. 📝 Current Status
 
-- **Immediate Next Steps:**
-    - **Content & Features Expansion:**
-        - **Technical Blog:** Design MDX architecture for sharing engineering insights.
-        - **Interactive API Showcase:** (New) Add a section to demo live backend endpoints or Swagger documentation.
-        - **Contact Integration:** Implement a functional contact form (e.g., Formspree) or 'Book a Meeting' Calendly embed widget.
-    - **Quality Assurance:**
-        - **E2E Testing:** Setup Playwright to automate critical path verification (Navigation, i18n, Forms).
+- **Version:** 0.9.2.
+- **Active initiative:** the design-system and page-architecture redesign. Phases, acceptance criteria and verification steps are tracked in [`docs/ROADMAP.md`](./docs/ROADMAP.md).
+
+### Shipped
+
+- **i18n:** three locales, glassmorphism language dropdown, i18n helpers covered by unit tests.
+- **Experience:** full timeline at `/experience` with a CV CTA; experience card in the hero bento; server-side logo validation (`fs.existsSync`) with a CSS placeholder fallback.
+- **Projects:** featured grid on the home page; multi-tag filtering with AND logic and smart sorting (featured > date); `inProgress` and `draft` states.
+- **Certifications:** Credly "Verified Credentials" integration; latest-achievement card in the hero.
+- **UX:** `ScrollToTop` with a circular progress indicator; SEO audit (meta, Open Graph, Twitter cards); image loading tuned for LCP.
+- **Tooling:** pnpm standardization, automated releases, CI deployment.
+
+### Known defects
+
+Tracked in the roadmap's maintenance backlog. The two that matter most: the **Open Graph image is an SVG**, which X and LinkedIn refuse to render (social previews are broken), and the **sitemap `<link>` 404s** because no sitemap integration is installed.
