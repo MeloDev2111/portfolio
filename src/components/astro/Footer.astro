@@ -4,7 +4,7 @@ import {
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
-import { siteConfig } from "../../site.config";
+import { siteConfig, nav } from "../../site.config";
 
 import Logo from "./Logo.astro";
 
@@ -12,28 +12,52 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
 import { getAllActiveSocials } from "../../utils/social";
+
+const navItems = nav
+    .filter((item) => item.enabled !== false)
+    .map((item) => ({
+        href: getRelativeLocaleUrl(lang, item.path),
+        label: t(item.key as Parameters<typeof t>[0]),
+    }));
 ---
 
 <footer class="bg-bg border-t border-border mt-auto py-12">
     <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8"
     >
-        <div class="flex flex-col items-center md:items-start gap-2">
-            <a
-                href={getRelativeLocaleUrl(lang, "")}
-                class="group flex items-center gap-2 hover:opacity-80 transition-opacity"
-                aria-label={siteConfig.name}
-            >
-                <Logo width="32" height="32" variant="original" />
-                <span
-                    class="text-lg font-heading font-bold text-fg tracking-tighter group-hover:text-accent transition-colors"
+        <div
+            class="flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <a
+                    href={getRelativeLocaleUrl(lang, "")}
+                    class="group flex items-center gap-2 hover:opacity-80 transition-opacity"
+                    aria-label={siteConfig.name}
                 >
-                    {siteConfig.alias}<span class="text-accent">.</span>
-                </span>
-            </a>
-            <p class="text-sm text-fg-muted mt-2">
-                {t("footer.copyright").replace("2026", year.toString())}
-            </p>
+                    <Logo width="32" height="32" variant="original" />
+                    <span
+                        class="text-lg font-heading font-bold text-fg tracking-tighter group-hover:text-accent transition-colors"
+                    >
+                        {siteConfig.alias}<span class="text-accent">.</span>
+                    </span>
+                </a>
+                <p class="text-sm text-fg-muted mt-2">
+                    {t("footer.copyright").replace("2026", year.toString())}
+                </p>
+            </div>
+
+            <nav class="flex flex-wrap gap-x-6 gap-y-2 justify-center">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class="text-sm font-medium text-fg-muted hover:text-accent transition-colors"
+                        >
+                            {item.label}
+                        </a>
+                    ))
+                }
+            </nav>
         </div>
 
         <div

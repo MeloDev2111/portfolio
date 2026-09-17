@@ -4,7 +4,7 @@ import {
     useTranslations,
     getRelativeLocaleUrl,
 } from "../../i18n/utils";
-import { siteConfig } from "../../site.config";
+import { siteConfig, nav } from "../../site.config";
 
 import Logo from "./Logo.astro";
 import LanguagePicker from "./LanguagePicker.astro";
@@ -13,24 +13,18 @@ import ThemeToggle from "../ui/ThemeToggle.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const navItems = [
-    { href: getRelativeLocaleUrl(lang, "/#about"), label: t("nav.about") },
-    {
-        href: getRelativeLocaleUrl(lang, "/#experience"),
-        label: t("nav.experience"),
-    },
-    {
-        href: getRelativeLocaleUrl(lang, "/#certifications"),
-        label: t("nav.certifications"),
-    },
-    {
-        href: getRelativeLocaleUrl(lang, "/#projects"),
-        label: t("nav.projects"),
-    },
-    { href: getRelativeLocaleUrl(lang, "/#tech-stack"), label: t("nav.tech") },
-];
+const currentPath = Astro.url.pathname.replace(/\/+$/, "");
 
-const currentPath = Astro.url.pathname;
+const navItems = nav
+    .filter((item) => item.enabled !== false)
+    .map((item) => {
+        const href = getRelativeLocaleUrl(lang, item.path);
+        return {
+            href,
+            label: t(item.key as Parameters<typeof t>[0]),
+            active: currentPath === href.replace(/\/+$/, ""),
+        };
+    });
 ---
 
 <header
@@ -44,31 +38,30 @@ const currentPath = Astro.url.pathname;
             aria-label={siteConfig.name}
         >
             <div
-                class="p-1.5 rounded-full bg-white/5 border border-white/5 group-hover:border-gold/30 transition-colors"
+                class="p-1.5 rounded-full bg-surface-raised border border-border group-hover:border-border-accent transition-colors"
             >
                 <Logo width="24" height="24" variant="original" />
             </div>
             <span
-                class="text-lg font-bold text-light tracking-tight hidden sm:block"
+                class="text-lg font-bold text-fg tracking-tight hidden sm:block"
             >
-                {siteConfig.alias}<span class="text-gold">.</span>
+                {siteConfig.alias}<span class="text-accent">.</span>
             </span>
         </a>
 
         <!-- P2: Nav Pills (Center) -->
         <nav
-            class="hidden md:flex items-center gap-1 bg-white/10 backdrop-blur-sm p-1 rounded-full border border-white/10 shadow-inner"
+            class="hidden md:flex items-center gap-1 bg-surface-raised/60 backdrop-blur-sm p-1 rounded-full border border-border shadow-inner"
         >
             {
                 navItems.map((item) => (
                     <a
                         href={item.href}
+                        aria-current={item.active ? "page" : undefined}
                         class={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                            currentPath === item.href ||
-                            (item.href !== "/" &&
-                                currentPath.startsWith(item.href))
-                                ? "bg-white/10 text-white shadow-sm"
-                                : "text-gray-400 hover:text-white hover:bg-white/5"
+                            item.active
+                                ? "bg-surface-raised text-fg-strong shadow-sm"
+                                : "text-fg-muted hover:text-fg-strong hover:bg-surface-raised/60"
                         }`}
                     >
                         {item.label}
@@ -88,7 +81,7 @@ const currentPath = Astro.url.pathname;
             <!-- Mobile Menu Toggle -->
             <button
                 id="mobile-menu-btn"
-                class="md:hidden p-2 text-gray-300 hover:text-white focus:outline-none"
+                class="md:hidden p-2 text-fg-muted hover:text-fg-strong focus:outline-none"
                 aria-label="Toggle menu"
             >
                 <svg
@@ -120,16 +113,17 @@ const currentPath = Astro.url.pathname;
         class="hidden fixed top-20 left-4 right-4 z-50 transform transition-all duration-300 origin-top scale-95 opacity-0"
     >
         <nav
-            class="bg-[#0c111c]/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1 ring-1 ring-white/5"
+            class="bg-surface/90 backdrop-blur-2xl border border-border rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1 ring-1 ring-border"
         >
             {
                 navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-between group"
+                        aria-current={item.active ? "page" : undefined}
+                        class="px-4 py-3 rounded-xl text-base font-medium text-fg-muted hover:text-fg-strong hover:bg-surface-raised transition-colors flex items-center justify-between group"
                     >
                         {item.label}
-                        <span class="opacity-0 group-hover:opacity-100 transition-opacity text-gold">
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity text-accent">
                             →
                         </span>
                     </a>
@@ -144,7 +138,6 @@ const currentPath = Astro.url.pathname;
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
-    const navLinks = document.querySelectorAll("nav a"); // Desktop nav links
 
     let lastScrollY = window.scrollY;
 
@@ -161,58 +154,12 @@ const currentPath = Astro.url.pathname;
 
         // 2. Backdrop Logic
         if (currentScrollY > 20) {
-            header?.classList.add("bg-gunmetal/80", "backdrop-blur-md");
+            header?.classList.add("bg-bg/80", "backdrop-blur-md");
         } else {
-            header?.classList.remove("bg-gunmetal/80", "backdrop-blur-md");
+            header?.classList.remove("bg-bg/80", "backdrop-blur-md");
         }
 
         lastScrollY = currentScrollY;
-    }
-
-    // Scroll Spy Logic
-    function initScrollSpy() {
-        const sections = document.querySelectorAll("section");
-        const observerOptions = {
-            root: null,
-            rootMargin: "-20% 0px -60% 0px", // Trigger when section is near top/middle
-            threshold: 0,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute("id");
-                    if (id) {
-                        highlightNavLink(id);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach((section) => observer.observe(section));
-    }
-
-    function highlightNavLink(id: string) {
-        navLinks.forEach((link) => {
-            const href = link.getAttribute("href");
-            if (href && href.includes(`#${id}`)) {
-                // Active Styling
-                link.classList.add("bg-white/10", "text-white", "shadow-sm");
-                link.classList.remove(
-                    "text-gray-400",
-                    "hover:text-white",
-                    "hover:bg-white/5",
-                );
-            } else {
-                // Inactive Styling
-                link.classList.remove("bg-white/10", "text-white", "shadow-sm");
-                link.classList.add(
-                    "text-gray-400",
-                    "hover:text-white",
-                    "hover:bg-white/5",
-                );
-            }
-        });
     }
 
     // Mobile Menu Functions
@@ -268,7 +215,4 @@ const currentPath = Astro.url.pathname;
             link.addEventListener("click", closeMobileMenu);
         });
     }
-
-    // Initialize
-    initScrollSpy();
 </script>

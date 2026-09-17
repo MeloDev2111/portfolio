@@ -17,6 +17,7 @@ export const ui = {
         "nav.language": "Language",
         "nav.langName": "English",
         "nav.contact": "Contact",
+        "nav.blog": "Blog",
         "hero.cta": "Download CV",
         "hero.greeting": "Hi, I'm",
         "hero.currentRole": "Currently At",
@@ -24,9 +25,16 @@ export const ui = {
             "Specializing in high-scalability platforms, Cloud solutions, and robust software architectures.",
         "hero.viewProjects": "View Projects",
         "about.p1":
-            "Systems Engineer with experience in developing <span class='text-[#e1e1e0] font-semibold'>high-scalability platforms</span> and <span class='text-[#e1e1e0] font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-[#c08b5a]'>Java, Spring Boot, Python</span>, and <span class='text-[#c08b5a]'>Cloud Computing</span>.",
+            "Systems Engineer with experience in developing <span class='text-fg-strong font-semibold'>high-scalability platforms</span> and <span class='text-fg-strong font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-accent'>Java, Spring Boot, Python</span>, and <span class='text-accent'>Cloud Computing</span>.",
         "about.p2":
-            "I have a strong interest in <span class='text-[#e1e1e0] font-semibold'>Software Architecture</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span>, and <span class='text-[#e1e1e0] font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments.",
+            "I have a strong interest in <span class='text-fg-strong font-semibold'>Software Architecture</span>, <span class='text-fg-strong font-semibold'>DevOps</span>, and <span class='text-fg-strong font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments.",
+        "about.focusAreas": "Focus Areas",
+        "about.architecture.title": "Architecture & Backend",
+        "about.architecture.subtitle": "Microservices & APIs",
+        "about.cloud.title": "Cloud & DevOps",
+        "about.cloud.subtitle": "AWS & Scalability",
+        "about.data.title": "Data Science",
+        "about.data.subtitle": "Analysis & Insights",
         "section.viewAllCerts": "View all certifications ->",
         "section.viewAllProjects": "View all projects archive",
         "section.viewFullTech": "View full tech stack ->",
@@ -61,6 +69,11 @@ export const ui = {
         "credly.description":
             "Verify all my digital badges and certifications directly on Credly.",
         "credly.viewProfile": "View Profile",
+        "proof.remote": "Remote-friendly",
+        "cta.title": "Let's build something great",
+        "cta.description":
+            "Open to new backend, cloud and data opportunities. Reach out or grab a copy of my resume.",
+        "cta.schedule": "Schedule a call",
     },
     es: {
         "nav.projects": "Proyectos",
@@ -72,6 +85,7 @@ export const ui = {
         "nav.language": "Idioma",
         "nav.langName": "Español",
         "nav.contact": "Contacto",
+        "nav.blog": "Blog",
         "hero.cta": "Descargar CV",
         "hero.greeting": "Hola, soy",
         "hero.currentRole": "Actualmente en",
@@ -79,9 +93,16 @@ export const ui = {
             "Especializado en plataformas de alta escalabilidad, soluciones Cloud y arquitecturas de software robustas.",
         "hero.viewProjects": "Ver Proyectos",
         "about.p1":
-            "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-[#e1e1e0] font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-[#e1e1e0] font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-[#c08b5a]'>Java, Spring Boot, Python</span> y <span class='text-[#c08b5a]'>Cloud Computing</span>.",
+            "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-fg-strong font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-fg-strong font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-accent'>Java, Spring Boot, Python</span> y <span class='text-accent'>Cloud Computing</span>.",
         "about.p2":
-            "Gran interés en el diseño de <span class='text-[#e1e1e0] font-semibold'>Arquitecturas de Software</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span> y <span class='text-[#e1e1e0] font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
+            "Gran interés en el diseño de <span class='text-fg-strong font-semibold'>Arquitecturas de Software</span>, <span class='text-fg-strong font-semibold'>DevOps</span> y <span class='text-fg-strong font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
+        "about.focusAreas": "Áreas de Enfoque",
+        "about.architecture.title": "Arquitectura & Backend",
+        "about.architecture.subtitle": "Microservicios y APIs",
+        "about.cloud.title": "Cloud & DevOps",
+        "about.cloud.subtitle": "AWS y Escalabilidad",
+        "about.data.title": "Ciencia de Datos",
+        "about.data.subtitle": "Análisis e Insights",
         "section.viewAllCerts": "Ver todas las certificaciones ->",
         "section.viewAllProjects": "Ver archivo de proyectos",
         "section.viewFullTech": "Ver todo el stack tecnológico ->",
@@ -115,6 +136,11 @@ export const ui = {
         "credly.description":
             "Verifica todas mis insignias y certificados digitales directamente en Credly.",
         "credly.viewProfile": "Ver Perfil",
+        "proof.remote": "Trabajo remoto",
+        "cta.title": "Construyamos algo grande",
+        "cta.description":
+            "Abierto a nuevas oportunidades en backend, cloud y datos. Escríbeme o descarga mi CV.",
+        "cta.schedule": "Agendar una llamada",
     },
     ja: {
         "nav.projects": "プロジェクト",
@@ -126,6 +152,7 @@ export const ui = {
         "nav.language": "言語",
         "nav.langName": "日本語",
         "nav.contact": "お問い合わせ",
+        "nav.blog": "ブログ",
         "hero.cta": "履歴書をダウンロード",
         "hero.greeting": "こんにちは、私は",
         "hero.currentRole": "現在",
@@ -133,9 +160,16 @@ export const ui = {
             "高スケーラビリティ・プラットフォーム、クラウドソリューション、および堅牢なソフトウェアアーキテクチャを専門としています。",
         "hero.viewProjects": "プロジェクトを見る",
         "about.p1":
-            "システムエンジニアとして、教育および金融分野における<span class='text-[#e1e1e0] font-semibold'>高スケーラビリティ・プラットフォーム</span>の開発や<span class='text-[#e1e1e0] font-semibold'>デジタルトランスフォーメーション</span>の経験があります。<span class='text-[#c08b5a]'>Java, Spring Boot, Python</span>, <span class='text-[#c08b5a]'>クラウドコンピューティング</span>などの技術を用いて、高品質で保守性が高く、スケーラブルなソフトウェアの構築に特化しています。",
+            "システムエンジニアとして、教育および金融分野における<span class='text-fg-strong font-semibold'>高スケーラビリティ・プラットフォーム</span>の開発や<span class='text-fg-strong font-semibold'>デジタルトランスフォーメーション</span>の経験があります。<span class='text-accent'>Java, Spring Boot, Python</span>, <span class='text-accent'>クラウドコンピューティング</span>などの技術を用いて、高品質で保守性が高く、スケーラブルなソフトウェアの構築に特化しています。",
         "about.p2":
-            "<span class='text-[#e1e1e0] font-semibold'>ソフトウェアアーキテクチャ</span>、<span class='text-[#e1e1e0] font-semibold'>DevOps</span>、<span class='text-[#e1e1e0] font-semibold'>データサイエンス</span>に強い関心があります。多角的なチームでのコラボレーション、プロセスの最適化、そしてダイナミックな技術環境における複雑な問題の解決を楽しんでいます。",
+            "<span class='text-fg-strong font-semibold'>ソフトウェアアーキテクチャ</span>、<span class='text-fg-strong font-semibold'>DevOps</span>、<span class='text-fg-strong font-semibold'>データサイエンス</span>に強い関心があります。多角的なチームでのコラボレーション、プロセスの最適化、そしてダイナミックな技術環境における複雑な問題の解決を楽しんでいます。",
+        "about.focusAreas": "専門分野",
+        "about.architecture.title": "アーキテクチャ＆バックエンド",
+        "about.architecture.subtitle": "マイクロサービス＆API",
+        "about.cloud.title": "クラウド＆DevOps",
+        "about.cloud.subtitle": "AWSとスケーラビリティ",
+        "about.data.title": "データサイエンス",
+        "about.data.subtitle": "分析とインサイト",
         "section.viewAllCerts": "すべての認定資格を見る ->",
         "section.viewAllProjects": "プロジェクトアーカイブを見る",
         "section.viewFullTech": "スキルスタックの詳細を見る ->",
@@ -170,5 +204,10 @@ export const ui = {
         "credly.description":
             "Credlyで私のデジタルバッジと認定資格をすべて確認できます。",
         "credly.viewProfile": "プロフィールを表示",
+        "proof.remote": "リモート対応",
+        "cta.title": "一緒に何かを作りましょう",
+        "cta.description":
+            "バックエンド、クラウド、データ分野の新しい機会を探しています。ご連絡いただくか、履歴書をダウンロードしてください。",
+        "cta.schedule": "通話を予約する",
     },
 } as const;

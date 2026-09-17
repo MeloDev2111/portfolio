@@ -83,3 +83,8 @@ export const getSecondarySocials = () =>
     USER_SOCIALS.filter((s) => !s.isPrimary && !s.disabled);
 export const getAllActiveSocials = () =>
     USER_SOCIALS.filter((s) => !s.disabled);
+
+// Single source of truth for the LinkedIn URL, reused by siteConfig.contact.
+export const LINKEDIN_URL = USER_SOCIALS.find(
+    (s) => s.name === "LinkedIn",
+)!.url;
