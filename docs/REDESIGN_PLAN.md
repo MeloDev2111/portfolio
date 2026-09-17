@@ -207,9 +207,9 @@ Nueva home, bento de 3 celdas, `About` a `/experience`, borrar `TechStackSection
 
 `Reveal` + IO + guarda no-JS, `motion-safe:`, trampa de foco, teclado en el selector de idioma, objetivos táctiles, borrar el tooltip de `ProjectCard`, `<ClientRouter />`.
 
-### Fase 6 — Limpieza
+### Fase 6 — Limpieza (Completada ✅)
 
-Borrar `tailwind.config.mjs`, la línea `@config`, los alias legacy, `siteConfig.theme.colors`. Sustituir el `ogImage` SVG por un PNG real de 1200×630 — **X y LinkedIn no renderizan OG en SVG, así que los previews sociales están rotos ahora mismo**. Partir `i18n/ui.ts`. Cerrar los dos documentos de `docs/`.
+Borrado `tailwind.config.mjs`, la línea `@config`, los alias legacy en `tokens.css`, `siteConfig.theme.colors`. Sustituido el `ogImage` SVG por un PNG real de 1200×630 (`/media/og-image.png`). Partición de `i18n/ui.ts` en `locales/{en,es,ja}.ts` con `satisfies`. Documentación cerrada y suite `tokens.test.ts` blindando contrastes e invariantes.
 
 _(`getBadgeUrl` y el import muerto de `Logo` en `Hero` ya se eliminaron en la Fase 3.)_
 

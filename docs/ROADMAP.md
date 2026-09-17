@@ -6,19 +6,19 @@
 
 ---
 
-## Now — Redesign (in progress)
+## Completed — Redesign (Phases 0–6)
 
-Consolidating the design system and restructuring the page architecture, in six shippable phases. The full working plan — verified findings, per-phase detail, acceptance criteria and verification steps — is in [REDESIGN_PLAN.md](./REDESIGN_PLAN.md).
+Consolidated the design system and restructured the page architecture in six shippable phases. The historical working plan is in [REDESIGN_PLAN.md](./REDESIGN_PLAN.md).
 
-| Phase | Delivers                                                                                                                  |
-| ----- | ------------------------------------------------------------------------------------------------------------------------- |
-| **0** | Groundwork: fix broken effects, contrast failures, header overlap, mobile scroll. Correct the docs. _(No visual change.)_ |
-| **1** | Token layer — `tokens.css`, effects as `@utility`. _Acceptance criterion: zero visual diff._                              |
-| **2** | Light/dark theming with a persisted toggle, FOUC-free.                                                                    |
-| **3** | Component primitives in `src/components/ui/`, migrated across all components.                                             |
-| **4** | Page restructure — short conversion-focused home, depth in dedicated pages.                                               |
-| **5** | Motion, accessibility, view transitions.                                                                                  |
-| **6** | Cleanup — retire the JS Tailwind config, legacy aliases, split `i18n/ui.ts`.                                              |
+| Phase | Delivers                                                                                            | Status     |
+| ----- | --------------------------------------------------------------------------------------------------- | ---------- |
+| **0** | Groundwork: fix broken effects, contrast failures, header overlap, mobile scroll. Correct the docs. | ✅ Shipped |
+| **1** | Token layer — `tokens.css`, effects as `@utility`.                                                  | ✅ Shipped |
+| **2** | Light/dark theming with a persisted toggle, FOUC-free.                                              | ✅ Shipped |
+| **3** | Component primitives in `src/components/ui/`, migrated across all components.                       | ✅ Shipped |
+| **4** | Page restructure — short conversion-focused home, depth in dedicated pages.                         | ✅ Shipped |
+| **5** | Motion, accessibility, view transitions.                                                            | ✅ Shipped |
+| **6** | Cleanup — retire the JS Tailwind config, legacy aliases, split `i18n/ui.ts`, OG PNG.                | ✅ Shipped |
 
 ---
 
@@ -155,7 +155,7 @@ A future high-contrast or sepia mode is one more `[data-theme="x"]` block. No co
 
 Small, unglamorous, and each one is a real defect.
 
-- [ ] **OG image is an SVG** (`/media/logo.svg`). X and LinkedIn do not render SVG — **social previews are broken right now**. Needs a real 1200×630 PNG. _(Phase 6.)_
+- [x] ~~**OG image is an SVG** (`/media/logo.svg`).~~ Resolved: generated 1200×630 PNG (`/media/og-image.png`). _(Phase 6.)_
 - [ ] `<link rel="sitemap">` is hardcoded and ignores `base`, and no sitemap integration is installed — the link 404s. Install `@astrojs/sitemap` or remove the tag.
 - [ ] E2E tests (Playwright) for the critical paths: navigation, language switching, theme persistence.
 - [ ] Self-host fonts. Google Fonts is currently a blocking third-party stylesheet in `<head>`.
