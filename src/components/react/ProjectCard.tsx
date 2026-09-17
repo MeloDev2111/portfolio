@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { cardClasses, tagClasses } from "../ui/_variants";
 
 interface ProjectCardProps {
     title: string;
@@ -44,17 +45,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             href={!inProgress ? link : undefined}
             target={!inProgress && link ? "_blank" : undefined}
             rel={!inProgress && link ? "noopener noreferrer" : undefined}
-            className={`group relative overflow-hidden rounded-2xl glass-card border border-white/5 transition-all duration-500 flex flex-col h-full ${
-                !inProgress
-                    ? "hover:border-[#c08b5a]/40 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 cursor-pointer"
-                    : "opacity-80 cursor-default"
-            }`}
+            className={cardClasses({
+                variant: "glass",
+                radius: "bento",
+                pad: "none",
+                interactive: !inProgress,
+                glow: !!(featured && !inProgress),
+                noise: true,
+                class: `group flex h-full flex-col ${
+                    inProgress ? "opacity-80 cursor-default" : "cursor-pointer"
+                }`,
+            })}
         >
-            {/* Noise Texture */}
-            <div className="absolute inset-0 bento-noise opacity-10 pointer-events-none"></div>
-
             {/* Image / Gradient Placeholder */}
-            <div className="h-48 overflow-hidden bg-gunmetal relative border-b border-white/5">
+            <div className="h-48 overflow-hidden bg-surface-sunken relative border-b border-border">
                 {image ? (
                     <img
                         src={typeof image === "string" ? image : image.src}
@@ -72,7 +76,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         decoding="async"
                     />
                 ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-charcoal to-gunmetal flex items-center justify-center">
+                    <div className="w-full h-full bg-gradient-to-br from-surface to-surface-sunken flex items-center justify-center">
                         <span className="text-4xl filter grayscale group-hover:grayscale-0 transition-all">
                             🚀
                         </span>
@@ -80,7 +84,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 )}
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gunmetal/20 group-hover:bg-gunmetal/0 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-bg/20 group-hover:bg-bg/0 transition-colors duration-300" />
 
                 {/* In Progress Overlay */}
                 {inProgress && (
@@ -96,13 +100,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="p-6 flex flex-col flex-grow relative z-30">
                 <div className="flex justify-between items-start mb-4 gap-2">
                     <h3
-                        className={`text-xl font-heading font-bold text-light transition-colors ${!inProgress && "group-hover:text-[#c08b5a]"}`}
+                        className={`text-xl font-heading font-bold text-fg-strong transition-colors ${!inProgress && "group-hover:text-accent"}`}
                     >
                         {title}
                     </h3>
                     <div className="flex flex-col gap-2 items-end">
                         {featured && !inProgress && (
-                            <span className="px-2 py-0.5 rounded text-[10px] tracking-wider font-bold bg-[#c08b5a] text-gunmetal uppercase shadow-[0_0_10px_rgba(192,139,90,0.4)]">
+                            <span
+                                className={tagClasses({
+                                    variant: "accent",
+                                    size: "xs",
+                                    class: "tracking-wider uppercase",
+                                })}
+                            >
                                 Featured
                             </span>
                         )}
@@ -116,14 +126,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 >
                     <p
                         ref={textRef}
-                        className="text-gray-400 text-sm line-clamp-3 leading-relaxed"
+                        className="text-fg-muted text-sm line-clamp-3 leading-relaxed"
                     >
                         {description}
                     </p>
 
                     {/* Custom Tooltip */}
                     <div
-                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-[#1a1f2e]/98 backdrop-blur-xl border border-white/10 rounded-xl text-sm text-gray-300 shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
+                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-surface-raised/98 backdrop-blur-xl border border-border-strong rounded-xl text-sm text-fg-muted shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
                             showTooltip && isTruncated
                                 ? "opacity-100 translate-y-0 scale-100 visible"
                                 : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
@@ -131,7 +141,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     >
                         {description}
                         {/* Arrow */}
-                        <div className="absolute -bottom-1.5 left-6 w-3 h-3 bg-[#1a1f2e]/98 border-r border-b border-white/10 rotate-45 transform"></div>
+                        <div className="absolute -bottom-1.5 left-6 w-3 h-3 bg-surface-raised/98 border-r border-b border-border-strong rotate-45 transform"></div>
                     </div>
                 </div>
 
@@ -140,7 +150,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     {tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-2.5 py-1 rounded-md bg-white/5 text-xs text-gray-400 border border-white/5 group-hover:border-[#c08b5a]/20 transition-colors"
+                            className={tagClasses({
+                                variant: "neutral",
+                                size: "sm",
+                                class: "group-hover:border-border-accent transition-colors",
+                            })}
                         >
                             {tag}
                         </span>

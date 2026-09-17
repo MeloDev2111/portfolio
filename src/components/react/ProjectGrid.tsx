@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { ProjectCard } from "./ProjectCard";
+import { tagClasses, buttonClasses } from "../ui/_variants";
 
 interface Project {
     id: string;
@@ -70,11 +71,11 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
             <div className="flex flex-wrap gap-3 justify-center">
                 <button
                     onClick={() => setActiveTags([])}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                        activeTags.length === 0
-                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
-                    }`}
+                    className={tagClasses({
+                        variant: activeTags.length === 0 ? "action" : "outline",
+                        size: "sm",
+                        class: "transition-colors hover:border-border-accent hover:text-fg",
+                    })}
                 >
                     {labels.all}
                 </button>
@@ -82,11 +83,13 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     <button
                         key={tag}
                         onClick={() => toggleTag(tag)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                            activeTags.includes(tag)
-                                ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
-                        }`}
+                        className={tagClasses({
+                            variant: activeTags.includes(tag)
+                                ? "action"
+                                : "outline",
+                            size: "sm",
+                            class: "transition-colors hover:border-border-accent hover:text-fg",
+                        })}
                     >
                         {tag}
                     </button>
@@ -112,11 +115,11 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
             {/* Empty State */}
             {filteredProjects.length === 0 && (
-                <div className="text-center py-20 text-gray-400 flex flex-col items-center gap-4">
+                <div className="text-center py-20 text-fg-muted flex flex-col items-center gap-4">
                     <p>No projects match all selected filters.</p>
                     <button
                         onClick={() => setActiveTags([])}
-                        className="text-[#c08b5a] hover:underline"
+                        className={buttonClasses({ variant: "link" })}
                     >
                         Clear filters
                     </button>

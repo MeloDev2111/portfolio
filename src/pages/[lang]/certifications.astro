@@ -98,7 +98,7 @@ const cleanCertProps = JSON.parse(JSON.stringify(certProps));
         </Card>
 
         <CertificationList
-            client:only="react"
+            client:visible
             certifications={cleanCertProps}
             labels={{
                 sortBy: t("ui.sortBy"),

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { cardClasses, buttonClasses } from "../ui/_variants";
 
 interface Certification {
     id: string;
@@ -35,40 +36,27 @@ export const CertificationList: React.FC<CertificationListProps> = ({
         });
     }, [certifications, sortOrder]);
 
-    const getBadgeUrl = (badgePath?: string) => {
-        if (!badgePath) return "";
-        if (badgePath.startsWith("http")) return badgePath;
-        // Assuming base path is handled or relative from root.
-        // In React/Astro, for public assets, starting with / is usually usually enough if base is root.
-        // If site has base path, it should be passed or handled.
-        // For simplicity here, we'll assume the passed props might handle it or we use relative.
-        // Actually, passing the processed URL from Astro is safer, but let's handle the simple case.
-        return badgePath; // Logic handled in parent or acceptable defaults
-    };
-
     return (
         <div className="space-y-8">
             {/* Controls */}
             <div className="flex justify-end items-center gap-4">
-                <span className="text-gray-400 text-sm">{labels.sortBy}:</span>
-                <div className="flex bg-charcoal rounded-lg p-1 border border-white/10">
+                <span className="text-fg-muted text-sm">{labels.sortBy}:</span>
+                <div className="flex bg-surface rounded-lg p-1 border border-border-strong">
                     <button
                         onClick={() => setSortOrder("desc")}
-                        className={`px-3 py-1.5 rounded-md text-sm transition-all relative ${
-                            sortOrder === "desc"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm z-10"
-                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
+                        className={buttonClasses({
+                            variant: sortOrder === "desc" ? "primary" : "ghost",
+                            size: "sm",
+                        })}
                     >
                         {labels.sortDesc}
                     </button>
                     <button
                         onClick={() => setSortOrder("asc")}
-                        className={`px-3 py-1.5 rounded-md text-sm transition-all relative ${
-                            sortOrder === "asc"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm z-10"
-                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
+                        className={buttonClasses({
+                            variant: sortOrder === "asc" ? "primary" : "ghost",
+                            size: "sm",
+                        })}
                     >
                         {labels.sortAsc}
                     </button>
@@ -83,11 +71,17 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                         href={cert.data.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block p-6 rounded-xl bg-charcoal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group h-full relative"
+                        className={cardClasses({
+                            variant: "glass",
+                            radius: "bento",
+                            pad: "md",
+                            interactive: true,
+                            class: "group relative block h-full",
+                        })}
                     >
                         {cert.data.starred && (
                             <div
-                                className="absolute top-4 right-4 text-gold opacity-80 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-4 right-4 text-accent opacity-80 group-hover:opacity-100 transition-opacity"
                                 title="Featured Certification"
                             >
                                 <svg
@@ -115,13 +109,13 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                                 </div>
                             )}
                             <div className="flex-grow">
-                                <h3 className="text-lg font-heading font-bold text-light group-hover:text-gold transition-colors line-clamp-2">
+                                <h3 className="text-lg font-heading font-bold text-fg-strong group-hover:text-accent transition-colors line-clamp-2">
                                     {cert.data.name}
                                 </h3>
-                                <p className="text-sm text-gray-400 mt-1">
+                                <p className="text-sm text-fg-muted mt-1">
                                     {cert.data.issuer}
                                 </p>
-                                <p className="text-xs text-gray-400 mt-2">
+                                <p className="text-xs text-fg-muted mt-2">
                                     {cert.data.date}
                                 </p>
                             </div>

@@ -176,7 +176,7 @@ export function buttonClasses({
     }
 
     return cx(
-        "inline-flex min-h-11 min-w-11 items-center justify-center rounded-card font-medium transition-colors duration-200",
+        "inline-flex items-center justify-center rounded-card font-medium transition-colors duration-200 pointer-coarse:min-h-11 pointer-coarse:min-w-11",
         buttonVariantClasses[variant],
         buttonSizeClasses[size],
         full && "w-full",
