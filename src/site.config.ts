@@ -34,16 +34,6 @@ export const siteConfig = {
         email: null as string | null,
         linkedin: LINKEDIN_URL,
     },
-    // "Deep Gunmetal & Copper" Theme
-    theme: {
-        colors: {
-            primary: "#c08b5a", // Antique Copper
-            secondary: "#5a5866", // Slate
-            background: "#0c111c", // Deep Gunmetal
-            surface: "#1F2937", // Charcoal (unchanged for now, used in other places?)
-            text: "#e1e1e0", // Platinum
-        },
-    },
-    // Default OG Image (relative to public/)
-    ogImage: "/media/logo.svg",
+    // Default OG Image (1200x630 PNG, relative to public/)
+    ogImage: "/media/og-image.png",
 };

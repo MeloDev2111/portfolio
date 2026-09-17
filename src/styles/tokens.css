@@ -10,10 +10,6 @@
  * Dark is the default, set directly on :root. [data-theme="light"] remaps
  * the semantic tier for the light theme, switched by src/utils/theme.ts,
  * src/layouts/ThemeScript.astro and src/components/ui/ThemeToggle.astro.
- *
- * Legacy aliases (--color-gunmetal, --color-gold, --color-light, --color-copper,
- * --color-charcoal) exist so `tailwind.config.mjs` and this file can coexist
- * without any component edits. They are removed in phase 6 along with the JS config.
  */
 
 @theme {
@@ -70,13 +66,6 @@
     --radius-panel: 1.5rem;
 
     --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-
-    /* Legacy aliases — remove in phase 6 */
-    --color-gunmetal: #0c111c;
-    --color-charcoal: #1f2937;
-    --color-gold: #c08b5a;
-    --color-light: #e1e1e0;
-    --color-copper: #c08b5a;
 }
 
 :root {
@@ -197,9 +186,7 @@
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 /*
- * Effects — @utility, not @layer base classes. A class in @layer base loses
- * to every utility, which is why components today re-declare
- * `border border-white/5` on top of `.glass-card`. As @utility these
+ * Effects — @utility, not @layer base classes. As @utility these
  * compose correctly and support variants (md:glass, hover:glass).
  */
 
