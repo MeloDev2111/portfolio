@@ -33,8 +33,7 @@ const latestCert = allCerts
 const techLogos = getBentoSkills().map((skill) => ({
     label: skill.name,
     src: skill.icon,
-    color: skill.featured?.colorClass || "",
-    border: skill.featured?.borderClass || "",
+    brand: skill.featured?.brand,
 }));
 ---
 
@@ -397,7 +396,12 @@ const techLogos = getBentoSkills().map((skill) => ({
                                 <>
                                     {displayedSkills.map((tech) => (
                                         <div
-                                            class={`group/icon relative w-full aspect-square flex items-center justify-center p-2 rounded-lg border border-white/5 bg-white/5 ${tech.border} ${tech.color} hover:scale-105 transition-transform cursor-default`}
+                                            class="group/icon relative w-full aspect-square flex items-center justify-center p-2 rounded-lg border border-white/5 bg-white/5 group-hover/icon:border-[var(--brand)]/40 group-hover/icon:bg-[var(--brand)]/20 hover:scale-105 transition-transform cursor-default"
+                                            style={
+                                                tech.brand
+                                                    ? `--brand: ${tech.brand}`
+                                                    : undefined
+                                            }
                                         >
                                             {/* Direct Img for sharp SVG rendering - NOW OPTIMIZED via Astro Image 
                                                 Note: remotePatterns must be configured for cdn.jsdelivr.net in astro.config.mjs

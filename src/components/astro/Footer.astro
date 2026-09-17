@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
 import { getAllActiveSocials } from "../../utils/social";
 ---
 
-<footer class="bg-gunmetal border-t border-light/5 mt-auto py-12">
+<footer class="bg-bg border-t border-border mt-auto py-12">
     <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6"
     >
@@ -26,12 +26,12 @@ import { getAllActiveSocials } from "../../utils/social";
             >
                 <Logo width="32" height="32" variant="original" />
                 <span
-                    class="text-lg font-heading font-bold text-light tracking-tighter group-hover:text-gold transition-colors"
+                    class="text-lg font-heading font-bold text-fg tracking-tighter group-hover:text-accent transition-colors"
                 >
-                    {siteConfig.alias}<span class="text-gold">.</span>
+                    {siteConfig.alias}<span class="text-accent">.</span>
                 </span>
             </a>
-            <p class="text-sm text-gray-400 mt-2">
+            <p class="text-sm text-fg-muted mt-2">
                 {t("footer.copyright").replace("2026", year.toString())}
             </p>
         </div>
@@ -45,10 +45,10 @@ import { getAllActiveSocials } from "../../utils/social";
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class={`flex items-center gap-1 text-gray-400 ${link.colorClass || "hover:text-gold"} transition-colors text-sm font-medium group`}
+                        class={`flex items-center gap-1 text-fg-muted ${link.colorClass || "hover:text-accent"} transition-colors text-sm font-medium group`}
                     >
                         <span class="w-5 h-5" set:html={link.icon} />
-                        <span class="group-hover:text-white transition-colors">
+                        <span class="group-hover:text-fg-strong transition-colors">
                             {link.name}
                         </span>
                     </a>

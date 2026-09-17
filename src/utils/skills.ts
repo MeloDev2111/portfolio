@@ -13,8 +13,7 @@ export interface Skill {
     // Optional configuration for the Hero Bento "Core Stats" or other featured sections
     featured?: {
         inBento: boolean;
-        colorClass: string; // Tailwind bg hover class
-        borderClass: string; // Tailwind border hover class
+        brand: string; // Raw brand hex — exempt from the no-raw-hex rule (see AGENTS.md)
     };
 }
 
@@ -30,8 +29,7 @@ export const SKILLS: Skill[] = [
         emoji: "☕",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#E71D36]/20",
-            borderClass: "group-hover/icon:border-[#E71D36]/40",
+            brand: "#E71D36",
         },
     },
     {
@@ -41,8 +39,7 @@ export const SKILLS: Skill[] = [
         emoji: "🍃",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#6db33f]/20",
-            borderClass: "group-hover/icon:border-[#6db33f]/40",
+            brand: "#6db33f",
         },
     },
     {
@@ -52,8 +49,7 @@ export const SKILLS: Skill[] = [
         emoji: "🐍",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#3776AB]/20",
-            borderClass: "group-hover/icon:border-[#3776AB]/40",
+            brand: "#3776AB",
         },
     },
     {
@@ -69,8 +65,7 @@ export const SKILLS: Skill[] = [
         emoji: "🟪",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#777BB4]/20",
-            borderClass: "group-hover/icon:border-[#777BB4]/40",
+            brand: "#777BB4",
         },
     },
     {
@@ -88,8 +83,7 @@ export const SKILLS: Skill[] = [
         emoji: "🌩️",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#f89820]/20",
-            borderClass: "group-hover/icon:border-[#f89820]/40",
+            brand: "#f89820",
         },
     },
     {
@@ -99,8 +93,7 @@ export const SKILLS: Skill[] = [
         emoji: "☁️",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#4285F4]/20",
-            borderClass: "group-hover/icon:border-[#4285F4]/40",
+            brand: "#4285F4",
         },
     },
 
@@ -130,8 +123,7 @@ export const SKILLS: Skill[] = [
         emoji: "🔵",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#3178C6]/20",
-            borderClass: "group-hover/icon:border-[#3178C6]/40",
+            brand: "#3178C6",
         },
     },
 
@@ -155,8 +147,7 @@ export const SKILLS: Skill[] = [
         emoji: "🌊",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#FF4B4B]/20",
-            borderClass: "group-hover/icon:border-[#FF4B4B]/40",
+            brand: "#FF4B4B",
         },
     },
     {
@@ -166,8 +157,7 @@ export const SKILLS: Skill[] = [
         emoji: "📓",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#F37626]/20",
-            borderClass: "group-hover/icon:border-[#F37626]/40",
+            brand: "#F37626",
         },
     },
 
@@ -185,8 +175,7 @@ export const SKILLS: Skill[] = [
         emoji: "🔵",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#0078D7]/20",
-            borderClass: "group-hover/icon:border-[#0078D7]/40",
+            brand: "#0078D7",
         },
     },
     {
@@ -202,8 +191,7 @@ export const SKILLS: Skill[] = [
         emoji: "🗄️",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#F05032]/20",
-            borderClass: "group-hover/icon:border-[#F05032]/40",
+            brand: "#F05032",
         },
     },
 
@@ -215,8 +203,7 @@ export const SKILLS: Skill[] = [
         emoji: "🐘",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#336791]/20",
-            borderClass: "group-hover/icon:border-[#336791]/40",
+            brand: "#336791",
         },
     },
     {
@@ -244,8 +231,7 @@ export const SKILLS: Skill[] = [
         emoji: "🍃",
         featured: {
             inBento: true,
-            colorClass: "group-hover/icon:bg-[#47A248]/20",
-            borderClass: "group-hover/icon:border-[#47A248]/40",
+            brand: "#47A248",
         },
     },
 ];
