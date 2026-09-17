@@ -1,0 +1,37 @@
+---
+/**
+ * Blocking theme bootstrap. Must run before the stylesheet paints so the
+ * correct data-theme attribute is set on <html> with zero flash.
+ *
+ * Deliberately hand-duplicated from src/utils/theme.ts instead of importing
+ * it: this script must have zero module dependencies to stay inline and
+ * synchronous. theme.test.ts asserts the storage key and hex values here
+ * stay in sync with that file.
+ */
+---
+
+<script is:inline data-astro-rerun>
+    (function () {
+        var KEY = "theme";
+        var COLORS = { dark: "#0c111c", light: "#faf7f2" };
+        var theme;
+        try {
+            var stored = localStorage.getItem(KEY);
+            var prefersLight = window.matchMedia(
+                "(prefers-color-scheme: light)",
+            ).matches;
+            theme =
+                stored === "dark" || stored === "light"
+                    ? stored
+                    : prefersLight
+                      ? "light"
+                      : "dark";
+        } catch (e) {
+            theme = "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.classList.add("js");
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", COLORS[theme]);
+    })();
+</script>

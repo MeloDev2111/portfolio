@@ -1,11 +1,13 @@
 ---
 import "../styles/global.css";
+import ThemeScript from "./ThemeScript.astro";
 import Header from "../components/astro/Header.astro";
 import Footer from "../components/astro/Footer.astro";
 import LanguageToast from "../components/astro/LanguageToast.astro";
 import ScrollToTop from "../components/astro/ScrollToTop.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import { siteConfig } from "../site.config";
+import { THEME_COLOR } from "../utils/theme";
 
 interface Props {
     title: string;
@@ -24,8 +26,10 @@ const {
 <html lang={lang} class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
+        <ThemeScript />
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="dark light" />
         <link
             rel="icon"
             type="image/svg+xml"
@@ -42,8 +46,8 @@ const {
             rel="stylesheet"
         />
 
-        <!-- Discord / Theme -->
-        <meta name="theme-color" content={siteConfig.theme.colors.primary} />
+        <!-- Theme color: page background, updated per-theme by ThemeScript/ThemeToggle -->
+        <meta name="theme-color" content={THEME_COLOR.dark} />
 
         <!-- SEO / Open Graph -->
         <title>{title}</title>

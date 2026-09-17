@@ -1,0 +1,67 @@
+---
+import { THEME_STORAGE_KEY, THEME_COLOR } from "../../utils/theme";
+---
+
+<button
+    id="theme-toggle"
+    type="button"
+    role="switch"
+    aria-checked="false"
+    aria-label="Toggle theme"
+    class="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-border-accent hover:text-fg"
+>
+    <svg
+        class="block h-5 w-5 light:hidden"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+    </svg>
+    <svg
+        class="hidden h-5 w-5 light:block"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v1.5m0 15V21m9-9h-1.5m-15 0H3m15.36-6.36-1.06 1.06M6.7 17.3l-1.06 1.06m0-12.72 1.06 1.06M17.3 17.3l1.06 1.06M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z"
+        ></path>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+</button>
+
+<script define:vars={{ THEME_STORAGE_KEY, THEME_COLOR }}>
+    const toggle = document.getElementById("theme-toggle");
+
+    function apply(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", THEME_COLOR[theme]);
+        toggle?.setAttribute("aria-checked", String(theme === "light"));
+    }
+
+    const current =
+        document.documentElement.getAttribute("data-theme") === "light"
+            ? "light"
+            : "dark";
+    apply(current);
+
+    toggle?.addEventListener("click", () => {
+        const next =
+            document.documentElement.getAttribute("data-theme") === "light"
+                ? "dark"
+                : "light";
+        localStorage.setItem(THEME_STORAGE_KEY, next);
+        apply(next);
+    });
+</script>

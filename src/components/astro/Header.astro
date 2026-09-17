@@ -8,6 +8,7 @@ import { siteConfig } from "../../site.config";
 
 import Logo from "./Logo.astro";
 import LanguagePicker from "./LanguagePicker.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -78,6 +79,9 @@ const currentPath = Astro.url.pathname;
 
         <!-- P3: Actions (Right) -->
         <div class="flex items-center gap-2 pr-2">
+            <!-- Theme Toggle -->
+            <ThemeToggle />
+
             <!-- Language Dropdown -->
             <LanguagePicker />
 
