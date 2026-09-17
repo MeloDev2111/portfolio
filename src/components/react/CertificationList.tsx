@@ -121,7 +121,7 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                                 <p className="text-sm text-gray-400 mt-1">
                                     {cert.data.issuer}
                                 </p>
-                                <p className="text-xs text-gray-500 mt-2">
+                                <p className="text-xs text-gray-400 mt-2">
                                     {cert.data.date}
                                 </p>
                             </div>

@@ -112,7 +112,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
             {/* Empty State */}
             {filteredProjects.length === 0 && (
-                <div className="text-center py-20 text-gray-500 flex flex-col items-center gap-4">
+                <div className="text-center py-20 text-gray-400 flex flex-col items-center gap-4">
                     <p>No projects match all selected filters.</p>
                     <button
                         onClick={() => setActiveTags([])}

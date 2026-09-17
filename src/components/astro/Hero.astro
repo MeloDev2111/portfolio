@@ -40,7 +40,7 @@ const techLogos = getBentoSkills().map((skill) => ({
 
 <section
     id="hero"
-    class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 lg:py-0 snap-start"
+    class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 lg:py-0"
 >
     <!-- Background: Subtle Grid & Deep Base -->
     <div class="absolute inset-0 bg-[#0c111c] -z-20"></div>
@@ -203,7 +203,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                         class="md:col-span-1 md:row-span-1 rounded-2xl glass-card p-5 flex flex-col items-center justify-between relative overflow-hidden group hover:border-[#c08b5a]/40 transition-all duration-500 cursor-pointer"
                     >
                         <div class="absolute inset-0 bento-noise pointer-events-none opacity-20" />
-                        <div class="absolute inset-0 opacity-0 pointer-events-none group-hover:opacity-20 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#c08b5a] via-transparent to-transparent" />
+                        <div class="absolute inset-0 opacity-0 pointer-events-none group-hover:opacity-20 transition-opacity duration-700 bg-[radial-gradient(circle_at_center,_rgba(192,139,90,1),_transparent)]" />
 
                         <div class="relative z-10 w-full flex flex-col items-center h-full">
                             <p class="text-[10px] text-[#f59e0b] font-heading mb-2 text-center uppercase tracking-widest font-bold animate-pulse">
@@ -426,7 +426,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                                         )}
                                         class="group/more relative w-full aspect-square flex items-center justify-center rounded-lg border border-white/5 bg-white/5 group-hover:bg-white/10 group-hover:border-[#c08b5a]/30 hover:!bg-[#c08b5a]/20 hover:!border-[#c08b5a] transition-all cursor-pointer"
                                     >
-                                        <span class="text-xs font-bold text-gray-500 group-hover:text-gray-300 group-hover/more:text-[#c08b5a] transition-colors">
+                                        <span class="text-xs font-bold text-gray-400 group-hover:text-gray-300 group-hover/more:text-[#c08b5a] transition-colors">
                                             +{remaining}
                                         </span>
 

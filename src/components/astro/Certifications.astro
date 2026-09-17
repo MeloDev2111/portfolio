@@ -16,7 +16,7 @@ const certifications = await getCollection("certifications");
 
 <section
     id="certifications"
-    class="py-16 md:py-24 min-h-[60vh] flex flex-col justify-center bg-charcoal snap-start"
+    class="py-16 md:py-24 min-h-[60vh] flex flex-col justify-center bg-charcoal"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
@@ -83,7 +83,7 @@ const certifications = await getCollection("certifications");
                                 <p class="text-xs text-gray-400 font-bold tracking-wider mb-4 border-b border-white/5 pb-2 w-full">
                                     {cert.data.issuer}
                                 </p>
-                                <p class="text-[10px] text-gray-500 font-mono tracking-widest mt-auto">
+                                <p class="text-[10px] text-gray-400 font-mono tracking-widest mt-auto">
                                     {cert.data.date}
                                 </p>
                             </div>
