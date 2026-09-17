@@ -195,9 +195,13 @@ Arreglar `.bento-noise` (`url(%23noise)`), los 3 gradientes radiales rotos, el v
 
 Construirlas y migrar en orden de riesgo creciente: primero las 4 páginas dedicadas (máxima duplicación, mínimo riesgo), luego `Certifications`, `Projects`, `TechStack`, `Experience`, `Footer`, después las islas React, y **`Hero` al final**.
 
+**Deuda conocida, fuera de esta lista a propósito:** `Header.astro` (pills de nav, menú móvil, sombra de scroll), `About.astro`, `LanguageToast.astro`, `ScrollToTop.astro`, `404.astro` y las clases del `<body>` en `Layout.astro` siguen con hex/alias legacy (`bg-white/10`, `text-gray-400`, `bg-gunmetal`, `text-light`…) y por tanto **no reaccionan al toggle de tema**. Es el motivo visible de que el modo claro "no encaje" en el header y en estas páginas sueltas. Se migran en la Fase 4 (ver abajo), donde `Header.astro` ya se toca por otros motivos.
+
 ### Fase 4 — Reestructuración de páginas
 
 Nueva home, bento de 3 celdas, `About` a `/experience`, borrar `TechStackSection`, nav desde config, `aria-current` en servidor, borrar el scroll-spy.
+
+**Se añade a esta fase:** migrar a tokens los colores de `Header.astro`, `LanguageToast.astro`, `ScrollToTop.astro`, `404.astro` y el `<body>` de `Layout.astro` (heredado de la deuda de Fase 3, arriba). `About.astro` se resuelve igual, como parte de su traslado a `/experience`.
 
 ### Fase 5 — Motion y a11y
 
@@ -205,7 +209,9 @@ Nueva home, bento de 3 celdas, `About` a `/experience`, borrar `TechStackSection
 
 ### Fase 6 — Limpieza
 
-Borrar `tailwind.config.mjs`, la línea `@config`, los alias legacy, `siteConfig.theme.colors`, `getBadgeUrl`, el import muerto de `Logo` en `Hero`. Sustituir el `ogImage` SVG por un PNG real de 1200×630 — **X y LinkedIn no renderizan OG en SVG, así que los previews sociales están rotos ahora mismo**. Partir `i18n/ui.ts`. Cerrar los dos documentos de `docs/`.
+Borrar `tailwind.config.mjs`, la línea `@config`, los alias legacy, `siteConfig.theme.colors`. Sustituir el `ogImage` SVG por un PNG real de 1200×630 — **X y LinkedIn no renderizan OG en SVG, así que los previews sociales están rotos ahora mismo**. Partir `i18n/ui.ts`. Cerrar los dos documentos de `docs/`.
+
+_(`getBadgeUrl` y el import muerto de `Logo` en `Hero` ya se eliminaron en la Fase 3.)_
 
 ---
 
