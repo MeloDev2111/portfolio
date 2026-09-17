@@ -81,8 +81,10 @@ const navItems = nav
             <!-- Mobile Menu Toggle -->
             <button
                 id="mobile-menu-btn"
-                class="md:hidden p-2 text-fg-muted hover:text-fg-strong focus:outline-none"
-                aria-label="Toggle menu"
+                class="md:hidden flex items-center justify-center pointer-coarse:min-h-11 pointer-coarse:min-w-11 p-2 text-fg-muted hover:text-fg-strong focus:outline-none"
+                aria-label={t("nav.menu")}
+                aria-expanded="false"
+                aria-controls="mobile-menu"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -111,6 +113,9 @@ const navItems = nav
     <div
         id="mobile-menu"
         class="hidden fixed top-20 left-4 right-4 z-50 transform transition-all duration-300 origin-top scale-95 opacity-0"
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("nav.menu")}
     >
         <nav
             class="bg-surface/90 backdrop-blur-2xl border border-border rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1 ring-1 ring-border"
@@ -163,22 +168,64 @@ const navItems = nav
     }
 
     // Mobile Menu Functions
+    let lastFocusedElement: HTMLElement | null = null;
+
+    function getFocusableMenuItems(): HTMLElement[] {
+        if (!mobileMenu) return [];
+        return Array.from(
+            mobileMenu.querySelectorAll<HTMLElement>(
+                "a[href], button:not([disabled])",
+            ),
+        );
+    }
+
+    function trapFocus(e: KeyboardEvent) {
+        if (e.key === "Escape") {
+            closeMobileMenu();
+            return;
+        }
+
+        if (e.key !== "Tab") return;
+
+        const focusable = getFocusableMenuItems();
+        if (!focusable.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+
     function openMobileMenu() {
+        lastFocusedElement = document.activeElement as HTMLElement;
+
         mobileMenu?.classList.remove("hidden");
         mobileMenuBackdrop?.classList.remove("hidden");
+        mobileMenuBtn?.setAttribute("aria-expanded", "true");
 
         // Small delay to allow display:block to apply before transition
         setTimeout(() => {
             mobileMenu?.classList.remove("scale-95", "opacity-0");
             mobileMenuBackdrop?.classList.remove("opacity-0");
+            getFocusableMenuItems()[0]?.focus();
         }, 10);
 
         document.body.style.overflow = "hidden"; // Lock scroll
+        document.addEventListener("keydown", trapFocus);
     }
 
     function closeMobileMenu() {
+        if (mobileMenuBtn?.getAttribute("aria-expanded") !== "true") return;
+
         mobileMenu?.classList.add("scale-95", "opacity-0");
         mobileMenuBackdrop?.classList.add("opacity-0");
+        mobileMenuBtn?.setAttribute("aria-expanded", "false");
 
         setTimeout(() => {
             mobileMenu?.classList.add("hidden");
@@ -186,6 +233,8 @@ const navItems = nav
         }, 300); // Matches transition duration
 
         document.body.style.overflow = ""; // Unlock scroll
+        document.removeEventListener("keydown", trapFocus);
+        lastFocusedElement?.focus();
     }
 
     // Event Listeners

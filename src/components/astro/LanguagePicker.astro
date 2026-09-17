@@ -10,7 +10,7 @@ const currentLang = languages.find((l) => l.active);
     <!-- Trigger Button -->
     <button
         type="button"
-        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-xs text-gray-300 hover:text-white hover:border-white/20 transition-all font-medium group"
+        class="flex items-center gap-2 pointer-coarse:min-h-11 pointer-coarse:min-w-11 justify-center px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-xs text-gray-300 hover:text-white hover:border-white/20 transition-all font-medium group"
         id="lang-menu-button"
         aria-expanded="false"
         aria-haspopup="true"
@@ -51,7 +51,7 @@ const currentLang = languages.find((l) => l.active);
                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                         }`}
                         role="menuitem"
-                        tabindex="-1"
+                        tabindex={l.active ? 0 : -1}
                     >
                         <span>{l.name}</span>
                         {l.active && (
@@ -81,34 +81,91 @@ const currentLang = languages.find((l) => l.active);
         const picker = document.getElementById("language-picker");
         const btn = document.getElementById("lang-menu-button");
 
-        if (!picker || !btn) return;
+        // Header persists across view transitions, so astro:after-swap can
+        // fire against the same nodes more than once — guard against
+        // re-binding the same listeners twice.
+        if (!picker || !btn || picker.dataset.bound === "true") return;
+        picker.dataset.bound = "true";
+
+        const items = Array.from(
+            picker.querySelectorAll<HTMLAnchorElement>('[role="menuitem"]'),
+        );
+
+        function openMenu() {
+            picker!.classList.add("open");
+            btn!.setAttribute("aria-expanded", "true");
+            const active = items.find((i) => i.tabIndex === 0) ?? items[0];
+            active?.focus();
+        }
+
+        function closeMenu(focusTrigger = false) {
+            picker!.classList.remove("open");
+            btn!.setAttribute("aria-expanded", "false");
+            if (focusTrigger) btn?.focus();
+        }
+
+        function setRoving(target: HTMLAnchorElement) {
+            items.forEach((i) => (i.tabIndex = i === target ? 0 : -1));
+            target.focus();
+        }
 
         // Toggle dropdown
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            picker.classList.toggle("open");
-            const isExpanded = picker.classList.contains("open");
-            btn.setAttribute("aria-expanded", isExpanded.toString());
+            if (picker!.classList.contains("open")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Roving tabindex + arrow-key navigation between menu items
+        items.forEach((item, index) => {
+            item.addEventListener("keydown", (e) => {
+                switch (e.key) {
+                    case "ArrowDown":
+                        e.preventDefault();
+                        setRoving(items[(index + 1) % items.length]);
+                        break;
+                    case "ArrowUp":
+                        e.preventDefault();
+                        setRoving(
+                            items[(index - 1 + items.length) % items.length],
+                        );
+                        break;
+                    case "Home":
+                        e.preventDefault();
+                        setRoving(items[0]);
+                        break;
+                    case "End":
+                        e.preventDefault();
+                        setRoving(items[items.length - 1]);
+                        break;
+                    case "Escape":
+                        e.preventDefault();
+                        closeMenu(true);
+                        break;
+                    case "Tab":
+                        closeMenu();
+                        break;
+                }
+            });
         });
 
         // Close on outside click
         document.addEventListener("click", (e) => {
-            if (!picker.contains(e.target as Node)) {
-                picker.classList.remove("open");
-                btn.setAttribute("aria-expanded", "false");
+            if (!picker!.contains(e.target as Node)) {
+                closeMenu();
             }
         });
 
-        // Close on Escape key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                picker.classList.remove("open");
-                btn.setAttribute("aria-expanded", "false");
-            }
+        // Close on Escape key (trigger has focus)
+        btn.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMenu(true);
         });
     }
 
     // Run setup on initial load and after Astro swaps pages
     setupLanguagePicker();
-    document.addEventListener("astro:after-swap", setupLanguagePicker);
+    document.addEventListener("astro:page-load", setupLanguagePicker);
 </script>
