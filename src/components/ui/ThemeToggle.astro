@@ -1,5 +1,5 @@
 ---
-import { THEME_STORAGE_KEY, THEME_COLOR } from "../../utils/theme";
+
 ---
 
 <button
@@ -8,10 +8,10 @@ import { THEME_STORAGE_KEY, THEME_COLOR } from "../../utils/theme";
     role="switch"
     aria-checked="false"
     aria-label="Toggle theme"
-    class="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-border-accent hover:text-fg"
+    class="group relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-border-accent hover:text-fg active:scale-95"
 >
     <svg
-        class="block h-5 w-5 light:hidden"
+        class="block h-5 w-5 light:hidden transition-transform duration-300 motion-safe:group-hover:-rotate-12"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -24,7 +24,7 @@ import { THEME_STORAGE_KEY, THEME_COLOR } from "../../utils/theme";
             d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
     </svg>
     <svg
-        class="hidden h-5 w-5 light:block"
+        class="hidden h-5 w-5 light:block transition-transform duration-300 motion-safe:group-hover:rotate-45"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -40,28 +40,57 @@ import { THEME_STORAGE_KEY, THEME_COLOR } from "../../utils/theme";
     <span class="sr-only">Toggle theme</span>
 </button>
 
-<script define:vars={{ THEME_STORAGE_KEY, THEME_COLOR }}>
-    const toggle = document.getElementById("theme-toggle");
+<script>
+    import {
+        THEME_STORAGE_KEY,
+        THEME_COLOR,
+        resolveTheme,
+        type Theme,
+    } from "../../utils/theme";
 
-    function apply(theme) {
+    function applyTheme(theme: Theme) {
         document.documentElement.setAttribute("data-theme", theme);
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute("content", THEME_COLOR[theme]);
+        const toggle = document.getElementById("theme-toggle");
         toggle?.setAttribute("aria-checked", String(theme === "light"));
     }
 
-    const current =
-        document.documentElement.getAttribute("data-theme") === "light"
-            ? "light"
-            : "dark";
-    apply(current);
+    function getCurrentTheme(): Theme {
+        const stored = localStorage.getItem(THEME_STORAGE_KEY);
+        const prefersLight = window.matchMedia(
+            "(prefers-color-scheme: light)",
+        ).matches;
+        return resolveTheme(stored, prefersLight);
+    }
 
-    toggle?.addEventListener("click", () => {
-        const next =
-            document.documentElement.getAttribute("data-theme") === "light"
-                ? "dark"
-                : "light";
-        localStorage.setItem(THEME_STORAGE_KEY, next);
-        apply(next);
+    function setupThemeToggle() {
+        const current = getCurrentTheme();
+        applyTheme(current);
+
+        const toggle = document.getElementById("theme-toggle");
+        if (!toggle || toggle.dataset.bound === "true") return;
+        toggle.dataset.bound = "true";
+
+        toggle.addEventListener("click", () => {
+            const isLight =
+                document.documentElement.getAttribute("data-theme") === "light";
+            const next: Theme = isLight ? "dark" : "light";
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, next);
+            } catch {
+                // Ignore storage errors (private browsing, quota)
+            }
+            applyTheme(next);
+        });
+    }
+
+    // Run setup on initial load and after Astro swaps pages
+    setupThemeToggle();
+    document.addEventListener("astro:page-load", setupThemeToggle);
+
+    // Reapply theme immediately after DOM swap to avoid FOUC before page paint
+    document.addEventListener("astro:after-swap", () => {
+        applyTheme(getCurrentTheme());
     });
 </script>
