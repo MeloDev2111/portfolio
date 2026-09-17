@@ -212,7 +212,8 @@ export const ui = {
         "credly.viewProfile": "プロフィールを表示",
         "toast.title": "言語がサポートされていません",
         "toast.prefix": "コンテンツは",
-        "toast.suffix": "ではまだご利用いただけません。英語版を表示しています。",
+        "toast.suffix":
+            "ではまだご利用いただけません。英語版を表示しています。",
         "proof.remote": "リモート対応",
         "cta.title": "一緒に何かを作りましょう",
         "cta.description":

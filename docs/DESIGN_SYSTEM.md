@@ -288,7 +288,11 @@ The workhorse. One component covers bento cells, project cards, cert cards, time
 
 ### Others
 
-`Prose.astro` (the MDX seam) · `Reveal.astro` · `ThemeToggle.astro` · `CertCard.astro` · `ProofBar.astro` · `CTASection.astro`
+`Prose.astro` (the MDX seam) · `Reveal.astro` · `ThemeToggle.astro` · `ProofBar.astro` · `CTASection.astro`
+
+`CertCard.astro` was removed in phase 4: the home page no longer has a
+certifications section, and `/certifications` renders cards through the
+`CertificationList` React island, not this primitive.
 
 ---
 

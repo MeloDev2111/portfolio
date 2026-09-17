@@ -171,18 +171,22 @@ const currentJob = EXPERIENCE.find((job) => job.current);
                 class="flex flex-wrap items-center gap-2 pt-3 border-t border-border relative z-10"
             >
                 {
-                    techLogos.slice(0, 6).map((tech) => (
-                        <Image
-                            src={tech.src}
-                            alt={tech.label}
-                            title={tech.label}
-                            width={24}
-                            height={24}
-                            class="h-6 w-6 object-contain opacity-80 grayscale transition-all group-hover:grayscale-0 group-hover:opacity-100"
-                        />
-                    ))
+                    techLogos
+                        .slice(0, 6)
+                        .map((tech) => (
+                            <Image
+                                src={tech.src}
+                                alt={tech.label}
+                                title={tech.label}
+                                width={24}
+                                height={24}
+                                class="h-6 w-6 object-contain opacity-80 grayscale transition-all group-hover:grayscale-0 group-hover:opacity-100"
+                            />
+                        ))
                 }
-                <span class="ml-auto text-[10px] text-accent group-hover:text-fg-strong transition-colors">
+                <span
+                    class="ml-auto text-[10px] text-accent group-hover:text-fg-strong transition-colors"
+                >
                     {t("section.viewFullExperience")}
                 </span>
             </div>
@@ -207,9 +211,7 @@ const currentJob = EXPERIENCE.find((job) => job.current);
                             {latestCert.data.badge ? (
                                 <Image
                                     src={
-                                        latestCert.data.badge.startsWith(
-                                            "http",
-                                        )
+                                        latestCert.data.badge.startsWith("http")
                                             ? latestCert.data.badge
                                             : import.meta.env.BASE_URL.replace(
                                                   /\/$/,
@@ -238,7 +240,9 @@ const currentJob = EXPERIENCE.find((job) => job.current);
                 )
             }
 
-            <div class="flex items-center gap-2 border-l border-border pl-4 flex-shrink-0">
+            <div
+                class="flex items-center gap-2 border-l border-border pl-4 flex-shrink-0"
+            >
                 {
                     getPrimarySocials().map((social) => (
                         <a
