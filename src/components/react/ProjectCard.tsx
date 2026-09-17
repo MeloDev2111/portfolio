@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { cardClasses, tagClasses } from "../ui/_variants";
 
 interface ProjectCardProps {
@@ -22,23 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     inProgress,
     priority = false,
 }) => {
-    const [showTooltip, setShowTooltip] = useState(false);
-    const [isTruncated, setIsTruncated] = useState(false);
-    const textRef = useRef<HTMLParagraphElement>(null);
     const Component = inProgress || !link ? "div" : "a";
-
-    useEffect(() => {
-        const checkTruncation = () => {
-            if (textRef.current) {
-                const { scrollHeight, clientHeight } = textRef.current;
-                setIsTruncated(scrollHeight > clientHeight);
-            }
-        };
-
-        checkTruncation();
-        window.addEventListener("resize", checkTruncation);
-        return () => window.removeEventListener("resize", checkTruncation);
-    }, [description]);
 
     return (
         <Component
@@ -119,30 +103,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     </div>
                 </div>
 
-                <div
-                    className="relative mb-6 flex-grow"
-                    onMouseEnter={() => isTruncated && setShowTooltip(true)}
-                    onMouseLeave={() => setShowTooltip(false)}
-                >
-                    <p
-                        ref={textRef}
-                        className="text-fg-muted text-sm line-clamp-3 leading-relaxed"
-                    >
+                <div className="relative mb-6 flex-grow">
+                    <p className="text-fg-muted text-sm line-clamp-3 leading-relaxed">
                         {description}
                     </p>
-
-                    {/* Custom Tooltip */}
-                    <div
-                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-surface-raised/98 backdrop-blur-xl border border-border-strong rounded-xl text-sm text-fg-muted shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
-                            showTooltip && isTruncated
-                                ? "opacity-100 translate-y-0 scale-100 visible"
-                                : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
-                        }`}
-                    >
-                        {description}
-                        {/* Arrow */}
-                        <div className="absolute -bottom-1.5 left-6 w-3 h-3 bg-surface-raised/98 border-r border-b border-border-strong rotate-45 transform"></div>
-                    </div>
                 </div>
 
                 {/* Tags */}

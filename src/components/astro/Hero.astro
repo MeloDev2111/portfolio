@@ -16,6 +16,7 @@ import { publicFileExists } from "../../utils/files";
 import Section from "../ui/Section.astro";
 import Card from "../ui/Card.astro";
 import Button from "../ui/Button.astro";
+import Tag from "../ui/Tag.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -228,10 +229,14 @@ const currentJob = EXPERIENCE.find((job) => job.current);
                                 <span class="text-3xl">🏆</span>
                             )}
                         </div>
-                        <div class="min-w-0">
-                            <p class="text-[10px] text-action-text font-heading uppercase tracking-widest font-bold">
+                        <div class="min-w-0 flex flex-col gap-1.5 items-start">
+                            <Tag
+                                variant="action"
+                                size="xs"
+                                class="uppercase tracking-widest"
+                            >
                                 {t("hero.latestAchievement")}
-                            </p>
+                            </Tag>
                             <h3 class="text-sm font-bold text-fg-strong leading-tight truncate group-hover:text-accent transition-colors">
                                 {latestCert.data.name}
                             </h3>
