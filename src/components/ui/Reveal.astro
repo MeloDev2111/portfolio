@@ -1,0 +1,18 @@
+---
+interface Props {
+    as?: "div" | "li";
+    index?: number;
+    class?: string;
+}
+
+const { as: Tag = "div", index, class: className } = Astro.props;
+
+// Stagger capped at ~5 steps per docs/DESIGN_SYSTEM.md.
+const style = index
+    ? `transition-delay: ${Math.min(index, 5) * 80}ms`
+    : undefined;
+---
+
+<Tag data-reveal style={style} class={className}>
+    <slot />
+</Tag>

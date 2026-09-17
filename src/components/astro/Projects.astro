@@ -4,6 +4,7 @@ import { getLocalizedProjects } from "../../utils/projects";
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Card from "../ui/Card.astro";
+import Reveal from "../ui/Reveal.astro";
 import {
     getLangFromUrl,
     useTranslations,
@@ -28,7 +29,7 @@ const projects = await getLocalizedProjects(lang);
             projects
                 .filter((p) => p.data.featured)
                 .slice(0, 3)
-                .map((project) => {
+                .map((project, index) => {
                     const cleanProps = JSON.parse(
                         JSON.stringify({
                             title: project.data.title,
@@ -40,7 +41,11 @@ const projects = await getLocalizedProjects(lang);
                             inProgress: project.data.inProgress,
                         }),
                     );
-                    return <ProjectCard client:visible {...cleanProps} />;
+                    return (
+                        <Reveal index={index}>
+                            <ProjectCard client:visible {...cleanProps} />
+                        </Reveal>
+                    );
                 })
         }
 
