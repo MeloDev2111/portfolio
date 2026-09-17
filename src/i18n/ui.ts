@@ -69,6 +69,9 @@ export const ui = {
         "credly.description":
             "Verify all my digital badges and certifications directly on Credly.",
         "credly.viewProfile": "View Profile",
+        "toast.title": "Language Not Supported",
+        "toast.prefix": "Content is not available in",
+        "toast.suffix": "yet. Showing English version.",
         "proof.remote": "Remote-friendly",
         "cta.title": "Let's build something great",
         "cta.description":
@@ -136,6 +139,9 @@ export const ui = {
         "credly.description":
             "Verifica todas mis insignias y certificados digitales directamente en Credly.",
         "credly.viewProfile": "Ver Perfil",
+        "toast.title": "Idioma no disponible",
+        "toast.prefix": "El contenido no está disponible en",
+        "toast.suffix": "todavía. Mostrando la versión en inglés.",
         "proof.remote": "Trabajo remoto",
         "cta.title": "Construyamos algo grande",
         "cta.description":
@@ -204,6 +210,9 @@ export const ui = {
         "credly.description":
             "Credlyで私のデジタルバッジと認定資格をすべて確認できます。",
         "credly.viewProfile": "プロフィールを表示",
+        "toast.title": "言語がサポートされていません",
+        "toast.prefix": "コンテンツは",
+        "toast.suffix": "ではまだご利用いただけません。英語版を表示しています。",
         "proof.remote": "リモート対応",
         "cta.title": "一緒に何かを作りましょう",
         "cta.description":

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
 import { ui, languages, defaultLang } from "../i18n/ui";
 import { getRelativeLocaleUrl } from "../i18n/utils";
 
@@ -14,31 +15,29 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
         class="min-h-[80vh] flex flex-col items-center justify-center text-center px-4"
     >
         <div class="relative mb-8">
-            <h1
-                class="text-9xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#c08b5a] to-[#c08b5a]/10 opacity-20 select-none"
+            <span
+                class="text-9xl font-heading font-bold text-border-strong select-none"
+                aria-hidden="true"
             >
                 404
-            </h1>
+            </span>
             <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-4xl font-bold text-light">Page Not Found</span
-                >
+                <h1 class="text-4xl font-bold text-fg-strong" id="error-title">
+                    Page Not Found
+                </h1>
             </div>
         </div>
 
         <p
             id="error-message"
-            class="text-xl text-gray-400 max-w-lg mb-8 leading-relaxed"
+            class="text-xl text-fg-muted max-w-lg mb-8 leading-relaxed"
         >
             {t["404.description"]}
         </p>
 
-        <a
-            href={homeUrl}
-            id="home-link"
-            class="px-8 py-3 rounded-full bg-[#c08b5a] text-gunmetal font-bold hover:bg-[#e6a66b] transition-all hover:scale-105 shadow-lg shadow-[#c08b5a]/20"
-        >
+        <Button href={homeUrl} id="home-link" variant="primary" size="lg">
             {t["404.button"]}
-        </a>
+        </Button>
     </div>
 </Layout>
 
@@ -65,10 +64,8 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
             const t = ui[firstSegment];
             if (t) {
                 // Update text content
-                const titleSpan = document.querySelector(
-                    ".font-bold.text-light",
-                );
-                if (titleSpan) titleSpan.textContent = t["404.title"];
+                const titleEl = document.getElementById("error-title");
+                if (titleEl) titleEl.textContent = t["404.title"];
 
                 const descP = document.getElementById("error-message");
                 if (descP) descP.textContent = t["404.description"];
