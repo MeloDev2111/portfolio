@@ -1,0 +1,67 @@
+---
+import {
+    cardClasses,
+    type CardVariant,
+    type CardPad,
+    type CardRadius,
+    type CardLift,
+} from "./_variants";
+
+interface Props {
+    as?: "div" | "a" | "article" | "li" | "button";
+    href?: string;
+    external?: boolean;
+    variant?: CardVariant;
+    pad?: CardPad;
+    radius?: CardRadius;
+    interactive?: boolean;
+    lift?: CardLift;
+    glow?: boolean;
+    noise?: boolean;
+    span?: string;
+    dashed?: boolean;
+    class?: string;
+}
+
+const {
+    as,
+    href,
+    external = false,
+    variant = "glass",
+    pad = "md",
+    radius = "card",
+    interactive = false,
+    lift = "none",
+    glow = false,
+    noise = false,
+    span,
+    dashed = false,
+    class: className,
+    ...rest
+} = Astro.props;
+
+const Tag = as ?? (href ? "a" : "div");
+const externalAttrs =
+    href && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+---
+
+<Tag
+    href={href}
+    class={cardClasses({
+        variant,
+        pad,
+        radius,
+        interactive,
+        lift,
+        glow,
+        noise,
+        dashed,
+        span,
+        class: className,
+    })}
+    {...externalAttrs}
+    {...rest}
+>
+    <slot name="media" />
+    <slot />
+</Tag>

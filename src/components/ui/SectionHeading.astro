@@ -1,0 +1,77 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+    eyebrow?: string;
+    title: string;
+    accent?: string;
+    level?: 2 | 3;
+    description?: string;
+    align?: "start" | "center";
+    rule?: boolean;
+    action?: { href: string; label: string };
+    class?: string;
+}
+
+const {
+    eyebrow,
+    title,
+    accent,
+    level = 2,
+    description,
+    align = "start",
+    rule = false,
+    action,
+    class: className,
+} = Astro.props;
+
+const Tag = level === 2 ? "h2" : "h3";
+const accentIndex = accent ? title.indexOf(accent) : -1;
+const before = accentIndex >= 0 ? title.slice(0, accentIndex) : title;
+const after = accentIndex >= 0 ? title.slice(accentIndex + accent!.length) : "";
+---
+
+<div
+    class:list={[
+        "flex flex-col gap-4",
+        align === "center"
+            ? "items-center text-center"
+            : "items-start justify-between gap-6 sm:flex-row sm:items-end",
+        className,
+    ]}
+>
+    <div
+        class:list={[
+            "flex flex-col gap-3",
+            align === "center" && "items-center",
+        ]}
+    >
+        {
+            eyebrow && (
+                <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-fg-subtle">
+                    {eyebrow}
+                </p>
+            )
+        }
+        <Tag
+            class="font-heading text-3xl font-bold tracking-tight text-fg-strong md:text-4xl"
+        >
+            {before}
+            {accentIndex >= 0 && <span class="text-accent">{accent}</span>}
+            {after}
+        </Tag>
+        {rule && <span class="h-px w-16 bg-border-accent" aria-hidden="true" />}
+        {
+            description && (
+                <p class="max-w-2xl text-lg text-fg-muted">{description}</p>
+            )
+        }
+    </div>
+    {
+        action && (
+            <Button href={action.href} variant="ghost" size="sm">
+                {action.label}
+            </Button>
+        )
+    }
+</div>

@@ -1,6 +1,8 @@
 ---
 import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import PageHeader from "../../components/ui/PageHeader.astro";
 import TechStackComponent from "../../components/astro/TechStack.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
@@ -17,31 +19,13 @@ const t = useTranslations(lang as any);
     lang={lang}
     description={t("page.techStackDescription")}
 >
-    <section
-        class="py-20 md:py-32 min-h-screen bg-gunmetal relative overflow-hidden"
-    >
-        {/* Background Elements */}
-        <div
-            class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(192,139,90,0.1),_transparent)] opacity-50"
-        >
-        </div>
+    <Section width="full" space="lg" backdrop="bloom">
+        <PageHeader
+            title={t("page.techStackTitle")}
+            description={t("page.techStackDescription")}
+            class="items-center text-center"
+        />
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="mb-16 text-center">
-                <h1
-                    class="text-4xl md:text-5xl font-heading font-bold text-white mb-6"
-                >
-                    {t("page.techStackTitle")}
-                    <span class="text-[#c08b5a]">.</span>
-                </h1>
-                <p
-                    class="text-xl text-[#94a3b8] max-w-2xl mx-auto leading-relaxed"
-                >
-                    {t("page.techStackDescription")}
-                </p>
-            </div>
-
-            <TechStackComponent />
-        </div>
-    </section>
+        <TechStackComponent />
+    </Section>
 </Layout>

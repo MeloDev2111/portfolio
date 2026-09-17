@@ -1,0 +1,42 @@
+---
+import {
+    sectionClasses,
+    sectionContainerClasses,
+    type SectionTone,
+    type SectionWidth,
+    type SectionSpace,
+    type SectionBackdrop,
+} from "./_variants";
+
+interface Props {
+    id?: string;
+    as?: "section" | "div";
+    tone?: SectionTone;
+    width?: SectionWidth;
+    space?: SectionSpace;
+    backdrop?: SectionBackdrop;
+    class?: string;
+}
+
+const {
+    id,
+    as: Tag = "section",
+    tone = "base",
+    width = "wide",
+    space = "md",
+    backdrop = "none",
+    class: className,
+} = Astro.props;
+---
+
+<Tag id={id} class={sectionClasses({ tone, space, class: className })}>
+    {
+        backdrop === "grid" && (
+            <div class="absolute inset-0 grid-backdrop pointer-events-none" />
+        )
+    }
+    {backdrop === "bloom" && <div class="bloom -top-20 -right-20 h-72 w-72" />}
+    <div class={sectionContainerClasses({ width })}>
+        <slot />
+    </div>
+</Tag>

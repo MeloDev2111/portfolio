@@ -1,6 +1,8 @@
 ---
 import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import PageHeader from "../../components/ui/PageHeader.astro";
 import ExperienceComponent from "../../components/astro/Experience.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
@@ -17,19 +19,12 @@ const t = useTranslations(lang as any);
     lang={lang}
     description={t("nav.experienceKey")}
 >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 class="text-4xl md:text-5xl font-heading font-bold text-light mb-8">
-            <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-[#c08b5a]"
-            >
-                {t("nav.experience")}
-            </span>
-        </h1>
-
-        <p class="text-xl text-gray-400 max-w-2xl mb-12">
-            {t("nav.experienceKey")}
-        </p>
+    <Section width="full" space="lg">
+        <PageHeader
+            title={t("nav.experience")}
+            description={t("nav.experienceKey")}
+        />
 
         <ExperienceComponent showTitle={false} />
-    </div>
+    </Section>
 </Layout>

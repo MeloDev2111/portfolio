@@ -1,0 +1,38 @@
+---
+interface Props {
+    eyebrow?: string;
+    title: string;
+    accent?: string;
+    description?: string;
+    class?: string;
+}
+
+const { eyebrow, title, accent, description, class: className } = Astro.props;
+
+const accentIndex = accent ? title.indexOf(accent) : -1;
+const before = accentIndex >= 0 ? title.slice(0, accentIndex) : title;
+const after = accentIndex >= 0 ? title.slice(accentIndex + accent!.length) : "";
+---
+
+<div class:list={["mb-12 flex flex-col gap-5", className]}>
+    {
+        eyebrow && (
+            <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-fg-subtle">
+                {eyebrow}
+            </p>
+        )
+    }
+    <h1
+        class="font-heading text-4xl font-bold tracking-tight text-fg-strong md:text-5xl"
+    >
+        {before}
+        {accentIndex >= 0 && <span class="text-accent">{accent}</span>}
+        {after}
+    </h1>
+    {
+        description && (
+            <p class="max-w-2xl text-xl text-fg-muted">{description}</p>
+        )
+    }
+    <slot name="actions" />
+</div>

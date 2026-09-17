@@ -1,0 +1,22 @@
+---
+import { tagClasses, type TagVariant, type TagSize } from "./_variants";
+
+interface Props {
+    variant?: TagVariant;
+    size?: TagSize;
+    as?: "span" | "li" | "button";
+    class?: string;
+}
+
+const {
+    variant = "neutral",
+    size = "sm",
+    as: Tag = "span",
+    class: className,
+    ...rest
+} = Astro.props;
+---
+
+<Tag class={tagClasses({ variant, size, class: className })} {...rest}>
+    <slot />
+</Tag>

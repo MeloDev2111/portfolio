@@ -1,6 +1,8 @@
 ---
 import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import PageHeader from "../../components/ui/PageHeader.astro";
 import { ProjectGrid } from "../../components/react/ProjectGrid";
 import { getLocalizedProjects } from "../../utils/projects";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
@@ -38,18 +40,11 @@ const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
     lang={lang}
     description={t("page.projectsDescription")}
 >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 class="text-4xl md:text-5xl font-heading font-bold text-light mb-8">
-            <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white"
-            >
-                {t("nav.projects")}
-            </span>
-        </h1>
-
-        <p class="text-xl text-gray-400 max-w-2xl mb-12">
-            {t("page.projectsDescription")}
-        </p>
+    <Section width="full" space="lg">
+        <PageHeader
+            title={t("nav.projects")}
+            description={t("page.projectsDescription")}
+        />
 
         <ProjectGrid
             client:only="react"
@@ -59,5 +54,5 @@ const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
                 filter: t("ui.filterBy"),
             }}
         />
-    </div>
+    </Section>
 </Layout>

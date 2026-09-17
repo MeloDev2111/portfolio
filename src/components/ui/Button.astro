@@ -1,0 +1,50 @@
+---
+import {
+    buttonClasses,
+    type ButtonVariant,
+    type ButtonSize,
+} from "./_variants";
+
+interface Props {
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    href?: string;
+    download?: boolean | string;
+    external?: boolean;
+    type?: "button" | "submit" | "reset";
+    iconPosition?: "start" | "end";
+    full?: boolean;
+    class?: string;
+}
+
+const {
+    variant = "primary",
+    size = "md",
+    href,
+    download,
+    external = false,
+    type = "button",
+    iconPosition = "start",
+    full = false,
+    class: className,
+    ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+const externalAttrs =
+    href && external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+const classes = buttonClasses({ variant, size, full, class: className });
+---
+
+<Tag
+    href={href}
+    download={download}
+    type={!href ? type : undefined}
+    class={classes}
+    {...externalAttrs}
+    {...rest}
+>
+    {iconPosition === "start" && <slot name="icon" />}
+    <slot />
+    {iconPosition === "end" && <slot name="icon" />}
+</Tag>
