@@ -3,6 +3,7 @@ import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/ui/Section.astro";
 import PageHeader from "../../components/ui/PageHeader.astro";
+import About from "../../components/astro/About.astro";
 import ExperienceComponent from "../../components/astro/Experience.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
@@ -25,6 +26,10 @@ const t = useTranslations(lang as any);
             description={t("nav.experienceKey")}
         />
 
-        <ExperienceComponent showTitle={false} />
+        <About />
+
+        <div class="mt-16">
+            <ExperienceComponent showTitle={false} />
+        </div>
     </Section>
 </Layout>
