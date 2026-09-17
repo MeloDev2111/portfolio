@@ -48,11 +48,12 @@ export function getAllLanguageUrls(url: URL, baseOverride?: string) {
     // Example: /en/experience -> ["", "en", "experience"]
     const segments = pathNoBase.split("/");
 
-    return [
-        { code: "en", name: ui.en["nav.langName"] || "English" },
-        { code: "es", name: ui.es["nav.langName"] || "Español" },
-        { code: "ja", name: ui.ja["nav.langName"] || "日本語" },
-    ].map((langObj) => {
+    const supportedLocales = Object.keys(ui) as (keyof typeof ui)[];
+
+    return supportedLocales.map((code) => {
+        const name =
+            (ui[code] as Record<string, string>)["nav.langName"] || code;
+        const langObj = { code, name };
         // Create new segments by replacing the current lang
         const newSegments = [...segments];
 

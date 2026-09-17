@@ -1,0 +1,73 @@
+import type { UIStrings } from "./en";
+
+export const es = {
+    "nav.projects": "Proyectos",
+    "nav.about": "Sobre mí",
+    "nav.tech": "Tecnologías",
+    "nav.certifications": "Certificaciones",
+    "nav.experience": "Experiencia",
+    "nav.experienceKey": "Trayectoria & Impacto",
+    "nav.language": "Idioma",
+    "nav.langName": "Español",
+    "nav.contact": "Contacto",
+    "nav.blog": "Blog",
+    "nav.menu": "Menú",
+    "hero.cta": "Descargar CV",
+    "hero.greeting": "Hola, soy",
+    "hero.currentRole": "Actualmente en",
+    "hero.description":
+        "Especializado en plataformas de alta escalabilidad, soluciones Cloud y arquitecturas de software robustas.",
+    "hero.viewProjects": "Ver Proyectos",
+    "about.p1":
+        "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-fg-strong font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-fg-strong font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-accent'>Java, Spring Boot, Python</span> y <span class='text-accent'>Cloud Computing</span>.",
+    "about.p2":
+        "Gran interés en el diseño de <span class='text-fg-strong font-semibold'>Arquitecturas de Software</span>, <span class='text-fg-strong font-semibold'>DevOps</span> y <span class='text-fg-strong font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
+    "about.focusAreas": "Áreas de Enfoque",
+    "about.architecture.title": "Arquitectura & Backend",
+    "about.architecture.subtitle": "Microservicios y APIs",
+    "about.cloud.title": "Cloud & DevOps",
+    "about.cloud.subtitle": "AWS y Escalabilidad",
+    "about.data.title": "Ciencia de Datos",
+    "about.data.subtitle": "Análisis e Insights",
+    "section.viewAllCerts": "Ver todas las certificaciones ->",
+    "section.viewAllProjects": "Ver archivo de proyectos",
+    "section.viewFullTech": "Ver todo el stack tecnológico ->",
+    "section.viewFullExperience": "Ver Experiencia Completa",
+    "section.downloadResume": "Descargar CV en PDF",
+    "ui.professional": "Profesional",
+    "ui.current": "Actualidad",
+    "ui.all": "Todos",
+    "ui.filterBy": "Filtrar por",
+    "ui.more": "Más",
+    "ui.noProjects": "No se encontraron proyectos para este filtro.",
+    "ui.sortBy": "Ordenar por Fecha",
+    "ui.sortDesc": "Más recientes",
+    "ui.sortAsc": "Más antiguos",
+    "page.techStackTitle": "Stack Tecnológico Completo",
+    "page.techStackDescription":
+        "Una visión completa de las herramientas, lenguajes y frameworks que utilizo para construir soluciones digitales robustas.",
+    "page.projectsDescription":
+        "Una muestra de mis proyectos técnicos, destacando arquitecturas backend escalables y aplicaciones full-stack.",
+    "page.certificationsDescription":
+        "Certificaciones profesionales y logros que validan mi experiencia técnica.",
+    "404.title": "Página no encontrada",
+    "404.description": "La página que buscas no existe o ha sido movida.",
+    "404.button": "Volver al Inicio",
+    "404.unsupportedLang":
+        "El idioma solicitado no está soportado. Redírigiendo a la versión en inglés...",
+    "footer.copyright": "© 2026 MeloDev. Todos los derechos reservados.",
+    "aria.page": "página",
+    "hero.latestAchievement": "Último Logro",
+    "credly.verified": "Credenciales Verificadas",
+    "credly.description":
+        "Verifica todas mis insignias y certificados digitales directamente en Credly.",
+    "credly.viewProfile": "Ver Perfil",
+    "toast.title": "Idioma no disponible",
+    "toast.prefix": "El contenido no está disponible en",
+    "toast.suffix": "todavía. Mostrando la versión en inglés.",
+    "proof.remote": "Trabajo remoto",
+    "cta.title": "Construyamos algo grande",
+    "cta.description":
+        "Abierto a nuevas oportunidades en backend, cloud y datos. Escríbeme o descarga mi CV.",
+    "cta.schedule": "Agendar una llamada",
+} satisfies UIStrings;
