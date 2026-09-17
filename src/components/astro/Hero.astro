@@ -10,7 +10,7 @@ import {
 import { siteConfig } from "../../site.config";
 import { getCVDetails } from "../../utils/cv";
 import { getBentoSkills } from "../../utils/skills";
-import { getPrimarySocials, getSecondarySocials } from "../../utils/social";
+import { getPrimarySocials } from "../../utils/social";
 import { EXPERIENCE } from "../../utils/experience";
 import { publicFileExists } from "../../utils/files";
 import Section from "../ui/Section.astro";
@@ -37,6 +37,8 @@ const techLogos = getBentoSkills().map((skill) => ({
     src: skill.icon,
     brand: skill.featured?.brand,
 }));
+
+const currentJob = EXPERIENCE.find((job) => job.current);
 ---
 
 <Section id="hero" tone="base" width="wide" space="lg" backdrop="grid">
@@ -110,297 +112,144 @@ const techLogos = getBentoSkills().map((skill) => ({
             </div>
         </Card>
 
-        <!-- 2. Main Socials (Compact Stack) -->
-        <Card
-            variant="glass"
-            radius="bento"
-            pad="sm"
-            noise
-            class="md:col-span-1 md:row-span-1 flex flex-col gap-3 justify-center group"
-        >
-            {
-                getPrimarySocials().map((social) => (
-                    <a
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-raised hover:bg-surface border border-border hover:border-border-accent transition-all group/link relative overflow-hidden"
-                    >
-                        <span
-                            class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-sunken text-fg p-1.5 group-hover/link:scale-110 transition-transform"
-                            set:html={social.icon}
-                        />
-
-                        <div class="flex flex-col">
-                            <span class="text-xs font-bold text-fg group-hover/link:text-action-text transition-colors leading-tight">
-                                {social.name}
-                            </span>
-                            <span class="text-[10px] text-fg-subtle font-medium leading-tight">
-                                {social.label}
-                            </span>
-                        </div>
-                        <div class="absolute right-2 text-fg-subtle opacity-0 group-hover/link:opacity-100 transition-opacity">
-                            <svg
-                                class="w-3 h-3"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M7 17L17 7M17 7H7M17 7V17"
-                                />
-                            </svg>
-                        </div>
-                    </a>
-                ))
-            }
-        </Card>
-
-        <!-- 3. Latest Certification (Dynamic) -->
-        {
-            latestCert && (
-                <Card
-                    as="a"
-                    href="#certifications"
-                    variant="glass"
-                    radius="bento"
-                    pad="sm"
-                    interactive
-                    glow
-                    noise
-                    class="md:col-span-1 md:row-span-1 flex flex-col items-center justify-between group"
-                >
-                    <div class="relative z-10 w-full flex flex-col items-center h-full">
-                        <p class="text-[10px] text-action-text font-heading mb-2 text-center uppercase tracking-widest font-bold animate-pulse">
-                            {t("hero.latestAchievement")}
-                        </p>
-
-                        <div class="flex-grow flex items-center justify-center py-2">
-                            {latestCert.data.badge ? (
-                                <div class="w-16 h-16 relative filter drop-shadow-[0_0_15px_color-mix(in_oklab,var(--accent)_20%,transparent)] group-hover:drop-shadow-[0_0_20px_color-mix(in_oklab,var(--accent)_40%,transparent)] group-hover:scale-110 transition-all duration-500 ease-out">
-                                    <Image
-                                        src={
-                                            latestCert.data.badge.startsWith(
-                                                "http",
-                                            )
-                                                ? latestCert.data.badge
-                                                : import.meta.env.BASE_URL.replace(
-                                                      /\/$/,
-                                                      "",
-                                                  ) + latestCert.data.badge
-                                        }
-                                        alt={latestCert.data.name}
-                                        width={64}
-                                        height={64}
-                                        class="w-full h-full object-contain"
-                                        loading="eager"
-                                    />
-                                </div>
-                            ) : (
-                                <span class="text-4xl group-hover:scale-110 transition-transform duration-500">
-                                    🏆
-                                </span>
-                            )}
-                        </div>
-
-                        <div class="text-center mt-2 transform group-hover:-translate-y-1 transition-transform duration-500">
-                            <h3 class="text-xs font-heading font-bold text-fg-strong leading-tight group-hover:text-accent transition-colors duration-300 line-clamp-2">
-                                {latestCert.data.name}
-                            </h3>
-                            <p class="text-[10px] text-fg-subtle mt-1 group-hover:text-fg-muted transition-colors duration-300">
-                                {latestCert.data.date}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Arrow Indicator */}
-                    <div class="absolute top-3 right-3 text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
-                        <svg
-                            class="w-3 h-3"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                            />
-                        </svg>
-                    </div>
-                </Card>
-            )
-        }
-
-        <!-- 4. Experience / Timeline Card (Dynamic) -->
+        <!-- 2. Currently (role + company + core stack) -->
         <Card
             as="a"
-            href="#experience"
+            href={getRelativeLocaleUrl(lang, "/experience")}
             variant="glass"
             radius="bento"
             pad="sm"
             interactive
             noise
-            class="md:col-span-1 md:row-span-1 flex flex-col justify-between group"
+            class="md:col-span-2 md:row-span-1 flex flex-col justify-center gap-4 group"
         >
-            <div class="flex items-center justify-between mb-2 relative z-10">
+            <div class="flex items-center justify-between relative z-10">
                 <p
                     class="text-[10px] text-fg-subtle font-mono uppercase tracking-widest font-medium"
                 >
-                    {t("nav.experience")}
+                    {t("hero.currentRole")}
                 </p>
-                <div class="flex items-center gap-2">
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-action opacity-75"
-                        ></span>
-                        <span
-                            class="relative inline-flex rounded-full h-2 w-2 bg-action"
-                        ></span>
-                    </span>
-                </div>
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-action opacity-75"
+                    ></span>
+                    <span
+                        class="relative inline-flex rounded-full h-2 w-2 bg-action"
+                    ></span>
+                </span>
             </div>
 
+            {
+                currentJob && (
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border border-border-strong bg-surface-raised">
+                            {publicFileExists(currentJob.logo) ? (
+                                <img
+                                    src={currentJob.logo}
+                                    alt={currentJob.company}
+                                    class="w-full h-full object-contain p-1.5"
+                                />
+                            ) : (
+                                <span class="text-accent font-bold text-sm">
+                                    {currentJob.company.charAt(0)}
+                                </span>
+                            )}
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold leading-none text-fg group-hover:text-accent transition-colors">
+                                {currentJob.role}
+                            </h4>
+                            <p class="text-[10px] text-fg-subtle mt-1 font-mono">
+                                {currentJob.company}
+                            </p>
+                        </div>
+                    </div>
+                )
+            }
+
             <div
-                class="relative z-10 flex-grow flex flex-col gap-3 justify-center"
+                class="flex flex-wrap items-center gap-2 pt-3 border-t border-border relative z-10"
             >
                 {
-                    EXPERIENCE.slice(0, 2).map((job) => (
-                        <div
-                            class={`flex items-center gap-3 ${!job.current ? "opacity-60 group-hover:opacity-100 transition-opacity duration-300" : ""}`}
-                        >
-                            <div
-                                class={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border border-border shadow-sm ${job.current ? "bg-surface-raised border-border-strong" : "bg-surface-raised"}`}
-                            >
-                                {publicFileExists(job.logo) ? (
-                                    <img
-                                        src={job.logo}
-                                        alt={job.company}
-                                        class="w-full h-full object-contain p-1.5"
-                                    />
-                                ) : (
-                                    <div class="w-full h-full flex items-center justify-center bg-surface-raised border border-border-strong rounded-lg text-accent font-bold text-sm">
-                                        {job.company.charAt(0)}
-                                    </div>
-                                )}
-                            </div>
-                            <div>
-                                <h4
-                                    class={`text-sm font-bold leading-none ${job.current ? "text-fg group-hover:text-accent transition-colors" : "text-fg-muted font-medium"}`}
-                                >
-                                    {job.role.replace("Developer", "").trim()}
-                                </h4>
-                                <p class="text-[10px] text-fg-subtle mt-1 font-mono">
-                                    {job.startDate} -{" "}
-                                    {job.current
-                                        ? t("ui.current")
-                                        : job.endDate}
-                                </p>
-                            </div>
-                        </div>
+                    techLogos.slice(0, 6).map((tech) => (
+                        <Image
+                            src={tech.src}
+                            alt={tech.label}
+                            title={tech.label}
+                            width={24}
+                            height={24}
+                            class="h-6 w-6 object-contain opacity-80 grayscale transition-all group-hover:grayscale-0 group-hover:opacity-100"
+                        />
                     ))
                 }
-            </div>
-
-            <div
-                class="relative z-10 mt-2 flex justify-end border-t border-border pt-2"
-            >
-                <span
-                    class="text-[10px] text-accent group-hover:text-fg-strong transition-colors flex items-center gap-1 font-medium"
-                >
+                <span class="ml-auto text-[10px] text-accent group-hover:text-fg-strong transition-colors">
                     {t("section.viewFullExperience")}
-                    <span class="group-hover:translate-x-1 transition-transform"
-                        >-></span
-                    >
                 </span>
             </div>
         </Card>
 
-        <!-- 5. Tech Stack (Compact Grid) -->
+        <!-- 3. Proof (latest certification + socials) -->
         <Card
             variant="glass"
             radius="bento"
             pad="sm"
+            glow
             noise
-            class="md:col-span-1 md:row-span-1 flex flex-col group"
+            class="md:col-span-2 md:row-span-1 flex items-center gap-4 group"
         >
-            <div class="flex items-center justify-between mb-4 relative z-10">
-                <p
-                    class="text-[10px] text-fg-subtle font-mono uppercase tracking-widest font-medium"
-                >
-                    {t("nav.tech") || "Tech Stack"}
-                </p>
-                <a
-                    href={getRelativeLocaleUrl(lang, "/tech-stack")}
-                    class="text-[10px] text-accent hover:text-fg-strong transition-colors opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300"
-                >
-                    {t("section.viewFullTech")?.split(" ")[0] || "View"} ->
-                </a>
-            </div>
+            {
+                latestCert && (
+                    <a
+                        href={getRelativeLocaleUrl(lang, "/certifications")}
+                        class="flex flex-1 items-center gap-3 min-w-0"
+                    >
+                        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                            {latestCert.data.badge ? (
+                                <Image
+                                    src={
+                                        latestCert.data.badge.startsWith(
+                                            "http",
+                                        )
+                                            ? latestCert.data.badge
+                                            : import.meta.env.BASE_URL.replace(
+                                                  /\/$/,
+                                                  "",
+                                              ) + latestCert.data.badge
+                                    }
+                                    alt={latestCert.data.name}
+                                    width={48}
+                                    height={48}
+                                    class="w-full h-full object-contain"
+                                    loading="eager"
+                                />
+                            ) : (
+                                <span class="text-3xl">🏆</span>
+                            )}
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] text-action-text font-heading uppercase tracking-widest font-bold">
+                                {t("hero.latestAchievement")}
+                            </p>
+                            <h3 class="text-sm font-bold text-fg-strong leading-tight truncate group-hover:text-accent transition-colors">
+                                {latestCert.data.name}
+                            </h3>
+                        </div>
+                    </a>
+                )
+            }
 
-            <div class="grid grid-cols-4 gap-3 relative z-10 content-start">
+            <div class="flex items-center gap-2 border-l border-border pl-4 flex-shrink-0">
                 {
-                    (() => {
-                        const MAX_ICONS = 8;
-                        const displayedSkills = techLogos.slice(
-                            0,
-                            MAX_ICONS - 1,
-                        ); // Save 1 slot for "More" button
-                        const remaining =
-                            techLogos.length - displayedSkills.length;
-
-                        return (
-                            <>
-                                {displayedSkills.map((tech) => (
-                                    <div
-                                        class="group/icon relative w-full aspect-square flex items-center justify-center p-2 rounded-lg border border-border bg-surface-raised group-hover/icon:border-[var(--brand)]/40 group-hover/icon:bg-[var(--brand)]/20 hover:scale-105 transition-transform cursor-default"
-                                        style={
-                                            tech.brand
-                                                ? `--brand: ${tech.brand}`
-                                                : undefined
-                                        }
-                                    >
-                                        <Image
-                                            src={tech.src}
-                                            alt={tech.label}
-                                            width={64}
-                                            height={64}
-                                            class="w-full h-full object-contain filter grayscale opacity-80 brightness-125 group-hover/icon:grayscale-0 group-hover/icon:opacity-100 group-hover/icon:brightness-100 transition-all duration-300"
-                                        />
-
-                                        {/* Dynamic Tooltip */}
-                                        <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-raised text-fg text-[10px] font-bold px-2 py-1 rounded-md opacity-0 group-hover/icon:opacity-100 transform translate-y-2 group-hover/icon:translate-y-0 transition-all duration-200 pointer-events-none whitespace-nowrap border border-border-strong shadow-xl z-20">
-                                            {tech.label}
-                                            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-raised border-r border-b border-border-strong rotate-45" />
-                                        </div>
-                                    </div>
-                                ))}
-
-                                {/* View All Link/Button */}
-                                <a
-                                    href={getRelativeLocaleUrl(
-                                        lang,
-                                        "/tech-stack",
-                                    )}
-                                    class="group/more relative w-full aspect-square flex items-center justify-center rounded-lg border border-border bg-surface-raised group-hover:bg-surface group-hover:border-border-accent hover:!bg-accent-surface hover:!border-accent transition-all cursor-pointer"
-                                >
-                                    <span class="text-xs font-bold text-fg-muted group-hover:text-fg group-hover/more:text-accent transition-colors">
-                                        +{remaining}
-                                    </span>
-
-                                    {/* Dynamic Tooltip for +N */}
-                                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-raised text-fg text-[10px] font-bold px-2 py-1 rounded-md opacity-0 group-hover/more:opacity-100 transform translate-y-2 group-hover/more:translate-y-0 transition-all duration-200 pointer-events-none whitespace-nowrap border border-border-strong shadow-xl z-20">
-                                        {t("ui.more") || "View All"}
-                                        <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-raised border-r border-b border-border-strong rotate-45" />
-                                    </div>
-                                </a>
-                            </>
-                        );
-                    })()
+                    getPrimarySocials().map((social) => (
+                        <a
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={social.name}
+                            class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-raised hover:bg-surface border border-border hover:border-border-accent text-fg p-2 transition-colors"
+                            set:html={social.icon}
+                        />
+                    ))
                 }
             </div>
         </Card>

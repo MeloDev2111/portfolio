@@ -1,0 +1,58 @@
+---
+import Card from "./Card.astro";
+import Button from "./Button.astro";
+import { siteConfig } from "../../site.config";
+import { getCVDetails } from "../../utils/cv";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { url: cvUrl, filename: cvFilename } = getCVDetails(lang);
+const { calendly, email, linkedin } = siteConfig.contact;
+---
+
+<Card
+    variant="glass"
+    radius="panel"
+    pad="lg"
+    glow
+    noise
+    class="flex flex-col items-center gap-6 text-center"
+>
+    <h2 class="font-heading text-3xl font-bold text-fg-strong md:text-4xl">
+        {t("cta.title")}
+    </h2>
+    <p class="max-w-xl text-fg-muted">{t("cta.description")}</p>
+    <div class="flex flex-wrap justify-center gap-4">
+        <Button
+            href={cvUrl}
+            download={cvFilename}
+            external
+            variant="primary"
+            size="lg"
+        >
+            {t("hero.cta")}
+        </Button>
+        {
+            linkedin && (
+                <Button href={linkedin} external variant="secondary" size="lg">
+                    {t("nav.contact")}
+                </Button>
+            )
+        }
+        {
+            calendly && (
+                <Button href={calendly} external variant="secondary" size="lg">
+                    {t("cta.schedule")}
+                </Button>
+            )
+        }
+        {
+            !calendly && email && (
+                <Button href={`mailto:${email}`} variant="secondary" size="lg">
+                    {t("nav.contact")}
+                </Button>
+            )
+        }
+    </div>
+</Card>

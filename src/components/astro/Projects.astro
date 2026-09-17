@@ -27,7 +27,7 @@ const projects = await getLocalizedProjects(lang);
         {
             projects
                 .filter((p) => p.data.featured)
-                .slice(0, 2)
+                .slice(0, 3)
                 .map((project) => {
                     const cleanProps = JSON.parse(
                         JSON.stringify({
