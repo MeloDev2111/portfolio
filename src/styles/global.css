@@ -1,9 +1,6 @@
 @import "tailwindcss";
+@import "./tokens.css";
 @config "../../tailwind.config.mjs";
-
-@theme {
-    /* We can extend here too if we want, but we used the config file */
-}
 
 /* Base styles */
 @layer base {
@@ -60,13 +57,9 @@
         @apply outline-none ring-2 ring-[#c08b5a] ring-offset-2 ring-offset-[#0c111c];
     }
 
-    /* Shared Utility Classes */
+    /* Shared Utility Classes — thin aliases over the tokens.css @utility effects */
     .glass-card {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        @apply glass;
     }
 
     .glass-card:hover {

@@ -1,0 +1,319 @@
+/**
+ * Design tokens — "Gunmetal & Copper".
+ * Source of truth: docs/DESIGN_SYSTEM.md
+ *
+ * Three tiers:
+ *   1. @theme         — static primitives. Never referenced directly by components.
+ *   2. :root          — semantic tokens (plain custom properties), remapped per theme.
+ *   3. @theme inline  — bridges semantics into Tailwind's --color-* namespace.
+ *
+ * Dark is the only theme wired up so far (default). The [data-theme="light"]
+ * block lands in phase 2 alongside the toggle.
+ *
+ * Legacy aliases (--color-gunmetal, --color-gold, --color-light, --color-copper,
+ * --color-charcoal) exist so `tailwind.config.mjs` and this file can coexist
+ * without any component edits. They are removed in phase 6 along with the JS config.
+ */
+
+@theme {
+    /* Copper — brand */
+    --color-copper-50: #fbf5ef;
+    --color-copper-100: #f4e6d6;
+    --color-copper-200: #e8cdae;
+    --color-copper-300: #daae82;
+    --color-copper-400: #c08b5a;
+    --color-copper-500: #ab7546;
+    --color-copper-600: #96602f;
+    --color-copper-700: #8a5c2e;
+    --color-copper-800: #5e3d1f;
+    --color-copper-900: #3a2614;
+
+    /* Amber — action & live signal */
+    --color-amber-300: #fcd34d;
+    --color-amber-400: #fbbf24;
+    --color-amber-500: #f59e0b;
+    --color-amber-600: #d97706;
+    --color-amber-700: #b45309;
+    --color-amber-800: #92400e;
+
+    /* Gunmetal — dark neutrals */
+    --color-gunmetal-950: #070b12;
+    --color-gunmetal-900: #0c111c;
+    --color-gunmetal-800: #141b2a;
+    --color-gunmetal-700: #1c2536;
+    --color-gunmetal-600: #2a3547;
+    --color-gunmetal-500: #414d61;
+    --color-gunmetal-400: #6b7789;
+    --color-gunmetal-300: #a2acbd;
+    --color-gunmetal-200: #c9d0da;
+    --color-gunmetal-100: #e1e1e0;
+
+    /* Paper — light neutrals (warm). Unused until phase 2. */
+    --color-paper-50: #fffdfa;
+    --color-paper-100: #faf7f2;
+    --color-paper-200: #f2ece2;
+    --color-paper-300: #e6ddcf;
+    --color-paper-400: #cfc4b3;
+    --color-paper-500: #9c9385;
+    --color-paper-600: #6b7078;
+    --color-paper-700: #55595f;
+    --color-paper-800: #33363b;
+    --color-paper-900: #0c111c;
+
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "JetBrains Mono", SFMono-Regular, monospace;
+
+    --radius-card: 1rem;
+    --radius-bento: 1.25rem;
+    --radius-panel: 1.5rem;
+
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Legacy aliases — remove in phase 6 */
+    --color-gunmetal: #0c111c;
+    --color-charcoal: #1f2937;
+    --color-gold: #c08b5a;
+    --color-light: #e1e1e0;
+    --color-copper: #c08b5a;
+}
+
+:root {
+    /* Surfaces */
+    --bg: var(--color-gunmetal-900);
+    --bg-subtle: var(--color-gunmetal-800);
+    --surface: var(--color-gunmetal-800);
+    --surface-raised: var(--color-gunmetal-700);
+    --surface-sunken: var(--color-gunmetal-950);
+
+    /* Borders */
+    --border: rgb(255 255 255 / 8%);
+    --border-strong: rgb(255 255 255 / 16%);
+    --border-accent: var(--color-copper-400);
+
+    /* Text */
+    --fg: var(--color-gunmetal-100);
+    --fg-strong: #ffffff;
+    --fg-muted: var(--color-gunmetal-300);
+    --fg-subtle: #7b8797;
+
+    /* Copper — identity */
+    --accent: var(--color-copper-400);
+    --accent-hover: var(--color-copper-300);
+    --accent-fg: var(--color-gunmetal-900);
+    --accent-surface: rgb(192 139 90 / 12%);
+
+    /* Amber — action & liveness */
+    --action: var(--color-amber-500);
+    --action-hover: var(--color-amber-400);
+    --action-fg: var(--color-gunmetal-900);
+    --action-surface: rgb(245 158 11 / 12%);
+    --action-text: var(--color-amber-500);
+
+    /* Effects */
+    --glass-bg: rgb(255 255 255 / 3%);
+    --glass-bg-hover: rgb(255 255 255 / 5%);
+    --glass-border: rgb(255 255 255 / 5%);
+    --glass-blur: 10px;
+    --glass-shadow: 0 4px 30px rgb(0 0 0 / 20%);
+    --glow-strength: 1;
+    --noise-blend: overlay;
+}
+
+@theme inline {
+    --color-bg: var(--bg);
+    --color-bg-subtle: var(--bg-subtle);
+    --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
+    --color-surface-sunken: var(--surface-sunken);
+
+    --color-border: var(--border);
+    --color-border-strong: var(--border-strong);
+    --color-border-accent: var(--border-accent);
+
+    --color-fg: var(--fg);
+    --color-fg-strong: var(--fg-strong);
+    --color-fg-muted: var(--fg-muted);
+    --color-fg-subtle: var(--fg-subtle);
+
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+    --color-accent-fg: var(--accent-fg);
+    --color-accent-surface: var(--accent-surface);
+
+    --color-action: var(--action);
+    --color-action-hover: var(--action-hover);
+    --color-action-fg: var(--action-fg);
+    --color-action-surface: var(--action-surface);
+    --color-action-text: var(--action-text);
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+/*
+ * Effects — @utility, not @layer base classes. A class in @layer base loses
+ * to every utility, which is why components today re-declare
+ * `border border-white/5` on top of `.glass-card`. As @utility these
+ * compose correctly and support variants (md:glass, hover:glass).
+ */
+
+@utility glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+@utility glass-interactive {
+    transition:
+        background-color 300ms var(--ease-out-soft),
+        border-color 300ms var(--ease-out-soft),
+        box-shadow 300ms var(--ease-out-soft),
+        transform 300ms var(--ease-out-soft);
+
+    &:hover {
+        background: var(--glass-bg-hover);
+        border-color: var(--border-accent);
+        box-shadow:
+            var(--glass-shadow),
+            0 0 30px color-mix(in oklab, var(--accent) 15%, transparent);
+        transform: translateY(-2px);
+    }
+}
+
+@utility glow-accent {
+    box-shadow: 0 0 calc(30px * var(--glow-strength))
+        color-mix(
+            in oklab,
+            var(--accent) calc(15% * var(--glow-strength)),
+            transparent
+        );
+}
+
+@utility bloom {
+    position: absolute;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--accent) 10%, transparent);
+    filter: blur(64px);
+    pointer-events: none;
+}
+
+@utility noise {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        mix-blend-mode: var(--noise-blend);
+        pointer-events: none;
+    }
+}
+
+@utility grid-backdrop {
+    background-image:
+        linear-gradient(to right, rgb(129 141 144 / 6%) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(129 141 144 / 6%) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(
+        circle at center,
+        black 40%,
+        transparent 100%
+    );
+}
+
+@utility prose {
+    max-width: 68ch;
+    color: var(--fg);
+
+    & h2 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--fg-strong);
+        margin-top: 2em;
+        margin-bottom: 0.75em;
+    }
+
+    & h3,
+    & h4 {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--fg-strong);
+        margin-top: 1.75em;
+        margin-bottom: 0.5em;
+    }
+
+    & p {
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        line-height: 1.75;
+    }
+
+    & a {
+        color: var(--accent);
+        text-underline-offset: 2px;
+
+        &:hover {
+            color: var(--accent-hover);
+        }
+    }
+
+    & strong {
+        color: var(--fg-strong);
+        font-weight: 600;
+    }
+
+    & ul,
+    & ol {
+        margin-top: 1.25em;
+        margin-bottom: 1.25em;
+        padding-left: 1.5em;
+    }
+
+    & li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    & code {
+        font-family: var(--font-mono);
+        font-size: 0.875em;
+        background: var(--surface-sunken);
+        border-radius: 0.25em;
+        padding: 0.15em 0.4em;
+    }
+
+    & pre {
+        background: var(--surface-sunken);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        padding: 1em;
+        overflow-x: auto;
+
+        & code {
+            background: none;
+            padding: 0;
+        }
+    }
+
+    & blockquote {
+        border-left: 2px solid var(--border-accent);
+        padding-left: 1em;
+        color: var(--fg-muted);
+        font-style: italic;
+    }
+
+    & img {
+        border-radius: var(--radius-card);
+    }
+
+    & hr {
+        border-color: var(--border);
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+}
