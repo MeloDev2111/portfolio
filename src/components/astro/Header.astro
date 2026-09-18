@@ -163,12 +163,11 @@ const navItems = nav
             header?.classList.remove("-translate-y-[150%]", "opacity-0");
         }
 
-        // 2. Backdrop Logic
-        if (currentScrollY > 20) {
-            header?.classList.add("bg-bg/80", "backdrop-blur-md");
-        } else {
-            header?.classList.remove("bg-bg/80", "backdrop-blur-md");
-        }
+        // No backdrop on the <header> itself by design: it is a layout
+        // container for a floating-pill navbar, and each cluster inside it
+        // (brand mark, nav pill, actions) carries its own surface. Adding a
+        // second one behind them read as a heavy slab. Legibility while
+        // scrolling is handled by the hide-on-scroll-down behaviour above.
 
         lastScrollY = currentScrollY;
     }

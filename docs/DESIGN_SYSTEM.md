@@ -333,6 +333,14 @@ The `js` class is added by the blocking theme script, so this costs no extra req
 
 ---
 
+### Navbar
+
+The header is a **floating pill**, not a bar: it is a transparent layout
+container, and each cluster inside it (brand mark, nav pill, actions) carries
+its own surface. It must not gain a background of its own on scroll — a second
+surface behind the pills reads as a heavy slab. Legibility while scrolling is
+handled by hiding the header on scroll-down instead.
+
 ## 9. Accessibility contract
 
 Non-negotiables. A change that breaks one of these does not ship.
