@@ -42,7 +42,14 @@ const techLogos = getBentoSkills().map((skill) => ({
 const currentJob = EXPERIENCE.find((job) => job.current);
 ---
 
-<Section id="hero" tone="base" width="wide" space="lg" backdrop="grid">
+<Section
+    id="hero"
+    tone="base"
+    width="wide"
+    space="none"
+    backdrop="grid"
+    class="pt-6 pb-16 md:pt-8 md:pb-24"
+>
     <div
         class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]"
     >
