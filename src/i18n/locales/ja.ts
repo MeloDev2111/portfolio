@@ -58,6 +58,8 @@ export const ja = {
         "リクエストされた言語はサポートされていません。英語版にリダイレクトしています...",
     "footer.copyright": "© 2026 MeloDev. All rights reserved.",
     "aria.page": "ページ",
+    "aria.toggleTheme": "テーマを切り替える",
+    "aria.backToTop": "トップへ戻る",
     "hero.latestAchievement": "最新の実績",
     "credly.verified": "確認済みの資格",
     "credly.description":

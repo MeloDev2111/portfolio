@@ -1,10 +1,20 @@
 ---
 import ThemeScript from "../layouts/ThemeScript.astro";
 import { getRelativeLocaleUrl } from "../i18n/utils";
+import { THEME_COLOR, THEME_FG } from "../utils/theme";
 
 const enUrl = getRelativeLocaleUrl("en", "");
 const esUrl = getRelativeLocaleUrl("es", "");
 const jaUrl = getRelativeLocaleUrl("ja", "");
+
+// This page carries no stylesheet by design — it redirects immediately, so a
+// blocking CSS request would be pure waste. Built from the theme tokens and
+// emitted inline so ThemeScript has something to colour.
+const criticalCss = `
+:root{color-scheme:dark;background:${THEME_COLOR.dark};color:${THEME_FG.dark}}
+:root[data-theme="light"]{color-scheme:light;background:${THEME_COLOR.light};color:${THEME_FG.light}}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+`;
 ---
 
 <!doctype html>
@@ -13,6 +23,7 @@ const jaUrl = getRelativeLocaleUrl("ja", "");
         <meta charset="UTF-8" />
         <ThemeScript />
         <title>Redirecting...</title>
+        <style is:inline set:html={criticalCss}></style>
         <!-- Default fallback for no-JS -->
         <meta http-equiv="refresh" content={`0;url=${enUrl}`} />
         <script define:vars={{ enUrl, esUrl, jaUrl }}>
@@ -32,7 +43,7 @@ const jaUrl = getRelativeLocaleUrl("ja", "");
             }
         </script>
     </head>
-    <body class="bg-bg text-fg flex items-center justify-center h-screen">
+    <body>
         <noscript>
             <p>
                 Redirecting to <a href={enUrl}>{enUrl}</a>...

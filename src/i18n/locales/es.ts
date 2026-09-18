@@ -57,6 +57,8 @@ export const es = {
         "El idioma solicitado no está soportado. Redírigiendo a la versión en inglés...",
     "footer.copyright": "© 2026 MeloDev. Todos los derechos reservados.",
     "aria.page": "página",
+    "aria.toggleTheme": "Cambiar tema",
+    "aria.backToTop": "Volver arriba",
     "hero.latestAchievement": "Último Logro",
     "credly.verified": "Credenciales Verificadas",
     "credly.description":

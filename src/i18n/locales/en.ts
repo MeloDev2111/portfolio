@@ -56,6 +56,8 @@ export const en = {
         "The requested language is not supported. Redirecting to English version...",
     "footer.copyright": "© 2026 MeloDev. All rights reserved.",
     "aria.page": "page",
+    "aria.toggleTheme": "Toggle theme",
+    "aria.backToTop": "Back to top",
     "hero.latestAchievement": "Latest Achievement",
     "credly.verified": "Verified Credentials",
     "credly.description":

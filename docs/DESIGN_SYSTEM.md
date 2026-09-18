@@ -213,15 +213,16 @@ Elevation is expressed by `--glass-shadow`, which is theme-dependent and deliber
 
 **Phase 1.** All effects are `@utility` declarations, not classes in `@layer base`. This matters: a class in `@layer base` loses to _every_ utility, which is exactly why cards today re-declare `border border-white/5` on top of `.glass-card`. As utilities they compose correctly and support variants (`md:glass`, `hover:glass`).
 
-| Utility             | What it does                                                                                                                   |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `glass`             | Themed frosted surface. Dark = translucent dark, `blur(10px)`. Light = frosted white at 70%, `blur(16px)`, with a real shadow. |
-| `glass-interactive` | Hover: raise background, accent border, add glow, `translateY(-2px)`.                                                          |
-| `glow-accent`       | Copper bloom, multiplied by `--glow-strength`.                                                                                 |
-| `bloom`             | The large blurred radial blob (replaces the hand-built `-top-20 -right-20 blur-3xl` div).                                      |
-| `noise`             | Per-card film grain via `::after`. Blend mode flips: `overlay` on dark, `multiply` on paper.                                   |
-| `grid-backdrop`     | The 40px grid lines with a radial mask, un-scoped so any section can use it.                                                   |
-| `prose`             | Token-driven long-form typography.                                                                                             |
+| Utility             | What it does                                                                                                                                                                  |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `glass`             | Themed frosted surface. Dark = translucent dark, `blur(10px)`. Light = frosted white at 70%, `blur(16px)`, with a real shadow.                                                |
+| `glass-interactive` | Hover: raise background, accent border, add glow, `translateY(-2px)`.                                                                                                         |
+| `glow-accent`       | Copper bloom, multiplied by `--glow-strength`.                                                                                                                                |
+| `bloom`             | The large blurred radial blob (replaces the hand-built `-top-20 -right-20 blur-3xl` div).                                                                                     |
+| `noise`             | Per-card film grain via `::after`. Blend mode flips: `overlay` on dark, `multiply` on paper.                                                                                  |
+| `--grain-opacity`   | Page-level grain strength (`body::before`). Pairs with `--noise-blend`, which flips `overlay`→`multiply` so the grain reads as print texture on paper instead of washing out. |
+| `grid-backdrop`     | The 40px grid lines with a radial mask, un-scoped so any section can use it.                                                                                                  |
+| `prose`             | Token-driven long-form typography.                                                                                                                                            |
 
 ### The glow trick
 
@@ -356,7 +357,8 @@ Non-negotiables. A change that breaks one of these does not ship.
 4. **No `min-h-[Nvh]` on sections**, no `scroll-snap`.
 5. **No gradient text.**
 6. **Any new color pair must be added to `tokens.test.ts`.**
-7. When something here is wrong, **fix this document in the same PR.** A stale design system is how the previous one eroded.
+7. **No `transition:persist` on anything whose content is computed per page or per locale.** A persisted element keeps its old DOM across a client-side swap, so `aria-current` and translated labels go stale and silently lie to assistive tech.
+8. When something here is wrong, **fix this document in the same PR.** A stale design system is how the previous one eroded.
 
 ---
 

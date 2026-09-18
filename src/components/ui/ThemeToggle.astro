@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <button
@@ -7,7 +10,7 @@
     type="button"
     role="switch"
     aria-checked="false"
-    aria-label="Toggle theme"
+    aria-label={t("aria.toggleTheme")}
     class="group relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-border-accent hover:text-fg active:scale-95"
 >
     <svg
@@ -37,7 +40,6 @@
             d="M12 3v1.5m0 15V21m9-9h-1.5m-15 0H3m15.36-6.36-1.06 1.06M6.7 17.3l-1.06 1.06m0-12.72 1.06 1.06M17.3 17.3l1.06 1.06M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z"
         ></path>
     </svg>
-    <span class="sr-only">Toggle theme</span>
 </button>
 
 <script>
