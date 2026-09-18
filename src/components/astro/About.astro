@@ -33,17 +33,9 @@ const focusAreas = [
 >
     <div class="grid gap-12 md:grid-cols-3 relative z-10">
         <!-- Bio -->
-        <div class="md:col-span-2 flex flex-col gap-6">
-            <div class="prose">
-                <p set:html={t("about.p1")} />
-                <p set:html={t("about.p2")} />
-            </div>
-
-            <div
-                class="mt-4 opacity-50 font-mono text-xs tracking-widest text-accent"
-            >
-                // ARCHITECTING_THE_FUTURE
-            </div>
+        <div class="md:col-span-2 prose">
+            <p set:html={t("about.p1")} />
+            <p set:html={t("about.p2")} />
         </div>
 
         <!-- Focus Areas -->

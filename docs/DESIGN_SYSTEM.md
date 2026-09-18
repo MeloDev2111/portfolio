@@ -365,8 +365,9 @@ Non-negotiables. A change that breaks one of these does not ship.
 4. **No `min-h-[Nvh]` on sections**, no `scroll-snap`.
 5. **No gradient text.**
 6. **Any new color pair must be added to `tokens.test.ts`.**
-7. **No `transition:persist` on anything whose content is computed per page or per locale.** A persisted element keeps its old DOM across a client-side swap, so `aria-current` and translated labels go stale and silently lie to assistive tech.
-8. When something here is wrong, **fix this document in the same PR.** A stale design system is how the previous one eroded.
+7. **No opacity on text.** A token that passes AA fails once it is faded: `text-accent opacity-50` measures 2.08:1 on paper and 2.44:1 on gunmetal. The contrast test cannot catch this because the failure is introduced in the component, not the token. Use `--fg-muted` or `--fg-subtle` instead.
+8. **No `transition:persist` on anything whose content is computed per page or per locale.** A persisted element keeps its old DOM across a client-side swap, so `aria-current` and translated labels go stale and silently lie to assistive tech.
+9. When something here is wrong, **fix this document in the same PR.** A stale design system is how the previous one eroded.
 
 ---
 
