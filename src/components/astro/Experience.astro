@@ -6,7 +6,6 @@ import {
 } from "../../i18n/utils";
 import { EXPERIENCE } from "../../utils/experience";
 import { publicFileExists } from "../../utils/files";
-import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 import Card from "../ui/Card.astro";
 import Tag from "../ui/Tag.astro";
@@ -47,163 +46,160 @@ const heading =
         : `${professionalWord} ${experienceWord}`;
 ---
 
-<Section id="experience" tone="base" width="wide" space="md" backdrop="grid">
-    <!-- Section Header -->
+{
+    showTitle && (
+        <SectionHeading
+            eyebrow={t("nav.experienceKey") || "CAREER PROGRESSION"}
+            title={heading}
+            accent={experienceWord}
+            class="mb-12 md:mb-20"
+        />
+    )
+}
+
+<!-- Vertical Timeline -->
+<ol
+    class="relative border-l border-border ml-3 md:ml-6 space-y-8 md:space-y-12 pl-6 md:pl-10"
+>
     {
-        showTitle && (
-            <SectionHeading
-                eyebrow={t("nav.experienceKey") || "CAREER PROGRESSION"}
-                title={heading}
-                accent={experienceWord}
-                class="mb-12 md:mb-20"
-            />
-        )
-    }
+        displayedExperience.map((job, index) => {
+            const startDate = new Date(job.startDate + "-15");
+            const endDate = job.current
+                ? new Date()
+                : new Date(job.endDate + "-15");
+            const formattedStartDate = startDate.toLocaleDateString(lang, {
+                year: "numeric",
+                month: "short",
+            });
+            const formattedEndDate = job.current
+                ? t("ui.current")
+                : endDate.toLocaleDateString(lang, {
+                      year: "numeric",
+                      month: "short",
+                  });
 
-    <!-- Vertical Timeline -->
-    <ol
-        class="relative border-l border-border ml-3 md:ml-6 space-y-8 md:space-y-12 pl-6 md:pl-10"
-    >
-        {
-            displayedExperience.map((job, index) => {
-                const startDate = new Date(job.startDate + "-15");
-                const endDate = job.current
-                    ? new Date()
-                    : new Date(job.endDate + "-15");
-                const formattedStartDate = startDate.toLocaleDateString(lang, {
-                    year: "numeric",
-                    month: "short",
-                });
-                const formattedEndDate = job.current
-                    ? t("ui.current")
-                    : endDate.toLocaleDateString(lang, {
-                          year: "numeric",
-                          month: "short",
-                      });
-
-                return (
-                    <Reveal as="li" index={index} class="relative group">
-                        <div
-                            class={`absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 md:w-5 md:h-5 rounded-full border-4 border-bg outline outline-1 outline-offset-2 transition-all duration-500 z-20
-                    ${
-                        job.current
-                            ? "bg-action outline-action shadow-[0_0_15px_color-mix(in_oklab,var(--action)_40%,transparent)] motion-safe:animate-pulse"
-                            : "bg-fg-subtle outline-fg-subtle group-hover:bg-accent group-hover:outline-accent"
-                    }`}
-                        />
-                        <Card
-                            variant="glass"
-                            radius="bento"
-                            pad="sm"
-                            interactive
-                            lift="x"
-                            class="relative"
-                        >
-                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-surface-raised border border-border items-center justify-center text-xl font-bold text-accent">
-                                        {publicFileExists(job.logo) ? (
-                                            <img
-                                                src={job.logo}
-                                                alt={job.company}
-                                                class="w-full h-full object-contain p-2"
-                                            />
-                                        ) : (
-                                            job.company.charAt(0)
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <h3 class="text-xl md:text-2xl font-bold text-fg-strong group-hover:text-accent transition-colors leading-tight">
-                                            {job.role}
-                                        </h3>
-                                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base font-medium">
-                                            <span class="text-action-text font-bold">
-                                                {job.company}
-                                            </span>
-                                            <span class="text-fg-subtle hidden md:inline">
-                                                •
-                                            </span>
-                                            <span class="text-fg-muted font-mono tracking-tight bg-surface-raised px-2 py-0.5 rounded text-xs md:text-sm">
-                                                {formattedStartDate} —{" "}
-                                                {formattedEndDate}
-                                            </span>
-                                        </div>
-                                    </div>
+            return (
+                <Reveal as="li" index={index} class="relative group">
+                    <div
+                        class={`absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 md:w-5 md:h-5 rounded-full border-4 border-bg outline outline-1 outline-offset-2 transition-all duration-500 z-20
+                ${
+                    job.current
+                        ? "bg-action outline-action shadow-[0_0_15px_color-mix(in_oklab,var(--action)_40%,transparent)] motion-safe:animate-pulse"
+                        : "bg-fg-subtle outline-fg-subtle group-hover:bg-accent group-hover:outline-accent"
+                }`}
+                    />
+                    <Card
+                        variant="glass"
+                        radius="bento"
+                        pad="sm"
+                        interactive
+                        lift="x"
+                        class="relative"
+                    >
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
+                            <div class="flex items-start gap-4">
+                                <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-surface-raised border border-border items-center justify-center text-xl font-bold text-accent">
+                                    {publicFileExists(job.logo) ? (
+                                        <img
+                                            src={job.logo}
+                                            alt={job.company}
+                                            class="w-full h-full object-contain p-2"
+                                        />
+                                    ) : (
+                                        job.company.charAt(0)
+                                    )}
                                 </div>
 
-                                {job.current && (
-                                    <Tag
-                                        variant="action"
-                                        size="xs"
-                                        class="self-start whitespace-nowrap mt-2 md:mt-0 uppercase tracking-widest"
-                                    >
-                                        {t("ui.current")}
-                                    </Tag>
-                                )}
+                                <div>
+                                    <h3 class="text-xl md:text-2xl font-bold text-fg-strong group-hover:text-accent transition-colors leading-tight">
+                                        {job.role}
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base font-medium">
+                                        <span class="text-action-text font-bold">
+                                            {job.company}
+                                        </span>
+                                        <span class="text-fg-subtle hidden md:inline">
+                                            •
+                                        </span>
+                                        <span class="text-fg-muted font-mono tracking-tight bg-surface-raised px-2 py-0.5 rounded text-xs md:text-sm">
+                                            {formattedStartDate} —{" "}
+                                            {formattedEndDate}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <p class="text-fg-muted leading-relaxed mb-6 font-light max-w-3xl text-sm md:text-base">
-                                {job.description[lang as "en" | "es"] ||
-                                    job.description.en}
-                            </p>
+                            {job.current && (
+                                <Tag
+                                    variant="action"
+                                    size="xs"
+                                    class="self-start whitespace-nowrap mt-2 md:mt-0 uppercase tracking-widest"
+                                >
+                                    {t("ui.current")}
+                                </Tag>
+                            )}
+                        </div>
 
-                            <div class="flex flex-wrap gap-2">
-                                {job.technologies.map((tech) => (
-                                    <Tag
-                                        variant="neutral"
-                                        size="sm"
-                                        class="font-mono hover:border-border-accent hover:text-accent transition-colors cursor-default select-none"
-                                    >
-                                        {tech}
-                                    </Tag>
-                                ))}
-                            </div>
-                        </Card>
-                    </Reveal>
-                );
-            })
-        }
-    </ol>
+                        <p class="text-fg-muted leading-relaxed mb-6 font-light max-w-3xl text-sm md:text-base">
+                            {job.description[lang as "en" | "es"] ||
+                                job.description.en}
+                        </p>
 
-    <!-- Actions: View All & Download CV -->
-    <div
-        class="mt-16 ml-4 md:ml-8 pl-8 md:pl-12 flex flex-col md:flex-row items-start md:items-center gap-8"
-    >
-        {
-            count ? (
-                <Button
-                    href={getRelativeLocaleUrl(lang, "experience")}
-                    variant="link"
+                        <div class="flex flex-wrap gap-2">
+                            {job.technologies.map((tech) => (
+                                <Tag
+                                    variant="neutral"
+                                    size="sm"
+                                    class="font-mono hover:border-border-accent hover:text-accent transition-colors cursor-default select-none"
+                                >
+                                    {tech}
+                                </Tag>
+                            ))}
+                        </div>
+                    </Card>
+                </Reveal>
+            );
+        })
+    }
+</ol>
+
+<!-- Actions: View All & Download CV -->
+<div
+    class="mt-16 ml-4 md:ml-8 pl-8 md:pl-12 flex flex-col md:flex-row items-start md:items-center gap-8"
+>
+    {
+        count ? (
+            <Button
+                href={getRelativeLocaleUrl(lang, "experience")}
+                variant="link"
+            >
+                {t("section.viewFullExperience")}
+            </Button>
+        ) : (
+            <Button
+                href={cvUrl}
+                download={cvFilename}
+                external
+                variant="primary"
+                size="lg"
+                iconPosition="end"
+            >
+                {t("hero.cta") || "Download CV"}
+                <svg
+                    slot="icon"
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
                 >
-                    {t("section.viewFullExperience")}
-                </Button>
-            ) : (
-                <Button
-                    href={cvUrl}
-                    download={cvFilename}
-                    external
-                    variant="primary"
-                    size="lg"
-                    iconPosition="end"
-                >
-                    {t("hero.cta") || "Download CV"}
-                    <svg
-                        slot="icon"
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        stroke-width="2.5"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                        />
-                    </svg>
-                </Button>
-            )
-        }
-    </div>
-</Section>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                </svg>
+            </Button>
+        )
+    }
+</div>

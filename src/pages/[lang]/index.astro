@@ -19,7 +19,15 @@ const { lang } = Astro.params;
     <Hero />
     <ProofBar />
     <Projects />
-    <Experience count={2} />
+    <Section
+        id="experience"
+        tone="base"
+        width="wide"
+        space="md"
+        backdrop="grid"
+    >
+        <Experience count={2} />
+    </Section>
     <Section width="wide" space="md">
         <CTASection />
     </Section>
