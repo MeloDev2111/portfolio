@@ -52,7 +52,7 @@ const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
         </p>
 
         <ProjectGrid
-            client:only="react"
+            client:load
             projects={cleanProjectProps}
             labels={{
                 all: t("ui.all"),

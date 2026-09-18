@@ -155,6 +155,13 @@ const currentPath = Astro.url.pathname;
             header?.classList.remove("-translate-y-[150%]", "opacity-0");
         }
 
+        // 2. Background Blur
+        if (currentScrollY > 20) {
+            header?.classList.add("bg-gunmetal/80", "backdrop-blur-md");
+        } else {
+            header?.classList.remove("bg-gunmetal/80", "backdrop-blur-md");
+        }
+
         lastScrollY = currentScrollY;
     }
 
@@ -260,17 +267,4 @@ const currentPath = Astro.url.pathname;
 
     // Initialize
     initScrollSpy();
-</script>
-
-<script>
-    const header = document.querySelector("header");
-
-    // Scroll Handler
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 20) {
-            header?.classList.add("bg-gunmetal/80", "backdrop-blur-md");
-        } else {
-            header?.classList.remove("bg-gunmetal/80", "backdrop-blur-md");
-        }
-    });
 </script>

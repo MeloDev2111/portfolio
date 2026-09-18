@@ -16,5 +16,5 @@ export const siteConfig = {
         },
     },
     // Default OG Image (relative to public/)
-    ogImage: "/media/logo.svg",
+    ogImage: "/media/og-image.png",
 };

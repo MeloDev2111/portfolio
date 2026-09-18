@@ -151,8 +151,11 @@ const displayedExperience = count
                                 </div>
 
                                 <p class="text-[#94a3b8] leading-relaxed mb-6 font-light max-w-3xl text-sm md:text-base">
-                                    {job.description[lang as "en" | "es"] ||
-                                        job.description.en}
+                                    {(lang in job.description
+                                        ? job.description[
+                                              lang as keyof typeof job.description
+                                          ]
+                                        : undefined) || job.description.en}
                                 </p>
 
                                 <div class="flex flex-wrap gap-2">

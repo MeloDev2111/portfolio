@@ -61,6 +61,9 @@ export const ui = {
         "credly.description":
             "Verify all my digital badges and certifications directly on Credly.",
         "credly.viewProfile": "View Profile",
+        "toast.title": "Language Notice",
+        "toast.content": "is not available yet. Showing English version.",
+        "footer.rights": "All rights reserved.",
     },
     es: {
         "nav.projects": "Proyectos",
@@ -115,6 +118,9 @@ export const ui = {
         "credly.description":
             "Verifica todas mis insignias y certificados digitales directamente en Credly.",
         "credly.viewProfile": "Ver Perfil",
+        "toast.title": "Aviso de Idioma",
+        "toast.content": "aún no está disponible. Mostrando versión en inglés.",
+        "footer.rights": "Todos los derechos reservados.",
     },
     ja: {
         "nav.projects": "プロジェクト",
@@ -170,5 +176,8 @@ export const ui = {
         "credly.description":
             "Credlyで私のデジタルバッジと認定資格をすべて確認できます。",
         "credly.viewProfile": "プロフィールを表示",
+        "toast.title": "言語のお知らせ",
+        "toast.content": "はまだ準備中です。英語版を表示しています。",
+        "footer.rights": "All rights reserved.",
     },
 } as const;

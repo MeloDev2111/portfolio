@@ -6,6 +6,7 @@ export interface ExperienceItem {
     description: {
         en: string;
         es: string;
+        ja?: string;
     };
     technologies: string[];
     current: boolean;
@@ -21,6 +22,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Working at Globant as a Java Developer Ssr Advanced, currently assigned to a Peruvian payment method client. Developing backend solutions using Java Spring Boot, Reactive Programming with Spring Webflux and Project Reactor, and Apache Kafka.",
             es: "Trabajando en Globant como Java Developer Ssr Advanced, actualmente asignado a un cliente peruano del sector de medios de pago. Desarrollando soluciones backend usando Java Spring Boot, Programación Reactiva con Spring Webflux y Project Reactor, y Apache Kafka.",
+            ja: "GlobantにてJava Developer Ssr Advancedとして勤務し、ペルーの決済プロバイダー案件を担当。Java Spring Boot、Spring WebfluxおよびProject Reactorによるリアクティブプログラミング、Apache Kafkaを用いたバックエンドソリューションを開発。",
         },
         technologies: [
             "Java",
@@ -40,6 +42,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Led the backend development for the Postgraduate LMS (10k+ users). Optimized enrollment processing from hours to minutes, handling an increase from 20k to 1M requests. Integrated Active Directory for efficient candidate registration and mentored new team members in DevOps culture.",
             es: "Lideré el desarrollo backend del LMS de Postgrado (10k+ usuarios). Optimicé el procesamiento de matrículas de horas a minutos, gestionando un incremento de 20k a 1M de solicitudes. Integré Active Directory para agilizar el proceso de registro de postulantes y mentoreé a nuevos miembros en cultura DevOps.",
+            ja: "大学院向けLMS（1万人以上のユーザー）のバックエンド開発をリード。履修登録処理を数時間から数分へと最適化し、2万件から100万件へのリクエスト増加に対応。Active Directoryを統合して出願登録を効率化し、チームメンバーへのDevOps文化の指導を担当。",
         },
         technologies: [
             "Java",
@@ -59,6 +62,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Developed modular interfaces with TypeScript and React, adhering to Clean Architecture and SOLID principles. Integrated AWS X-Ray for microservices monitoring and optimized complex PostgreSQL queries using pganalyze for critical production issues.",
             es: "Desarrollé interfaces modulares con TypeScript y React, siguiendo Arquitectura Limpia y principios SOLID. Integré AWS X-Ray para monitoreo de microservicios y optimicé consultas complejas en PostgreSQL usando pganalyze para incidencias críticas en producción.",
+            ja: "クリーンアーキテクチャとSOLID原則に基づき、TypeScriptとReactを用いたモジュール型インターフェースを開発。AWS X-Rayによるマイクロサービスのモニタリング統合や、pganalyzeを用いた本番障害向けの複雑なPostgreSQLクエリ最適化を実施。",
         },
         technologies: [
             "TypeScript",
@@ -78,6 +82,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Implemented RESTful APIs with Spring Boot using Hexagonal Architecture, DDD, and CQRS. Developed serverless solutions on AWS with Node.js and improved database performance with stored procedures. Introduced the Object Mother pattern for standardized unit testing.",
             es: "Implementé APIs RESTful con Spring Boot usando Arquitectura Hexagonal, DDD y CQRS. Desarrollé soluciones serverless en AWS con Node.js y mejoré el rendimiento de base de datos con procedimientos almacenados. Introduje el patrón Object Mother para pruebas unitarias estandarizadas.",
+            ja: "ヘキサゴナルアーキテクチャ、DDD、CQRSを適用したSpring BootによるRESTful APIを実装。Node.jsを用いたAWSサーバーレスソリューションの開発や、ストアドプロシージャによるデータベース性能向上を達成。単体テスト標準化のためObject Motherパターンを導入。",
         },
         technologies: [
             "Java",

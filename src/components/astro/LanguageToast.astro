@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div
@@ -32,12 +35,11 @@
 
         <!-- Content -->
         <div class="flex-1 text-sm">
-            <h4 class="font-bold text-white mb-1">Language Not Supported</h4>
+            <h4 class="font-bold text-white mb-1">{t("toast.title")}</h4>
             <p class="text-gray-300 leading-relaxed">
-                Content is not available in <span
-                    id="toast-lang"
-                    class="font-mono text-[#c08b5a] font-bold"></span> yet. Showing
-                English version.
+                <span id="toast-lang" class="font-mono text-[#c08b5a] font-bold"
+                ></span>{" "}
+                {t("toast.content")}
             </p>
         </div>
 
