@@ -8,7 +8,7 @@ A high-performance, accessible, and internationalized personal portfolio website
 
 ## 🚀 Tech Stack
 
-- **Framework:** [Astro 5](https://astro.build/) - High-performance static site generation.
+- **Framework:** [Astro 7](https://astro.build/) - High-performance static site generation.
 - **UI Library:** [React 19](https://react.dev/) - For interactive components.
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework.
 - **Testing:** [Vitest](https://vitest.dev/) - Blazing fast unit testing.
@@ -35,20 +35,24 @@ A high-performance, accessible, and internationalized personal portfolio website
 │   │   ├── astro/       # Static components (Hero, Header, Footer)
 │   │   └── react/       # Interactive components (ProjectGrid, Filters)
 │   ├── content/         # Content Collections (Data source)
-│   │   ├── certifications/ # JSON data for certifications
+│   │   ├── certifications/ # Individual JSON files per certification
 │   │   └── projects/    # Markdown files for projects (en/es)
 │   ├── i18n/            # Internationalization logic
 │   │   ├── ui.ts        # UI labels and translations
 │   │   └── utils.ts     # Path and locale helpers
 │   ├── layouts/         # Page layouts (Layout.astro)
 │   ├── pages/           # File-based routing
-│   │   ├── [lang]/      # Localized pages wrapper (en/es)
+│   │   ├── [lang]/      # Localized pages wrapper (en/es/ja)
 │   │   ├── 404.astro    # Custom 404 error page
 │   │   └── index.astro  # Root redirect
 │   ├── styles/          # Global styles (Tailwind imports)
 │   ├── tests/           # Unit tests (Vitest)
-│   └── utils/           # Helper functions (cv, skills, social)
+│   ├── utils/           # Helper functions (cv, skills, social)
+│   ├── content.config.ts # Content Collections schema definitions
+│   └── site.config.ts   # Site configuration & metadata
+├── .gitattributes       # Git normalization (LF line endings)
 ├── astro.config.mjs     # Astro configuration
+├── eslint.config.js     # ESLint 9 configuration
 └── tailwind.config.mjs  # Tailwind configuration
 ```
 
@@ -82,18 +86,18 @@ A high-performance, accessible, and internationalized personal portfolio website
 
 ### Adding a Certification
 
-1.  Open `src/content/certifications/certs.json`.
-2.  Add a new entry to the array:
+1. Create a new `.json` file in `src/content/certifications/<cert-id>.json` (e.g., `aws-cloud-practitioner.json`):
     ```json
     {
         "name": "Certification Name",
-        "issuer": "Provider (e.g., AWS)",
-        "date": "2024-01-01",
-        "link": "https://credly.com/...",
+        "issuer": "Provider (e.g., Amazon Web Services)",
+        "date": "YYYY-MM-DD",
+        "url": "https://credly.com/...",
         "badge": "https://images.credly.com/...",
-        "starred": true // Highlights in Hero section
+        "starred": true
     }
     ```
+    _Note: `url`, `badge`, and `starred` are optional. Setting `starred: true` highlights the certification in the Hero Bento grid and Featured sections._
 
 ### Adding Work Experience
 
@@ -143,7 +147,8 @@ All commands are run from the root of the project:
 | `pnpm build`   | Build your production site to `./dist/`     |
 | `pnpm preview` | Preview your build locally                  |
 | `pnpm test`    | Run unit tests with Vitest                  |
-| `pnpm lint`    | Check for linting errors                    |
+| `pnpm check`   | Validate types with Astro Check             |
+| `pnpm lint`    | Check for linting and formatting errors     |
 | `pnpm format`  | Fix formatting issues with Prettier         |
 | `pnpm release` | Create a new release (tag + changelog)      |
 

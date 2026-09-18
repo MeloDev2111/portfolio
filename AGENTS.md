@@ -13,20 +13,21 @@
 
 ### Core Frameworks
 
-- **Framework:** Astro 5 (Latest) - Chosen for SSG capabilities, speed, and islands architecture.
+- **Framework:** Astro 7 (Latest) - Chosen for SSG capabilities, speed, and islands architecture.
 - **Authentication/Logic:** Minimal client-side JS, mostly static HTML.
 - **UI Library:** React 19 (for interactive islands like the Tech Stack grid).
 - **Styling:** Tailwind CSS v4 (using `@tailwindcss/vite` plugin).
-    - _Theme:_ Custom `industrial-gold` palette defined in CSS variables/Tailwind config.
+    - _Theme:_ Custom `Deep Gunmetal & Antique Copper` palette defined in CSS variables/Tailwind config.
 - **Bundler:** Vite 6 (via Astro).
 
 ### Key Libraries & Tools
 
 - **Internationalization (i18n):** Native Astro i18n features.
-    - Locales: `en` (default), `es`.
+    - Locales: `en` (default), `es`, `ja`.
     - Routing: `/[lang]/...` strategy with `prefixDefaultLocale: true`.
 - **Testing:** `vitest` for unit testing logic and components.
-- **Linting/Formatting:** ESLint 9 + Prettier (with Astro plugins).
+- **Linting/Formatting:** ESLint 9 + Prettier (with Astro and TypeScript plugins).
+- **Type Checking:** `astro check` via `@astrojs/check` and `typescript`.
 - **Release Automation:** `release-it` + `auto-changelog` for semantic versioning and CHANGELOG generation.
 
 ### DevOps & CI/CD
@@ -43,34 +44,47 @@
 ├── public/              # Static assets (images, fonts, resume.pdf)
 ├── src/
 │   ├── assets/          # Optimized assets (processed by Astro)
-│   ├── components/      # Reusable UI components (Astro & React)
-│   │   ├── common/      # Shared components (Header, Footer, Button)
-│   │   └── sections/    # Page sections (Hero, About, Projects)
+│   ├── components/      # UI components
+│   │   ├── astro/       # Static components (Hero, Header, Footer, Experience)
+│   │   └── react/       # Interactive components (ProjectGrid, CertificationList)
+│   ├── content/         # Content collections (projects, certifications)
+│   │   ├── certifications/ # Individual JSON files per certification
+│   │   └── projects/    # Markdown files for projects (en/es)
+│   ├── i18n/            # Internationalization dictionaries and utilities
+│   │   ├── ui.ts        # UI labels and translations
+│   │   └── utils.ts     # Locale routing and translation helpers
 │   ├── layouts/         # Page layouts (Layout.astro)
 │   ├── pages/           # File-based routing
-│   │   ├── [lang]/      # Localized pages wrapper
+│   │   ├── [lang]/      # Localized pages wrapper (en, es, ja)
 │   │   ├── 404.astro    # Custom 404 error page
-│   │   └── index.astro  # Root redirect to default locale
-│   └── utils/           # Helper functions (i18n, formatting)
+│   │   └── index.astro  # Root redirect with language detection
+│   ├── styles/          # Global styles (Tailwind v4 imports)
+│   ├── utils/           # Helper functions (cv, experience, skills, social, files)
+│   ├── content.config.ts # Content Collections schema definitions
+│   └── site.config.ts   # Central site configuration and metadata
+├── tests/               # Unit tests (Vitest)
+├── .gitattributes       # Git normalization (LF line endings)
 ├── astro.config.mjs     # Astro configuration (i18n, integrations)
+├── eslint.config.js     # ESLint 9 configuration
 ├── pnpm-workspace.yaml  # pnpm workspace configuration (allowBuilds)
-└── tailwind.config.mjs  # Tailwind configuration (theme extension)
+├── tailwind.config.mjs  # Tailwind configuration
+└── tsconfig.json        # TypeScript configuration with strict paths
 ```
 
-## 4. 🎨 Design System Guidelines ("Dark Industrial Gold")
+## 4. 🎨 Design System Guidelines ("Dark Industrial Gold / Copper")
 
 - **Visual Identity:** Sophisticated Dark Mode with "Moon/Wolf" iconography.
 - **Color Palette:**
-    - **Backgrounds:** Deep Gunmetal / Charcoal (`#111827`, `#0B0C10`).
-    - **Primary Accent:** Mustard/Golden Yellow (`#F4D03F`, `#FFC107`) for CTAs and highlights.
-    - **Text:** Crisp White/Light Grey (`#F9FAFB`) for readability.
+    - **Backgrounds:** Deep Gunmetal (`#0c111c`) / Charcoal (`#1F2937`).
+    - **Primary Accent:** Antique Copper (`#c08b5a`, aliased as `gold`) / Slate (`#5a5866`).
+    - **Text:** Platinum (`#e1e1e0`) / Light Grey (`#F9FAFB`) for readability.
 - **Typography:**
     - **Headings:** Modern Sans-Serif ('Space Grotesk' or 'Outfit').
     - **Body:** Readable Sans-Serif ('Inter' or 'Public Sans').
 - **UI Patterns:**
     - **Bento Grid:** For displaying projects and skills.
     - **Glassmorphism:** Subtle transparency on navigation.
-    - **Glow Effects:** Warm golden glows for "featured" elements.
+    - **Glow Effects:** Warm golden/copper glows for "featured" elements.
 
 ## 5. ✅ Development Constraints & Rules
 
@@ -95,8 +109,13 @@
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.9.0 (Multi-Language Support & Package Manager Optimization).
+- **Status:** v0.9.2 (Code Quality, Tooling Stabilization & Multi-Language).
 - **Recent Focus:**
+    - **Code Quality, Tooling & Strict TypeScript (v0.9.2):**
+        - Normalized line endings across platforms with `.gitattributes` (`* text=auto eol=lf`) and `.prettierrc` (`endOfLine: auto`).
+        - Added `typescript` and `@astrojs/check` in `devDependencies` with dedicated `pnpm check` script.
+        - Configured active ESLint 9 flat configuration (`eslint.config.js`) enforcing `@typescript-eslint/no-explicit-any`.
+        - Eradicated all `any` and `as any` usages across localized pages and React components.
     - **Package Manager & Security:**
         - Standardized workspace setup on `pnpm` (v12+).
         - Configured `pnpm-workspace.yaml` `allowBuilds` for `esbuild` build script permissions.

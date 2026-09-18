@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
     name: melodev-portfolio
-    description: A high-performance, accessible, and internationalized personal portfolio website built with Astro 5 and React 19.
+    description: A high-performance, accessible, and internationalized personal portfolio website built with Astro 7 and React 19.
     annotations:
         github.com/project-slug: MeloDev2111/portfolio
         backstage.io/techdocs-ref: dir:.
