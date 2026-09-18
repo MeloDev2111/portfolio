@@ -68,13 +68,34 @@ const t = useTranslations(lang);
 </div>
 
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const fallbackLang = urlParams.get("lang_fallback");
-    const toast = document.getElementById("lang-toast");
-    const langSpan = document.getElementById("toast-lang");
-    const closeBtn = document.getElementById("close-toast");
+    // Same module-caching caveat as Header.astro: re-query and re-bind on
+    // astro:page-load so the close button is never wired to a detached node.
+    function initLanguageToast() {
+        const toast = document.getElementById("lang-toast");
+        const langSpan = document.getElementById("toast-lang");
+        const closeBtn = document.getElementById("close-toast");
+        if (!toast || !langSpan) return;
 
-    if (fallbackLang && toast && langSpan) {
+        function hideToast() {
+            toast?.classList.add("translate-x-[120%]");
+            // Clean up URL param without refreshing
+            window.history.replaceState(
+                {},
+                document.title,
+                window.location.pathname,
+            );
+        }
+
+        if (closeBtn && closeBtn.dataset.bound !== "true") {
+            closeBtn.dataset.bound = "true";
+            closeBtn.addEventListener("click", hideToast);
+        }
+
+        const fallbackLang = new URLSearchParams(window.location.search).get(
+            "lang_fallback",
+        );
+        if (!fallbackLang) return;
+
         // Get full language name using Intl.DisplayNames
         let langName = fallbackLang;
         try {
@@ -86,7 +107,6 @@ const t = useTranslations(lang);
             console.warn("Intl.DisplayNames not supported or invalid code", e);
         }
 
-        // Set language
         langSpan.textContent = langName;
 
         // Show toast after a small delay
@@ -95,19 +115,9 @@ const t = useTranslations(lang);
         }, 500);
 
         // Auto hide after 6 seconds
-        setTimeout(() => {
-            hideToast();
-        }, 6000);
+        setTimeout(hideToast, 6000);
     }
 
-    function hideToast() {
-        if (toast) {
-            toast.classList.add("translate-x-[120%]");
-            // Clean up URL param without refreshing
-            const newUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, newUrl);
-        }
-    }
-
-    closeBtn?.addEventListener("click", hideToast);
+    initLanguageToast();
+    document.addEventListener("astro:page-load", initLanguageToast);
 </script>

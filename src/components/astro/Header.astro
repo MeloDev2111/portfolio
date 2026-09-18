@@ -139,12 +139,18 @@ const navItems = nav
 </header>
 
 <script>
-    const header = document.querySelector("header");
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
-
-    let lastScrollY = window.scrollY;
+    // Astro bundles this as a module, and the browser will not re-execute a
+    // module it has already loaded. With <ClientRouter /> the <header> is a
+    // brand-new node after every navigation, so element references captured at
+    // module scope go stale and the scroll behaviour silently dies. Everything
+    // is therefore re-queried and re-bound on astro:page-load, which also fires
+    // on the initial load.
+    let header: HTMLElement | null = null;
+    let mobileMenuBtn: HTMLElement | null = null;
+    let mobileMenu: HTMLElement | null = null;
+    let mobileMenuBackdrop: HTMLElement | null = null;
+    let lastFocusedElement: HTMLElement | null = null;
+    let lastScrollY = 0;
 
     function handleScroll() {
         const currentScrollY = window.scrollY;
@@ -168,8 +174,6 @@ const navItems = nav
     }
 
     // Mobile Menu Functions
-    let lastFocusedElement: HTMLElement | null = null;
-
     function getFocusableMenuItems(): HTMLElement[] {
         if (!mobileMenu) return [];
         return Array.from(
@@ -237,7 +241,48 @@ const navItems = nav
         lastFocusedElement?.focus();
     }
 
-    // Event Listeners
+    function initHeader() {
+        header = document.querySelector("header");
+        mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
+
+        // A swap can land mid-transition; make sure nothing leaks across pages.
+        document.removeEventListener("keydown", trapFocus);
+        document.body.style.overflow = "";
+        lastFocusedElement = null;
+
+        // Seed from the real scroll position and paint the correct state now,
+        // instead of waiting for the first scroll event. This is what makes a
+        // reload at a non-zero offset render the backdrop correctly.
+        lastScrollY = window.scrollY;
+        handleScroll();
+
+        if (
+            mobileMenuBtn &&
+            mobileMenu &&
+            mobileMenuBtn.dataset.bound !== "true"
+        ) {
+            mobileMenuBtn.dataset.bound = "true";
+
+            mobileMenuBtn.addEventListener("click", () => {
+                if (mobileMenu?.classList.contains("hidden")) {
+                    openMobileMenu();
+                } else {
+                    closeMobileMenu();
+                }
+            });
+
+            mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
+
+            mobileMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", closeMobileMenu);
+            });
+        }
+    }
+
+    // Bound once on window, which survives every swap, and reads the header
+    // reference that initHeader keeps current.
     let ticking = false;
     window.addEventListener("scroll", () => {
         if (!ticking) {
@@ -249,19 +294,6 @@ const navItems = nav
         }
     });
 
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener("click", () => {
-            if (mobileMenu.classList.contains("hidden")) {
-                openMobileMenu();
-            } else {
-                closeMobileMenu();
-            }
-        });
-
-        mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
-
-        mobileMenu.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", closeMobileMenu);
-        });
-    }
+    initHeader();
+    document.addEventListener("astro:page-load", initHeader);
 </script>
