@@ -6,7 +6,7 @@ import PageHeader from "../../components/ui/PageHeader.astro";
 import Card from "../../components/ui/Card.astro";
 import { CertificationList } from "../../components/react/CertificationList";
 import { getCollection, type CollectionEntry } from "astro:content";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
     return getI18nStaticPaths();

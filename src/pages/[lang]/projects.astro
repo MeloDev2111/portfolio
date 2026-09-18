@@ -5,7 +5,7 @@ import Section from "../../components/ui/Section.astro";
 import PageHeader from "../../components/ui/PageHeader.astro";
 import { ProjectGrid } from "../../components/react/ProjectGrid";
 import { getLocalizedProjects } from "../../utils/projects";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { useTranslations } from "../../i18n/utils";
 
 export async function getStaticPaths() {
     return getI18nStaticPaths();

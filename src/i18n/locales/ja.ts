@@ -2,7 +2,6 @@ import type { UIStrings } from "./en";
 
 export const ja = {
     "nav.projects": "プロジェクト",
-    "nav.about": "自己紹介",
     "nav.tech": "スキルスタック",
     "nav.certifications": "認定資格",
     "nav.experience": "職歴",
@@ -18,17 +17,6 @@ export const ja = {
     "hero.description":
         "高スケーラビリティ・プラットフォーム、クラウドソリューション、および堅牢なソフトウェアアーキテクチャを専門としています。",
     "hero.viewProjects": "プロジェクトを見る",
-    "about.p1":
-        "システムエンジニアとして、教育および金融分野における<span class='text-fg-strong font-semibold'>高スケーラビリティ・プラットフォーム</span>の開発や<span class='text-fg-strong font-semibold'>デジタルトランスフォーメーション</span>の経験があります。<span class='text-accent'>Java, Spring Boot, Python</span>, <span class='text-accent'>クラウドコンピューティング</span>などの技術を用いて、高品質で保守性が高く、スケーラブルなソフトウェアの構築に特化しています。",
-    "about.p2":
-        "<span class='text-fg-strong font-semibold'>ソフトウェアアーキテクチャ</span>、<span class='text-fg-strong font-semibold'>DevOps</span>、<span class='text-fg-strong font-semibold'>データサイエンス</span>に強い関心があります。多角的なチームでのコラボレーション、プロセスの最適化、そしてダイナミックな技術環境における複雑な問題の解決を楽しんでいます。",
-    "about.focusAreas": "専門分野",
-    "about.architecture.title": "アーキテクチャ＆バックエンド",
-    "about.architecture.subtitle": "マイクロサービス＆API",
-    "about.cloud.title": "クラウド＆DevOps",
-    "about.cloud.subtitle": "AWSとスケーラビリティ",
-    "about.data.title": "データサイエンス",
-    "about.data.subtitle": "分析とインサイト",
     "section.viewAllCerts": "すべての認定資格を見る ->",
     "section.viewAllProjects": "プロジェクトアーカイブを見る",
     "section.viewFullTech": "スキルスタックの詳細を見る ->",

@@ -2,7 +2,6 @@ import type { UIStrings } from "./en";
 
 export const es = {
     "nav.projects": "Proyectos",
-    "nav.about": "Sobre mí",
     "nav.tech": "Tecnologías",
     "nav.certifications": "Certificaciones",
     "nav.experience": "Experiencia",
@@ -18,17 +17,6 @@ export const es = {
     "hero.description":
         "Especializado en plataformas de alta escalabilidad, soluciones Cloud y arquitecturas de software robustas.",
     "hero.viewProjects": "Ver Proyectos",
-    "about.p1":
-        "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-fg-strong font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-fg-strong font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-accent'>Java, Spring Boot, Python</span> y <span class='text-accent'>Cloud Computing</span>.",
-    "about.p2":
-        "Gran interés en el diseño de <span class='text-fg-strong font-semibold'>Arquitecturas de Software</span>, <span class='text-fg-strong font-semibold'>DevOps</span> y <span class='text-fg-strong font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
-    "about.focusAreas": "Áreas de Enfoque",
-    "about.architecture.title": "Arquitectura & Backend",
-    "about.architecture.subtitle": "Microservicios y APIs",
-    "about.cloud.title": "Cloud & DevOps",
-    "about.cloud.subtitle": "AWS y Escalabilidad",
-    "about.data.title": "Ciencia de Datos",
-    "about.data.subtitle": "Análisis e Insights",
     "section.viewAllCerts": "Ver todas las certificaciones ->",
     "section.viewAllProjects": "Ver archivo de proyectos",
     "section.viewFullTech": "Ver todo el stack tecnológico ->",

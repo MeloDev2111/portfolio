@@ -1,6 +1,5 @@
 export const en = {
     "nav.projects": "Projects",
-    "nav.about": "About",
     "nav.tech": "Tech Stack",
     "nav.certifications": "Certifications",
     "nav.experience": "Experience",
@@ -16,17 +15,6 @@ export const en = {
     "hero.description":
         "Specializing in high-scalability platforms, Cloud solutions, and robust software architectures.",
     "hero.viewProjects": "View Projects",
-    "about.p1":
-        "Systems Engineer with experience in developing <span class='text-fg-strong font-semibold'>high-scalability platforms</span> and <span class='text-fg-strong font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-accent'>Java, Spring Boot, Python</span>, and <span class='text-accent'>Cloud Computing</span>.",
-    "about.p2":
-        "I have a strong interest in <span class='text-fg-strong font-semibold'>Software Architecture</span>, <span class='text-fg-strong font-semibold'>DevOps</span>, and <span class='text-fg-strong font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments.",
-    "about.focusAreas": "Focus Areas",
-    "about.architecture.title": "Architecture & Backend",
-    "about.architecture.subtitle": "Microservices & APIs",
-    "about.cloud.title": "Cloud & DevOps",
-    "about.cloud.subtitle": "AWS & Scalability",
-    "about.data.title": "Data Science",
-    "about.data.subtitle": "Analysis & Insights",
     "section.viewAllCerts": "View all certifications ->",
     "section.viewAllProjects": "View all projects archive",
     "section.viewFullTech": "View full tech stack ->",
