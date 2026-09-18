@@ -40,17 +40,23 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
         return [];
     };
 
+    // Pre-process normalized tags for each project
+    const normalizedProjects = useMemo(() => {
+        if (!projects || !Array.isArray(projects)) return [];
+        return projects.map((p) => ({
+            ...p,
+            safeTags: getSafeTags(p.data.tags),
+        }));
+    }, [projects]);
+
     // Extract unique tags
     const allTags = useMemo(() => {
         const tags = new Set<string>();
-        if (projects && Array.isArray(projects)) {
-            projects.forEach((p) => {
-                const pTags = getSafeTags(p.data.tags);
-                pTags.forEach((t) => tags.add(t));
-            });
-        }
+        normalizedProjects.forEach((p) => {
+            p.safeTags.forEach((t) => tags.add(t));
+        });
         return Array.from(tags).sort();
-    }, [projects]);
+    }, [normalizedProjects]);
 
     // Handle tag toggle
     const toggleTag = (tag: string) => {
@@ -61,40 +67,63 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
     // Filter projects (AND logic: project must contain all selected tags)
     const filteredProjects = useMemo(() => {
-        if (activeTags.length === 0) return projects;
-        return projects.filter((p) => {
-            const pTags = getSafeTags(p.data.tags);
-            return activeTags.every((tag) => pTags.includes(tag));
+        if (activeTags.length === 0) return normalizedProjects;
+        return normalizedProjects.filter((p) =>
+            activeTags.every((tag) => p.safeTags.includes(tag)),
+        );
+    }, [normalizedProjects, activeTags]);
+
+    // Calculate which unselected tags have at least 1 matching project in filteredProjects
+    const availableTags = useMemo(() => {
+        const set = new Set<string>();
+        filteredProjects.forEach((p) => {
+            p.safeTags.forEach((t) => set.add(t));
         });
-    }, [projects, activeTags]);
+        return set;
+    }, [filteredProjects]);
 
     return (
         <div className="space-y-8">
             {/* Filter Controls */}
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-2.5 justify-center items-center">
                 <button
                     onClick={() => setActiveTags([])}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                         activeTags.length === 0
-                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                            : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
+                            ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_12px_rgba(192,139,90,0.35)] font-semibold"
+                            : "bg-charcoal text-gray-400 hover:text-white border border-white/5 hover:border-[#c08b5a]/30 cursor-pointer"
                     }`}
                 >
-                    {labels.all}
+                    <span>{labels.all}</span>
+                    {activeTags.length > 0 && (
+                        <span className="text-xs bg-white/10 px-1.5 py-0.5 rounded-full text-gray-300">
+                            ✕
+                        </span>
+                    )}
                 </button>
-                {allTags.map((tag) => (
-                    <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                            activeTags.includes(tag)
-                                ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_10px_rgba(192,139,90,0.3)]"
-                                : "bg-charcoal text-gray-400 hover:text-light border border-white/5 hover:border-[#c08b5a]/30"
-                        }`}
-                    >
-                        {tag}
-                    </button>
-                ))}
+                {allTags.map((tag) => {
+                    const isSelected = activeTags.includes(tag);
+                    const isAvailable = isSelected || availableTags.has(tag);
+
+                    return (
+                        <button
+                            key={tag}
+                            onClick={() => isAvailable && toggleTag(tag)}
+                            disabled={!isAvailable}
+                            aria-pressed={isSelected}
+                            aria-disabled={!isAvailable}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 select-none ${
+                                isSelected
+                                    ? "bg-[#c08b5a] text-gunmetal shadow-[0_0_12px_rgba(192,139,90,0.35)] font-semibold cursor-pointer"
+                                    : isAvailable
+                                      ? "bg-charcoal text-gray-300 hover:text-white border border-white/10 hover:border-[#c08b5a]/40 hover:bg-white/5 cursor-pointer"
+                                      : "bg-charcoal/40 text-gray-600 border border-white/5 opacity-30 cursor-not-allowed"
+                            }`}
+                        >
+                            {tag}
+                        </button>
+                    );
+                })}
             </div>
 
             {/* Grid */}
@@ -104,7 +133,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         key={project.id}
                         title={project.data.title}
                         description={project.data.description}
-                        tags={getSafeTags(project.data.tags)}
+                        tags={project.safeTags}
                         link={project.data.link}
                         image={project.data.image}
                         featured={project.data.featured}
