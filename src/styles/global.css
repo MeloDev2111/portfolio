@@ -9,7 +9,6 @@
 @layer base {
     html {
         @apply scroll-smooth;
-        scroll-snap-type: y proximity;
         scroll-padding-top: 5rem;
         /* Offset for sticky header */
     }

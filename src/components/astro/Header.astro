@@ -13,23 +13,25 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-    { href: getRelativeLocaleUrl(lang, "/#about"), label: t("nav.about") },
     {
-        href: getRelativeLocaleUrl(lang, "/#experience"),
+        href: getRelativeLocaleUrl(lang, "/projects"),
+        label: t("nav.projects"),
+    },
+    {
+        href: getRelativeLocaleUrl(lang, "/experience"),
         label: t("nav.experience"),
     },
     {
-        href: getRelativeLocaleUrl(lang, "/#certifications"),
-        label: t("nav.certifications"),
+        href: getRelativeLocaleUrl(lang, "/tech-stack"),
+        label: t("nav.tech"),
     },
     {
-        href: getRelativeLocaleUrl(lang, "/#projects"),
-        label: t("nav.projects"),
+        href: getRelativeLocaleUrl(lang, "/certifications"),
+        label: t("nav.certifications"),
     },
-    { href: getRelativeLocaleUrl(lang, "/#tech-stack"), label: t("nav.tech") },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
 ---
 
 <header
@@ -59,20 +61,26 @@ const currentPath = Astro.url.pathname;
             class="hidden md:flex items-center gap-1 bg-white/10 backdrop-blur-sm p-1 rounded-full border border-white/10 shadow-inner"
         >
             {
-                navItems.map((item) => (
-                    <a
-                        href={item.href}
-                        class={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                            currentPath === item.href ||
-                            (item.href !== "/" &&
-                                currentPath.startsWith(item.href))
-                                ? "bg-white/10 text-white shadow-sm"
-                                : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
-                    >
-                        {item.label}
-                    </a>
-                ))
+                navItems.map((item) => {
+                    const itemPath = item.href.replace(/\/$/, "");
+                    const isActive =
+                        currentPath === itemPath ||
+                        (itemPath !== "" &&
+                            itemPath !== "/" &&
+                            currentPath.startsWith(`${itemPath}/`));
+                    return (
+                        <a
+                            href={item.href}
+                            class={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                                isActive
+                                    ? "bg-white/10 text-white shadow-sm"
+                                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            {item.label}
+                        </a>
+                    );
+                })
             }
         </nav>
 
@@ -119,17 +127,35 @@ const currentPath = Astro.url.pathname;
             class="bg-[#0c111c]/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-2 flex flex-col gap-1 ring-1 ring-white/5"
         >
             {
-                navItems.map((item) => (
-                    <a
-                        href={item.href}
-                        class="px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-between group"
-                    >
-                        {item.label}
-                        <span class="opacity-0 group-hover:opacity-100 transition-opacity text-gold">
-                            →
-                        </span>
-                    </a>
-                ))
+                navItems.map((item) => {
+                    const itemPath = item.href.replace(/\/$/, "");
+                    const isActive =
+                        currentPath === itemPath ||
+                        (itemPath !== "" &&
+                            itemPath !== "/" &&
+                            currentPath.startsWith(`${itemPath}/`));
+                    return (
+                        <a
+                            href={item.href}
+                            class={`px-4 py-3 rounded-xl text-base font-medium transition-colors flex items-center justify-between group ${
+                                isActive
+                                    ? "bg-white/10 text-white font-semibold"
+                                    : "text-gray-300 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            {item.label}
+                            <span
+                                class={`transition-opacity text-gold ${
+                                    isActive
+                                        ? "opacity-100"
+                                        : "opacity-0 group-hover:opacity-100"
+                                }`}
+                            >
+                                →
+                            </span>
+                        </a>
+                    );
+                })
             }
         </nav>
     </div>
@@ -140,7 +166,6 @@ const currentPath = Astro.url.pathname;
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
-    const navLinks = document.querySelectorAll("nav a"); // Desktop nav links
 
     let lastScrollY = window.scrollY;
 
@@ -163,52 +188,6 @@ const currentPath = Astro.url.pathname;
         }
 
         lastScrollY = currentScrollY;
-    }
-
-    // Scroll Spy Logic
-    function initScrollSpy() {
-        const sections = document.querySelectorAll("section");
-        const observerOptions = {
-            root: null,
-            rootMargin: "-20% 0px -60% 0px", // Trigger when section is near top/middle
-            threshold: 0,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute("id");
-                    if (id) {
-                        highlightNavLink(id);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach((section) => observer.observe(section));
-    }
-
-    function highlightNavLink(id: string) {
-        navLinks.forEach((link) => {
-            const href = link.getAttribute("href");
-            if (href && href.includes(`#${id}`)) {
-                // Active Styling
-                link.classList.add("bg-white/10", "text-white", "shadow-sm");
-                link.classList.remove(
-                    "text-gray-400",
-                    "hover:text-white",
-                    "hover:bg-white/5",
-                );
-            } else {
-                // Inactive Styling
-                link.classList.remove("bg-white/10", "text-white", "shadow-sm");
-                link.classList.add(
-                    "text-gray-400",
-                    "hover:text-white",
-                    "hover:bg-white/5",
-                );
-            }
-        });
     }
 
     // Mobile Menu Functions
@@ -264,7 +243,4 @@ const currentPath = Astro.url.pathname;
             link.addEventListener("click", closeMobileMenu);
         });
     }
-
-    // Initialize
-    initScrollSpy();
 </script>

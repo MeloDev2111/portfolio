@@ -34,18 +34,26 @@ const displayedExperience = count
     : allExperience;
 ---
 
-<section
-    id="experience"
-    class="py-16 md:py-20 relative overflow-hidden text-left bg-[#0c111c] snap-start"
+<div
+    class={showTitle
+        ? "py-16 md:py-20 relative overflow-hidden text-left bg-[#0c111c]"
+        : "relative text-left"}
 >
     <!-- Background Decor (Subtle) -->
-    <div class="absolute inset-0 bg-[#0c111c] -z-20"></div>
-    <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,#818d9010_1px,transparent_1px),linear-gradient(to_bottom,#818d9010_1px,transparent_1px)] bg-[size:40px_40px] -z-10 masking-gradient opacity-30"
-    >
-    </div>
+    {
+        showTitle && (
+            <>
+                <div class="absolute inset-0 bg-[#0c111c] -z-20" />
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#818d9010_1px,transparent_1px),linear-gradient(to_bottom,#818d9010_1px,transparent_1px)] bg-[size:40px_40px] -z-10 masking-gradient opacity-30" />
+            </>
+        )
+    }
 
-    <div class="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div
+        class={showTitle
+            ? "max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+            : "relative z-10"}
+    >
         <!-- Section Header -->
         {
             showTitle && (
@@ -211,4 +219,4 @@ const displayedExperience = count
             }
         </div>
     </div>
-</section>
+</div>

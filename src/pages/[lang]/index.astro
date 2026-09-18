@@ -2,11 +2,6 @@
 import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/astro/Hero.astro";
-import About from "../../components/astro/About.astro";
-import Experience from "../../components/astro/Experience.astro";
-import Certifications from "../../components/astro/Certifications.astro";
-import Projects from "../../components/astro/Projects.astro";
-import TechStackSection from "../../components/astro/TechStackSection.astro";
 
 export function getStaticPaths() {
     return getI18nStaticPaths();
@@ -17,9 +12,4 @@ const { lang } = Astro.params;
 
 <Layout title="MeloDev Portfolio" lang={lang}>
     <Hero />
-    <About />
-    <Experience count={2} />
-    <Certifications />
-    <Projects />
-    <TechStackSection />
 </Layout>
