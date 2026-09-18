@@ -10,9 +10,8 @@ import {
 import { siteConfig } from "../../site.config";
 import { getCVDetails } from "../../utils/cv";
 import { getBentoSkills } from "../../utils/skills";
-import { getPrimarySocials, getSecondarySocials } from "../../utils/social";
+import { getPrimarySocials } from "../../utils/social";
 import { EXPERIENCE } from "../../utils/experience";
-import Logo from "./Logo.astro";
 import { publicFileExists } from "../../utils/files";
 
 const lang = getLangFromUrl(Astro.url);
@@ -351,7 +350,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                         {t("section.viewFullExperience")}
                         <span
                             class="group-hover:translate-x-1 transition-transform"
-                            >-></span
+                            >&rarr;</span
                         >
                     </span>
                 </div>
@@ -378,7 +377,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                         href={getRelativeLocaleUrl(lang, "/tech-stack")}
                         class="text-[10px] text-[#c08b5a] hover:text-white transition-colors opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300"
                     >
-                        {t("section.viewFullTech")?.split(" ")[0] || "View"} ->
+                        {t("section.viewFullTech")?.split(" ")[0] || "View"} &rarr;
                     </a>
                 </div>
 

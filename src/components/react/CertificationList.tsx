@@ -35,17 +35,6 @@ export const CertificationList: React.FC<CertificationListProps> = ({
         });
     }, [certifications, sortOrder]);
 
-    const getBadgeUrl = (badgePath?: string) => {
-        if (!badgePath) return "";
-        if (badgePath.startsWith("http")) return badgePath;
-        // Assuming base path is handled or relative from root.
-        // In React/Astro, for public assets, starting with / is usually usually enough if base is root.
-        // If site has base path, it should be passed or handled.
-        // For simplicity here, we'll assume the passed props might handle it or we use relative.
-        // Actually, passing the processed URL from Astro is safer, but let's handle the simple case.
-        return badgePath; // Logic handled in parent or acceptable defaults
-    };
-
     return (
         <div className="space-y-8">
             {/* Controls */}

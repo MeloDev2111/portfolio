@@ -13,6 +13,7 @@
         "changelog": "auto-changelog -p",
         "lint": "eslint . && prettier --check .",
         "format": "prettier --write .",
+        "check": "astro check",
         "test": "vitest run"
     },
     "dependencies": {
@@ -27,6 +28,7 @@
         "tailwindcss": "^4.1.18"
     },
     "devDependencies": {
+        "@astrojs/check": "^0.9.10",
         "@release-it/conventional-changelog": "latest",
         "@testing-library/dom": "^10.4.1",
         "@testing-library/react": "^16.3.2",
@@ -40,6 +42,7 @@
         "prettier": "^3.8.1",
         "prettier-plugin-astro": "^0.14.1",
         "release-it": "^20.2.1",
+        "typescript": "^5.9.3",
         "vitest": "^4.0.18"
     }
 }

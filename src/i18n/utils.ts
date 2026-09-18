@@ -10,9 +10,14 @@ export function getLangFromUrl(url: URL, baseOverride?: string) {
 
 export { ui }; // Re-export ui for direct access if needed
 
-export function useTranslations(lang: keyof typeof ui) {
+export type SupportedLanguage = keyof typeof ui;
+
+export function useTranslations(lang?: string) {
+    const validLang = (
+        lang && lang in ui ? lang : defaultLang
+    ) as SupportedLanguage;
     return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-        return ui[lang][key] || ui[defaultLang][key];
+        return ui[validLang][key] || ui[defaultLang][key];
     };
 }
 

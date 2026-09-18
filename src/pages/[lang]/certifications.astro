@@ -2,17 +2,15 @@
 import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import { CertificationList } from "../../components/react/CertificationList";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getCollection } from "astro:content";
+import { useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
     return getI18nStaticPaths();
 }
 
 const { lang } = Astro.params;
-const t = useTranslations(lang as any);
-
-type CertEntry = CollectionEntry<"certifications">;
+const t = useTranslations(lang);
 
 const allCertifications = await getCollection("certifications");
 

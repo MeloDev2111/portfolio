@@ -15,7 +15,7 @@ export const publicFileExists = (filePath: string | undefined): boolean => {
             : filePath;
         const publicPath = path.join(process.cwd(), "public", cleanPath);
         return fs.existsSync(publicPath);
-    } catch (e) {
+    } catch {
         return false;
     }
 };

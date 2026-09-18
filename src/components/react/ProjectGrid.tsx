@@ -29,10 +29,14 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     const [activeTags, setActiveTags] = useState<string[]>([]);
 
     // Helper to normalize tags (handle if Astro passes Set, Array or String)
-    const getSafeTags = (tags: any): string[] => {
+    const getSafeTags = (tags: unknown): string[] => {
         if (typeof tags === "string") return tags.split(",");
-        if (Array.isArray(tags)) return tags;
-        if (tags instanceof Set) return Array.from(tags);
+        if (Array.isArray(tags))
+            return tags.filter((t): t is string => typeof t === "string");
+        if (tags instanceof Set)
+            return Array.from(tags).filter(
+                (t): t is string => typeof t === "string",
+            );
         return [];
     };
 

@@ -1,7 +1,6 @@
 ---
-import { getAllLanguageUrls, getLangFromUrl } from "../../i18n/utils";
+import { getAllLanguageUrls } from "../../i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
 const languages = getAllLanguageUrls(Astro.url);
 const currentLang = languages.find((l) => l.active);
 ---
