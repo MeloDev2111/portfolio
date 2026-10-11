@@ -17,7 +17,7 @@
         "test": "vitest run"
     },
     "auto-changelog": {
-        "ignoreCommitPattern": "^(chore: release|docs.changelog.)"
+        "ignoreCommitPattern": "^.?(chore: release|docs.changelog.)"
     },
     "dependencies": {
         "@astrojs/react": "latest",
