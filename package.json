@@ -1,7 +1,7 @@
 {
     "name": "melodev-portfolio",
     "type": "module",
-    "version": "0.12.1",
+    "version": "0.12.2",
     "packageManager": "pnpm@12.4.1",
     "license": "MIT",
     "scripts": {
@@ -17,7 +17,7 @@
         "test": "vitest run"
     },
     "auto-changelog": {
-        "ignoreCommitPattern": "^(chore: release|docs.changelog.)"
+        "ignoreCommitPattern": "^.?(chore: release|docs.changelog.)"
     },
     "dependencies": {
         "@astrojs/react": "latest",
