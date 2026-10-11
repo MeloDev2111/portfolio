@@ -3,7 +3,7 @@
  *
  * Usage: node scripts/generate-og-image.mjs
  *
- * Text is rendered with Space Grotesk (name) and Inter (role/tagline). SVG text
+ * Text is rendered with Space Grotesk (name) and Inter (role). SVG text
  * needs the fonts installed, so the script registers them with fontconfig:
  * it uses scripts/.fonts/ (re-running itself with FONTCONFIG_FILE set) and downloads the TTFs there on first run
  * (git-ignored, SIL OFL licensed). If you cannot download them, drop the
@@ -39,7 +39,6 @@ const COLORS = {
 const TEXT = {
     name: "Melio Diaz",
     role: "Software Engineer",
-    tagline: "Cloud · Data · Architecture",
 };
 
 async function ensureFonts() {
@@ -105,6 +104,11 @@ async function generateOgImage() {
             <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="${COLORS.wolf}" stroke-width="0.75" stroke-opacity="0.25" />
             </pattern>
+            <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="${COLORS.moon}" stop-opacity="0.2" />
+                <stop offset="60%" stop-color="${COLORS.moon}" stop-opacity="0.05" />
+                <stop offset="100%" stop-color="${COLORS.moon}" stop-opacity="0" />
+            </radialGradient>
         </defs>
 
         <rect width="${width}" height="${height}" fill="${COLORS.gunmetal}" />
@@ -112,22 +116,17 @@ async function generateOgImage() {
         <rect width="${width}" height="${height}" fill="url(#subtleGlow)" />
         <rect width="${width}" height="${height}" fill="url(#grid)" />
 
-        <rect x="24" y="24" width="${width - 48}" height="${height - 48}" rx="24" fill="none" stroke="${COLORS.moon}" stroke-width="1.5" stroke-opacity="0.2" />
-
-        <!-- Logo on the left -->
-        <g transform="translate(90, 165)">
-            <rect x="-20" y="-20" width="340" height="340" rx="28" fill="${COLORS.charcoal}" fill-opacity="0.4" stroke="${COLORS.platinum}" stroke-opacity="0.1" stroke-width="1.5" />
-            <g transform="scale(0.63)">
-                ${innerLogo}
-            </g>
+        <!-- Logo on the left, free of containers, lit by a moon glow -->
+        <circle cx="328" cy="315" r="330" fill="url(#moonGlow)" />
+        <g transform="translate(115, 108) scale(0.9)">
+            ${innerLogo}
         </g>
 
         <!-- Text on the right -->
-        <g transform="translate(460, 0)">
-            <text x="0" y="285" font-family="Space Grotesk" font-size="80" font-weight="700" fill="${COLORS.platinum}" letter-spacing="-1">${TEXT.name}</text>
-            <rect x="0" y="315" width="64" height="4" rx="2" fill="${COLORS.moon}" />
-            <text x="0" y="372" font-family="Inter" font-size="34" font-weight="600" fill="${COLORS.moon}">${TEXT.role}</text>
-            <text x="0" y="420" font-family="Inter" font-size="24" font-weight="500" fill="${COLORS.muted}" letter-spacing="0.5">${TEXT.tagline}</text>
+        <g transform="translate(611, 0)">
+            <text x="0" y="300" font-family="Space Grotesk" font-size="100" font-weight="700" fill="${COLORS.platinum}" letter-spacing="-1.5">${TEXT.name}</text>
+            <rect x="0" y="336" width="80" height="5" rx="2.5" fill="${COLORS.moon}" />
+            <text x="0" y="398" font-family="Inter" font-size="42" font-weight="600" fill="${COLORS.moon}">${TEXT.role}</text>
         </g>
     </svg>
     `;
