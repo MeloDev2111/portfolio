@@ -117,8 +117,16 @@
 
 ## 6. 📝 Current Status & Roadmap
 
-- **Status:** v0.9.2 (Code Quality, Tooling Stabilization & Multi-Language).
+- **Status:** v0.12.0 + Brand Refresh (unreleased, branch `feat/brand-refresh`).
 - **Recent Focus:**
+    - **Brand Refresh (unreleased):**
+        - Optimized master logo, added dark/light/mono variants and a simplified favicon set (see Section 4).
+        - Replaced the copper and amber accents with the `moon`/`wolf` palette tokens; regenerated the OG image.
+    - **Home, Projects & Hero (v0.11.0 - v0.12.0):**
+        - Simplified the home into a bento dashboard and optimized navigation (v0.11.0).
+        - Added smart tag dimming and dynamic faceted filtering in `ProjectGrid`; optimized responsive icon sizing in the Hero bento grid (v0.12.0).
+    - **Sitemap, SSR Hydration & Japanese Data (v0.10.0):**
+        - Integrated `@astrojs/sitemap`, fixed SSR hydration, added Japanese career data and the OG image.
     - **Code Quality, Tooling & Strict TypeScript (v0.9.2):**
         - Normalized line endings across platforms with `.gitattributes` (`* text=auto eol=lf`) and `.prettierrc` (`endOfLine: auto`).
         - Added `typescript` and `@astrojs/check` in `devDependencies` with dedicated `pnpm check` script.
