@@ -27,7 +27,10 @@ const COLORS = {
 const TITLE = "MeloDev logo: a wolf inside the moon";
 
 // --- Master logo parsing -------------------------------------------------
-const master = fs.readFileSync(path.join(publicDir, "media", "logo.svg"), "utf-8");
+const master = fs.readFileSync(
+    path.join(publicDir, "media", "logo.svg"),
+    "utf-8",
+);
 const svgTag = master.match(/<svg[^>]*>/)[0];
 const viewBox = svgTag.match(/viewBox="([^"]+)"/)[1];
 const paths = [...master.matchAll(/<path fill="([^"]+)" d="([^"]+)"\/>/g)].map(
@@ -52,8 +55,12 @@ function writeBrandVariants() {
             f === COLORS.moon ? COLORS.moonOnLight : COLORS.wolfOnLight,
         ),
         // Monochrome: the moon is the silhouette, the wolf is negative space.
-        "logo-mono-dark.svg": logoSvg((f) => (f === COLORS.moon ? COLORS.gunmetal : null)),
-        "logo-mono-light.svg": logoSvg((f) => (f === COLORS.moon ? COLORS.platinum : null)),
+        "logo-mono-dark.svg": logoSvg((f) =>
+            f === COLORS.moon ? COLORS.gunmetal : null,
+        ),
+        "logo-mono-light.svg": logoSvg((f) =>
+            f === COLORS.moon ? COLORS.platinum : null,
+        ),
     };
     for (const [name, svg] of Object.entries(out)) {
         fs.writeFileSync(path.join(brandDir, name), svg);
@@ -90,7 +97,10 @@ function symbolSvg({ background = null, scale = 1 } = {}) {
 }
 
 const png = (svg, size) =>
-    sharp(Buffer.from(svg), { density: 384 }).resize(size, size).png({ compressionLevel: 9 }).toBuffer();
+    sharp(Buffer.from(svg), { density: 384 })
+        .resize(size, size)
+        .png({ compressionLevel: 9 })
+        .toBuffer();
 
 // ICO container holding PNG-compressed entries.
 function buildIco(entries) {
@@ -118,19 +128,34 @@ async function writeFavicons() {
     fs.writeFileSync(path.join(publicDir, "favicon.svg"), transparent);
 
     const ico = await Promise.all(
-        [16, 32, 48].map(async (size) => ({ size, data: await png(transparent, size) })),
+        [16, 32, 48].map(async (size) => ({
+            size,
+            data: await png(transparent, size),
+        })),
     );
     fs.writeFileSync(path.join(publicDir, "favicon.ico"), buildIco(ico));
 
     // Opaque icons: iOS paints transparency black, and 0.8 scale keeps the
     // symbol inside the maskable safe zone for the PWA sizes.
     const opaque = symbolSvg({ background: COLORS.gunmetal, scale: 0.8 });
-    fs.writeFileSync(path.join(publicDir, "apple-touch-icon.png"), await png(opaque, 180));
-    fs.writeFileSync(path.join(publicDir, "icon-192.png"), await png(opaque, 192));
-    fs.writeFileSync(path.join(publicDir, "icon-512.png"), await png(opaque, 512));
+    fs.writeFileSync(
+        path.join(publicDir, "apple-touch-icon.png"),
+        await png(opaque, 180),
+    );
+    fs.writeFileSync(
+        path.join(publicDir, "icon-192.png"),
+        await png(opaque, 192),
+    );
+    fs.writeFileSync(
+        path.join(publicDir, "icon-512.png"),
+        await png(opaque, 512),
+    );
 }
 
-if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1]))) {
+if (
+    process.argv[1] &&
+    import.meta.url.endsWith(path.basename(process.argv[1]))
+) {
     const only = process.argv[2];
     if (only !== "favicons") writeBrandVariants();
     if (only !== "variants") await writeFavicons();
