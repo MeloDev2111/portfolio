@@ -1,7 +1,7 @@
 {
     "name": "melodev-portfolio",
     "type": "module",
-    "version": "0.12.0",
+    "version": "0.12.1",
     "packageManager": "pnpm@12.4.1",
     "license": "MIT",
     "scripts": {
@@ -10,11 +10,14 @@
         "preview": "astro preview",
         "astro": "astro",
         "release": "release-it",
-        "changelog": "auto-changelog -p",
+        "changelog": "auto-changelog",
         "lint": "eslint . && prettier --check .",
         "format": "prettier --write .",
         "check": "astro check",
         "test": "vitest run"
+    },
+    "auto-changelog": {
+        "ignoreCommitPattern": "^(chore: release|docs.changelog.)"
     },
     "dependencies": {
         "@astrojs/react": "latest",
