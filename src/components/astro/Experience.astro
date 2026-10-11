@@ -58,13 +58,13 @@ const displayedExperience = count
         {
             showTitle && (
                 <div class="mb-12 md:mb-20">
-                    <span class="text-[#c08b5a] font-mono text-xs tracking-[0.2em] font-bold uppercase block mb-3">
+                    <span class="text-gold font-mono text-xs tracking-[0.2em] font-bold uppercase block mb-3">
                         {t("nav.experienceKey") || "CAREER PROGRESSION"}
                     </span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
                         {lang === "es" ? (
                             <>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-[#c08b5a]">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">
                                     {t("nav.experience")}
                                 </span>{" "}
                                 {t("ui.professional")}
@@ -72,7 +72,7 @@ const displayedExperience = count
                         ) : (
                             <>
                                 {t("ui.professional")}{" "}
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-[#c08b5a]">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">
                                     {t("nav.experience")}
                                 </span>
                             </>
@@ -113,14 +113,14 @@ const displayedExperience = count
                                 class={`absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 md:w-5 md:h-5 rounded-full border-4 border-[#0c111c] outline outline-1 outline-offset-2 transition-all duration-500 z-20
                     ${
                         job.current
-                            ? "bg-[#f59e0b] outline-[#f59e0b] shadow-[0_0_15px_rgba(245,158,11,0.4)] animate-pulse"
-                            : "bg-gray-600 outline-gray-600 group-hover:bg-[#c08b5a] group-hover:outline-[#c08b5a]"
+                            ? "bg-moon outline-moon shadow-[0_0_15px_rgba(245,158,11,0.4)] animate-pulse"
+                            : "bg-gray-600 outline-gray-600 group-hover:bg-gold group-hover:outline-gold"
                     }`}
                             />
-                            <div class="relative rounded-2xl glass-card border border-white/5 p-5 md:p-6 hover:border-[#c08b5a]/30 transition-all duration-500 group-hover:bg-white/[0.03] group-hover:translate-x-2">
+                            <div class="relative rounded-2xl glass-card border border-white/5 p-5 md:p-6 hover:border-gold/30 transition-all duration-500 group-hover:bg-white/[0.03] group-hover:translate-x-2">
                                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
                                     <div class="flex items-start gap-4">
-                                        <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-[#c08b5a]">
+                                        <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-gold">
                                             {publicFileExists(job.logo) ? (
                                                 <img
                                                     src={job.logo}
@@ -133,11 +133,11 @@ const displayedExperience = count
                                         </div>
 
                                         <div>
-                                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-[#c08b5a] transition-colors leading-tight">
+                                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-gold transition-colors leading-tight">
                                                 {job.role}
                                             </h3>
                                             <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base font-medium">
-                                                <span class="text-[#f59e0b] font-bold">
+                                                <span class="text-moon font-bold">
                                                     {job.company}
                                                 </span>
                                                 <span class="text-gray-600 hidden md:inline">
@@ -152,7 +152,7 @@ const displayedExperience = count
                                     </div>
 
                                     {job.current && (
-                                        <span class="self-start inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#f59e0b]/10 text-[#f59e0b] text-[10px] md:text-xs font-bold border border-[#f59e0b]/20 whitespace-nowrap mt-2 md:mt-0 uppercase tracking-widest">
+                                        <span class="self-start inline-flex items-center px-2.5 py-0.5 rounded-full bg-moon/10 text-moon text-[10px] md:text-xs font-bold border border-moon/20 whitespace-nowrap mt-2 md:mt-0 uppercase tracking-widest">
                                             {t("ui.current")}
                                         </span>
                                     )}
@@ -168,7 +168,7 @@ const displayedExperience = count
 
                                 <div class="flex flex-wrap gap-2">
                                     {job.technologies.map((tech) => (
-                                        <span class="px-2.5 py-1 rounded-md bg-[#0f172a] border border-white/5 text-xs text-gray-400 font-mono hover:bg-white/5 hover:text-[#c08b5a] hover:border-[#c08b5a]/30 transition-all cursor-default select-none">
+                                        <span class="px-2.5 py-1 rounded-md bg-[#0f172a] border border-white/5 text-xs text-gray-400 font-mono hover:bg-white/5 hover:text-gold hover:border-gold/30 transition-all cursor-default select-none">
                                             {tech}
                                         </span>
                                     ))}
@@ -188,7 +188,7 @@ const displayedExperience = count
                 count ? (
                     <a
                         href={getRelativeLocaleUrl(lang, "experience")}
-                        class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
+                        class="text-gold hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
                     >
                         {t("section.viewFullExperience")}
                     </a>
@@ -198,7 +198,7 @@ const displayedExperience = count
                         download={cvFilename}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#f59e0b] text-[#0f172a] font-bold hover:bg-[#eab308] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-orange-500/20"
+                        class="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-moon text-gunmetal font-bold hover:brightness-110 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-moon/20"
                     >
                         <span>{t("hero.cta") || "Download CV"}</span>
                         <svg

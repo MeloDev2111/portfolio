@@ -5,13 +5,14 @@ export const siteConfig = {
     title: "Software Engineer & Data Enthusiast",
     description:
         "Personal portfolio of Melio Diaz (MeloDev), a Systems Engineer specializing in High-Scalability Platforms, Cloud Computing, and Software Architecture.",
-    // "Deep Gunmetal & Copper" Theme
+    // "Dark Industrial Gold" theme: moon (yellow) + wolf (slate) from the logo.
+    // Keep in sync with @theme in src/styles/global.css.
     theme: {
         colors: {
-            primary: "#c08b5a", // Antique Copper
-            secondary: "#5a5866", // Slate
+            primary: "#f1de76", // Moon
+            secondary: "#47505c", // Wolf
             background: "#0c111c", // Deep Gunmetal
-            surface: "#1F2937", // Charcoal (unchanged for now, used in other places?)
+            surface: "#1f2937", // Charcoal
             text: "#e1e1e0", // Platinum
         },
     },

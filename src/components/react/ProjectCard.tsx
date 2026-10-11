@@ -46,7 +46,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             rel={!inProgress && link ? "noopener noreferrer" : undefined}
             className={`group relative overflow-hidden rounded-2xl glass-card border border-white/5 transition-all duration-500 flex flex-col h-full ${
                 !inProgress
-                    ? "hover:border-[#c08b5a]/40 hover:shadow-[0_0_30px_rgba(192,139,90,0.15)] hover:-translate-y-1 cursor-pointer"
+                    ? "hover:border-gold/40 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-moon)_15%,transparent)] hover:-translate-y-1 cursor-pointer"
                     : "opacity-80 cursor-default"
             }`}
         >
@@ -96,13 +96,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="p-6 flex flex-col flex-grow relative z-30">
                 <div className="flex justify-between items-start mb-4 gap-2">
                     <h3
-                        className={`text-xl font-heading font-bold text-light transition-colors ${!inProgress && "group-hover:text-[#c08b5a]"}`}
+                        className={`text-xl font-heading font-bold text-light transition-colors ${!inProgress && "group-hover:text-gold"}`}
                     >
                         {title}
                     </h3>
                     <div className="flex flex-col gap-2 items-end">
                         {featured && !inProgress && (
-                            <span className="px-2 py-0.5 rounded text-[10px] tracking-wider font-bold bg-[#c08b5a] text-gunmetal uppercase shadow-[0_0_10px_rgba(192,139,90,0.4)]">
+                            <span className="px-2 py-0.5 rounded text-[10px] tracking-wider font-bold bg-gold text-gunmetal uppercase shadow-[0_0_10px_color-mix(in_srgb,var(--color-moon)_40%,transparent)]">
                                 Featured
                             </span>
                         )}
@@ -140,7 +140,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     {tags.map((tag) => (
                         <span
                             key={tag}
-                            className="px-2.5 py-1 rounded-md bg-white/5 text-xs text-gray-400 border border-white/5 group-hover:border-[#c08b5a]/20 transition-colors"
+                            className="px-2.5 py-1 rounded-md bg-white/5 text-xs text-gray-400 border border-white/5 group-hover:border-gold/20 transition-colors"
                         >
                             {tag}
                         </span>
