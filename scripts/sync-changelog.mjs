@@ -15,23 +15,18 @@ if (!version) {
     process.exit(1);
 }
 
-const run = (cmd, args) =>
-    execFileSync(cmd, args, {
-        stdio: "inherit",
-        shell: process.platform === "win32",
-    });
+const run = (cmd, args, options = {}) =>
+    execFileSync(cmd, args, { stdio: "inherit", ...options });
 
-run("pnpm", ["changelog"]);
+// pnpm is a .cmd shim on Windows and needs a shell; git must not use one, or
+// the commit message would be passed with literal quotes.
+run("pnpm", ["changelog"], { shell: process.platform === "win32" });
 
 try {
     execFileSync("git", ["diff", "--quiet", "--", "CHANGELOG.md"]);
     console.log("CHANGELOG.md already up to date.");
 } catch {
     run("git", ["add", "CHANGELOG.md"]);
-    run("git", [
-        "commit",
-        "-m",
-        `"docs(changelog): sync v${version} [skip ci]"`,
-    ]);
+    run("git", ["commit", "-m", `docs(changelog): sync v${version} [skip ci]`]);
     run("git", ["push"]);
 }
