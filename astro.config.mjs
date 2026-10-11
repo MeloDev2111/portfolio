@@ -7,8 +7,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-    site: process.env.SITE_URL || "https://melodev2111.github.io",
-    base: process.env.BASE_PATH || "/portfolio",
+    site: process.env.SITE_URL || "https://meliodiaz.com",
+    base: process.env.BASE_PATH || "/",
     integrations: [react(), sitemap()],
 
     // Internationalization strategy
