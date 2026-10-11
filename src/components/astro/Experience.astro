@@ -58,13 +58,13 @@ const displayedExperience = count
         {
             showTitle && (
                 <div class="mb-12 md:mb-20">
-                    <span class="text-[#c08b5a] font-mono text-xs tracking-[0.2em] font-bold uppercase block mb-3">
+                    <span class="text-gold font-mono text-xs tracking-[0.2em] font-bold uppercase block mb-3">
                         {t("nav.experienceKey") || "CAREER PROGRESSION"}
                     </span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
                         {lang === "es" ? (
                             <>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-[#c08b5a]">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-gold">
                                     {t("nav.experience")}
                                 </span>{" "}
                                 {t("ui.professional")}
@@ -72,7 +72,7 @@ const displayedExperience = count
                         ) : (
                             <>
                                 {t("ui.professional")}{" "}
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-[#c08b5a]">
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-gold">
                                     {t("nav.experience")}
                                 </span>
                             </>
@@ -114,13 +114,13 @@ const displayedExperience = count
                     ${
                         job.current
                             ? "bg-[#f59e0b] outline-[#f59e0b] shadow-[0_0_15px_rgba(245,158,11,0.4)] animate-pulse"
-                            : "bg-gray-600 outline-gray-600 group-hover:bg-[#c08b5a] group-hover:outline-[#c08b5a]"
+                            : "bg-gray-600 outline-gray-600 group-hover:bg-gold group-hover:outline-gold"
                     }`}
                             />
-                            <div class="relative rounded-2xl glass-card border border-white/5 p-5 md:p-6 hover:border-[#c08b5a]/30 transition-all duration-500 group-hover:bg-white/[0.03] group-hover:translate-x-2">
+                            <div class="relative rounded-2xl glass-card border border-white/5 p-5 md:p-6 hover:border-gold/30 transition-all duration-500 group-hover:bg-white/[0.03] group-hover:translate-x-2">
                                 <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
                                     <div class="flex items-start gap-4">
-                                        <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-[#c08b5a]">
+                                        <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-gold">
                                             {publicFileExists(job.logo) ? (
                                                 <img
                                                     src={job.logo}
@@ -133,7 +133,7 @@ const displayedExperience = count
                                         </div>
 
                                         <div>
-                                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-[#c08b5a] transition-colors leading-tight">
+                                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-gold transition-colors leading-tight">
                                                 {job.role}
                                             </h3>
                                             <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base font-medium">
@@ -168,7 +168,7 @@ const displayedExperience = count
 
                                 <div class="flex flex-wrap gap-2">
                                     {job.technologies.map((tech) => (
-                                        <span class="px-2.5 py-1 rounded-md bg-[#0f172a] border border-white/5 text-xs text-gray-400 font-mono hover:bg-white/5 hover:text-[#c08b5a] hover:border-[#c08b5a]/30 transition-all cursor-default select-none">
+                                        <span class="px-2.5 py-1 rounded-md bg-[#0f172a] border border-white/5 text-xs text-gray-400 font-mono hover:bg-white/5 hover:text-gold hover:border-gold/30 transition-all cursor-default select-none">
                                             {tech}
                                         </span>
                                     ))}
@@ -188,7 +188,7 @@ const displayedExperience = count
                 count ? (
                     <a
                         href={getRelativeLocaleUrl(lang, "experience")}
-                        class="text-[#c08b5a] hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
+                        class="text-gold hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
                     >
                         {t("section.viewFullExperience")}
                     </a>

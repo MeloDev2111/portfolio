@@ -10,16 +10,16 @@ const t = useTranslations(lang);
     class="fixed top-24 right-4 z-[60] transform translate-x-[120%] transition-transform duration-500 ease-out max-w-sm w-full"
 >
     <div
-        class="glass-card bg-[#0c111c]/90 backdrop-blur-xl border border-[#c08b5a] p-4 rounded-xl shadow-[0_0_20px_rgba(192,139,90,0.2)] flex items-start gap-3 relative overflow-hidden"
+        class="glass-card bg-[#0c111c]/90 backdrop-blur-xl border border-gold p-4 rounded-xl shadow-[0_0_20px_color-mix(in_srgb,var(--color-moon)_20%,transparent)] flex items-start gap-3 relative overflow-hidden"
     >
         <!-- Glow effect -->
         <div
-            class="absolute inset-0 bg-gradient-to-r from-[#c08b5a]/10 to-transparent pointer-events-none"
+            class="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent pointer-events-none"
         >
         </div>
 
         <!-- Icon -->
-        <div class="text-[#c08b5a] mt-0.5 shrink-0">
+        <div class="text-gold mt-0.5 shrink-0">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -37,7 +37,7 @@ const t = useTranslations(lang);
         <div class="flex-1 text-sm">
             <h4 class="font-bold text-white mb-1">{t("toast.title")}</h4>
             <p class="text-gray-300 leading-relaxed">
-                <span id="toast-lang" class="font-mono text-[#c08b5a] font-bold"
+                <span id="toast-lang" class="font-mono text-gold font-bold"
                 ></span>{" "}
                 {t("toast.content")}
             </p>

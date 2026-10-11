@@ -1,8 +1,19 @@
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
+/* Brand palette: single source of truth. Components consume these via
+   Tailwind utilities (bg-moon, text-wolf, ...) or var(--color-*). */
 @theme {
-    /* We can extend here too if we want, but we used the config file */
+    --color-gunmetal: #0c111c; /* Deep Gunmetal (background) */
+    --color-charcoal: #1f2937; /* Charcoal (surface) */
+    --color-light: #e1e1e0; /* Platinum (text) */
+    --color-moon: #f1de76; /* Primary accent (logo moon). Text on it: gunmetal */
+    --color-wolf: #47505c; /* Secondary (logo wolf) */
+
+    /* @deprecated: temporary aliases of --color-moon, kept to avoid a mass
+       rename. Use `moon` in new code and remove these once migrated. */
+    --color-gold: var(--color-moon);
+    --color-copper: var(--color-moon);
 }
 
 /* Base styles */
@@ -39,39 +50,40 @@
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-[#0c111c];
+        @apply bg-gunmetal;
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-[#818d90]/20 rounded-full border-[2px] border-[#0c111c];
+        @apply bg-wolf rounded-full border-[2px] border-gunmetal;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-[#c08b5a]/60;
+        @apply bg-moon/60;
     }
 
     /* Custom Selection */
     ::selection {
-        @apply bg-[#c08b5a]/30 text-white;
+        @apply bg-moon/30 text-light;
     }
 
     /* Focus Outline to match theme */
     :focus-visible {
-        @apply outline-none ring-2 ring-[#c08b5a] ring-offset-2 ring-offset-[#0c111c];
+        @apply outline-none ring-2 ring-moon ring-offset-2 ring-offset-gunmetal;
     }
 
     /* Shared Utility Classes */
     .glass-card {
-        background: rgba(255, 255, 255, 0.03);
+        background: color-mix(in srgb, var(--color-light) 3%, transparent);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid color-mix(in srgb, var(--color-light) 5%, transparent);
+        box-shadow: 0 4px 30px
+            color-mix(in srgb, var(--color-gunmetal) 40%, transparent);
     }
 
     .glass-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(192, 139, 90, 0.2);
+        background: color-mix(in srgb, var(--color-light) 5%, transparent);
+        border-color: color-mix(in srgb, var(--color-moon) 20%, transparent);
     }
 
     .bento-noise {
