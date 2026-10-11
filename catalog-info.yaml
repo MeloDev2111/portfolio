@@ -12,7 +12,7 @@ metadata:
         framework: astro
         aesthetic: dark-industrial-gold
     links:
-        - url: https://melodev2111.github.io/portfolio/en
+        - url: https://meliodiaz.com/en
           title: Live Portfolio
           icon: dashboard
         - url: https://github.com/MeloDev2111/portfolio
