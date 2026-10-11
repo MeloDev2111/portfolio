@@ -104,7 +104,7 @@ const techLogos = getBentoSkills().map((skill) => ({
 
                 <div class="relative z-10 pt-4">
                     <span
-                        class="text-[#f59e0b] font-mono text-base mb-2 block tracking-widest font-bold"
+                        class="text-moon font-mono text-base mb-2 block tracking-widest font-bold"
                     >
                         {t("hero.greeting") || "Hi, I'm"}
                     </span>
@@ -128,7 +128,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                         download={cvFilename}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#f59e0b] text-[#0f172a] font-bold hover:bg-[#eab308] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-orange-500/20"
+                        class="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-moon text-gunmetal font-bold hover:brightness-110 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-moon/20"
                     >
                         <span>{t("hero.cta") || ui.en["hero.cta"]}</span>
                         <svg
@@ -155,7 +155,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                                 aria-label="LinkedIn"
                             >
                                 <span
-                                    class="w-5 h-5 flex items-center justify-center text-white group-hover/btn:text-[#f59e0b] transition-colors"
+                                    class="w-5 h-5 flex items-center justify-center text-white group-hover/btn:text-moon transition-colors"
                                     set:html={linkedInSocial.icon}
                                 />
                                 <span>LinkedIn</span>
@@ -172,7 +172,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                                 aria-label="GitHub"
                             >
                                 <span
-                                    class="w-5 h-5 flex items-center justify-center text-white group-hover/btn:text-[#f59e0b] transition-colors"
+                                    class="w-5 h-5 flex items-center justify-center text-white group-hover/btn:text-moon transition-colors"
                                     set:html={githubSocial.icon}
                                 />
                                 <span>GitHub</span>
@@ -201,9 +201,9 @@ const techLogos = getBentoSkills().map((skill) => ({
                 >
                     <div class="flex items-center justify-between mb-2">
                         <p
-                            class="text-[10px] text-[#f59e0b] font-mono uppercase tracking-widest font-bold flex items-center gap-1.5"
+                            class="text-[10px] text-moon font-mono uppercase tracking-widest font-bold flex items-center gap-1.5"
                         >
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"
+                            <span class="w-1.5 h-1.5 rounded-full bg-moon"
                             ></span>
                             {t("nav.projects")}
                         </p>
@@ -297,10 +297,10 @@ const techLogos = getBentoSkills().map((skill) => ({
                     <div class="flex items-center gap-2">
                         <span class="relative flex h-2 w-2">
                             <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f59e0b] opacity-75"
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-moon opacity-75"
                             ></span>
                             <span
-                                class="relative inline-flex rounded-full h-2 w-2 bg-[#f59e0b]"
+                                class="relative inline-flex rounded-full h-2 w-2 bg-moon"
                             ></span>
                         </span>
                     </div>
@@ -467,7 +467,7 @@ const techLogos = getBentoSkills().map((skill) => ({
                     class="relative z-10 w-full flex flex-col items-center h-full"
                 >
                     <p
-                        class="text-[10px] text-[#f59e0b] font-heading mb-2 text-center uppercase tracking-widest font-bold"
+                        class="text-[10px] text-moon font-heading mb-2 text-center uppercase tracking-widest font-bold"
                     >
                         {t("hero.latestAchievement")}
                     </p>
