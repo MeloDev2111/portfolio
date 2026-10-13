@@ -10,7 +10,9 @@ const jaUrl = getRelativeLocaleUrl("ja", "");
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Redirecting...</title>
+        <title>Melio Diaz | Software Engineer</title>
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href={new URL(`${enUrl}/`, Astro.site).href} />
         <!-- Default fallback for no-JS -->
         <meta http-equiv="refresh" content={`0;url=${enUrl}`} />
         <script define:vars={{ enUrl, esUrl, jaUrl }}>

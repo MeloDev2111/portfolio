@@ -99,6 +99,10 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                                     <img
                                         src={cert.data.badge}
                                         alt={cert.data.name}
+                                        width={64}
+                                        height={64}
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-16 h-16 object-contain"
                                     />
                                 </div>

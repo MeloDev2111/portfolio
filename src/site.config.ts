@@ -1,4 +1,5 @@
 export const siteConfig = {
+    url: "https://meliodiaz.com",
     name: "Melio Diaz",
     alias: "MeloDev",
     role: "Software Engineer",
@@ -18,4 +19,5 @@ export const siteConfig = {
     },
     // Default OG Image (relative to public/)
     ogImage: "/media/og-image.png",
+    ogImageAlt: "Melio Diaz (MeloDev), Software Engineer",
 };
