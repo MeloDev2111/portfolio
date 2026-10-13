@@ -1,5 +1,5 @@
 ---
-import { getI18nStaticPaths } from "../../i18n/utils";
+import { getI18nStaticPaths, useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/astro/Hero.astro";
 
@@ -8,8 +8,13 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
+const t = useTranslations(lang);
 ---
 
-<Layout title="MeloDev Portfolio" lang={lang}>
+<Layout
+    title={t("seo.homeTitle")}
+    description={t("seo.homeDescription")}
+    lang={lang}
+>
     <Hero />
 </Layout>

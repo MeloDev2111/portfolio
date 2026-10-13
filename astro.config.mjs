@@ -9,7 +9,18 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
     site: process.env.SITE_URL || "https://meliodiaz.com",
     base: process.env.BASE_PATH || "/",
-    integrations: [react(), sitemap()],
+    integrations: [
+        react(),
+        sitemap({
+            filter: (page) =>
+                !page.includes("/404") && new URL(page).pathname !== "/",
+            lastmod: new Date(),
+            i18n: {
+                defaultLocale: "en",
+                locales: { en: "en", es: "es", ja: "ja" },
+            },
+        }),
+    ],
 
     // Internationalization strategy
     i18n: {
