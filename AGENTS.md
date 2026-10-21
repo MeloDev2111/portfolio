@@ -1,4 +1,4 @@
-# 🤖 AGENT.md: Project Context & Guidelines
+# 🤖 AGENTS.md: Project Context & Guidelines
 
 > **Note to AI Agents:** This file serves as the primary source of truth for the project's architecture, philosophy, and development standards. Always consult this file before making major architectural decisions.
 
@@ -15,11 +15,11 @@
 ### Core Frameworks
 
 - **Framework:** Astro 7 (Latest) - Chosen for SSG capabilities, speed, and islands architecture.
-- **Authentication/Logic:** Minimal client-side JS, mostly static HTML.
+- **Rendering:** Static HTML first, minimal client-side JS.
 - **UI Library:** React 19 (for interactive islands like the Tech Stack grid).
 - **Styling:** Tailwind CSS v4 (using `@tailwindcss/vite` plugin).
     - _Theme:_ Custom `Gunmetal, Moon & Wolf` palette defined once in `@theme` (`src/styles/global.css`).
-- **Bundler:** Vite 6 (via Astro).
+- **Bundler:** Vite (bundled with Astro; not a direct dependency).
 
 ### Key Libraries & Tools
 
@@ -33,7 +33,7 @@
 
 ### DevOps & CI/CD
 
-- **Platform:** GitHub Pages.
+- **Platform:** GitHub Pages, served at `https://meliodiaz.com` (`public/CNAME`; `site` comes from `SITE_URL`, default in `astro.config.mjs`).
 - **Workflow:** Automated deployment via GitHub Actions on push to `master`.
 - **Versioning:** Semantic Versioning (SemVer) enforced via `pnpm release`.
 
@@ -42,7 +42,8 @@
 ```text
 /
 ├── .github/workflows/   # CI/CD pipelines
-├── public/              # Static assets (images, fonts, resume.pdf)
+├── docs/                # Public roadmap (ROADMAP.md)
+├── public/              # Static assets (images, fonts, CV, robots.txt, CNAME)
 ├── src/
 │   ├── assets/          # Optimized assets (processed by Astro)
 │   ├── components/      # UI components
@@ -70,11 +71,11 @@
 ├── .release-it.json     # Release automation (hooks, plugins)
 ├── eslint.config.js     # ESLint 9 configuration
 ├── pnpm-workspace.yaml  # pnpm workspace configuration (allowBuilds)
-├── tailwind.config.mjs  # Tailwind configuration
+├── tailwind.config.mjs  # Fonts and animations (loaded via @config; colors live in @theme)
 └── tsconfig.json        # TypeScript configuration with strict paths
 ```
 
-## 4. 🎨 Design System Guidelines ("Dark Industrial Gold")
+## 4. 🎨 Design System Guidelines ("Dark Industrial Gold": the name is historical, the palette is moon + wolf)
 
 - **Visual Identity:** Sophisticated Dark Mode with "Moon/Wolf" iconography.
 - **Color Palette** (tokens live in `@theme`, `src/styles/global.css`; never hardcode hex values in components):
@@ -82,7 +83,7 @@
     - **Primary Accent:** Moon `moon` (`#F1DE76`, from the logo). Text placed on a moon background MUST be `gunmetal`.
     - **Secondary:** Wolf `wolf` (`#47505C`, from the logo). Use for surfaces/borders/scrollbar, not for text on gunmetal (2.3:1). For muted text on gunmetal use `#a3a3ad` (7.5:1).
     - **Text:** Platinum `light` (`#e1e1e0`) / Light Grey (`#F9FAFB`).
-    - **Deprecated aliases:** `gold` and `copper` now resolve to `moon` (temporary, to avoid a mass rename). Use `moon` in new code. The old copper `#c08b5a` and slate `#5a5866` are retired.
+    - **Deprecated aliases:** `gold` and `copper` resolve to `moon` (temporary, still used in ~24 files). Never use them in new code, and replace them with `moon` when touching a file. The old copper `#c08b5a` and slate `#5a5866` are retired.
 - **Logo & brand assets** (regenerate derived files with `node scripts/generate-brand-assets.mjs`; the master logo is never redrawn):
     - Master: `public/media/logo.svg` (optimized, has `<title>`).
     - Variants (transparent bg): `public/media/brand/logo-dark-bg.svg` (default), `logo-light-bg.svg`, `logo-mono-dark.svg`, `logo-mono-light.svg`.
@@ -114,64 +115,13 @@
             - Add a new dictionary entry for the language in the `ui` object.
             - Add `nav.langName` for the language selector.
         3.  The `LanguagePicker` component will automatically detect and display the new language.
-5.  **Formatting & Quality:** Use `pnpm format` to automatically fix styling issues across the project.
-6.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases.
+5.  **Content model:** English content files are the single source of truth; `es`/`ja` files only override the fields that change (the rest is inherited). Step-by-step guides for adding projects, certifications and experience are in `README.md`.
+6.  **SEO:** Every page gets canonical, hreflang, localized meta tags and JSON-LD from `Layout.astro`. Keep that logic in the layout, not in pages.
+7.  **Formatting & Quality:** Before pushing run `pnpm lint`, `pnpm test` and `pnpm format`.
+8.  **Clean Commits:** Follow Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`) to support automated releases. Every merge to `master` publishes a release.
 
-## 6. 📝 Current Status & Roadmap
+## 6. 📝 Status & Roadmap
 
-- **Status:** v0.13.1 (Brand Refresh & Release Pipeline Fixes).
-- **Recent Focus:**
-    - **Brand Refresh (v0.13.0 - v0.13.1):**
-        - Optimized master logo, added dark/light/mono variants and a simplified favicon set (see Section 4).
-        - Replaced the copper and amber accents with the `moon`/`wolf` palette tokens.
-        - OG image simplified to logo, name and role (no boxes, no tagline), centered composition.
-    - **Release Pipeline (v0.12.1 - v0.12.2):**
-        - `CHANGELOG.md` is generated by `auto-changelog` after the tag via `scripts/sync-changelog.mjs` (`after:release` hook), so each version gets its date and no `null` header.
-        - Release and sync commits (`chore: release`, `docs(changelog)`) are filtered out of the changelog.
-    - **Home, Projects & Hero (v0.11.0 - v0.12.0):**
-        - Simplified the home into a bento dashboard and optimized navigation (v0.11.0).
-        - Added smart tag dimming and dynamic faceted filtering in `ProjectGrid`; optimized responsive icon sizing in the Hero bento grid (v0.12.0).
-    - **Sitemap, SSR Hydration & Japanese Data (v0.10.0):**
-        - Integrated `@astrojs/sitemap`, fixed SSR hydration, added Japanese career data and the OG image.
-    - **Code Quality, Tooling & Strict TypeScript (v0.9.2):**
-        - Normalized line endings across platforms with `.gitattributes` (`* text=auto eol=lf`) and `.prettierrc` (`endOfLine: auto`).
-        - Added `typescript` and `@astrojs/check` in `devDependencies` with dedicated `pnpm check` script.
-        - Configured active ESLint 9 flat configuration (`eslint.config.js`) enforcing `@typescript-eslint/no-explicit-any`.
-        - Eradicated all `any` and `as any` usages across localized pages and React components.
-    - **Package Manager & Security:**
-        - Standardized workspace setup on `pnpm` (v12+).
-        - Configured `pnpm-workspace.yaml` `allowBuilds` for `esbuild` build script permissions.
-        - Updated GitHub Actions workflow (`master-pipeline.yml`) to use `pnpm` v12.
-    - **i18n & Multi-Language:**
-        - Upgraded language selector from binary toggle to a premium glassmorphism dropdown.
-        - Added support for Japanese (`ja`) and optimized the `getAllLanguageUrls` helper.
-        - Refactored `src/i18n/utils.ts` for automated unit testing (Vitest).
-    - **Final Polish & SEO:**
-        - Conducted comprehensive SEO audit (meta tags, descriptions, Open Graph, Twitter Cards).
-        - Verified layout integrity and LCP strategies via visual tests and Lighthouse.
-        - Optimized image loading (eager vs lazy) for better LCP.
-    - **UX Enhancements:**
-        - Implemented `ScrollToTop` component with circular progress indicator.
-        - Fixed scroll snapping inconsistency in Experience section.
-        - Cleaned up Header visual artifacts on scroll.
-    - **Experience Section:**
-        - Implemented full timeline view at `/experience` with "Download CV" CTA.
-        - Integrated "Experience" card into Hero Bento grid (showing top 2 roles) with perfect vertical alignment.
-        - Unified logo logic: Server-side validation (`fs.existsSync`) + Premium CSS placeholder fallback for missing images.
-        - Standardized styling for buttons and layout consistency.
-    - **Projects Section:** 
-        - Implemented static featured grid (Top 2 + "View All") for optimal home layout.
-        - Added `inProgress` and `draft` states with visual badges and disabling logic.
-        - Enhanced `ProjectGrid` with multi-tag filtering (AND logic) and smart sorting (Featured > Date).
-        - Integrated new case studies: IBM Data Engineering, Data Science, and API Colores.
-        - Refactored localization strategy: English files are the strict Single Source of Truth for configuration.
-    - **Hero Section:** Dynamic "Latest Achievement" bento card.
-    - **Certifications:** Added "Verified Credentials" banner with Credly integration.
-
-- **Immediate Next Steps:**
-    - **Content & Features Expansion:**
-        - **Technical Blog:** Design MDX architecture for sharing engineering insights.
-        - **Interactive API Showcase:** (New) Add a section to demo live backend endpoints or Swagger documentation.
-        - **Contact Integration:** Implement a functional contact form (e.g., Formspree) or 'Book a Meeting' Calendly embed widget.
-    - **Quality Assurance:**
-        - **E2E Testing:** Setup Playwright to automate critical path verification (Navigation, i18n, Forms).
+- **Current version:** read it from `package.json`. Release history: `CHANGELOG.md` (generated, never edit by hand).
+- **Roadmap:** `docs/ROADMAP.md` lists what is planned and what is open for contribution. Update it when a roadmap item ships or a new one is agreed.
+- Do not log change history or "recent focus" here; it goes stale. This file only holds what an agent needs to write correct code today.
