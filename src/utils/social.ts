@@ -6,6 +6,7 @@ export interface SocialLink {
     colorClass?: string;
     isPrimary?: boolean; // True for GitHub/LinkedIn (Large cards)
     disabled?: boolean;
+    excludeFromSameAs?: boolean; // Not a personal profile (e.g. a community): keep out of JSON-LD sameAs
 }
 
 /**
@@ -28,6 +29,14 @@ export const USER_SOCIALS: SocialLink[] = [
         label: "Connect",
         colorClass: "hover:text-blue-400",
         isPrimary: true,
+    },
+    {
+        name: "Chamba Lab",
+        url: "https://chambalab.org/",
+        icon: "☕",
+        label: "Community",
+        colorClass: "hover:text-yellow-400",
+        excludeFromSameAs: true,
     },
     {
         name: "Credly",

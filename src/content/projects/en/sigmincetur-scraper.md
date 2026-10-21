@@ -4,7 +4,7 @@ description: "Automated data extraction tool for the National Tourism Informatio
 tags: ["Node.js", "Scraping"]
 date: 2022-09-07
 featured: false
-draft: true
+draft: false
 link: "https://github.com/MeloDev2111/SIGMINCETUR-Scraper"
 image: "../../../assets/projects/project-placeholder.svg"
 ---
