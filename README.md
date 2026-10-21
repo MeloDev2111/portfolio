@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/github/license/MeloDev2111/portfolio?style=flat-square)
 ![Version](https://img.shields.io/github/package-json/v/MeloDev2111/portfolio?color=blue&style=flat-square)
 
-A high-performance, accessible, and internationalized personal portfolio website built for a Backend Developer & Data Science enthusiast. Designed with a "Dark Industrial Gold" aesthetic and focused on showcasing technical depth.
+A high-performance, accessible, and internationalized personal portfolio website built for a Backend Developer & Data Science enthusiast. Designed with a "Dark Industrial Gold" aesthetic (moon yellow and wolf slate, derived from the logo) and focused on showcasing technical depth.
 
 ## 🚀 Tech Stack
 
@@ -13,48 +13,20 @@ A high-performance, accessible, and internationalized personal portfolio website
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework.
 - **Testing:** [Vitest](https://vitest.dev/) - Blazing fast unit testing.
 - **i18n:** Native Astro Internationalization (English, Spanish & Japanese).
-- **Deployment:** GitHub Pages via GitHub Actions.
+- **Deployment:** GitHub Pages via GitHub Actions, served at [meliodiaz.com](https://meliodiaz.com).
 
 ## ✨ Features
 
 - **⚡ Blazing Fast:** Statically generated for optimal performance (Lighthouse 95+).
 - **🌍 Internationalization (i18n):** Full support for English (`/en`), Spanish (`/es`), and Japanese (`/ja`).
-- **🎨 Custom Design System:** "Dark Industrial Gold" theme with Bento Grid layouts.
+- **🎨 Custom Design System:** "Dark Industrial Gold" theme (moon + wolf palette) with Bento Grid layouts.
+- **🔎 SEO:** Canonical URLs, hreflang, JSON-LD, sitemap, robots.txt and localized Open Graph tags.
 - **📱 Responsive:** Mobile-first design approach.
-- **🤖 Automated Releases:** Semantic versioning and changelog generation using `release-it`.
+- **🤖 Automated Releases:** Every merge to `master` publishes a release: version bump from Conventional Commits with `release-it`, changelog with `auto-changelog`. See [CHANGELOG.md](CHANGELOG.md).
 
 ## 🛠️ Project Structure
 
-```text
-/
-├── .github/workflows/   # CI/CD pipelines
-├── public/              # Static assets (images, fonts, resume.pdf)
-├── src/
-│   ├── assets/          # Optimized assets (processed by Astro)
-│   ├── components/      # UI Components
-│   │   ├── astro/       # Static components (Hero, Header, Footer)
-│   │   └── react/       # Interactive components (ProjectGrid, Filters)
-│   ├── content/         # Content Collections (Data source)
-│   │   ├── certifications/ # Individual JSON files per certification
-│   │   └── projects/    # Markdown files for projects (en/es)
-│   ├── i18n/            # Internationalization logic
-│   │   ├── ui.ts        # UI labels and translations
-│   │   └── utils.ts     # Path and locale helpers
-│   ├── layouts/         # Page layouts (Layout.astro)
-│   ├── pages/           # File-based routing
-│   │   ├── [lang]/      # Localized pages wrapper (en/es/ja)
-│   │   ├── 404.astro    # Custom 404 error page
-│   │   └── index.astro  # Root redirect
-│   ├── styles/          # Global styles (Tailwind imports)
-│   ├── tests/           # Unit tests (Vitest)
-│   ├── utils/           # Helper functions (cv, skills, social)
-│   ├── content.config.ts # Content Collections schema definitions
-│   └── site.config.ts   # Site configuration & metadata
-├── .gitattributes       # Git normalization (LF line endings)
-├── astro.config.mjs     # Astro configuration
-├── eslint.config.js     # ESLint 9 configuration
-└── tailwind.config.mjs  # Tailwind configuration
-```
+Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What is planned next is in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## 📝 Content Management
 
@@ -152,13 +124,15 @@ All commands are run from the root of the project:
 | `pnpm format`  | Fix formatting issues with Prettier         |
 | `pnpm release` | Create a new release (tag + changelog)      |
 
+Before opening a PR, run `pnpm lint`, `pnpm test` and `pnpm format`.
+
 ## 🤝 Contributing
 
-This is a personal portfolio project, but suggestions are welcome!
+This is a personal portfolio project, but suggestions are welcome! Check [docs/ROADMAP.md](docs/ROADMAP.md) for open items and read [AGENTS.md](AGENTS.md) for the architecture and rules.
 
 1.  Fork the repository.
 2.  Create your feature branch (`git checkout -b feature/amazing-feature`).
-3.  Commit your changes (`git commit -m 'feat: add some amazing feature'`).
+3.  Commit your changes using [Conventional Commits](https://www.conventionalcommits.org/) (`git commit -m 'feat: add some amazing feature'`).
 4.  **Run Tests:** Ensure all tests pass (`pnpm test`).
 5.  **Lint Check:** Verify code quality (`pnpm lint`).
 6.  **Format Code:** Fix styling issues automatically (`pnpm format`).
