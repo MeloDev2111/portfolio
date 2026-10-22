@@ -7,6 +7,8 @@ export interface DemoRole {
     title: string;
     start: string; // YYYY-MM
     end: string; // YYYY-MM | "Present"
+    // Client (consultancy) or project (in-house). Changes with every assignment.
+    assignment: { label: L10n; value: L10n };
     summary: L10n;
     highlights: L10nList;
     technologies: string[];
@@ -22,7 +24,7 @@ export interface DemoCompany {
     logo: string;
     kind: L10n;
     context: L10n;
-    location: string;
+    location: L10n;
     roles: DemoRole[]; // newest first
     metrics: DemoMetric[];
 }
@@ -30,8 +32,8 @@ export interface DemoCompany {
 export const DEMO_EXPERIENCE: DemoCompany[] = [
     {
         company: "Globant",
-        logo: "/logos/globant.svg",
-        location: "Lima, Peru",
+        logo: "/logos/globant.png",
+        location: { en: "Lima, Peru", es: "Lima, Perú" },
         kind: {
             en: "Technology consultancy",
             es: "Consultora tecnológica",
@@ -54,6 +56,13 @@ export const DEMO_EXPERIENCE: DemoCompany[] = [
                 title: "Java Developer Ssr Advanced",
                 start: "2026-03",
                 end: "Present",
+                assignment: {
+                    label: { en: "Client", es: "Cliente" },
+                    value: {
+                        en: "Payments · Leading national payments ecosystem (fintech)",
+                        es: "Pagos · Ecosistema nacional líder en pagos (fintech)",
+                    },
+                },
                 technologies: [
                     "Java 21",
                     "Spring WebFlux",
@@ -84,8 +93,8 @@ export const DEMO_EXPERIENCE: DemoCompany[] = [
     },
     {
         company: "UTP",
-        logo: "/logos/utp.svg",
-        location: "Lima, Peru",
+        logo: "/logos/utp.png",
+        location: { en: "Lima, Peru", es: "Lima, Perú" },
         kind: {
             en: "University",
             es: "Universidad",
@@ -129,6 +138,13 @@ export const DEMO_EXPERIENCE: DemoCompany[] = [
                 title: "Backend Developer Ssr",
                 start: "2023-10",
                 end: "2026-03",
+                assignment: {
+                    label: { en: "Project", es: "Proyecto" },
+                    value: {
+                        en: "UTP+Class · Learning Management System",
+                        es: "UTP+Class · Learning Management System",
+                    },
+                },
                 technologies: [
                     "Java",
                     "Spring Boot",
@@ -161,6 +177,13 @@ export const DEMO_EXPERIENCE: DemoCompany[] = [
                 title: "Full Stack Developer",
                 start: "2023-05",
                 end: "2023-10",
+                assignment: {
+                    label: { en: "Project", es: "Proyecto" },
+                    value: {
+                        en: "UTP+Class · Learning Management System",
+                        es: "UTP+Class · Learning Management System",
+                    },
+                },
                 technologies: [
                     "TypeScript",
                     "React",
@@ -190,6 +213,13 @@ export const DEMO_EXPERIENCE: DemoCompany[] = [
                 title: "Backend Developer",
                 start: "2022-05",
                 end: "2023-05",
+                assignment: {
+                    label: { en: "Project", es: "Proyecto" },
+                    value: {
+                        en: "UTP+Class · Learning Management System",
+                        es: "UTP+Class · Learning Management System",
+                    },
+                },
                 technologies: [
                     "Java",
                     "Spring Boot",
@@ -227,20 +257,28 @@ const MONTHS_FMT: Intl.DateTimeFormatOptions = {
 };
 
 export function formatMonth(value: string, lang: string): string {
-    return new Date(`${value}-15`).toLocaleDateString(
+    const text = new Date(`${value}-15`).toLocaleDateString(
         lang === "es" ? "es" : "en",
         MONTHS_FMT,
     );
+    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
+/**
+ * Months between two YYYY-MM values, counting both the start and the end month
+ * (the way LinkedIn does): Mar 2026 to Oct 2026 is 8 months, not 7.
+ */
 function monthsBetween(start: string, end: string): number {
-    const s = new Date(`${start}-15`);
-    const e = end === "Present" ? new Date() : new Date(`${end}-15`);
-    return (
-        (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth())
-    );
+    const [sy, sm] = start.split("-").map(Number);
+    const now = new Date();
+    const [ey, em] =
+        end === "Present"
+            ? [now.getFullYear(), now.getMonth() + 1]
+            : end.split("-").map(Number);
+    return (ey - sy) * 12 + (em - sm) + 1;
 }
 
+/** LinkedIn style duration: "8 mos", "1 yr 1 mo", "3 yrs 11 mos". */
 export function tenure(start: string, end: string, lang: string): string {
     const months = monthsBetween(start, end);
     const y = Math.floor(months / 12);
@@ -251,10 +289,15 @@ export function tenure(start: string, end: string, lang: string): string {
         parts.push(
             es
                 ? `${y} ${y > 1 ? "años" : "año"}`
-                : `${y} yr${y > 1 ? "s" : ""}`,
+                : `${y} ${y > 1 ? "yrs" : "yr"}`,
         );
-    if (m) parts.push(es ? `${m} ${m > 1 ? "meses" : "mes"}` : `${m} mo`);
-    return parts.join(" ") || (es ? "1 mes" : "1 mo");
+    if (m)
+        parts.push(
+            es
+                ? `${m} ${m > 1 ? "meses" : "mes"}`
+                : `${m} ${m > 1 ? "mos" : "mo"}`,
+        );
+    return parts.join(" ");
 }
 
 /** Whole years since the earliest role, e.g. 4 for 4 yrs 5 mo. */

@@ -1,5 +1,5 @@
 ---
-// Proposal D (recommended): grouped timeline with a side rail (role, dates, stack) and a reading column.
+// Proposal D (recommended): grouped timeline with a side rail (role, dates, client, stack) and a reading column.
 import {
     DEMO_EXPERIENCE,
     boldMarkup,
@@ -21,30 +21,36 @@ const present = es ? "Actualidad" : "Present";
         DEMO_EXPERIENCE.map((c) => {
             const first = c.roles[c.roles.length - 1];
             const last = c.roles[0];
+            // One role: its own dates already say it all, so skip the company dates.
+            const single = c.roles.length === 1;
             return (
                 <li>
                     <article class="glass-card rounded-2xl p-5 sm:p-7 lg:p-9">
-                        <header class="flex flex-col gap-4 sm:flex-row sm:items-center pb-6 border-b border-white/10">
-                            <div class="shrink-0 h-12 w-32 rounded-lg bg-[#f4f4f5] flex items-center justify-center px-3">
+                        <header class="flex items-center gap-4 pb-6 border-b border-white/10">
+                            <div class="shrink-0 h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-[#f4f4f5] flex items-center justify-center p-2">
                                 <img
                                     src={c.logo}
                                     alt=""
-                                    height="24"
-                                    class="max-h-6 w-full object-contain"
+                                    width="40"
+                                    height="40"
+                                    class="max-h-full max-w-full object-contain"
                                 />
                             </div>
                             <div class="flex-1 min-w-0">
-                                <h2 class="font-heading text-2xl md:text-3xl font-bold text-light flex flex-wrap items-baseline gap-x-3">
+                                <h2 class="font-heading text-2xl md:text-3xl font-bold text-light leading-tight">
                                     {c.company}
-                                    <span class="text-sm font-sans font-medium text-moon">
-                                        {c.kind[key]}
-                                    </span>
                                 </h2>
-                                <p class="mt-1 text-sm md:text-base text-[#a3a3ad]">
-                                    {c.context[key]} · {c.location}
+                                <p class="mt-0.5 text-sm md:text-base text-[#a3a3ad]">
+                                    {c.kind[key]} · {c.location[key]}
                                 </p>
                             </div>
-                            <p class="text-sm font-mono text-[#a3a3ad] sm:text-right shrink-0">
+                            <p
+                                class={
+                                    single
+                                        ? "hidden"
+                                        : "hidden sm:block text-sm font-mono text-[#a3a3ad] text-right shrink-0"
+                                }
+                            >
                                 <time datetime={first.start}>
                                     {formatMonth(first.start, lang)}
                                 </time>
@@ -61,6 +67,23 @@ const present = es ? "Actualidad" : "Present";
                                 </span>
                             </p>
                         </header>
+                        <p
+                            class={
+                                single
+                                    ? "hidden"
+                                    : "sm:hidden mt-4 text-sm font-mono text-[#a3a3ad]"
+                            }
+                        >
+                            {formatMonth(first.start, lang)}
+                            {" – "}
+                            {last.end === "Present"
+                                ? present
+                                : formatMonth(last.end, lang)}
+                            <span class="text-moon">
+                                {" · "}
+                                {tenure(first.start, last.end, lang)}
+                            </span>
+                        </p>
 
                         <ol class="mt-8 ml-1.5 border-l border-white/10 space-y-12">
                             {c.roles.map((r, i) => (
@@ -88,6 +111,14 @@ const present = es ? "Actualidad" : "Present";
                                             <span class="text-moon">
                                                 {" · "}
                                                 {tenure(r.start, r.end, lang)}
+                                            </span>
+                                        </p>
+                                        <p class="mt-3 text-sm leading-5">
+                                            <span class="block text-[11px] font-semibold uppercase tracking-widest text-moon">
+                                                {r.assignment.label[key]}
+                                            </span>
+                                            <span class="text-[#c5cbd6]">
+                                                {r.assignment.value[key]}
                                             </span>
                                         </p>
                                         <ul class="mt-4 flex flex-wrap gap-2">
