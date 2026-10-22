@@ -1,0 +1,107 @@
+---
+// Proposal A: one card per company, role progression as a sub-timeline.
+import {
+    DEMO_EXPERIENCE,
+    formatMonth,
+    tenure,
+} from "../../../utils/experience-demo";
+
+interface Props {
+    lang: string;
+}
+const { lang } = Astro.props;
+const es = lang === "es";
+const present = es ? "Actualidad" : "Present";
+---
+
+<ol class="space-y-10">
+    {
+        DEMO_EXPERIENCE.map((c) => {
+            const first = c.roles[c.roles.length - 1];
+            const last = c.roles[0];
+            return (
+                <li>
+                    <article class="glass-card rounded-2xl p-6 md:p-8">
+                        <header class="flex flex-col sm:flex-row sm:items-start gap-4 pb-6 border-b border-white/10">
+                            <div class="shrink-0 w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                                <span
+                                    class="font-heading text-2xl font-bold text-moon"
+                                    aria-hidden="true"
+                                >
+                                    {c.company.charAt(0)}
+                                </span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h2 class="font-heading text-2xl md:text-3xl font-bold text-light">
+                                    {c.company}
+                                </h2>
+                                <p class="mt-1 text-[#a3a3ad] text-sm md:text-base">
+                                    {c.context[es ? "es" : "en"]}
+                                </p>
+                            </div>
+                            <p class="text-sm font-mono text-[#a3a3ad] sm:text-right shrink-0">
+                                <time datetime={first.start}>
+                                    {formatMonth(first.start, lang)}
+                                </time>
+                                {" – "}
+                                {last.end === "Present" ? (
+                                    present
+                                ) : (
+                                    <time datetime={last.end}>
+                                        {formatMonth(last.end, lang)}
+                                    </time>
+                                )}
+                                <span class="block text-moon">
+                                    {tenure(first.start, last.end, lang)}
+                                </span>
+                            </p>
+                        </header>
+
+                        <ol class="mt-8 ml-1.5 border-l border-white/10 space-y-10">
+                            {c.roles.map((r, i) => (
+                                <li class="relative pl-7 md:pl-9">
+                                    <span
+                                        class={`absolute -left-[7px] top-2 h-3.5 w-3.5 rounded-full border-2 border-gunmetal ${i === 0 ? "bg-moon" : "bg-wolf"}`}
+                                        aria-hidden="true"
+                                    />
+                                    <h3 class="font-heading text-lg md:text-xl font-semibold text-light">
+                                        {r.title}
+                                    </h3>
+                                    <p class="mt-0.5 text-sm font-mono text-[#a3a3ad]">
+                                        <time datetime={r.start}>
+                                            {formatMonth(r.start, lang)}
+                                        </time>
+                                        {" – "}
+                                        {r.end === "Present" ? (
+                                            present
+                                        ) : (
+                                            <time datetime={r.end}>
+                                                {formatMonth(r.end, lang)}
+                                            </time>
+                                        )}
+                                    </p>
+                                    <ul class="mt-4 space-y-3 max-w-prose text-[15px] md:text-base leading-7 text-[#c5cbd6]">
+                                        {r.highlights[es ? "es" : "en"].map(
+                                            (h) => (
+                                                <li class="relative pl-5 before:absolute before:left-0 before:top-[0.75em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-moon/70">
+                                                    {h}
+                                                </li>
+                                            ),
+                                        )}
+                                    </ul>
+                                    <ul class="mt-5 flex flex-wrap gap-2">
+                                        {r.technologies.map((t) => (
+                                            <li class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-[#c5cbd6]">
+                                                {t}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            ))}
+                        </ol>
+                    </article>
+                </li>
+            );
+        })
+    }
+</ol>
