@@ -1,226 +1,210 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import {
-    getLangFromUrl,
-    useTranslations,
-    getRelativeLocaleUrl,
-} from "../../i18n/utils";
-import { EXPERIENCE } from "../../utils/experience";
+    EXPERIENCE,
+    boldMarkup,
+    formatMonth,
+    formatTenure,
+    localize,
+    localizeList,
+    monthsBetween,
+} from "../../utils/experience";
+import { getCVDetails } from "../../utils/cv";
 import { publicFileExists } from "../../utils/files";
 
-interface Props {
-    count?: number;
-    showTitle?: boolean;
-}
-
-const { count, showTitle = true } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-import { getCVDetails } from "../../utils/cv";
 const { url: cvUrl, filename: cvFilename } = getCVDetails(lang);
 
-// Ordenar experiencia por fecha (más reciente primero)
-const allExperience = [...EXPERIENCE].sort((a, b) => {
-    // Si ambas son actuales, se podrían ordenar por fecha de inicio, pero asumimos orden en array
-    if (a.current && !b.current) return -1;
-    if (!a.current && b.current) return 1;
-
-    const dateA = new Date(a.startDate).getTime();
-    const dateB = new Date(b.startDate).getTime();
-    return dateB - dateA;
-});
-
-const displayedExperience = count
-    ? allExperience.slice(0, count)
-    : allExperience;
+const endLabel = (end: string) =>
+    end === "Present" ? t("ui.current") : formatMonth(end, lang);
+const tenure = (start: string, end: string) =>
+    formatTenure(monthsBetween(start, end), lang);
 ---
 
-<div
-    class={showTitle
-        ? "py-16 md:py-20 relative overflow-hidden text-left bg-[#0c111c]"
-        : "relative text-left"}
->
-    <!-- Background Decor (Subtle) -->
-    {
-        showTitle && (
-            <>
-                <div class="absolute inset-0 bg-[#0c111c] -z-20" />
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#818d9010_1px,transparent_1px),linear-gradient(to_bottom,#818d9010_1px,transparent_1px)] bg-[size:40px_40px] -z-10 masking-gradient opacity-30" />
-            </>
-        )
-    }
-
-    <div
-        class={showTitle
-            ? "max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-            : "relative z-10"}
-    >
-        <!-- Section Header -->
+<div class="relative text-left">
+    <ol class="space-y-8 md:space-y-10">
         {
-            showTitle && (
-                <div class="mb-12 md:mb-20">
-                    <span class="text-gold font-mono text-xs tracking-[0.2em] font-bold uppercase block mb-3">
-                        {t("nav.experienceKey") || "CAREER PROGRESSION"}
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                        {lang === "es" ? (
-                            <>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">
-                                    {t("nav.experience")}
-                                </span>{" "}
-                                {t("ui.professional")}
-                            </>
-                        ) : (
-                            <>
-                                {t("ui.professional")}{" "}
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">
-                                    {t("nav.experience")}
-                                </span>
-                            </>
-                        )}
-                    </h2>
-                </div>
-            )
-        }
-
-        <!-- Vertical Timeline -->
-        <ol
-            class="relative border-l border-white/10 ml-3 md:ml-6 space-y-8 md:space-y-12 pl-6 md:pl-10"
-        >
-            {
-                displayedExperience.map((job) => {
-                    const startDate = new Date(job.startDate + "-15");
-                    const endDate = job.current
-                        ? new Date()
-                        : new Date(job.endDate + "-15");
-                    const formattedStartDate = startDate.toLocaleDateString(
-                        lang,
-                        { year: "numeric", month: "short" },
-                    );
-                    const formattedEndDate = job.current
-                        ? t("ui.current")
-                        : endDate.toLocaleDateString(lang, {
-                              year: "numeric",
-                              month: "short",
-                          });
-
-                    // <!-- Timeline Node (Dot) -->
-                    // <!-- Content Card (Glassmorphism) -->
-                    // <!-- Logo Placeholder/Image -->
-                    // <!-- Tech Stack Tags (Minimal) -->
-                    return (
-                        <li class="relative group">
-                            <div
-                                class={`absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 md:w-5 md:h-5 rounded-full border-4 border-[#0c111c] outline outline-1 outline-offset-2 transition-all duration-500 z-20
-                    ${
-                        job.current
-                            ? "bg-moon outline-moon shadow-[0_0_15px_rgba(245,158,11,0.4)] animate-pulse"
-                            : "bg-gray-600 outline-gray-600 group-hover:bg-gold group-hover:outline-gold"
-                    }`}
-                            />
-                            <div class="relative rounded-2xl glass-card border border-white/5 p-5 md:p-6 hover:border-gold/30 transition-all duration-500 group-hover:bg-white/[0.03] group-hover:translate-x-2">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-4 mb-4">
-                                    <div class="flex items-start gap-4">
-                                        <div class="hidden md:flex flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-white/10 items-center justify-center text-xl font-bold text-gold">
-                                            {publicFileExists(job.logo) ? (
-                                                <img
-                                                    src={job.logo}
-                                                    alt={job.company}
-                                                    width="48"
-                                                    height="48"
-                                                    loading="lazy"
-                                                    decoding="async"
-                                                    class="w-full h-full object-contain p-2"
-                                                />
-                                            ) : (
-                                                job.company.charAt(0)
-                                            )}
-                                        </div>
-
-                                        <div>
-                                            <h3 class="text-xl md:text-2xl font-bold text-gray-100 group-hover:text-gold transition-colors leading-tight">
-                                                {job.role}
-                                            </h3>
-                                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-sm md:text-base font-medium">
-                                                <span class="text-moon font-bold">
-                                                    {job.company}
-                                                </span>
-                                                <span class="text-gray-600 hidden md:inline">
-                                                    •
-                                                </span>
-                                                <span class="text-gray-400 font-mono tracking-tight bg-white/5 px-2 py-0.5 rounded text-xs md:text-sm">
-                                                    {formattedStartDate} —{" "}
-                                                    {formattedEndDate}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {job.current && (
-                                        <span class="self-start inline-flex items-center px-2.5 py-0.5 rounded-full bg-moon/10 text-moon text-[10px] md:text-xs font-bold border border-moon/20 whitespace-nowrap mt-2 md:mt-0 uppercase tracking-widest">
-                                            {t("ui.current")}
+            EXPERIENCE.map((company) => {
+                const first = company.roles[company.roles.length - 1];
+                const last = company.roles[0];
+                // One role: its own dates already say it all, so skip the company dates.
+                const single = company.roles.length === 1;
+                return (
+                    <li>
+                        <article class="glass-card rounded-2xl p-5 sm:p-7 lg:p-9">
+                            <header class="flex items-center gap-4 pb-6 border-b border-white/10">
+                                <div class="shrink-0 h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-[#f4f4f5] flex items-center justify-center p-2">
+                                    {publicFileExists(company.logo) ? (
+                                        <img
+                                            src={company.logo}
+                                            alt=""
+                                            width="40"
+                                            height="40"
+                                            loading="lazy"
+                                            decoding="async"
+                                            class="max-h-full max-w-full object-contain"
+                                        />
+                                    ) : (
+                                        <span
+                                            class="font-heading text-xl font-bold text-gunmetal"
+                                            aria-hidden="true"
+                                        >
+                                            {company.company.charAt(0)}
                                         </span>
                                     )}
                                 </div>
-
-                                <p class="text-[#94a3b8] leading-relaxed mb-6 font-light max-w-3xl text-sm md:text-base">
-                                    {(lang in job.description
-                                        ? job.description[
-                                              lang as keyof typeof job.description
-                                          ]
-                                        : undefined) || job.description.en}
-                                </p>
-
-                                <div class="flex flex-wrap gap-2">
-                                    {job.technologies.map((tech) => (
-                                        <span class="px-2.5 py-1 rounded-md bg-[#0f172a] border border-white/5 text-xs text-gray-400 font-mono hover:bg-white/5 hover:text-gold hover:border-gold/30 transition-all cursor-default select-none">
-                                            {tech}
-                                        </span>
-                                    ))}
+                                <div class="flex-1 min-w-0">
+                                    <h2 class="font-heading text-2xl md:text-3xl font-bold text-light leading-tight">
+                                        {company.company}
+                                    </h2>
+                                    <p class="mt-0.5 text-sm md:text-base text-[#a3a3ad]">
+                                        {localize(company.kind, lang)} ·{" "}
+                                        {localize(company.location, lang)}
+                                    </p>
                                 </div>
-                            </div>
-                        </li>
-                    );
-                })
-            }
-        </ol>
+                                {!single && (
+                                    <p class="hidden sm:block text-sm font-mono text-[#a3a3ad] text-right shrink-0">
+                                        <time datetime={first.start}>
+                                            {formatMonth(first.start, lang)}
+                                        </time>
+                                        {" – "}
+                                        {last.end === "Present" ? (
+                                            endLabel(last.end)
+                                        ) : (
+                                            <time datetime={last.end}>
+                                                {endLabel(last.end)}
+                                            </time>
+                                        )}
+                                        <span class="block text-moon">
+                                            {tenure(first.start, last.end)}
+                                        </span>
+                                    </p>
+                                )}
+                            </header>
+                            {!single && (
+                                <p class="sm:hidden mt-4 text-sm font-mono text-[#a3a3ad]">
+                                    {formatMonth(first.start, lang)}
+                                    {" – "}
+                                    {endLabel(last.end)}
+                                    <span class="text-moon">
+                                        {" · "}
+                                        {tenure(first.start, last.end)}
+                                    </span>
+                                </p>
+                            )}
 
-        <!-- Actions: View All & Download CV -->
-        <div
-            class="mt-16 ml-4 md:ml-8 pl-8 md:pl-12 flex flex-col md:flex-row items-start md:items-center gap-8"
+                            <ol class="mt-8 ml-1.5 border-l border-white/10 space-y-12">
+                                {company.roles.map((role, i) => (
+                                    <li class="relative pl-6 md:pl-9 grid gap-x-10 gap-y-4 lg:grid-cols-[250px_minmax(0,1fr)]">
+                                        <span
+                                            class={`absolute -left-[7px] top-2 h-3.5 w-3.5 rounded-full border-2 border-gunmetal ${i === 0 && role.end === "Present" ? "bg-moon" : "bg-wolf"}`}
+                                            aria-hidden="true"
+                                        />
+                                        <div>
+                                            <h3 class="font-heading text-lg md:text-xl font-semibold text-light leading-snug">
+                                                {role.title}
+                                            </h3>
+                                            <p class="mt-1 text-sm font-mono text-[#a3a3ad]">
+                                                <time datetime={role.start}>
+                                                    {formatMonth(
+                                                        role.start,
+                                                        lang,
+                                                    )}
+                                                </time>
+                                                {" – "}
+                                                {role.end === "Present" ? (
+                                                    endLabel(role.end)
+                                                ) : (
+                                                    <time datetime={role.end}>
+                                                        {endLabel(role.end)}
+                                                    </time>
+                                                )}
+                                                <span class="text-moon">
+                                                    {" · "}
+                                                    {tenure(
+                                                        role.start,
+                                                        role.end,
+                                                    )}
+                                                </span>
+                                            </p>
+                                            <p class="mt-3 text-sm leading-5">
+                                                <span class="block text-[11px] font-semibold uppercase tracking-widest text-moon">
+                                                    {t(
+                                                        role.assignment.kind ===
+                                                            "client"
+                                                            ? "experience.client"
+                                                            : "experience.project",
+                                                    )}
+                                                </span>
+                                                <span class="text-[#c5cbd6]">
+                                                    {localize(
+                                                        role.assignment.value,
+                                                        lang,
+                                                    )}
+                                                </span>
+                                            </p>
+                                            <ul class="mt-4 flex flex-wrap gap-2">
+                                                {role.technologies.map(
+                                                    (tech) => (
+                                                        <li class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-[#c5cbd6]">
+                                                            {tech}
+                                                        </li>
+                                                    ),
+                                                )}
+                                            </ul>
+                                        </div>
+                                        <div class="min-w-0">
+                                            <p class="max-w-[68ch] text-base md:text-lg font-medium leading-7 text-light">
+                                                {localize(role.summary, lang)}
+                                            </p>
+                                            <ul class="mt-4 space-y-3 max-w-[68ch] text-[15px] md:text-base leading-7 text-[#c5cbd6]">
+                                                {localizeList(
+                                                    role.highlights,
+                                                    lang,
+                                                ).map((highlight) => (
+                                                    <li
+                                                        class="relative pl-5 before:absolute before:left-0 before:top-[0.75em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-moon/70"
+                                                        set:html={boldMarkup(
+                                                            highlight,
+                                                        )}
+                                                    />
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ol>
+                        </article>
+                    </li>
+                );
+            })
+        }
+    </ol>
+
+    <div class="mt-12 flex">
+        <a
+            href={cvUrl}
+            download={cvFilename}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-moon text-gunmetal font-bold hover:brightness-110 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-moon/20"
         >
-            {
-                count ? (
-                    <a
-                        href={getRelativeLocaleUrl(lang, "experience")}
-                        class="text-gold hover:text-white underline underline-offset-4 transition-colors font-medium tracking-wide"
-                    >
-                        {t("section.viewFullExperience")}
-                    </a>
-                ) : (
-                    <a
-                        href={cvUrl}
-                        download={cvFilename}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-moon text-gunmetal font-bold hover:brightness-110 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-moon/20"
-                    >
-                        <span>{t("hero.cta") || "Download CV"}</span>
-                        <svg
-                            class="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            stroke-width="2.5"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                            />
-                        </svg>
-                    </a>
-                )
-            }
-        </div>
+            <span>{t("hero.cta")}</span>
+            <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                stroke-width="2.5"
+                aria-hidden="true"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                ></path>
+            </svg>
+        </a>
     </div>
 </div>

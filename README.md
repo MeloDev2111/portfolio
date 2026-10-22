@@ -73,27 +73,42 @@ Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What
 
 ### Adding Work Experience
 
-1.  Open `src/utils/experience.ts`.
-2.  Add a new entry to the `EXPERIENCE` array:
+Experience is grouped by company in `src/utils/experience.ts` (newest first, both companies and roles).
+
+1.  **New role in an existing company** (for example a promotion, or a new client at a consultancy): set an `end` date on the current role and add the new one on top of that company's `roles`.
+2.  **New company:** add an entry at the top of the `EXPERIENCE` array:
+
     ```typescript
     {
         company: "Company Name",
-        role: "Job Title",
-        startDate: "YYYY-MM",
-        endDate: "YYYY-MM", // or "Present",
-        description: {
-            en: "Description in English.",
-            es: "Descripción en Español."
-        },
-        technologies: ["React", "TypeScript", "Node.js"],
-        current: true, // or false
-        logo: "/logos/company.png" // Optional
+        logo: "/logos/company.png", // Optional symbol in public/logos
+        kind: { en: "Technology consultancy", es: "Consultora tecnológica" },
+        location: { en: "Lima, Peru", es: "Lima, Perú" },
+        roles: [
+            {
+                title: "Job Title",
+                start: "YYYY-MM",
+                end: "Present", // or "YYYY-MM"
+                assignment: {
+                    kind: "client", // or "project"
+                    value: { en: "Client or project", es: "Cliente o proyecto" },
+                },
+                summary: { en: "One line headline.", es: "Frase resumen." },
+                highlights: {
+                    en: ["Achievement with a **key figure**."],
+                    es: ["Logro con una **cifra clave**."],
+                },
+                technologies: ["React", "TypeScript"],
+            },
+        ],
     }
     ```
+
+    _Notes: `ja` texts are optional and fall back to English. Wrap key figures in `**bold**`. Durations are computed like LinkedIn does (start and end month both count) and the "years of experience" line is calculated from the first role._
+
     **Note regarding Logos:**
-    - The system automatically checks if the file exists in `public/logos/`.
-    - If the file exists, it will be displayed.
-    - If it's missing or undefined, a premium placeholder with the company's initial will be shown automatically.
+    - Use the company symbol (square), not the full wordmark. It is shown on a light tile.
+    - If the file is missing or undefined, a placeholder with the company's initial is shown automatically.
 
 ### Adding a New Language
 
@@ -103,7 +118,7 @@ Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What
     - Add a new dictionary entry in the `ui` object (be sure to include `nav.langName`).
 3.  **Localize Content:**
     - Create localized project files in `src/content/projects/[lang]/`.
-    - Add localized descriptions in `src/utils/experience.ts`.
+    - Add the optional `ja`/new language texts in `src/utils/experience.ts` (it falls back to English).
 4.  **Verify:** Run `pnpm test` to verify routing logic.
 
 ## 🧞 Commands
