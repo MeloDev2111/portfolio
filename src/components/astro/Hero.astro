@@ -11,7 +11,7 @@ import { siteConfig } from "../../site.config";
 import { getCVDetails } from "../../utils/cv";
 import { getBentoSkills } from "../../utils/skills";
 import { getPrimarySocials } from "../../utils/social";
-import { EXPERIENCE } from "../../utils/experience";
+import { getTimeline } from "../../utils/experience";
 import { publicFileExists } from "../../utils/files";
 import { getLocalizedProjects } from "../../utils/projects";
 
@@ -310,46 +310,48 @@ const techLogos = getBentoSkills().map((skill) => ({
                     class="relative z-10 flex-grow flex flex-col gap-3 justify-center"
                 >
                     {
-                        EXPERIENCE.slice(0, 2).map((job) => (
-                            <div
-                                class={`flex items-center gap-3 ${!job.current ? "opacity-60 group-hover:opacity-100 transition-opacity duration-300" : ""}`}
-                            >
+                        getTimeline()
+                            .slice(0, 2)
+                            .map((job) => (
                                 <div
-                                    class={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border border-white/5 shadow-sm ${job.current ? "bg-white/5 border-white/10" : "bg-white/5"}`}
+                                    class={`flex items-center gap-3 ${!job.current ? "opacity-60 group-hover:opacity-100 transition-opacity duration-300" : ""}`}
                                 >
-                                    {publicFileExists(job.logo) ? (
-                                        <img
-                                            src={job.logo}
-                                            alt={job.company}
-                                            width="40"
-                                            height="40"
-                                            loading="lazy"
-                                            decoding="async"
-                                            class="w-full h-full object-contain p-1.5"
-                                        />
-                                    ) : (
-                                        <div class="w-full h-full flex items-center justify-center bg-white/5 border border-white/10 rounded-lg text-gold font-bold text-sm">
-                                            {job.company.charAt(0)}
-                                        </div>
-                                    )}
-                                </div>
-                                <div>
-                                    <h4
-                                        class={`text-sm font-bold leading-none ${job.current ? "text-gray-200 group-hover:text-gold transition-colors" : "text-gray-400 font-medium"}`}
+                                    <div
+                                        class={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 border border-white/5 shadow-sm ${publicFileExists(job.logo) ? "bg-[#f4f4f5]" : job.current ? "bg-white/5 border-white/10" : "bg-white/5"}`}
                                     >
-                                        {job.role
-                                            .replace("Developer", "")
-                                            .trim()}
-                                    </h4>
-                                    <p class="text-[10px] text-[#818d90] mt-1 font-mono">
-                                        {job.startDate} -{" "}
-                                        {job.current
-                                            ? t("ui.current")
-                                            : job.endDate}
-                                    </p>
+                                        {publicFileExists(job.logo) ? (
+                                            <img
+                                                src={job.logo}
+                                                alt={job.company}
+                                                width="40"
+                                                height="40"
+                                                loading="lazy"
+                                                decoding="async"
+                                                class="w-full h-full object-contain p-1.5"
+                                            />
+                                        ) : (
+                                            <div class="w-full h-full flex items-center justify-center bg-white/5 border border-white/10 rounded-lg text-gold font-bold text-sm">
+                                                {job.company.charAt(0)}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <h4
+                                            class={`text-sm font-bold leading-none ${job.current ? "text-gray-200 group-hover:text-gold transition-colors" : "text-gray-400 font-medium"}`}
+                                        >
+                                            {job.title
+                                                .replace("Developer", "")
+                                                .trim()}
+                                        </h4>
+                                        <p class="text-[10px] text-[#818d90] mt-1 font-mono">
+                                            {job.start} -{" "}
+                                            {job.current
+                                                ? t("ui.current")
+                                                : job.end}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
+                            ))
                     }
                 </div>
 
