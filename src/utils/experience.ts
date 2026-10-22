@@ -22,7 +22,6 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Java Developer Ssr Advanced at a leading national payments technology ecosystem in Peru. Migrated legacy services to Java 21, Spring WebFlux and Hexagonal Architecture under the PBC (Packaged Business Capabilities) approach, integrated an online settlement service that moves selected merchants from daily batch settlement to real-time processing, stabilized asynchronous banking integrations and added observability with New Relic.",
             es: "Java Developer Ssr Advanced en un ecosistema tecnológico nacional líder en pagos en Perú. Migré servicios legacy a Java 21, Spring WebFlux y Arquitectura Hexagonal bajo el enfoque PBC (Packaged Business Capabilities), integré un servicio de liquidación en línea que lleva a comercios seleccionados de la liquidación diaria por lotes al procesamiento en tiempo real, estabilicé integraciones bancarias asíncronas e implementé observabilidad con New Relic.",
-            ja: "ペルーを代表する決済分野の国内テクノロジーエコシステムでJava Developer Ssr Advancedとして勤務。レガシーサービスをJava 21、Spring WebFlux、ヘキサゴナルアーキテクチャへPBC（Packaged Business Capabilities）アプローチで移行し、一部の加盟店を日次バッチ精算からリアルタイム処理へ切り替えるオンライン精算サービスを統合。非同期の銀行連携を安定化し、New Relicによる可観測性を実装。",
         },
         technologies: [
             "Java",
@@ -42,7 +41,6 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Led the planning, backend development and launch of the Graduate School LMS (10k+ new users) and contributed to the launch and stability of the university-wide LMS (200k users). Reengineered enrollment from hours to minutes while absorbing a load increase from 20k to 1M records, integrated Active Directory for secure applicant registration and mentored new team members in DevOps and backend standards.",
             es: "Lideré la planificación, el desarrollo backend y el lanzamiento del LMS de la Escuela de Postgrado (10k+ nuevos usuarios) y contribuí al lanzamiento y la estabilidad del LMS de toda la universidad (200k usuarios). Rediseñé la matrícula de horas a minutos absorbiendo un incremento de carga de 20k a 1M de registros, integré Active Directory para un registro seguro de postulantes y mentoreé a nuevos integrantes en DevOps y estándares backend.",
-            ja: "大学院向けLMS（新規1万人以上のユーザー）の計画・バックエンド開発・ローンチをリードし、全学LMS（20万ユーザー）のローンチと安定稼働にも貢献。履修登録処理を数時間から数分へ再設計し、2万件から100万件への負荷増に対応。Active Directory連携による安全な出願登録を実現し、新メンバーにDevOpsとバックエンドの標準を指導。",
         },
         technologies: [
             "Java",
@@ -62,7 +60,6 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Developed interfaces with TypeScript and React following Clean Architecture, Design System and SOLID principles. Integrated Java microservices with AWS X-Ray for monitoring and error diagnosis, tuned complex PostgreSQL queries with pganalyze and provided active production support for incident resolution.",
             es: "Desarrollé interfaces con TypeScript y React siguiendo Clean Architecture, Design System y principios SOLID. Integré microservicios Java con AWS X-Ray para monitoreo y diagnóstico de errores, afiné consultas complejas en PostgreSQL con pganalyze y brindé soporte activo en producción para resolver incidencias.",
-            ja: "クリーンアーキテクチャ、デザインシステム、SOLID原則に基づき、TypeScriptとReactでインターフェースを開発。JavaマイクロサービスにAWS X-Rayを統合して監視とエラー診断を強化し、pganalyzeで複雑なPostgreSQLクエリをチューニング。インシデント解決のため本番サポートも担当。",
         },
         technologies: [
             "TypeScript",
@@ -82,7 +79,6 @@ export const EXPERIENCE: ExperienceItem[] = [
         description: {
             en: "Designed and developed RESTful APIs with Java/Spring Boot using Hexagonal Architecture, DDD and CQRS. Implemented AWS serverless web services with Node.js, integrated the LMS with external ecosystems (Zoom API) and internal components (CRMs and mobile app) and introduced the Object Mother pattern to standardize and speed up unit tests for the whole team.",
             es: "Diseñé y desarrollé APIs RESTful con Java/Spring Boot usando Arquitectura Hexagonal, DDD y CQRS. Implementé web services serverless en AWS con Node.js, integré el LMS con ecosistemas externos (Zoom API) y componentes internos (CRMs y app móvil) e introduje el patrón Object Mother para estandarizar y agilizar los tests unitarios de todo el equipo.",
-            ja: "Java/Spring BootでヘキサゴナルアーキテクチャとDDD、CQRSを用いたRESTful APIを設計・開発。Node.jsによるAWSサーバーレスのWebサービスを実装し、LMSを外部エコシステム（Zoom API）および社内コンポーネント（CRM、モバイルアプリ）と連携。Object Motherパターンを導入し、チーム全体の単体テスト作成を標準化・効率化。",
         },
         technologies: [
             "Java",

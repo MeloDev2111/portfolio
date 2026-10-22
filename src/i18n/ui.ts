@@ -26,7 +26,7 @@ export const ui = {
         "seo.homeTitle":
             "Melio Diaz | Software Engineer: Backend, Cloud & Data",
         "seo.homeDescription":
-            "Portfolio of Melio Diaz, Software Engineer from Peru. Java, Spring Boot, AWS and data projects, certifications and experience in EdTech and banking.",
+            "Portfolio of Melio Diaz, Software Engineer from Peru. Java, Spring Boot, AWS and data projects, certifications and experience in EdTech and fintech.",
         "about.p1":
             "Systems Engineer with experience in developing <span class='text-[#e1e1e0] font-semibold'>high-scalability platforms</span> and <span class='text-[#e1e1e0] font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-gold'>Java, Spring Boot, Python</span>, and <span class='text-gold'>Cloud Computing</span>.",
         "about.p2":
@@ -88,7 +88,7 @@ export const ui = {
         "seo.homeTitle":
             "Melio Diaz | Software Engineer: Backend, Cloud y Datos",
         "seo.homeDescription":
-            "Portafolio de Melio Diaz, Software Engineer de Perú. Proyectos con Java, Spring Boot, AWS y datos, certificaciones y experiencia en EdTech y banca.",
+            "Portafolio de Melio Diaz, Software Engineer de Perú. Proyectos con Java, Spring Boot, AWS y datos, certificaciones y experiencia en EdTech y fintech.",
         "about.p1":
             "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-[#e1e1e0] font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-[#e1e1e0] font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-gold'>Java, Spring Boot, Python</span> y <span class='text-gold'>Cloud Computing</span>.",
         "about.p2":
