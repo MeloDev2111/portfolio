@@ -64,7 +64,8 @@ const personJsonLd = {
         addressCountry: "PE",
     },
     sameAs: USER_SOCIALS.filter(
-        (s) => !s.disabled && s.url.startsWith("https://"),
+        (s) =>
+            !s.disabled && !s.excludeFromSameAs && s.url.startsWith("https://"),
     ).map((s) => s.url),
 };
 ---
