@@ -90,8 +90,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     onClick={() => setActiveTags([])}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                         activeTags.length === 0
-                            ? "bg-gold text-gunmetal shadow-[0_0_12px_color-mix(in_srgb,var(--color-moon)_35%,transparent)] font-semibold"
-                            : "bg-charcoal text-gray-400 hover:text-white border border-white/5 hover:border-gold/30 cursor-pointer"
+                            ? "bg-moon text-gunmetal shadow-[0_0_12px_color-mix(in_srgb,var(--color-moon)_35%,transparent)] font-semibold"
+                            : "bg-charcoal text-gray-400 hover:text-white border border-white/5 hover:border-moon/30 cursor-pointer"
                     }`}
                 >
                     <span>{labels.all}</span>
@@ -114,9 +114,9 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                             aria-disabled={!isAvailable}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 select-none ${
                                 isSelected
-                                    ? "bg-gold text-gunmetal shadow-[0_0_12px_color-mix(in_srgb,var(--color-moon)_35%,transparent)] font-semibold cursor-pointer"
+                                    ? "bg-moon text-gunmetal shadow-[0_0_12px_color-mix(in_srgb,var(--color-moon)_35%,transparent)] font-semibold cursor-pointer"
                                     : isAvailable
-                                      ? "bg-charcoal text-gray-300 hover:text-white border border-white/10 hover:border-gold/40 hover:bg-white/5 cursor-pointer"
+                                      ? "bg-charcoal text-gray-300 hover:text-white border border-white/10 hover:border-moon/40 hover:bg-white/5 cursor-pointer"
                                       : "bg-charcoal/40 text-gray-600 border border-white/5 opacity-30 cursor-not-allowed"
                             }`}
                         >
@@ -149,7 +149,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     <p>No projects match all selected filters.</p>
                     <button
                         onClick={() => setActiveTags([])}
-                        className="text-gold hover:underline"
+                        className="text-moon hover:underline"
                     >
                         Clear filters
                     </button>

@@ -45,14 +45,14 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
             aria-label={siteConfig.name}
         >
             <div
-                class="p-1.5 rounded-full bg-white/5 border border-white/5 group-hover:border-gold/30 transition-colors"
+                class="p-1.5 rounded-full bg-white/5 border border-white/5 group-hover:border-moon/30 transition-colors"
             >
                 <Logo width="24" height="24" variant="original" />
             </div>
             <span
                 class="text-lg font-bold text-light tracking-tight hidden sm:block"
             >
-                {siteConfig.alias}<span class="text-gold">.</span>
+                {siteConfig.alias}<span class="text-moon">.</span>
             </span>
         </a>
 
@@ -145,7 +145,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
                         >
                             {item.label}
                             <span
-                                class={`transition-opacity text-gold ${
+                                class={`transition-opacity text-moon ${
                                     isActive
                                         ? "opacity-100"
                                         : "opacity-0 group-hover:opacity-100"

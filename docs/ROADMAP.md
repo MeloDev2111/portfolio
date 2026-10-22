@@ -22,4 +22,3 @@ Public summary of where the portfolio is heading. Released work is in [CHANGELOG
 - **Contact integration** (Formspree form or Calendly embed).
 - **Interactive API showcase** (live endpoints or Swagger).
 - **E2E tests with Playwright** (navigation, i18n, forms).
-- **Retire the `gold` and `copper` color aliases:** replace them with `moon` across the components, then remove them from `@theme` in `src/styles/global.css`.
