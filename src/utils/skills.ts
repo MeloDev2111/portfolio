@@ -79,6 +79,12 @@ export const SKILLS: Skill[] = [
         icon: `${DEVICON_BASE}/apachekafka/apachekafka-original.svg`,
         emoji: "📡",
     },
+    {
+        name: "Quarkus",
+        category: "Backend",
+        icon: `${DEVICON_BASE}/quarkus/quarkus-original.svg`,
+        emoji: "⚡",
+    },
 
     // Cloud
     {
@@ -134,6 +140,12 @@ export const SKILLS: Skill[] = [
             borderClass: "group-hover/icon:border-[#3178C6]/40",
         },
     },
+    {
+        name: "JavaScript",
+        category: "Frontend",
+        icon: `${DEVICON_BASE}/javascript/javascript-original.svg`,
+        emoji: "🟨",
+    },
 
     // Data Science
     {
@@ -177,6 +189,18 @@ export const SKILLS: Skill[] = [
         category: "DevOps",
         icon: `${DEVICON_BASE}/docker/docker-original.svg`,
         emoji: "🐳",
+    },
+    {
+        name: "Kubernetes",
+        category: "DevOps",
+        icon: `${DEVICON_BASE}/kubernetes/kubernetes-original.svg`,
+        emoji: "☸️",
+    },
+    {
+        name: "New Relic",
+        category: "DevOps",
+        icon: `${DEVICON_BASE}/newrelic/newrelic-original.svg`,
+        emoji: "📈",
     },
     {
         name: "Azure DevOps",
@@ -226,6 +250,12 @@ export const SKILLS: Skill[] = [
         emoji: "🗄️",
     },
     {
+        name: "MySQL",
+        category: "Database",
+        icon: `${DEVICON_BASE}/mysql/mysql-original.svg`,
+        emoji: "🐬",
+    },
+    {
         name: "SQL",
         category: "Database",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
@@ -247,6 +277,12 @@ export const SKILLS: Skill[] = [
             colorClass: "group-hover/icon:bg-[#47A248]/20",
             borderClass: "group-hover/icon:border-[#47A248]/40",
         },
+    },
+    {
+        name: "DynamoDB",
+        category: "Database",
+        icon: `${DEVICON_BASE}/dynamodb/dynamodb-original.svg`,
+        emoji: "🗄️",
     },
 ];
 

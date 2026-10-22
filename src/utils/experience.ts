@@ -20,29 +20,29 @@ export const EXPERIENCE: ExperienceItem[] = [
         startDate: "2026-03",
         endDate: "Present",
         description: {
-            en: "Working at Globant as a Java Developer Ssr Advanced, currently assigned to a Peruvian payment method client. Developing backend solutions using Java Spring Boot, Reactive Programming with Spring Webflux and Project Reactor, and Apache Kafka.",
-            es: "Trabajando en Globant como Java Developer Ssr Advanced, actualmente asignado a un cliente peruano del sector de medios de pago. Desarrollando soluciones backend usando Java Spring Boot, Programación Reactiva con Spring Webflux y Project Reactor, y Apache Kafka.",
-            ja: "GlobantにてJava Developer Ssr Advancedとして勤務し、ペルーの決済プロバイダー案件を担当。Java Spring Boot、Spring WebfluxおよびProject Reactorによるリアクティブプログラミング、Apache Kafkaを用いたバックエンドソリューションを開発。",
+            en: "Java Developer Ssr Advanced at a leading national payments technology ecosystem in Peru. Migrated legacy services to Java 21, Spring WebFlux and Hexagonal Architecture under the PBC (Packaged Business Capabilities) approach, integrated an online settlement service that moves selected merchants from daily batch settlement to real-time processing, stabilized asynchronous banking integrations and added observability with New Relic.",
+            es: "Java Developer Ssr Advanced en un ecosistema tecnológico nacional líder en pagos en Perú. Migré servicios legacy a Java 21, Spring WebFlux y Arquitectura Hexagonal bajo el enfoque PBC (Packaged Business Capabilities), integré un servicio de liquidación en línea que lleva a comercios seleccionados de la liquidación diaria por lotes al procesamiento en tiempo real, estabilicé integraciones bancarias asíncronas e implementé observabilidad con New Relic.",
+            ja: "ペルーを代表する決済分野の国内テクノロジーエコシステムでJava Developer Ssr Advancedとして勤務。レガシーサービスをJava 21、Spring WebFlux、ヘキサゴナルアーキテクチャへPBC（Packaged Business Capabilities）アプローチで移行し、一部の加盟店を日次バッチ精算からリアルタイム処理へ切り替えるオンライン精算サービスを統合。非同期の銀行連携を安定化し、New Relicによる可観測性を実装。",
         },
         technologies: [
             "Java",
-            "Spring Boot",
-            "Spring Webflux",
-            "Project Reactor",
+            "Spring WebFlux",
+            "Hexagonal Architecture",
             "Apache Kafka",
+            "New Relic",
         ],
         current: true,
         logo: "/logos/globant.png",
     },
     {
         company: "UTP",
-        role: "Backend Developer", // Promoted from Trainee
+        role: "Backend Developer Ssr",
         startDate: "2023-10",
         endDate: "2026-03",
         description: {
-            en: "Led the backend development for the Postgraduate LMS (10k+ users). Optimized enrollment processing from hours to minutes, handling an increase from 20k to 1M requests. Integrated Active Directory for efficient candidate registration and mentored new team members in DevOps culture.",
-            es: "Lideré el desarrollo backend del LMS de Postgrado (10k+ usuarios). Optimicé el procesamiento de matrículas de horas a minutos, gestionando un incremento de 20k a 1M de solicitudes. Integré Active Directory para agilizar el proceso de registro de postulantes y mentoreé a nuevos miembros en cultura DevOps.",
-            ja: "大学院向けLMS（1万人以上のユーザー）のバックエンド開発をリード。履修登録処理を数時間から数分へと最適化し、2万件から100万件へのリクエスト増加に対応。Active Directoryを統合して出願登録を効率化し、チームメンバーへのDevOps文化の指導を担当。",
+            en: "Led the planning, backend development and launch of the Graduate School LMS (10k+ new users) and contributed to the launch and stability of the university-wide LMS (200k users). Reengineered enrollment from hours to minutes while absorbing a load increase from 20k to 1M records, integrated Active Directory for secure applicant registration and mentored new team members in DevOps and backend standards.",
+            es: "Lideré la planificación, el desarrollo backend y el lanzamiento del LMS de la Escuela de Postgrado (10k+ nuevos usuarios) y contribuí al lanzamiento y la estabilidad del LMS de toda la universidad (200k usuarios). Rediseñé la matrícula de horas a minutos absorbiendo un incremento de carga de 20k a 1M de registros, integré Active Directory para un registro seguro de postulantes y mentoreé a nuevos integrantes en DevOps y estándares backend.",
+            ja: "大学院向けLMS（新規1万人以上のユーザー）の計画・バックエンド開発・ローンチをリードし、全学LMS（20万ユーザー）のローンチと安定稼働にも貢献。履修登録処理を数時間から数分へ再設計し、2万件から100万件への負荷増に対応。Active Directory連携による安全な出願登録を実現し、新メンバーにDevOpsとバックエンドの標準を指導。",
         },
         technologies: [
             "Java",
@@ -56,13 +56,13 @@ export const EXPERIENCE: ExperienceItem[] = [
     },
     {
         company: "UTP",
-        role: "Trainee Full Stack Developer",
+        role: "Full Stack Developer",
         startDate: "2023-05",
         endDate: "2023-10",
         description: {
-            en: "Developed modular interfaces with TypeScript and React, adhering to Clean Architecture and SOLID principles. Integrated AWS X-Ray for microservices monitoring and optimized complex PostgreSQL queries using pganalyze for critical production issues.",
-            es: "Desarrollé interfaces modulares con TypeScript y React, siguiendo Arquitectura Limpia y principios SOLID. Integré AWS X-Ray para monitoreo de microservicios y optimicé consultas complejas en PostgreSQL usando pganalyze para incidencias críticas en producción.",
-            ja: "クリーンアーキテクチャとSOLID原則に基づき、TypeScriptとReactを用いたモジュール型インターフェースを開発。AWS X-Rayによるマイクロサービスのモニタリング統合や、pganalyzeを用いた本番障害向けの複雑なPostgreSQLクエリ最適化を実施。",
+            en: "Developed interfaces with TypeScript and React following Clean Architecture, Design System and SOLID principles. Integrated Java microservices with AWS X-Ray for monitoring and error diagnosis, tuned complex PostgreSQL queries with pganalyze and provided active production support for incident resolution.",
+            es: "Desarrollé interfaces con TypeScript y React siguiendo Clean Architecture, Design System y principios SOLID. Integré microservicios Java con AWS X-Ray para monitoreo y diagnóstico de errores, afiné consultas complejas en PostgreSQL con pganalyze y brindé soporte activo en producción para resolver incidencias.",
+            ja: "クリーンアーキテクチャ、デザインシステム、SOLID原則に基づき、TypeScriptとReactでインターフェースを開発。JavaマイクロサービスにAWS X-Rayを統合して監視とエラー診断を強化し、pganalyzeで複雑なPostgreSQLクエリをチューニング。インシデント解決のため本番サポートも担当。",
         },
         technologies: [
             "TypeScript",
@@ -76,13 +76,13 @@ export const EXPERIENCE: ExperienceItem[] = [
     },
     {
         company: "UTP",
-        role: "Trainee Backend Developer",
+        role: "Backend Developer",
         startDate: "2022-05",
         endDate: "2023-05", // Overlaps slightly with start of next role, standard transition period
         description: {
-            en: "Implemented RESTful APIs with Spring Boot using Hexagonal Architecture, DDD, and CQRS. Developed serverless solutions on AWS with Node.js and improved database performance with stored procedures. Introduced the Object Mother pattern for standardized unit testing.",
-            es: "Implementé APIs RESTful con Spring Boot usando Arquitectura Hexagonal, DDD y CQRS. Desarrollé soluciones serverless en AWS con Node.js y mejoré el rendimiento de base de datos con procedimientos almacenados. Introduje el patrón Object Mother para pruebas unitarias estandarizadas.",
-            ja: "ヘキサゴナルアーキテクチャ、DDD、CQRSを適用したSpring BootによるRESTful APIを実装。Node.jsを用いたAWSサーバーレスソリューションの開発や、ストアドプロシージャによるデータベース性能向上を達成。単体テスト標準化のためObject Motherパターンを導入。",
+            en: "Designed and developed RESTful APIs with Java/Spring Boot using Hexagonal Architecture, DDD and CQRS. Implemented AWS serverless web services with Node.js, integrated the LMS with external ecosystems (Zoom API) and internal components (CRMs and mobile app) and introduced the Object Mother pattern to standardize and speed up unit tests for the whole team.",
+            es: "Diseñé y desarrollé APIs RESTful con Java/Spring Boot usando Arquitectura Hexagonal, DDD y CQRS. Implementé web services serverless en AWS con Node.js, integré el LMS con ecosistemas externos (Zoom API) y componentes internos (CRMs y app móvil) e introduje el patrón Object Mother para estandarizar y agilizar los tests unitarios de todo el equipo.",
+            ja: "Java/Spring BootでヘキサゴナルアーキテクチャとDDD、CQRSを用いたRESTful APIを設計・開発。Node.jsによるAWSサーバーレスのWebサービスを実装し、LMSを外部エコシステム（Zoom API）および社内コンポーネント（CRM、モバイルアプリ）と連携。Object Motherパターンを導入し、チーム全体の単体テスト作成を標準化・効率化。",
         },
         technologies: [
             "Java",
