@@ -83,7 +83,7 @@
     - **Primary Accent:** Moon `moon` (`#F1DE76`, from the logo). Text placed on a moon background MUST be `gunmetal`.
     - **Secondary:** Wolf `wolf` (`#47505C`, from the logo). Use for surfaces/borders/scrollbar, not for text on gunmetal (2.3:1). For muted text on gunmetal use `#a3a3ad` (7.5:1).
     - **Text:** Platinum `light` (`#e1e1e0`) / Light Grey (`#F9FAFB`).
-    - **Deprecated aliases:** `gold` and `copper` resolve to `moon` (temporary, still used in ~24 files). Never use them in new code, and replace them with `moon` when touching a file. The old copper `#c08b5a` and slate `#5a5866` are retired.
+    - **Retired colors:** the `gold` and `copper` aliases are gone (use `moon`); the old copper `#c08b5a` and slate `#5a5866` are retired too.
 - **Logo & brand assets** (regenerate derived files with `node scripts/generate-brand-assets.mjs`; the master logo is never redrawn):
     - Master: `public/media/logo.svg` (optimized, has `<title>`).
     - Variants (transparent bg): `public/media/brand/logo-dark-bg.svg` (default), `logo-light-bg.svg`, `logo-mono-dark.svg`, `logo-mono-light.svg`.

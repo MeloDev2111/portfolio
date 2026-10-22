@@ -45,7 +45,7 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                         onClick={() => setSortOrder("desc")}
                         className={`px-3 py-1.5 rounded-md text-sm transition-all relative ${
                             sortOrder === "desc"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm z-10"
+                                ? "bg-moon text-gunmetal font-bold shadow-sm z-10"
                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                         }`}
                     >
@@ -55,7 +55,7 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                         onClick={() => setSortOrder("asc")}
                         className={`px-3 py-1.5 rounded-md text-sm transition-all relative ${
                             sortOrder === "asc"
-                                ? "bg-gold text-gunmetal font-bold shadow-sm z-10"
+                                ? "bg-moon text-gunmetal font-bold shadow-sm z-10"
                                 : "text-gray-400 hover:text-white hover:bg-white/5"
                         }`}
                     >
@@ -72,11 +72,11 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                         href={cert.data.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block p-6 rounded-xl bg-charcoal border border-white/5 hover:border-gold/30 transition-all hover:shadow-lg hover:shadow-gold/5 group h-full relative"
+                        className="block p-6 rounded-xl bg-charcoal border border-white/5 hover:border-moon/30 transition-all hover:shadow-lg hover:shadow-moon/5 group h-full relative"
                     >
                         {cert.data.starred && (
                             <div
-                                className="absolute top-4 right-4 text-gold opacity-80 group-hover:opacity-100 transition-opacity"
+                                className="absolute top-4 right-4 text-moon opacity-80 group-hover:opacity-100 transition-opacity"
                                 title="Featured Certification"
                             >
                                 <svg
@@ -108,7 +108,7 @@ export const CertificationList: React.FC<CertificationListProps> = ({
                                 </div>
                             )}
                             <div className="flex-grow">
-                                <h3 className="text-lg font-heading font-bold text-light group-hover:text-gold transition-colors line-clamp-2">
+                                <h3 className="text-lg font-heading font-bold text-light group-hover:text-moon transition-colors line-clamp-2">
                                     {cert.data.name}
                                 </h3>
                                 <p className="text-sm text-gray-400 mt-1">

@@ -9,11 +9,6 @@
     --color-light: #e1e1e0; /* Platinum (text) */
     --color-moon: #f1de76; /* Primary accent (logo moon). Text on it: gunmetal */
     --color-wolf: #47505c; /* Secondary (logo wolf) */
-
-    /* @deprecated: temporary aliases of --color-moon, kept to avoid a mass
-       rename. Use `moon` in new code and remove these once migrated. */
-    --color-gold: var(--color-moon);
-    --color-copper: var(--color-moon);
 }
 
 /* Base styles */

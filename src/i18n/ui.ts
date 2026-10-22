@@ -28,7 +28,7 @@ export const ui = {
         "seo.homeDescription":
             "Portfolio of Melio Diaz, Software Engineer from Peru. Java, Spring Boot, AWS and data projects, certifications and experience in EdTech and fintech.",
         "about.p1":
-            "Systems Engineer with experience in developing <span class='text-[#e1e1e0] font-semibold'>high-scalability platforms</span> and <span class='text-[#e1e1e0] font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-gold'>Java, Spring Boot, Python</span>, and <span class='text-gold'>Cloud Computing</span>.",
+            "Systems Engineer with experience in developing <span class='text-[#e1e1e0] font-semibold'>high-scalability platforms</span> and <span class='text-[#e1e1e0] font-semibold'>digital transformation</span> in the education and financial sectors. Specialized in creating quality, maintainable, and scalable software using technologies like <span class='text-moon'>Java, Spring Boot, Python</span>, and <span class='text-moon'>Cloud Computing</span>.",
         "about.p2":
             "I have a strong interest in <span class='text-[#e1e1e0] font-semibold'>Software Architecture</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span>, and <span class='text-[#e1e1e0] font-semibold'>Data Science</span>. I enjoy collaborating in multidisciplinary teams, optimizing processes, and solving complex problems in dynamic technological environments.",
         "section.viewAllCerts": "View all certifications ->",
@@ -93,7 +93,7 @@ export const ui = {
         "seo.homeDescription":
             "Portafolio de Melio Diaz, Software Engineer de Perú. Proyectos con Java, Spring Boot, AWS y datos, certificaciones y experiencia en EdTech y fintech.",
         "about.p1":
-            "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-[#e1e1e0] font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-[#e1e1e0] font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-gold'>Java, Spring Boot, Python</span> y <span class='text-gold'>Cloud Computing</span>.",
+            "Ingeniero de Sistemas con experiencia en el desarrollo de <span class='text-[#e1e1e0] font-semibold'>plataformas de alta escalabilidad</span> y <span class='text-[#e1e1e0] font-semibold'>transformación digital</span> en los sectores educativo y financiero. Especializado en crear software de calidad, mantenible y escalable utilizando tecnologías como <span class='text-moon'>Java, Spring Boot, Python</span> y <span class='text-moon'>Cloud Computing</span>.",
         "about.p2":
             "Gran interés en el diseño de <span class='text-[#e1e1e0] font-semibold'>Arquitecturas de Software</span>, <span class='text-[#e1e1e0] font-semibold'>DevOps</span> y <span class='text-[#e1e1e0] font-semibold'>Ciencia de Datos</span>. Disfruto colaborar en equipos multidisciplinarios, optimizar procesos y resolver problemas complejos en entornos tecnológicos dinámicos.",
         "section.viewAllCerts": "Ver todas las certificaciones ->",
@@ -157,7 +157,7 @@ export const ui = {
         "seo.homeDescription":
             "ペルー出身のソフトウェアエンジニア Melio Diaz のポートフォリオ。Java、Spring Boot、AWS、データ分野のプロジェクト、資格、職務経歴を紹介します。",
         "about.p1":
-            "システムエンジニアとして、教育および金融分野における<span class='text-[#e1e1e0] font-semibold'>高スケーラビリティ・プラットフォーム</span>の開発や<span class='text-[#e1e1e0] font-semibold'>デジタルトランスフォーメーション</span>の経験があります。<span class='text-gold'>Java, Spring Boot, Python</span>, <span class='text-gold'>クラウドコンピューティング</span>などの技術を用いて、高品質で保守性が高く、スケーラブルなソフトウェアの構築に特化しています。",
+            "システムエンジニアとして、教育および金融分野における<span class='text-[#e1e1e0] font-semibold'>高スケーラビリティ・プラットフォーム</span>の開発や<span class='text-[#e1e1e0] font-semibold'>デジタルトランスフォーメーション</span>の経験があります。<span class='text-moon'>Java, Spring Boot, Python</span>, <span class='text-moon'>クラウドコンピューティング</span>などの技術を用いて、高品質で保守性が高く、スケーラブルなソフトウェアの構築に特化しています。",
         "about.p2":
             "<span class='text-[#e1e1e0] font-semibold'>ソフトウェアアーキテクチャ</span>、<span class='text-[#e1e1e0] font-semibold'>DevOps</span>、<span class='text-[#e1e1e0] font-semibold'>データサイエンス</span>に強い関心があります。多角的なチームでのコラボレーション、プロセスの最適化、そしてダイナミックな技術環境における複雑な問題の解決を楽しんでいます。",
         "section.viewAllCerts": "すべての認定資格を見る ->",

@@ -26,9 +26,9 @@ import { getAllActiveSocials } from "../../utils/social";
             >
                 <Logo width="32" height="32" variant="original" />
                 <span
-                    class="text-lg font-heading font-bold text-light tracking-tighter group-hover:text-gold transition-colors"
+                    class="text-lg font-heading font-bold text-light tracking-tighter group-hover:text-moon transition-colors"
                 >
-                    {siteConfig.alias}<span class="text-gold">.</span>
+                    {siteConfig.alias}<span class="text-moon">.</span>
                 </span>
             </a>
             <p class="text-sm text-gray-400 mt-2">
@@ -46,7 +46,7 @@ import { getAllActiveSocials } from "../../utils/social";
                         href={link.url}
                         target="_blank"
                         rel="me noopener noreferrer"
-                        class={`flex items-center gap-1 text-gray-400 ${link.colorClass || "hover:text-gold"} transition-colors text-sm font-medium group`}
+                        class={`flex items-center gap-1 text-gray-400 ${link.colorClass || "hover:text-moon"} transition-colors text-sm font-medium group`}
                     >
                         <span class="w-5 h-5" set:html={link.icon} />
                         <span class="group-hover:text-white transition-colors">
