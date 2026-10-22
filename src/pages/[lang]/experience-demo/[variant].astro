@@ -5,10 +5,12 @@ import Layout from "../../../layouts/Layout.astro";
 import VariantA from "../../../components/astro/experience-demo/VariantA.astro";
 import VariantB from "../../../components/astro/experience-demo/VariantB.astro";
 import VariantC from "../../../components/astro/experience-demo/VariantC.astro";
+import VariantD from "../../../components/astro/experience-demo/VariantD.astro";
+import { totalYears } from "../../../utils/experience-demo";
 
 export function getStaticPaths() {
     return getI18nStaticPaths().flatMap(({ params }) =>
-        ["a", "b", "c"].map((variant) => ({
+        ["d", "a", "b", "c"].map((variant) => ({
             params: { ...params, variant },
         })),
     );
@@ -17,10 +19,12 @@ export function getStaticPaths() {
 const { lang, variant } = Astro.params;
 const es = lang === "es";
 const names: Record<string, string> = {
+    d: es ? "D · Propuesta final" : "D · Final proposal",
     a: es ? "A · Línea de tiempo agrupada" : "A · Grouped timeline",
     b: es ? "B · Caso de estudio" : "B · Case study",
     c: es ? "C · Panel de impacto" : "C · Impact dashboard",
 };
+const years = totalYears();
 ---
 
 <Layout title={`Experience demo ${variant} | MeloDev`} lang={lang} noindex>
@@ -47,9 +51,18 @@ const names: Record<string, string> = {
             </span>
         </h1>
         <p class="text-lg text-[#a3a3ad] max-w-2xl mb-12">
-            {es ? "Trayectoria e impacto" : "Work history & impact"}
+            {
+                variant === "d"
+                    ? es
+                        ? `${years}+ años de experiencia profesional · Trayectoria e impacto`
+                        : `${years}+ years of professional experience · Work history & impact`
+                    : es
+                      ? "Trayectoria e impacto"
+                      : "Work history & impact"
+            }
         </p>
 
+        {variant === "d" && <VariantD lang={lang} />}
         {variant === "a" && <VariantA lang={lang} />}
         {variant === "b" && <VariantB lang={lang} />}
         {variant === "c" && <VariantC lang={lang} />}
