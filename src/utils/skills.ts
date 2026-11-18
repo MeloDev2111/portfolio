@@ -19,7 +19,7 @@ export interface Skill {
 }
 
 const DEVICON_BASE =
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.18.0/icons";
 
 export const SKILLS: Skill[] = [
     // Backend
@@ -90,7 +90,7 @@ export const SKILLS: Skill[] = [
     {
         name: "AWS",
         category: "Cloud",
-        icon: `${DEVICON_BASE}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
+        icon: `${DEVICON_BASE}/amazonwebservices/amazonwebservices-original.svg`,
         emoji: "🌩️",
         featured: {
             inBento: true,
@@ -246,7 +246,7 @@ export const SKILLS: Skill[] = [
     {
         name: "SQL Server",
         category: "Database",
-        icon: `${DEVICON_BASE}/sqlserver/sqlserver-original.svg`,
+        icon: `${DEVICON_BASE}/microsoftsqlserver/microsoftsqlserver-original.svg`,
         emoji: "🗄️",
     },
     {
@@ -258,7 +258,7 @@ export const SKILLS: Skill[] = [
     {
         name: "SQL",
         category: "Database",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
+        icon: `${DEVICON_BASE}/azuresqldatabase/azuresqldatabase-original.svg`,
         emoji: "🗃️",
     },
     {
