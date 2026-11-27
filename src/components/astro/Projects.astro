@@ -5,6 +5,7 @@ import {
     getLangFromUrl,
     useTranslations,
     getRelativeLocaleUrl,
+    getProjectCardLabels,
 } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -40,12 +41,19 @@ const projects = await getLocalizedProjects(lang);
                                 description: project.data.description,
                                 tags: project.data.tags ?? [],
                                 link: project.data.link,
+                                demo: project.data.demo,
                                 image: project.data.image,
                                 featured: project.data.featured,
                                 inProgress: project.data.inProgress,
                             }),
                         );
-                        return <ProjectCard client:visible {...cleanProps} />;
+                        return (
+                            <ProjectCard
+                                client:visible
+                                {...cleanProps}
+                                labels={getProjectCardLabels(t)}
+                            />
+                        );
                     })
             }
 

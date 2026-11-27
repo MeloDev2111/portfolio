@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { ProjectCard } from "./ProjectCard";
+import { ProjectCard, type ProjectCardLabels } from "./ProjectCard";
 
 interface Project {
     id: string;
@@ -8,6 +8,7 @@ interface Project {
         description: string;
         tags: string | string[]; // Allow string input
         link?: string;
+        demo?: string;
         image?: string | { src: string; width: number; height: number };
         featured?: boolean;
         inProgress?: boolean;
@@ -19,6 +20,9 @@ interface ProjectGridProps {
     labels: {
         all: string;
         filter: string;
+        noProjects: string;
+        clearFilters: string;
+        card: ProjectCardLabels;
     };
 }
 
@@ -135,10 +139,12 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         description={project.data.description}
                         tags={project.safeTags}
                         link={project.data.link}
+                        demo={project.data.demo}
                         image={project.data.image}
                         featured={project.data.featured}
                         inProgress={project.data.inProgress}
                         priority={index < 3}
+                        labels={labels.card}
                     />
                 ))}
             </div>
@@ -146,12 +152,12 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
             {/* Empty State */}
             {filteredProjects.length === 0 && (
                 <div className="text-center py-20 text-gray-500 flex flex-col items-center gap-4">
-                    <p>No projects match all selected filters.</p>
+                    <p>{labels.noProjects}</p>
                     <button
                         onClick={() => setActiveTags([])}
                         className="text-moon hover:underline"
                     >
-                        Clear filters
+                        {labels.clearFilters}
                     </button>
                 </div>
             )}

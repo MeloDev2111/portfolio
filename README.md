@@ -43,6 +43,7 @@ Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What
     featured: true # Shows in Home & Top of Projects
     inProgress: false # Adds 'In Construction' badge
     link: "https://github.com/..."
+    demo: "https://..." # Optional: running app. Adds a "Live" badge and Demo/Code buttons
     image: "../../../assets/projects/my-image.png" # OR project-placeholder.svg
     ---
     ```

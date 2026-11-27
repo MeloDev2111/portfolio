@@ -1,30 +1,72 @@
 import React, { useState, useRef, useEffect } from "react";
 
+export interface ProjectCardLabels {
+    demo: string;
+    code: string;
+    site: string;
+    featured: string;
+    inProgress: string;
+    liveBadge: string;
+}
+
 interface ProjectCardProps {
     title: string;
     description: string;
     tags: string[];
     link?: string;
+    demo?: string;
     image?: string | { src: string; width: number; height: number };
     featured?: boolean;
     inProgress?: boolean;
     priority?: boolean;
+    labels: ProjectCardLabels;
 }
+
+const isRepoUrl = (url: string) => /github\.com|gitlab\.com/.test(url);
+
+const ExternalIcon: React.FC = () => (
+    <svg
+        aria-hidden="true"
+        className="w-3.5 h-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+        <path d="M7 17 17 7M8 7h9v9" />
+    </svg>
+);
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
     description,
     tags,
     link,
+    demo,
     image,
     featured,
     inProgress,
     priority = false,
+    labels,
 }) => {
     const [showTooltip, setShowTooltip] = useState(false);
     const [isTruncated, setIsTruncated] = useState(false);
     const textRef = useRef<HTMLParagraphElement>(null);
-    const Component = inProgress || !link ? "div" : "a";
+    // The card opens the running app when there is one, otherwise the code/site.
+    // Nested <a> tags are invalid, so the card is an <article> with real links
+    // inside (title and action row) plus a click handler for the rest of its area.
+    const primary = inProgress ? undefined : (demo ?? link);
+    // The action row only shows on cards with a demo, where the two links differ.
+    const secondary = demo && link !== demo ? link : undefined;
+
+    const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
+        if (!primary) return;
+        if ((e.target as HTMLElement).closest("a")) return;
+        if (window.getSelection()?.toString()) return;
+        window.open(primary, "_blank", "noopener,noreferrer");
+    };
 
     useEffect(() => {
         const checkTruncation = () => {
@@ -40,13 +82,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }, [description]);
 
     return (
-        <Component
-            href={!inProgress ? link : undefined}
-            target={!inProgress && link ? "_blank" : undefined}
-            rel={!inProgress && link ? "noopener noreferrer" : undefined}
+        <article
+            onClick={handleCardClick}
             className={`group relative overflow-hidden rounded-2xl glass-card border border-white/5 transition-all duration-500 flex flex-col h-full ${
-                !inProgress
-                    ? "hover:border-moon/40 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-moon)_15%,transparent)] hover:-translate-y-1 cursor-pointer"
+                primary
+                    ? "hover:border-moon/40 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-moon)_15%,transparent)] motion-safe:hover:-translate-y-1 cursor-pointer"
                     : "opacity-80 cursor-default"
             }`}
         >
@@ -82,11 +122,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gunmetal/20 group-hover:bg-gunmetal/0 transition-colors duration-300" />
 
+                {/* Live badge: the project has a running demo */}
+                {demo && !inProgress && (
+                    <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gunmetal/80 backdrop-blur-md border border-moon/30 text-[11px] font-semibold tracking-wide text-moon">
+                        <span className="relative flex w-1.5 h-1.5">
+                            <span className="absolute inset-0 rounded-full bg-moon opacity-60 motion-safe:animate-ping" />
+                            <span className="relative w-1.5 h-1.5 rounded-full bg-moon" />
+                        </span>
+                        {labels.liveBadge}
+                    </span>
+                )}
+
                 {/* In Progress Overlay */}
                 {inProgress && (
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center z-20">
                         <span className="px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 text-xs font-bold tracking-widest uppercase shadow-lg backdrop-blur-md">
-                            🚧 In Construction
+                            🚧 {labels.inProgress}
                         </span>
                     </div>
                 )}
@@ -96,14 +147,25 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <div className="p-6 flex flex-col flex-grow relative z-30">
                 <div className="flex justify-between items-start mb-4 gap-2">
                     <h3
-                        className={`text-xl font-heading font-bold text-light transition-colors ${!inProgress && "group-hover:text-moon"}`}
+                        className={`text-xl font-heading font-bold text-light transition-colors ${primary ? "group-hover:text-moon" : ""}`}
                     >
-                        {title}
+                        {primary ? (
+                            <a
+                                href={primary}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="decoration-moon underline-offset-4 focus-visible:outline-none focus-visible:underline"
+                            >
+                                {title}
+                            </a>
+                        ) : (
+                            title
+                        )}
                     </h3>
                     <div className="flex flex-col gap-2 items-end">
                         {featured && !inProgress && (
                             <span className="px-2 py-0.5 rounded text-[10px] tracking-wider font-bold bg-moon text-gunmetal uppercase shadow-[0_0_10px_color-mix(in_srgb,var(--color-moon)_40%,transparent)]">
-                                Featured
+                                {labels.featured}
                             </span>
                         )}
                     </div>
@@ -146,7 +208,37 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         </span>
                     ))}
                 </div>
+
+                {/* Actions */}
+                {demo && !inProgress && (
+                    <div className="flex flex-wrap gap-2 mt-5 pt-5 border-t border-white/5">
+                        {demo && (
+                            <a
+                                href={demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-moon text-gunmetal text-xs font-semibold transition-shadow hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-moon)_45%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moon"
+                            >
+                                {labels.demo}
+                                <ExternalIcon />
+                            </a>
+                        )}
+                        {secondary && (
+                            <a
+                                href={secondary}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-gray-300 text-xs font-semibold transition-colors hover:border-moon/40 hover:text-moon focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moon"
+                            >
+                                {isRepoUrl(secondary)
+                                    ? labels.code
+                                    : labels.site}
+                                <ExternalIcon />
+                            </a>
+                        )}
+                    </div>
+                )}
             </div>
-        </Component>
+        </article>
     );
 };

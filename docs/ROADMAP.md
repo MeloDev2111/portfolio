@@ -6,7 +6,7 @@ Public summary of where the portfolio is heading. Released work is in [CHANGELOG
 
 - **Lighthouse CI in the pipeline:** fail the build when any category drops below 95.
 - **CV generated from site data:** build the PDF from `experience.ts` and the certifications instead of maintaining it by hand.
-- **Live demos:** link running demos for IterView-AI and API Colores from their project cards.
+- **Live demos:** cards now support a `demo` link; IterView-AI and API Colores still need a running deployment to link (the old Heroku URL is gone).
 
 ## Phase 3: content and credibility
 
