@@ -86,7 +86,7 @@ export const LinkIcon: React.FC<{
 export const ProjectLinkButtons: React.FC<{ items: ProjectLinkItem[] }> = ({
     items,
 }) => (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-2">
         {items.map((item) => (
             <a
                 key={item.kind}
@@ -95,7 +95,7 @@ export const ProjectLinkButtons: React.FC<{ items: ProjectLinkItem[] }> = ({
                 rel="noopener noreferrer"
                 aria-label={item.label}
                 title={item.label}
-                className={`grid place-items-center w-9 h-9 rounded-full border transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moon ${
+                className={`grid place-items-center w-10 h-10 rounded-full border transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moon ${
                     item.kind === "demo"
                         ? "bg-moon text-gunmetal border-moon hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-moon)_50%,transparent)]"
                         : "border-white/10 text-gray-300 hover:text-moon hover:border-moon/50"

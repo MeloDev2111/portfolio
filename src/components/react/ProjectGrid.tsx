@@ -447,7 +447,6 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                             demo={project.data.demo}
                             image={project.data.image}
                             year={project.data.year}
-                            featured={project.data.featured}
                             inProgress={project.data.inProgress}
                             labels={labels.card}
                         />

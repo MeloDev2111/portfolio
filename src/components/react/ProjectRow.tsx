@@ -1,5 +1,5 @@
 import React from "react";
-import { getProjectLinks, PlayIcon, ProjectLinkButtons } from "./ProjectLinks";
+import { getProjectLinks, ProjectLinkButtons } from "./ProjectLinks";
 import type { ProjectCardLabels } from "./ProjectCard";
 
 interface ProjectRowProps {
@@ -10,14 +10,15 @@ interface ProjectRowProps {
     demo?: string;
     image?: string | { src: string; width: number; height: number };
     year?: number;
-    featured?: boolean;
     inProgress?: boolean;
     labels: ProjectCardLabels;
 }
 
-const MAX_TAGS = 3;
-
-/** Compact list row: built for scanning many projects at once. */
+/**
+ * List row: thumbnail, title, two lines of description and a quiet meta line.
+ * Badges are left to the gallery; here the buttons on the right already say
+ * whether there is a demo, so nothing is repeated.
+ */
 export const ProjectRow: React.FC<ProjectRowProps> = ({
     title,
     description,
@@ -26,13 +27,12 @@ export const ProjectRow: React.FC<ProjectRowProps> = ({
     demo,
     image,
     year,
-    featured,
     inProgress,
     labels,
 }) => {
     const links = inProgress ? [] : getProjectLinks(labels, link, demo);
     const primary = links[0]?.href;
-    const extraTags = tags.length - MAX_TAGS;
+    const meta = [year, ...tags].filter(Boolean).join("  ·  ");
 
     const handleRowClick = (e: React.MouseEvent<HTMLElement>) => {
         if (!primary) return;
@@ -44,85 +44,49 @@ export const ProjectRow: React.FC<ProjectRowProps> = ({
     return (
         <article
             onClick={handleRowClick}
-            className={`group grid grid-cols-[1fr_auto] lg:grid-cols-[6rem_minmax(0,1fr)_16rem_2.5rem_5.25rem] items-center gap-x-5 gap-y-3 px-4 py-4 lg:px-5 rounded-xl transition-colors duration-200 ${
-                primary ? "cursor-pointer hover:bg-white/[0.03]" : "opacity-70"
+            className={`group grid grid-cols-[minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-6 gap-y-3 p-4 sm:p-5 rounded-xl transition-colors duration-200 ${
+                primary ? "cursor-pointer hover:bg-white/[0.03]" : ""
             }`}
         >
             {/* Thumbnail */}
-            <div className="hidden lg:block w-24 h-14 rounded-lg overflow-hidden bg-charcoal border border-white/5">
+            <div className="hidden sm:block w-40 md:w-48 aspect-[2/1] rounded-lg overflow-hidden bg-charcoal border border-white/5">
                 {image && (
                     <img
                         src={typeof image === "string" ? image : image.src}
                         alt=""
-                        className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-110"
+                        className={`w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-105 ${inProgress ? "opacity-50" : ""}`}
                         loading="lazy"
                         decoding="async"
                     />
                 )}
             </div>
 
-            {/* Title + description */}
+            {/* Text */}
             <div className="min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-2.5 flex-wrap">
                     <h3
-                        className={`font-heading font-bold text-light text-base transition-colors ${primary ? "group-hover:text-moon" : ""}`}
+                        className={`font-heading font-bold text-lg transition-colors ${primary ? "text-light group-hover:text-moon" : "text-light/70"}`}
                     >
                         {title}
                     </h3>
-                    {featured && !inProgress && (
-                        <span
-                            className="w-1.5 h-1.5 rounded-full bg-moon shadow-[0_0_8px_var(--color-moon)]"
-                            title={labels.featured}
-                            aria-label={labels.featured}
-                            role="img"
-                        />
-                    )}
-                    {demo && !inProgress && (
-                        <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border border-moon/40 text-[9px] font-bold tracking-wider uppercase text-moon">
-                            <PlayIcon className="w-2 h-2" />
-                            {labels.liveBadge}
-                        </span>
-                    )}
                     {inProgress && (
-                        <span className="px-1.5 py-0.5 rounded border border-yellow-500/40 text-[9px] font-bold tracking-wider uppercase text-yellow-400">
+                        <span className="px-1.5 py-0.5 rounded border border-yellow-500/40 text-[10px] font-bold tracking-wider uppercase text-yellow-400">
                             {labels.inProgress}
                         </span>
                     )}
                 </div>
-                <p className="mt-1 text-sm text-gray-400 line-clamp-2 lg:line-clamp-1">
+                <p className="mt-1.5 text-[15px] leading-relaxed text-gray-400 line-clamp-2 max-w-3xl">
                     {description}
+                </p>
+                <p className="mt-2 text-xs text-gray-500 font-mono tracking-tight">
+                    {meta}
                 </p>
             </div>
 
-            {/* Links (top-right on mobile, last column on desktop) */}
-            <div className="row-start-1 col-start-2 lg:col-start-5 justify-self-end">
+            {/* Links */}
+            <div className="row-start-1 col-start-2 sm:col-start-3 self-start sm:self-center">
                 <ProjectLinkButtons items={links} />
             </div>
-
-            {/* Tags */}
-            <div className="col-span-2 lg:col-span-1 lg:col-start-3 lg:row-start-1 flex flex-wrap gap-1.5">
-                {tags.slice(0, MAX_TAGS).map((tag) => (
-                    <span
-                        key={tag}
-                        className="px-2 py-0.5 rounded bg-white/5 text-[11px] text-gray-400 border border-white/5"
-                    >
-                        {tag}
-                    </span>
-                ))}
-                {extraTags > 0 && (
-                    <span
-                        className="px-1.5 py-0.5 text-[11px] text-gray-500"
-                        title={tags.slice(MAX_TAGS).join(", ")}
-                    >
-                        +{extraTags}
-                    </span>
-                )}
-            </div>
-
-            {/* Year */}
-            <span className="hidden lg:block lg:col-start-4 lg:row-start-1 font-mono text-xs text-gray-500 tabular-nums">
-                {year}
-            </span>
         </article>
     );
 };

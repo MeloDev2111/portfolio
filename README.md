@@ -38,7 +38,7 @@ Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What
     ---
     title: "Project Name"
     description: "Brief description in English."
-    tags: ["React", "TypeScript"]
+    tags: ["React", "TypeScript"] # Only from src/utils/projectTags.ts (max 5)
     date: 2024-01-01
     featured: true # Shows in Home & Top of Projects
     inProgress: false # Adds 'In Construction' badge
