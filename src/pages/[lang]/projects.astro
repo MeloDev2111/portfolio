@@ -24,6 +24,7 @@ const projectProps = projects.map((p) => ({
         tags: p.data.tags,
         link: p.data.link,
         demo: p.data.demo,
+        year: p.data.date?.getFullYear(),
         image: p.data.image,
         featured: p.data.featured,
         inProgress: p.data.inProgress,
@@ -58,8 +59,14 @@ const cardLabels = getProjectCardLabels(t);
             projects={cleanProjectProps}
             labels={{
                 all: t("ui.all"),
-                filter: t("ui.filterBy"),
+                more: t("projects.moreTech"),
                 noProjects: t("ui.noProjects"),
+                search: t("projects.search"),
+                searchTech: t("projects.searchTech"),
+                tech: t("projects.tech"),
+                viewGrid: t("projects.viewGrid"),
+                viewList: t("projects.viewList"),
+                count: t("projects.count"),
                 clearFilters: t("ui.clearFilters"),
                 card: cardLabels,
             }}
