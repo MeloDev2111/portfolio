@@ -10,7 +10,8 @@ const projectsCollection = defineCollection({
             description: z.string(),
             tags: z.array(z.string()).optional(), // Optional for localized files (inherits from EN)
             image: image().optional(),
-            link: z.string().url().optional(),
+            link: z.string().url().optional(), // Source code or main site
+            demo: z.string().url().optional(), // Running app, shown as "Live demo"
             date: z.date().optional(), // Optional for localized files (inherits from EN)
             featured: z.boolean().default(false),
             inProgress: z.boolean().default(false).optional(),

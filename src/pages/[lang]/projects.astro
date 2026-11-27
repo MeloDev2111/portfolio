@@ -3,7 +3,7 @@ import { getI18nStaticPaths } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import { ProjectGrid } from "../../components/react/ProjectGrid";
 import { getLocalizedProjects } from "../../utils/projects";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations, getProjectCardLabels } from "../../i18n/utils";
 
 export async function getStaticPaths() {
     return getI18nStaticPaths();
@@ -23,6 +23,8 @@ const projectProps = projects.map((p) => ({
         description: p.data.description,
         tags: p.data.tags,
         link: p.data.link,
+        demo: p.data.demo,
+        year: p.data.date?.getFullYear(),
         image: p.data.image,
         featured: p.data.featured,
         inProgress: p.data.inProgress,
@@ -31,6 +33,7 @@ const projectProps = projects.map((p) => ({
 
 // Sanitize props to remove any potential non-POJO artifacts for hydration safety
 const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
+const cardLabels = getProjectCardLabels(t);
 ---
 
 <Layout
@@ -56,7 +59,16 @@ const cleanProjectProps = JSON.parse(JSON.stringify(projectProps));
             projects={cleanProjectProps}
             labels={{
                 all: t("ui.all"),
-                filter: t("ui.filterBy"),
+                more: t("projects.moreTech"),
+                noProjects: t("ui.noProjects"),
+                search: t("projects.search"),
+                searchTech: t("projects.searchTech"),
+                tech: t("projects.tech"),
+                viewGrid: t("projects.viewGrid"),
+                viewList: t("projects.viewList"),
+                count: t("projects.count"),
+                clearFilters: t("ui.clearFilters"),
+                card: cardLabels,
             }}
         />
     </div>

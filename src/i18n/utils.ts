@@ -84,3 +84,15 @@ export function getAllLanguageUrls(url: URL, baseOverride?: string) {
         };
     });
 }
+
+/** Localized labels for ProjectCard, shared by the home and the projects page. */
+export function getProjectCardLabels(t: ReturnType<typeof useTranslations>) {
+    return {
+        demo: t("project.demo"),
+        code: t("project.code"),
+        site: t("project.site"),
+        featured: t("project.featured"),
+        inProgress: t("project.inProgress"),
+        liveBadge: t("project.liveBadge"),
+    };
+}
