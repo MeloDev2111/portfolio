@@ -39,6 +39,15 @@ const ExternalIcon: React.FC = () => (
     </svg>
 );
 
+const PlayIcon: React.FC<{ className?: string }> = ({ className }) => (
+    <svg aria-hidden="true" className={className} viewBox="0 0 24 24">
+        <path
+            fill="currentColor"
+            d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"
+        />
+    </svg>
+);
+
 export const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
     description,
@@ -122,15 +131,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gunmetal/20 group-hover:bg-gunmetal/0 transition-colors duration-300" />
 
-                {/* Live badge: the project has a running demo */}
+                {/* Live demo: a quiet tag at rest, a preview call to action on hover */}
                 {demo && !inProgress && (
-                    <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gunmetal/80 backdrop-blur-md border border-moon/30 text-[11px] font-semibold tracking-wide text-moon">
-                        <span className="relative flex w-1.5 h-1.5">
-                            <span className="absolute inset-0 rounded-full bg-moon opacity-60 motion-safe:animate-ping" />
-                            <span className="relative w-1.5 h-1.5 rounded-full bg-moon" />
+                    <>
+                        <span className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1.5 px-2 py-1 rounded bg-gunmetal/85 backdrop-blur-md border border-moon/40 text-[10px] font-bold tracking-wider uppercase text-moon transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0">
+                            <PlayIcon className="w-2.5 h-2.5" />
+                            {labels.liveBadge}
                         </span>
-                        {labels.liveBadge}
-                    </span>
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 z-10 flex items-end justify-center pb-5 bg-gradient-to-t from-gunmetal/90 via-gunmetal/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
+                        >
+                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-moon text-gunmetal text-sm font-semibold shadow-[0_0_24px_color-mix(in_srgb,var(--color-moon)_45%,transparent)] motion-safe:translate-y-2 motion-safe:transition-transform motion-safe:duration-300 group-hover:translate-y-0 group-focus-within:translate-y-0">
+                                <PlayIcon className="w-3.5 h-3.5" />
+                                {labels.demo}
+                            </span>
+                        </div>
+                    </>
                 )}
 
                 {/* In Progress Overlay */}
