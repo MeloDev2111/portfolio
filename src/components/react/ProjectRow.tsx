@@ -1,6 +1,7 @@
 import React from "react";
 import { getProjectLinks, ProjectLinkButtons } from "./ProjectLinks";
 import type { ProjectCardLabels } from "./ProjectCard";
+import { ProjectDescription } from "./ProjectDescription";
 
 interface ProjectRowProps {
     title: string;
@@ -75,9 +76,15 @@ export const ProjectRow: React.FC<ProjectRowProps> = ({
                         </span>
                     )}
                 </div>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-gray-400 line-clamp-2 max-w-3xl">
-                    {description}
-                </p>
+                <div className="mt-1.5 max-w-3xl">
+                    <ProjectDescription
+                        title={title}
+                        text={description}
+                        links={links}
+                        labels={labels}
+                        className="text-[15px] leading-relaxed text-gray-400 line-clamp-2"
+                    />
+                </div>
                 <p className="mt-2 text-xs text-gray-500 font-mono tracking-tight">
                     {meta}
                 </p>

@@ -94,5 +94,7 @@ export function getProjectCardLabels(t: ReturnType<typeof useTranslations>) {
         featured: t("project.featured"),
         inProgress: t("project.inProgress"),
         liveBadge: t("project.liveBadge"),
+        readMore: t("project.readMore"),
+        close: t("project.close"),
     };
 }
