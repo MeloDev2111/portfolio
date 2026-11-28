@@ -37,7 +37,7 @@ Folder layout, conventions and design rules live in [AGENTS.md](AGENTS.md). What
     ```markdown
     ---
     title: "Project Name"
-    description: "Brief description in English."
+    description: "Brief description in English." # Aim for 280 chars max; longer text shows in a "Read more" panel (the tests warn)
     tags: ["React", "TypeScript"] # Only from src/utils/projectTags.ts (max 5)
     date: 2024-01-01
     featured: true # Shows in Home & Top of Projects

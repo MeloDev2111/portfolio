@@ -1,6 +1,6 @@
 ---
 title: "Song Workshop"
-description: "Original songs written with Claude Code and sung by Suno, published with their lyrics in every language (Japanese with hiragana and romaji), Suno's takes, the exact prompt and the process behind each one. A four-phase workflow (discover, compose, generate, learn) driven by Claude Code commands, a Python audio analyzer with librosa and a static site generated from the song packages."
+description: "Original songs written with Claude Code and sung by Suno, published with the lyrics in every language, Suno's takes and the exact prompt. Behind them: a four-phase Claude Code workflow, a Python audio analyzer built on librosa and a static site generated from each song."
 tags: ["AI Agents", "Python", "JavaScript"]
 date: 2026-11-27
 featured: true
