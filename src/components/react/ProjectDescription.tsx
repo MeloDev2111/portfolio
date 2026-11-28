@@ -1,11 +1,4 @@
-import React, {
-    useCallback,
-    useEffect,
-    useId,
-    useLayoutEffect,
-    useRef,
-    useState,
-} from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LinkIcon, type ProjectLinkItem } from "./ProjectLinks";
 
@@ -23,25 +16,10 @@ interface ProjectDescriptionProps {
     labels: ProjectDescriptionLabels;
 }
 
-const MARGIN = 12;
-/** Panel padding (px-4 pt-1.5): the text inside lines up with the original. */
-const PAD_X = 16;
-const PAD_Y = 6;
-const MAX_WIDTH = 800; // max-w-3xl (768) + padding: the list row text
-const OPEN_DELAY = 250;
-
-interface Position {
-    top: number;
-    left: number;
-    width: number;
-}
-
 /**
- * Project description clamped to a few lines. When the text does not fit:
- * - with a mouse, hovering the text unfolds the full description in a panel
- *   laid over it, rendered on <body> (no clipping by the card, no layout shift);
- * - a "read more" button opens it in a dialog: a bottom sheet on phones, a
- *   centered panel on larger screens. This is also the keyboard path.
+ * Project description clamped to a few lines. When the text does not fit, a
+ * "read more" button opens it in a dialog: a bottom sheet on phones, a centered
+ * panel on larger screens. Nothing opens on hover: reading more is a choice.
  * The full text always stays in the DOM, so screen readers read it as is.
  */
 export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
@@ -52,12 +30,8 @@ export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
     labels,
 }) => {
     const textRef = useRef<HTMLParagraphElement>(null);
-    const panelRef = useRef<HTMLDivElement>(null);
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const timer = useRef<number | undefined>(undefined);
     const [truncated, setTruncated] = useState(false);
-    const [hovering, setHovering] = useState(false);
-    const [pos, setPos] = useState<Position | null>(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const titleId = useId();
 
@@ -71,67 +45,9 @@ export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
         return () => ro.disconnect();
     }, [text]);
 
-    // Lay the panel over the clamped text, same font and width, so it reads as
-    // the text unfolding downwards (over the tags, never over the image and its
-    // links). It only moves up when the bottom of the viewport cuts it.
-    const place = useCallback(() => {
-        const p = textRef.current;
-        const panel = panelRef.current;
-        if (!p || !panel) return;
-        const anchor = p.getBoundingClientRect();
-        const style = getComputedStyle(p);
-        const vw = document.documentElement.clientWidth;
-        const width = Math.min(
-            anchor.width + PAD_X * 2,
-            MAX_WIDTH,
-            vw - MARGIN * 2,
-        );
-        const left = Math.min(
-            Math.max(anchor.left - PAD_X, MARGIN),
-            vw - width - MARGIN,
-        );
-        panel.style.fontSize = style.fontSize;
-        panel.style.lineHeight = style.lineHeight;
-        // Measure at the final width and font: the height depends on them.
-        panel.style.width = `${width}px`;
-        const height = panel.offsetHeight;
-        const top = Math.max(
-            Math.min(anchor.top - PAD_Y, window.innerHeight - MARGIN - height),
-            MARGIN,
-        );
-        setPos({ top, left, width });
-    }, []);
-
-    useLayoutEffect(() => {
-        if (!hovering) {
-            setPos(null);
-            return;
-        }
-        place();
-        window.addEventListener("scroll", place, true);
-        window.addEventListener("resize", place);
-        return () => {
-            window.removeEventListener("scroll", place, true);
-            window.removeEventListener("resize", place);
-        };
-    }, [hovering, place]);
-
-    useEffect(() => () => window.clearTimeout(timer.current), []);
-
-    const onEnter = (e: React.PointerEvent) => {
-        if (!truncated || e.pointerType !== "mouse") return;
-        window.clearTimeout(timer.current);
-        timer.current = window.setTimeout(() => setHovering(true), OPEN_DELAY);
-    };
-    const onLeave = () => {
-        window.clearTimeout(timer.current);
-        setHovering(false);
-    };
-
     const openDialog = (e: React.MouseEvent) => {
         // The card opens its link on click; this button must not.
         e.stopPropagation();
-        onLeave();
         dialogRef.current?.showModal();
         setDialogOpen(true);
     };
@@ -150,12 +66,7 @@ export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
 
     return (
         <>
-            <p
-                ref={textRef}
-                onPointerEnter={onEnter}
-                onPointerLeave={onLeave}
-                className={className}
-            >
+            <p ref={textRef} className={className}>
                 {text}
             </p>
 
@@ -169,27 +80,6 @@ export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
                     {labels.readMore}
                 </button>
             )}
-
-            {hovering &&
-                createPortal(
-                    <div
-                        ref={panelRef}
-                        aria-hidden="true"
-                        style={
-                            pos
-                                ? {
-                                      top: pos.top,
-                                      left: pos.left,
-                                      width: pos.width,
-                                  }
-                                : { top: 0, left: 0, visibility: "hidden" }
-                        }
-                        className="fixed z-[60] pointer-events-none rounded-xl border border-white/10 bg-charcoal px-4 pt-1.5 pb-3 text-gray-200 shadow-[0_18px_40px_-12px_rgb(0_0_0/0.7)] motion-safe:animate-[desc-pop_160ms_ease-out]"
-                    >
-                        {text}
-                    </div>,
-                    document.body,
-                )}
 
             {truncated &&
                 createPortal(

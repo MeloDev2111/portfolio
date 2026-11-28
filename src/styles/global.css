@@ -86,14 +86,7 @@
     }
 }
 
-/* Project description: hover panel and read-more dialog (ProjectDescription.tsx) */
-@keyframes desc-pop {
-    from {
-        opacity: 0;
-        transform: translateY(4px);
-    }
-}
-
+/* Project description: read-more dialog (ProjectDescription.tsx) */
 @keyframes sheet-up {
     from {
         transform: translateY(100%);
