@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 /**
  * Card descriptions are clamped to 3 lines (2 in the list view); the rest is
- * reachable through the hover panel or the "read more" dialog. Past this soft
+ * reachable through the "read more" dialog. Past this soft
  * limit the text still works, but it reads like a README, so the test warns
  * instead of failing.
  */
