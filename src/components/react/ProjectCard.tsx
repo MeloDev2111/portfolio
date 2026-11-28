@@ -1,12 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
+    ProjectDescription,
+    type ProjectDescriptionLabels,
+} from "./ProjectDescription";
+import {
     getProjectLinks,
     LinkIcon,
     PlayIcon,
     type ProjectLinkLabels,
 } from "./ProjectLinks";
 
-export interface ProjectCardLabels extends ProjectLinkLabels {
+export interface ProjectCardLabels
+    extends ProjectLinkLabels, ProjectDescriptionLabels {
     featured: string;
     inProgress: string;
     liveBadge: string;
@@ -43,10 +48,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     priority = false,
     labels,
 }) => {
-    const [showTooltip, setShowTooltip] = useState(false);
-    const [isTruncated, setIsTruncated] = useState(false);
     const [revealed, setRevealed] = useState(false);
-    const textRef = useRef<HTMLParagraphElement>(null);
     const cardRef = useRef<HTMLElement>(null);
 
     const links = inProgress ? [] : getProjectLinks(labels, link, demo);
@@ -75,19 +77,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         document.addEventListener("pointerdown", close);
         return () => document.removeEventListener("pointerdown", close);
     }, [revealed]);
-
-    useEffect(() => {
-        const checkTruncation = () => {
-            if (textRef.current) {
-                const { scrollHeight, clientHeight } = textRef.current;
-                setIsTruncated(scrollHeight > clientHeight);
-            }
-        };
-
-        checkTruncation();
-        window.addEventListener("resize", checkTruncation);
-        return () => window.removeEventListener("resize", checkTruncation);
-    }, [description]);
 
     // Hidden overlays must not catch taps: on touch screens the first tap has to
     // reach the card (to reveal the options), not an invisible link.
@@ -219,30 +208,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                     )}
                 </div>
 
-                <div
-                    className="relative mb-6 flex-grow"
-                    onMouseEnter={() => isTruncated && setShowTooltip(true)}
-                    onMouseLeave={() => setShowTooltip(false)}
-                >
-                    <p
-                        ref={textRef}
+                <div className="mb-6 flex-grow">
+                    <ProjectDescription
+                        title={title}
+                        text={description}
+                        links={links}
+                        labels={labels}
                         className="text-gray-400 text-sm line-clamp-3 leading-relaxed"
-                    >
-                        {description}
-                    </p>
-
-                    {/* Custom Tooltip */}
-                    <div
-                        className={`absolute bottom-full left-0 mb-2 w-full p-4 bg-[#1a1f2e]/98 backdrop-blur-xl border border-white/10 rounded-xl text-sm text-gray-300 shadow-2xl transition-all duration-300 z-50 origin-bottom leading-relaxed ${
-                            showTooltip && isTruncated
-                                ? "opacity-100 translate-y-0 scale-100 visible"
-                                : "opacity-0 translate-y-4 scale-95 invisible pointer-events-none"
-                        }`}
-                    >
-                        {description}
-                        {/* Arrow */}
-                        <div className="absolute -bottom-1.5 left-6 w-3 h-3 bg-[#1a1f2e]/98 border-r border-b border-white/10 rotate-45 transform"></div>
-                    </div>
+                    />
                 </div>
 
                 {/* Tags */}
